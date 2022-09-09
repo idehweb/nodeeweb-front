@@ -127,7 +127,7 @@ console.log('homeData',themeData)
       {themeData.body && themeData.body.map((body, h) => {
 
         if (body.name === 'MainContent') {
-          return <MainContent/>
+          return <MainContent {...props}/>
 
         }
         if (body.name === 'PostSlider') {

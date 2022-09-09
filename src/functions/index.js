@@ -748,6 +748,33 @@ export const sendExtra = (d, obj) => {
       });
   });
 };
+export const createRecord = (model, obj) => {
+  return new Promise(function (resolve, reject) {
+    postData(`${AdminRoute}/${model}`, obj, true)
+      .then((data) => {
+        let mainD = data["data"];
+
+        resolve(mainD);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+export const editRecord = (model,_id, obj) => {
+  console.log('editRecord')
+  return new Promise(function (resolve, reject) {
+    putData(`${AdminRoute}/${model}/${_id}`, obj, true)
+      .then((data) => {
+        let mainD = data["data"];
+
+        resolve(mainD);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
 
 export const contactBoy = (d, obj) => {
   return new Promise(function (resolve, reject) {

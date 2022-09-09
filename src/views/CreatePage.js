@@ -89,7 +89,8 @@ const CreatePage = (props) => {
         async store(data, options = {}) {
           console.log("store ")
           console.log('_id',_id)
-          SaveBuilder(_id, {...data, html: editor.getHtml(), js: editor.getJs()}).then(r => {
+          // console.log('_id',)
+          SaveBuilder(_id, {...data, html: editor.getHtml(), js: editor.getJs(),css:editor.getCss()}).then(r => {
             sessionStorage.setItem(options.key, JSON.stringify(data));
 
             console.log('r', r);

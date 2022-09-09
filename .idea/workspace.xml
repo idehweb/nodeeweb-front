@@ -2,200 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="06443989-9eed-404f-8640-c258027113f4" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/assets/grapesjs/css/grapes.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/grapesjs/fonts/main-fonts.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/grapesjs/fonts/main-fonts.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/grapesjs/fonts/main-fonts.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/grapesjs/fonts/main-fonts.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/grapesjs/grapes.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/grapesjs/grapes.min.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/styles/grape.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Edit.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/MainContent.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/layout/MainSidebar/MainSidebarNavItems.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-builder/contentslider/blocks.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-builder/contentslider/components/Container.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-builder/contentslider/components/NavNext.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-builder/contentslider/components/NavPrev.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-builder/contentslider/components/Pagination.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-builder/contentslider/components/Scrollbar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-builder/contentslider/components/Slide.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-builder/contentslider/components/Wrapper.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-builder/contentslider/components/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-builder/contentslider/constants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-builder/contentslider/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-builder/contentslider/utils.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-builder/countdown/blocks.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-builder/countdown/components.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-builder/countdown/consts.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-builder/countdown/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-builder/productslider/blocks.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-builder/productslider/components/Container.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-builder/productslider/components/NavNext.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-builder/productslider/components/NavPrev.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-builder/productslider/components/Pagination.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-builder/productslider/components/Scrollbar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-builder/productslider/components/Slide.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-builder/productslider/components/Wrapper.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-builder/productslider/components/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-builder/productslider/constants.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-builder/productslider/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-builder/productslider/utils.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/Admin.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/CreatePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/capacitor.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/capacitor.config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/craco.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/craco.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deploy.js" beforeDir="false" afterPath="$PROJECT_DIR$/deploy.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Create.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Style.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/components-overview/CreateForm_old.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/android-chrome-192x192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/android-chrome-512x512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/apple-touch-icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/favicon-16x16.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/favicon-32x32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/icon-192x192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/icon-256x256.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/icon-384x384.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/icon-512x512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/mstile-150x150.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/manifest.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/icon/drawable-hdpi-icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/icon/drawable-hdpi-icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/icon/drawable-ldpi-icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/icon/drawable-ldpi-icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/icon/drawable-mdpi-icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/icon/drawable-mdpi-icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/icon/drawable-playstore-512-icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/icon/drawable-xhdpi-icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/icon/drawable-xhdpi-icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/icon/drawable-xxhdpi-icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/icon/drawable-xxhdpi-icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/icon/drawable-xxxhdpi-icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/icon/drawable-xxxhdpi-icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/icon/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/icon/mipmap-ldpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/icon/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/icon/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/icon/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/icon/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/splash/drawable-land-hdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-land-hdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/splash/drawable-land-ldpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-land-ldpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/splash/drawable-land-mdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-land-mdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/splash/drawable-land-xhdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-land-xhdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/splash/drawable-land-xxhdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-land-xxhdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/splash/drawable-land-xxxhdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-land-xxxhdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/splash/drawable-port-hdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-port-hdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/splash/drawable-port-ldpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-port-ldpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/splash/drawable-port-mdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-port-mdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/splash/drawable-port-xhdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-port-xhdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/splash/drawable-port-xxhdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-port-xxhdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/android/splash/drawable-port-xxxhdpi-screen.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/android/splash/drawable-port-xxxhdpi-screen.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/icon0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/AppIcon-20x20@1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/AppIcon-20x20@2x-1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/AppIcon-20x20@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/AppIcon-20x20@3x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/AppIcon-29x29@1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/AppIcon-29x29@2x-1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/AppIcon-29x29@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/AppIcon-29x29@3x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/AppIcon-40x40@1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/AppIcon-40x40@2x-1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/AppIcon-40x40@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/AppIcon-40x40@3x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/AppIcon-512@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/AppIcon-60x60@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/AppIcon-60x60@3x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/AppIcon-76x76@1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/AppIcon-76x76@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/icon/AppIcon-83.5x83.5@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/splash/Default-568h@2x~iphone.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/splash/Default-568h@2x~iphone.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/splash/Default-667h.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/splash/Default-667h.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/splash/Default-736h.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/splash/Default-736h.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/splash/Default-Landscape-736h.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/splash/Default-Landscape-736h.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/splash/Default-Landscape@2x~ipad.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/splash/Default-Landscape@2x~ipad.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/splash/Default-Landscape@~ipadpro.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/splash/Default-Landscape@~ipadpro.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/splash/Default-Landscape~ipad.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/splash/Default-Landscape~ipad.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/splash/Default-Portrait@2x~ipad.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/splash/Default-Portrait@2x~ipad.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/splash/Default-Portrait@~ipadpro.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/splash/Default-Portrait@~ipadpro.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/splash/Default-Portrait~ipad.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/splash/Default-Portrait~ipad.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/splash/Default@2x~iphone.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/splash/Default@2x~iphone.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/ios/splash/Default~iphone.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/ios/splash/Default~iphone.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/splash.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/splash.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Firebase.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/IosStyles.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/img/not-found.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/img/snapchat.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/styles/global.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/styles/ltr.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/styles/rtl.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/styles/shards-dashboards.1.1.0.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Home/PostCard.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Home/Story.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Home/StoryCard.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Loading.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Modal.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Questions/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Questions/styles.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Tooltip.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/PageTitle.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/components-overview/CreateForm.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/components-overview/LoadingComponent.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/components-overview/LoginForm.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/MainFooter.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/MainHeader.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/MainNavbar/MainNavbar.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/MainNavbar/NavbarNav/Notifications.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/MainNavbar/NavbarNav/UserActions.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/MainNavbar/NavbarNav/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/MainNavbar/NavbarToggle.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/MainSidebar/MainSidebar.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/MainSidebar/SidebarCatItem.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/MainSidebar/SidebarMainNavbar.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/MainSidebar/SidebarNavItem.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/MainSidebar/SidebarNavItems.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/profile/UserAccountDetails.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/profile/UserDetails.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/single-post/SidebarActions.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/single-post/SidebarCategories.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/table/DataTable.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/table/styles.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/sidebar-nav-items.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/functions/FirebaseHelper.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/functions/NativeHelper.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/functions/dataProvider.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/functions/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/functions/pageData.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/functions/reducer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/functions/store.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/functions/types.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/functions/utils.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/i18n.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/images/flags/ir.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/images/flags/tr.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/images/logo-256x512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/images/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/images/sales-overview/no-product-image.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/language/ar/translation.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/language/en/translation.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/language/fa/translation.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/language/tu/translation.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/Default.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/serviceWorker.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Home.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Link.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Login.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/MyOrders.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/MyPosts.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Page.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/PlaceOrder.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Post.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Profile.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/SavedPosts.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/SubmitOrder.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/withTracker.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Edit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/MainContent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MainContent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/components-overview/CreateForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/components-overview/CreateForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/table/DataTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/table/DataTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/functions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/functions/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Admin.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Admin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/CreatePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/CreatePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Home.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -207,23 +26,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DataTable.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/table/DataTable.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6723">
-              <caret line="262" column="35" selection-start-line="262" selection-start-column="35" selection-end-line="262" selection-end-column="35" />
-              <folding>
-                <element signature="e#55#95#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="CreatePage.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/views/CreatePage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1809">
-              <caret line="92" column="43" selection-start-line="92" selection-start-column="43" selection-end-line="92" selection-end-column="43" />
+            <state relative-caret-position="618">
+              <caret line="92" column="88" selection-start-line="92" selection-start-column="88" selection-end-line="92" selection-end-column="88" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -231,24 +38,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/App.js">
+      <file leaf-file-name="MainContent.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/MainContent.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1485">
-              <caret line="64" column="19" selection-start-line="64" selection-start-column="19" selection-end-line="64" selection-end-column="19" />
-              <folding>
-                <element signature="e#22#60#0" expanded="true" />
-                <element signature="e#206#245#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Page.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/views/Page.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2943">
-              <caret line="132" column="22" selection-start-line="132" selection-start-column="22" selection-end-line="132" selection-end-column="22" />
+            <state relative-caret-position="554">
+              <caret line="215" column="9" lean-forward="true" selection-start-line="215" selection-start-column="9" selection-end-line="215" selection-end-column="9" />
               <folding>
                 <element signature="e#0#51#0" expanded="true" />
               </folding>
@@ -256,33 +50,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PageBuilder.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/components/page-builder/PageBuilder.js">
+      <file leaf-file-name="Style.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Style.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="231" lean-forward="true" selection-start-line="231" selection-end-line="231" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Admin.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/views/Admin.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3402">
-              <caret line="157" column="30" selection-start-line="157" selection-start-column="26" selection-end-line="157" selection-end-column="30" />
-              <folding>
-                <element signature="e#0#49#0" expanded="true" />
-                <element signature="e#444#581#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/functions/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34479">
-              <caret line="1283" column="20" selection-start-line="1283" selection-start-column="13" selection-end-line="1283" selection-end-column="20" />
+            <state relative-caret-position="486">
+              <caret line="18" column="9" lean-forward="true" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -292,38 +64,45 @@
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>'Title'd</find>
-      <find>NavL</find>
-      <find>/funct</find>
-      <find>selectedCats</find>
-      <find>headCells</find>
-      <find>grapesjs</find>
-      <find>grapesjs.init</find>
-      <find>grapes</find>
-      <find>reac</find>
-      <find>.init</find>
-      <find>/componen</find>
-      <find>buttonLink</find>
-      <find>ButtonLink</find>
-      <find>Cre</find>
-      <find>putData</find>
-      <find>editor</find>
-      <find>par</find>
-      <find>_id</find>
-      <find>'store</find>
-      <find>&quot;store</find>
       <find>SaveBuilder</find>
       <find>ApiUrl</find>
       <find>useParams</find>
-      <find>pageBuilder</find>
       <find>type</find>
       <find>post</find>
       <find>Edit</find>
       <find>frames</find>
-      <find>getBlogPost</find>
       <find>GRID_LAYOUT</find>
+      <find>getThePost</find>
+      <find>returnFieldType</find>
+      <find>field</find>
+      <find>getBlogPost</find>
+      <find>changeEveryThing</find>
+      <find>moment</find>
+      <find>Theme</find>
+      <find>rules</find>
+      <find>pageBuilder</find>
+      <find>move</find>
+      <find>moveFiles</find>
+      <find>setSubdomain</find>
+      <find>cpFiles</find>
+      <find>updateImportantFiles</find>
+      <find>create new</find>
+      <find>postData</find>
+      <find>redirect</find>
+      <find>buttonLink</find>
+      <find>HC.</find>
+      <find>editRecord</find>
+      <find>Navigate</find>
+      <find>edit-page</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src/components/layout</dir>
@@ -346,28 +125,34 @@
         <option value="$PROJECT_DIR$/src/layouts/Default.js" />
         <option value="$PROJECT_DIR$/src/views/Post.js" />
         <option value="$PROJECT_DIR$/src/views/Home_old.js" />
-        <option value="$PROJECT_DIR$/src/views/Home.js" />
         <option value="$PROJECT_DIR$/src/components/components-overview/PostSlider.js" />
-        <option value="$PROJECT_DIR$/src/components/MainContent.js" />
         <option value="$PROJECT_DIR$/src/components/layout/MainFooter.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/components/layout/MainSidebar/MainSidebarNavItem.js" />
         <option value="$PROJECT_DIR$/src/views/MyPosts.js" />
-        <option value="$PROJECT_DIR$/src/components/Edit.js" />
         <option value="$PROJECT_DIR$/src/assets/styles/rtl.css" />
-        <option value="$PROJECT_DIR$/src/components/components-overview/CreateForm.js" />
         <option value="$PROJECT_DIR$/src/components/layout/MainSidebar/MainSidebarNavItems.js" />
         <option value="$PROJECT_DIR$/src/functions/utils.js" />
         <option value="$PROJECT_DIR$/src/routes.js" />
         <option value="$PROJECT_DIR$/src/assets/styles/grape.css" />
-        <option value="$PROJECT_DIR$/src/views/Admin.js" />
         <option value="&lt;ce39571c-90df-4e04-b94e-47ff272b5444&gt;/home/arvand/domains/arvandguarantee.shop/public_html/main/build/index.html" />
-        <option value="$PROJECT_DIR$/src/views/CreatePage.js" />
-        <option value="$PROJECT_DIR$/src/components/table/DataTable.js" />
         <option value="$PROJECT_DIR$/src/App.js" />
-        <option value="$PROJECT_DIR$/src/functions/index.js" />
         <option value="$PROJECT_DIR$/src/views/Page.js" />
         <option value="$PROJECT_DIR$/src/components/page-builder/PageBuilder.js" />
+        <option value="$PROJECT_DIR$/src/views/Home.js" />
+        <option value="$PROJECT_DIR$/src/components/components-overview/CreateForm_old.js" />
+        <option value="&lt;ce39571c-90df-4e04-b94e-47ff272b5444&gt;/home/admin/domains/idehweb.com/public_html/v2/main/src/controllers/customer.mjs" />
+        <option value="$PROJECT_DIR$/src/components/Create.js" />
+        <option value="$PROJECT_DIR$/src/components/components-overview/CreateForm.js" />
+        <option value="$PROJECT_DIR$/src/components/Edit.js" />
+        <option value="$PROJECT_DIR$/src/functions/index.js" />
+        <option value="$PROJECT_DIR$/src/views/Admin.js" />
+        <option value="$PROJECT_DIR$/src/components/table/DataTable.js" />
+        <option value="$PROJECT_DIR$/src/Stylr.js" />
+        <option value="$PROJECT_DIR$/src/Style.js" />
+        <option value="$PROJECT_DIR$/src/views/CreatePage.js" />
+        <option value="$PROJECT_DIR$/src/components/Style.js" />
+        <option value="$PROJECT_DIR$/src/components/MainContent.js" />
       </list>
     </option>
   </component>
@@ -386,9 +171,8 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="y" value="23" />
-    <option name="width" value="1680" />
-    <option name="height" value="969" />
+    <option name="width" value="834" />
+    <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -407,64 +191,13 @@
             <path>
               <item name="nodeeweb-front" type="b2602c69:ProjectViewProjectNode" />
               <item name="nodeeweb-front" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nodeeweb-front" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nodeeweb-front" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="site_setting" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nodeeweb-front" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nodeeweb-front" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nodeeweb-front" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nodeeweb-front" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nodeeweb-front" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nodeeweb-front" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="styles" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="nodeeweb-front" type="b2602c69:ProjectViewProjectNode" />
               <item name="nodeeweb-front" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nodeeweb-front" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nodeeweb-front" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="Home" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nodeeweb-front" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nodeeweb-front" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="page-builder" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nodeeweb-front" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nodeeweb-front" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="table" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nodeeweb-front" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nodeeweb-front" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="functions" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="nodeeweb-front" type="b2602c69:ProjectViewProjectNode" />
@@ -492,15 +225,16 @@
     <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/components/page-builder" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components" />
+      <recent name="$PROJECT_DIR$/src/components/components-overview" />
       <recent name="$PROJECT_DIR$/src/assets/styles" />
       <recent name="$PROJECT_DIR$/src/components/page-builder" />
       <recent name="$PROJECT_DIR$/src/views" />
-      <recent name="$PROJECT_DIR$/src/components/layout/MainSidebar" />
-      <recent name="$PROJECT_DIR$/src/assets" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components" />
+      <recent name="$PROJECT_DIR$/src/components/page-builder" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -534,12 +268,12 @@
       <workItem from="1662128518963" duration="31940000" />
       <workItem from="1662322573124" duration="1792000" />
       <workItem from="1662371175092" duration="5940000" />
-      <workItem from="1662537222570" duration="250000" />
+      <workItem from="1662537222570" duration="18859000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="57920000" />
+    <option name="totallyTimeSpent" value="76529000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -550,11 +284,12 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.38235295" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.23424369" />
       <window_info anchor="right" id="Remote Host" order="3" weight="0.32967034" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2741148" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2741148" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Find" order="1" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -565,29 +300,29 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="File Transfer" order="8" weight="0.32983193" />
-      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" id="Remote Host" order="3" weight="0.32967034" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27106228" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2741148" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="11" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.42962185" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.23424369" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Version Control" order="11" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="File Transfer" order="12" weight="0.32983193" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info id="Favorites" order="2" side_tool="true" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -609,41 +344,10 @@
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="3" />
+      <option name="time" value="7" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="675">
-          <caret line="39" column="19" selection-start-line="39" selection-start-column="19" selection-end-line="39" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/capacitor.config.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jsconfig.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../nodeeweb/main/src/routes/public/p.mjs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="810">
-          <caret line="46" column="12" lean-forward="true" selection-start-line="46" selection-start-column="12" selection-end-line="46" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/capacitor.config.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/jsconfig.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -727,13 +431,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/MainContent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5508">
-          <caret line="204" column="20" selection-start-line="204" selection-start-column="20" selection-end-line="204" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/assets/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="346">
@@ -783,13 +480,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/Home.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="132">
-          <caret line="61" column="7" lean-forward="true" selection-start-line="61" selection-start-column="7" selection-end-line="61" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/views/Post.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="293">
@@ -801,6 +491,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
           <caret line="61" selection-start-line="61" selection-end-line="100" selection-end-column="3" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#1958#3114#0" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -845,20 +539,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Edit.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3375">
-          <caret line="130" column="16" selection-start-line="130" selection-start-column="16" selection-end-line="130" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/components-overview/CreateForm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2079">
-          <caret line="82" column="22" selection-start-line="82" selection-start-column="22" selection-end-line="82" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/layout/MainSidebar/MainSidebarNavItem.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="972">
@@ -870,6 +550,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="8" column="50" selection-start-line="8" selection-start-column="50" selection-end-line="8" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -877,6 +560,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4131">
           <caret line="153" selection-start-line="153" selection-end-line="153" />
+          <folding>
+            <element signature="e#54#82#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -899,6 +585,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="157">
           <caret line="31" column="23" lean-forward="true" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
+          <folding>
+            <element signature="e#850#908#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -906,25 +595,8 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
           <caret line="46" column="6" selection-start-line="46" selection-start-column="6" selection-end-line="46" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/CreatePage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1809">
-          <caret line="92" column="43" selection-start-line="92" selection-start-column="43" selection-end-line="92" selection-end-column="43" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/table/DataTable.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6723">
-          <caret line="262" column="35" selection-start-line="262" selection-start-column="35" selection-end-line="262" selection-end-column="35" />
-          <folding>
-            <element signature="e#55#95#0" expanded="true" />
+            <element signature="e#117#156#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -940,21 +612,62 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/Admin.js">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3402">
-          <caret line="157" column="30" selection-start-line="157" selection-start-column="26" selection-end-line="157" selection-end-column="30" />
+        <state relative-caret-position="124">
+          <caret line="5" column="7" lean-forward="true" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/page-builder/PageBuilder.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="238" column="10" selection-start-line="238" selection-start-column="10" selection-end-line="238" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/components-overview/AddToCardButton.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="11" column="28" selection-end-line="119" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/components-overview/CreateForm_old.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="143" column="12" selection-start-line="143" selection-start-column="12" selection-end-line="143" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Create.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="422">
+          <caret line="60" column="1" lean-forward="true" selection-start-line="60" selection-start-column="1" selection-end-line="66" selection-end-column="3" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#639#1655#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Edit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="155" column="22" lean-forward="true" selection-start-line="155" selection-start-column="22" selection-end-line="155" selection-end-column="22" />
           <folding>
             <element signature="e#0#49#0" expanded="true" />
-            <element signature="e#444#581#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/functions/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34479">
-          <caret line="1283" column="20" selection-start-line="1283" selection-start-column="13" selection-end-line="1283" selection-end-column="20" />
+        <state relative-caret-position="243">
+          <caret line="760" column="9" lean-forward="true" selection-start-line="760" selection-start-column="9" selection-end-line="760" selection-end-column="9" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -963,18 +676,83 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/views/Page.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2943">
-          <caret line="132" column="22" selection-start-line="132" selection-start-column="22" selection-end-line="132" selection-end-column="22" />
+        <state relative-caret-position="234">
+          <caret line="115" column="24" lean-forward="true" selection-start-line="115" selection-start-column="24" selection-end-line="115" selection-end-column="24" />
           <folding>
             <element signature="e#0#51#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/page-builder/PageBuilder.js">
+    <entry file="file://$PROJECT_DIR$/src/components/components-overview/CreateForm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="231" lean-forward="true" selection-start-line="231" selection-end-line="231" />
+        <state relative-caret-position="-1992">
+          <caret line="130" column="12" lean-forward="true" selection-start-line="130" selection-start-column="12" selection-end-line="130" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/table/DataTable.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="142" column="22" selection-start-line="142" selection-start-column="11" selection-end-line="142" selection-end-column="22" />
+          <folding>
+            <element signature="e#55#95#0" expanded="true" />
+            <element signature="e#734#772#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/Admin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="91">
+          <caret line="138" column="10" lean-forward="true" selection-end-line="172" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+            <element signature="e#444#581#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/Home.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="114" column="38" lean-forward="true" selection-start-line="114" selection-start-column="38" selection-end-line="114" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/CreatePage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="618">
+          <caret line="92" column="88" selection-start-line="92" selection-start-column="88" selection-end-line="92" selection-end-column="88" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Style.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="18" column="9" lean-forward="true" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/MainContent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="554">
+          <caret line="215" column="9" lean-forward="true" selection-start-line="215" selection-start-column="9" selection-end-line="215" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

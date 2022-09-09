@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {getTheSingleData} from '#c/functions/index';
+import {getTheSingleData,editRecord} from '#c/functions/index';
 import CreateForm from "#c/components/components-overview/CreateForm";
 import {toast} from "react-toastify";
 import store from "#c/functions/store";
@@ -7,7 +7,7 @@ import {withTranslation} from 'react-i18next';
 
 function Edit(props) {
   console.log('props', props)
-  const {model, _id, t} = props
+  let {model, _id, t,rules} = props
   const [data, setData] = useState([]);
   const [fields, setFields] = useState([]);
   let theform = {
@@ -114,6 +114,7 @@ function Edit(props) {
         let lastObj = {
           type: 'input',
           label: t(d),
+          name: d,
 
           size: {
             sm: 6,
@@ -128,28 +129,38 @@ function Edit(props) {
           child: [],
           value: data[d] || '',
         };
-        if(typeof data[d]=='object'){
-          lastObj.type='object';
+        if (typeof data[d] == 'object') {
+          lastObj.type = 'object';
 
         }
-        if(typeof data[d]=='number'){
-          lastObj.type='number';
+        if (typeof data[d] == 'number') {
+          lastObj.type = 'number';
         }
-        if(typeof data[d]=='string'){
+        if (typeof data[d] == 'string') {
 
         }
         // console.log('type of ',d,typeof data[d])
         formVals.push(lastObj)
 
       })
-console.log('formVals',formVals)
+      console.log('formVals', formVals)
       setData(data);
-      setFields(formVals);
+      setFields(data);
     });
   }
-  console.log(data)
+
+  const onSubmit = (values) => {
+
+    console.log('values',model,_id, values);
+    editRecord(model,_id,values).then(e=>{
+      console.log('e',e)
+    })
+  }
+
   return (
     <CreateForm
+      rules={rules}
+      onSubmit={onSubmit}
       buttons={theform.add.buttons}
       fields={fields}/>
   );

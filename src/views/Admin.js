@@ -31,6 +31,7 @@ import {
 import {withTranslation} from 'react-i18next';
 import MainSidebarNavItems from "#c/components/layout/MainSidebar/MainSidebarNavItems";
 import Edit from "#c/components/Edit";
+import Create from "#c/components/Create";
 import {useSelector} from "react-redux";
 
 const Admin = (props) => {
@@ -118,7 +119,7 @@ const Admin = (props) => {
 
     })
   }
-  // console.log('headCells', headCells)
+  // console.log('rules', rules[model])
   return (
     <Container fluid className="main-content-container fghjkjhgf">
       <Row className="relative mt-3 mb-3">
@@ -146,16 +147,16 @@ const Admin = (props) => {
               lg={{size: 12}}
               md={{size: 12}}
               sm="12">
-              {(action == 'list' && data) && <Table
+              {(action == 'list' && data && model && rules) && <Table
                 base={model + '/'}
                 data={data}
+                rules={rules[model] ? rules[model].list : {}}
                 headCells={headCells}
                 newText={t('No records found. Please create one')}
                 buttonText={t('create new')}
-                buttonLink={'create-page'}
               />}
-              {action == 'create'}
-              {action == 'edit' && <Row><Edit model={model} _id={_id}/></Row>}
+              {(action == 'create' && model && rules) && <Row><Create model={model} rules={rules[model] ? rules[model].create : {}}/></Row>}
+              {(action == 'edit' && model && rules) && <Row><Edit model={model} _id={_id} rules={rules[model] ? rules[model].edit : {}}/></Row>}
               {/*{action}*/}
               {/*{model}*/}
               {_id}

@@ -10,7 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Toolbar from '@mui/material/Toolbar';
 import Paper from '@mui/material/Paper';
-import {Alert, Button, Col, Row} from 'shards-react';
+import {Alert, Col, Row} from 'shards-react';
 import {withTranslation} from 'react-i18next';
 // import {Button, Col, Container, Nav, Na .vItem, NavLink, Row} from 'shards-react';
 import {Link} from 'react-router-dom';
@@ -124,8 +124,9 @@ function DataTable({
                      t,
                      newText,
                      buttonText,
-                     buttonLink,
+
                      actions,
+                     rules
                    }) {
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
@@ -133,17 +134,26 @@ function DataTable({
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(20);
+  let buttonLink = '',pageBuilder=false;
+  // console.clear()
+  // console.log('rules',rules)
+  if(rules.url){
+    buttonLink=rules.url;
+  }
+  if(rules.pageBuilder){
+    pageBuilder=true;
+  }
   if (headCells && !headCells[0] && rows && rows[0]) {
     // console.log(Object.keys(rows[0]))
     Object.keys(rows[0]).forEach((head) => {
       // console.log('typeof rows[0].head', typeof rows[0][head])
       // if (typeof rows[0][head] != 'object')
-        headCells.push({
-          id: head,
-          numeric: false,
-          disablePadding: true,
-          label: head,
-        })
+      headCells.push({
+        id: head,
+        numeric: false,
+        disablePadding: true,
+        label: head,
+      })
     })
 
   }
@@ -154,7 +164,7 @@ function DataTable({
     label: 'actions',
     edit: true,
     delete: true,
-    pageBuilder: true,
+    pageBuilder: pageBuilder,
   })
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -259,8 +269,8 @@ function DataTable({
                                     outline
                                     theme="info"
                                     size="sm"
-                                    to={'edit/'+row['_id']}>
-                                   {HC.button_text || t('edit')}
+                                    to={'edit/' + row['_id']}>
+                                    {HC.button_text || t('edit')}
                                   </Link>
                                 ) : null}
                                 {HC.delete ? (
@@ -280,7 +290,7 @@ function DataTable({
                                     theme="danger"
                                     size="sm"
                                     className="ml-2"
-                                    to={'edit-page/'+row['_id']}
+                                    to={'edit-page/' + row['_id']}
                                   >
                                     {t('edit with page builder')}
                                   </Link>

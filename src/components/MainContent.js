@@ -10,6 +10,7 @@ import {
   clearPost,
   getBlogPost,
   isClient,
+  getPage,
   loadPost,
   loveIt,
   MainUrl,
@@ -18,6 +19,7 @@ import {
 import { SnapChatIcon } from "#c/assets/index";
 import Loading from "#c/components/Loading";
 import PageBuilder from "#c/components/page-builder/PageBuilder";
+import Style from "#c/components/Style";
 import { useSelector } from "react-redux";
 import CONFIG from "#c/config";
 import ShareIcon from "@mui/icons-material/Share";
@@ -28,7 +30,7 @@ import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import { RWebShare } from "react-web-share";
 
 const MainContent = (props) => {
-  // console.log("props", props);
+  console.log("props", props);
   let { match, location, history, t, url } = props;
 
   let page = useSelector((st) => {
@@ -51,7 +53,8 @@ const MainContent = (props) => {
   const getThePost = (_id='home') => {
     return new Promise(function(resolve, reject) {
 
-      getBlogPost(_id).then((d = {}) => {
+      // getBlogPost(_id).then((d = {}) => {
+      getPage(_id).then((d = {}) => {
         console.log("set _id to show:", d);
         if(d._id) {
           savePost({
@@ -211,6 +214,7 @@ const MainContent = (props) => {
         className="d-inline-block item-icon-wrapper mt-3 ki765rfg hgfd"
         dangerouslySetInnerHTML={{ __html: elements.html }}
       />}
+      <Style css={elements.css}/>
       {/*<PageBuilder elements={elements}/>*/}
     </Container>
   );

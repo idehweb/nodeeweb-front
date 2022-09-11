@@ -19,6 +19,7 @@ const initialState = {
     // shippingAddress:{},
     // shippingAddresses:[],
     user: {},
+    admin: {},
     productSliderData: [],
     postSliderData: [],
     product: {},
@@ -59,7 +60,7 @@ const reducer = (state = initialState, {type, data, payload}) => {
                 loading: false
             });
         case Types.SaveData: {
-            console.log("Types.SaveData");
+            console.log("Types.SaveData",state);
             return Object.assign({}, state, data);
         }
         case "cats/catsLoaded": {

@@ -28,7 +28,7 @@ const storage = typeof window !== "undefined" ? createWebStorage("local") : crea
 const devMode = process.env.NODE_ENV === "development";
 
 const persistConfig = {
-  key: "arvandshop",
+  key: "nodeeweb",
   storage
 };
 export const storeProducts = (data) => ({

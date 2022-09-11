@@ -22,6 +22,7 @@ export const THEME_URL = CONFIG.THEME_URL || CONFIG.BASE_URL + 'customer';
 // console.log("REACT_APP_FRONT_ROUTE",process.env);
 // export const ApiUrl = "http://localhost:3003/customer";
 export const token = (typeof window === "undefined") ? null : store.getState().store.user.token;
+export const admin_token = (typeof window === "undefined") ? null : store.getState().store.admin.token;
 
 export const loadProductItems = (cat_id = null, include = null, filter = {}) => {
   console.log("======> loadProductItems");
@@ -422,7 +423,7 @@ export const SaveBuilder = (_id = null, data, headers) => {
   return new Promise(function (resolve, reject) {
     let c = [];
     if (_id)
-      putData(`${AdminRoute}/page/` + _id, {elements: data},true)
+      putData(`${AdminRoute}/page/` + _id, {elements: data}, true)
         .then(({data = {}}) => {
           let mainD = data["data"];
 
@@ -432,7 +433,7 @@ export const SaveBuilder = (_id = null, data, headers) => {
           reject(err);
         });
     else
-      postData(`${AdminRoute}/page/`, {title:'1',slug:'1',elements: data},true)
+      postData(`${AdminRoute}/page/`, {title: '1', slug: '1', elements: data}, true)
         .then(({data = {}}) => {
           let mainD = data["data"];
 
@@ -761,7 +762,7 @@ export const createRecord = (model, obj) => {
       });
   });
 };
-export const editRecord = (model,_id, obj) => {
+export const editRecord = (model, _id, obj) => {
   console.log('editRecord')
   return new Promise(function (resolve, reject) {
     putData(`${AdminRoute}/${model}/${_id}`, obj, true)
@@ -1678,6 +1679,26 @@ export const register = (number, fd, method = "sms") => {
       handleErr(err);
       return err;
     });
+};
+export const loginAdmin = (username, password) => {
+  console.log('loginAdmin')
+  return new Promise(function (resolve, reject) {
+
+    let {admin} = store.getState().store;
+    postData(`${AdminRoute}/admin/login`, {identifier: username, password: password})
+      .then(({data}) => {
+        if (data && data.user) {
+          admin = {...admin, ...{username: username, admin_token: data.user.token}};
+          if (data.success) SaveData({admin: admin});
+        }
+        return resolve(data);
+      })
+      .catch((err) => {
+        // console.log('sdf', err);
+        // handleErr(err);
+        return reject(err);
+      });
+  });
 };
 export const authCustomerForgotPass = (number, fd, method = "sms") => {
   let {user} = store.getState().store;

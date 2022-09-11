@@ -28,6 +28,7 @@ import 'grapesjs-preset-webpage/dist/grapesjs-preset-webpage.min.css'
 import 'grapesjs-preset-webpage/dist/grapesjs-preset-webpage.min.js'
 import "#c/components/page-builder/contentslider/index"
 import "#c/components/page-builder/countdown/index"
+import "#c/components/page-builder/box/index"
 import '#assets/styles/grape.css'
 
 // import '../components/page-builder/productslider/index'
@@ -107,7 +108,14 @@ const CreatePage = (props) => {
       height: '100vh',
       width: '100%',
       // plugins: ['gjs-preset-webpage', 'grapesjs-swiper-slider',],
-      plugins: ['gjs-component-productslider', 'gjs-component-countdown', 'gjs-preset-webpage', 'grapesjs-swiper-slider', sessionStoragePlugin],
+      plugins: [
+        'gjs-component-box',
+        // 'gjs-component-productslider',
+        // 'gjs-component-countdown',
+        // 'gjs-preset-webpage',s
+        // 'grapesjs-swiper-slider',
+        sessionStoragePlugin
+      ],
       // blocManager: {
       //     custom: true,
       //     blocks,

@@ -4,7 +4,7 @@ import { withTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
 
 import PageTitle from "#c/components/common/PageTitle";
-import LoginForm from "#c/components/components-overview/LoginForm";
+import AdminLoginForm from "#c/components/components-overview/AdminLoginForm";
 import { defaultImg } from "#c/assets/index";
 import { savePost } from "#c/functions/index";
 
@@ -16,7 +16,7 @@ const Login = ({ t }) => {
   let params = useParams();
 
   console.log("params", params);
-  if(params._state==='goToCheckout'){
+  if(params._state=='goToCheckout'){
     savePost({goToCheckout: true})
   }
   const [state, setState] = useState({
@@ -43,7 +43,7 @@ const Login = ({ t }) => {
         <Col lg="4" className="mx-auto mb-4">
           <Card small>
 
-            <LoginForm/>
+            <AdminLoginForm/>
           </Card>
         </Col>
       </div>

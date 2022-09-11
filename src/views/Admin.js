@@ -1,22 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import Table from '#c/components/table/DataTable';
+import Login from '#c/components/admin/Login';
+import Dashboard from '#c/components/admin/Dashboard';
 
 import {Col, Container, Row} from 'shards-react';
-import {
-  slide1Img,
-  slide2Img,
-  slide3Img,
-  slide4Img,
-  slide5Img,
-  slideOffer1Img,
-  slideOffer2Img,
-  slideOffer3Img,
-  slideOffer4Img,
-  slideOffer5Img,
-  slideOffer6Img,
-  valentineDays
-} from '#c/assets/index';
+
 // Import Swiper styles
 import {
   enableAdmin,
@@ -25,7 +14,8 @@ import {
   getPosts,
   getPostsByCat,
   getTheData,
-  setCountry
+  setCountry,
+  admin_token
 } from '#c/functions/index';
 
 import {withTranslation} from 'react-i18next';
@@ -71,7 +61,10 @@ const Admin = (props) => {
 
   // console.log('themeData.rules[',model,']',themeData.rules)
 
-  let action = params.action || 'list';
+  let action = params.action || 'dashboard';
+  if(!admin_token){
+    action='login';
+  }
   // console.log('models', models);
   // useEffect(() => {
   //   // setSelectedCats(items)
@@ -122,11 +115,15 @@ const Admin = (props) => {
   // console.log('rules', rules[model])
   return (
     <Container fluid className="main-content-container fghjkjhgf">
+      {admin_token}
       <Row className="relative mt-3 mb-3">
         <Col>
         </Col>
       </Row>
-      <Row className={"m-0"}>
+      {action=='dashboard' && <Dashboard/>}
+      {action=='login' && <Login/>}
+
+      {(action!=='login' && action!=='dashboard') && <Row className={"m-0"}>
         <Col tag="aside" lg={{size: 3}} md={{size: 4}} className={"sidebar white mobilenone"}>
           <Row className={""}>
             <Col lg={{size: 12}} md={{size: 12}}>
@@ -163,7 +160,7 @@ const Admin = (props) => {
             </Col>
           </Row>
         </Col>
-      </Row>
+      </Row>}
 
     </Container>
   );

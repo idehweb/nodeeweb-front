@@ -101,6 +101,8 @@ class LoginForm extends React.Component {
 
     register(phoneNumber, fd, this.state.loginMethod).then((r) => {
       // new user
+      console.log('local', store.getState().store)
+
       if (r.shallWeSetPass) {
         this.state.timer = globalTimerSet;
         this.myInterval = setInterval(() => {

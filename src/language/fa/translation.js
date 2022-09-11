@@ -13,6 +13,8 @@ export default ()=>({
   "please choose combination": "لطفا انتخاب کنید",
   "WhatsApp": "واتس‌اپ",
   "SMS": "اس ام اس",
+  "username": "نام کاربری",
+  "password": "رمز عبور",
   "Wrong phone number?": "شماره موبایل اشتباه است",
   "cancel": "ببند!",
   "your phone number": "شماره موبایل شما",

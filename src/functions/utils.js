@@ -36,19 +36,18 @@ export const postData = (url = "", data = {}, f = false, headers = {}, rewriteHe
     axios
       .post(url, data, option)
       .then(function (response) {
-        resolve(response);
+        return resolve(response);
         // response.json();
       })
       .catch(function (error) {
         console.log("post error()", error);
-        if (error && error.response && error.response.status == 401) {
-          reject({
+        if (error && error.response && error.response.data && error.response.status == 401) {
+          return reject({
             success: false,
-            message: "Please sign in!"
+            message: error.response.data.message || "Please sign in!"
           });
-          return 0;
         }
-        reject(error);
+        return reject(error);
       });
   });
 };

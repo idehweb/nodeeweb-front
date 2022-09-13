@@ -1,5 +1,6 @@
 import React from "react";
 import store from "#c/functions/store";
+import { Navigate } from "react-router-dom";
 
 import {Button, Col, Form, FormInput, InputGroup, ListGroup, ListGroupItem, Row} from "shards-react";
 import {
@@ -28,6 +29,7 @@ class LoginForm extends React.Component {
     this.state = {
       username: null,
       password: null,
+      redirect: null
     };
     window.scrollTo(0, 0);
   }
@@ -54,6 +56,9 @@ class LoginForm extends React.Component {
       }
       if (r.success) {
         console.log('error', r)
+        this.setState({
+          redirect: '/admin/dashboard'
+        })
         toast(r.message, {
           type: "success"
         });
@@ -71,24 +76,13 @@ class LoginForm extends React.Component {
 
   render() {
     const {
-      isDisplay,
-      goToProfile,
-      token,
-      firstName,
-      lastName,
-      CameFromPost,
-      goToProduct,
-      setPassword,
-      getPassword,
-      internationalCode,
-      enterActivationCodeMode,
-      internationalCodeClass,
-      goToCheckout,
-      loginMethod,
-      timer
+      redirect
     } = this.state;
     const {t} = this.props;
+    if (redirect) {
+      return <Navigate to={redirect}/>;
 
+    }
     return (
       <ListGroup flush>
         <ListGroupItem className="p-3">

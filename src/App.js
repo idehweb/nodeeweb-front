@@ -112,17 +112,7 @@ const APP = ((props) => {
           ))}
         </Routes>
       </BrowserRouter>
-      {/*<CustomModal onClose={() => {*/}
-      {/*onCloseModal();*/}
-      {/*}} open={false} className={'width50vw sdfghyjuikol kiuytgfhjuyt orangeBack'}*/}
-      {/*title={'بازدیدکنندگان عزیز'}>*/}
-      {/*/!*<p style={{textAlign:'center'}}>بازدیدکنندگان عزیز</p>*!/*/}
-      {/*<Col><p style={{ textAlign: 'center' }}>*/}
-      {/*ضمن عرض تبریک به مناسبت فرا رسیدن سال جدید و آرزوی شادکامی به اطلاع می رسانیم،*/}
-      {/*ارسال سفارشات شهرستان تا ۲۴ اسفند و تهران تا ۲۸ اسفند صورت خواهد گرفت. خریدهایی که بعد از این مدت انجام شوند،*/}
-      {/*بعد از تعطیلات نوروز در تاریخ ۶ فروردین ارسال خواهند شد.*/}
-      {/*</p></Col>*/}
-      {/*</CustomModal>*/}
+
     </div>
   );
 });

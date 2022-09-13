@@ -2,10 +2,10 @@ import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import Table from '#c/components/table/DataTable';
 import Login from '#c/components/admin/Login';
+import Logout from '#c/components/admin/Logout';
 import Dashboard from '#c/components/admin/Dashboard';
 
 import {Col, Container, Row} from 'shards-react';
-
 // Import Swiper styles
 import {
   enableAdmin,
@@ -14,9 +14,9 @@ import {
   getPosts,
   getPostsByCat,
   getTheData,
-  setCountry,
-  admin_token
+  setCountry
 } from '#c/functions/index';
+import store from "#c/functions/store";
 
 import {withTranslation} from 'react-i18next';
 import MainSidebarNavItems from "#c/components/layout/MainSidebar/MainSidebarNavItems";
@@ -29,7 +29,11 @@ const Admin = (props) => {
   const themeData = useSelector((st) => st.store.themeData);
   if (!themeData)
     return <></>
-
+  let st = store.getState().store;
+  let admin_token = null;
+  if (st.admin && st.admin.admin_token) {
+    admin_token = st.admin.admin_token;
+  }
   const [data, setData] = useState([]);
   let models = [];
   if (themeData.models)
@@ -56,14 +60,30 @@ const Admin = (props) => {
   //   });
   let params = useParams();
   let _id = params._id;
+  let action = params.action || 'dashboard';
   let model = params.model;
   let rules = themeData.rules
-
+  // console.clear();
+  // console.log('action', action, params.action, params.model);
   // console.log('themeData.rules[',model,']',themeData.rules)
+  if (params.model) {
+    action = params.action || 'list'
+  }
+  if (params.model === 'dashboard') {
+    action = 'dashboard'
 
-  let action = params.action || 'dashboard';
-  if(!admin_token){
-    action='login';
+  }
+  if (params.model === 'logout') {
+    action = 'logout'
+
+  }
+  if (params.model === 'login') {
+    action = 'login'
+
+  }
+  console.log('admin_token', admin_token);
+  if (!admin_token) {
+    action = 'login'
   }
   // console.log('models', models);
   // useEffect(() => {
@@ -112,22 +132,41 @@ const Admin = (props) => {
 
     })
   }
-  // console.log('rules', rules[model])
+  let menu = [{
+    child: [],
+    onClick: () => {
+    },
+    parent: null,
+    slug: "dashboard",
+    title: {
+      fa: 'Dashboard'
+    },
+    to: "",
+    _id: "Dashboard"
+  }, ...models, {
+    child: [],
+    onClick: () => {
+    },
+    parent: null,
+    slug: "logout",
+    title: {
+      fa: 'Logout'
+    },
+    to: "",
+    _id: "Logout"
+  }];
+  console.log('menu', menu)
   return (
-    <Container fluid className="main-content-container fghjkjhgf">
-      {admin_token}
-      <Row className="relative mt-3 mb-3">
-        <Col>
-        </Col>
-      </Row>
-      {action=='dashboard' && <Dashboard/>}
-      {action=='login' && <Login/>}
+    <>
 
-      {(action!=='login' && action!=='dashboard') && <Row className={"m-0"}>
+      {action == 'logout' && <Logout/>}
+      {action == 'login' && <Login/>}
+
+      {(action !== 'login' && action !== 'logout') && <Row className={"m-0"}>
         <Col tag="aside" lg={{size: 3}} md={{size: 4}} className={"sidebar white mobilenone"}>
           <Row className={""}>
             <Col lg={{size: 12}} md={{size: 12}}>
-              <MainSidebarNavItems items={models}/>
+              <MainSidebarNavItems items={menu}/>
             </Col>
           </Row>
         </Col>
@@ -144,16 +183,21 @@ const Admin = (props) => {
               lg={{size: 12}}
               md={{size: 12}}
               sm="12">
+              {action == 'dashboard' && <Dashboard/>}
+
               {(action == 'list' && data && model && rules) && <Table
                 base={model + '/'}
                 data={data}
+                model={model}
                 rules={rules[model] ? rules[model].list : {}}
                 headCells={headCells}
                 newText={t('No records found. Please create one')}
                 buttonText={t('create new')}
               />}
-              {(action == 'create' && model && rules) && <Row><Create model={model} rules={rules[model] ? rules[model].create : {}}/></Row>}
-              {(action == 'edit' && model && rules) && <Row><Edit model={model} _id={_id} rules={rules[model] ? rules[model].edit : {}}/></Row>}
+              {(action == 'create' && model && rules) &&
+              <Row><Create model={model} rules={rules[model] ? rules[model].create : {}}/></Row>}
+              {(action == 'edit' && model && rules) &&
+              <Row><Edit model={model} _id={_id} rules={rules[model] ? rules[model].edit : {}}/></Row>}
               {/*{action}*/}
               {/*{model}*/}
               {_id}
@@ -162,7 +206,7 @@ const Admin = (props) => {
         </Col>
       </Row>}
 
-    </Container>
+    </>
   );
 };
 

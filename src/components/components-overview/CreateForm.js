@@ -112,7 +112,7 @@ function CreateForm(props) {
         sm={field.size ? field.size.sm : ''}
         lg={field.size ? field.size.lg : ''}
         className={'MGD ' + field.className}>
-        <label htmlFor="feLastName">{field.label}</label>
+        <label htmlFor="feLastName">{field.label} - object</label>
         <Field
           name={'key' + field.label}
           component="input"

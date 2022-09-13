@@ -22,7 +22,7 @@ export const THEME_URL = CONFIG.THEME_URL || CONFIG.BASE_URL + 'customer';
 // console.log("REACT_APP_FRONT_ROUTE",process.env);
 // export const ApiUrl = "http://localhost:3003/customer";
 export const token = (typeof window === "undefined") ? null : store.getState().store.user.token;
-export const admin_token = (typeof window === "undefined") ? null : store.getState().store.admin.token;
+export const admin_token = (typeof window === "undefined") ? null : store.getState().store.admin.admin_token;
 
 export const loadProductItems = (cat_id = null, include = null, filter = {}) => {
   console.log("======> loadProductItems");
@@ -132,6 +132,9 @@ const handleErr = (err) => {
 export const Logout = () => {
   clearState();
   window.location.replace("/");
+};
+export const clearAdminState = () => {
+  clearState();
 };
 
 export const LevelCategoriesData = (i = "") =>

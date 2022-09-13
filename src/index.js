@@ -20,7 +20,7 @@ import 'bootstrap/dist/css/bootstrap.rtl.min.css';
 // import 'bootstrap-v4-rtl/dist/css/bootstrap-rtl.min.css';
 // import bootstrap from 'bootstrap';
 // import "shards-ui/dist/css/shards.min.css"
-// import '#c/assets/styles/shards-dashboards.1.1.0.min.css';
+import '#c/assets/styles/shards-dashboards.1.1.0.min.css';
 import '#c/assets/styles/global.css';
 import '#c/assets/styles/ltr.css';
 import '#c/assets/styles/rtl.css';

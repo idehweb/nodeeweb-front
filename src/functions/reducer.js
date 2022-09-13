@@ -18,7 +18,7 @@ const initialState = {
     // billingAddresses:[],
     // shippingAddress:{},
     // shippingAddresses:[],
-    user: {},
+    user: localStorage.getItem('user') || {},
     admin: {},
     productSliderData: [],
     postSliderData: [],
@@ -74,11 +74,11 @@ const reducer = (state = initialState, {type, data, payload}) => {
 
             return {...state, themeData: payload.themeData};
         }
-        case "data/homeLoaded": {
-            console.log("data/homeLoaded");
-
-            return {...state, homeData: payload.homeData};
-        }
+        // case "data/homeLoaded": {
+        //     console.log("data/homeLoaded");
+        //
+        //     return {...state, homeData: payload.homeData};
+        // }
         case "site/status": {
             return {
                 ...state,
@@ -113,7 +113,7 @@ const reducer = (state = initialState, {type, data, payload}) => {
             return {...state, product: initialState.product};
         }
         default:
-            return {...state};
+            return state
     }
 };
 

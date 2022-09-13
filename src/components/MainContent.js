@@ -143,79 +143,12 @@ const MainContent = (props) => {
 
     <Container className="main-content-container p-0 pb-4 kiuytyuioiu bg-white" key={0}>
 
-      {/*<Row className={"limited posrel"}>*/}
-        {/*<div className={"floating-tools"}>*/}
-          {/*{isClient && <ButtonGroup vertical>*/}
-
-            {/*{title && <RWebShare*/}
-              {/*data={{*/}
-                {/*text: excerpt,*/}
-                {/*url: CONFIG.SHOP_URL + "p/" + _id + "/" + encodeURIComponent(title[lan]),*/}
-                {/*title: title[lan]*/}
-              {/*}}*/}
-              {/*sites={["whatsapp", "telegram", "linkedin", "copy"]}*/}
-              {/*closeText={t("close")}*/}
-              {/*onClick={() => console.log("shared successfully!")}*/}
-            {/*>*/}
-              {/*<Button>*/}
-                {/*<ShareIcon/>*/}
-              {/*</Button>*/}
-            {/*</RWebShare>}*/}
-            {/*/!*{views && <Button><RemoveRedEyeIcon/><Badge theme="info">{views}</Badge></Button>}*!/*/}
-
-            {/*{enableAdmin && <a href={VARIABLE.ADMIN_URL + "/#/product/" + _id} target={"_blank"}><i*/}
-              {/*className="material-icons">edit</i></a>}*/}
-          {/*</ButtonGroup>}*/}
-        {/*</div>*/}
-        {/*<Col lg="3" md="4" xs="12">*/}
-
-          {/*<Gallery photos={photos} thumbnail={thumbnail}/>*/}
-
-        {/*</Col>*/}
-        {/*<Col lg="9" md="8" xs="12">*/}
-
-
-          {/*<Row>*/}
-            {/*<Col lg="12" md="12" className={"single-product"}>*/}
-
-              {/*<h1 className="kjhghjk hgfd ">*/}
-                {/*{title && title.fa}*/}
-              {/*</h1>*/}
-
-
-              {/*{excerpt && <div*/}
-                {/*className="d-inline-block item-icon-wrapper mt-3 ki765rfg hgfd"*/}
-                {/*dangerouslySetInnerHTML={{ __html: excerpt }}*/}
-              {/*/>}*/}
-
-
-            {/*</Col>*/}
-          {/*</Row>*/}
-
-
-        {/*</Col>*/}
-
-        {/*<Col lg={12} md={12} sm={12} xs={12}>*/}
-
-          {/*{tab === "description" && <div className={"pt-5"} id={"description"}>*/}
-            {/*{description && <div*/}
-              {/*className="d-inline-block item-icon-wrapper ki765rfg  hgfd mb-5"*/}
-              {/*dangerouslySetInnerHTML={{ __html: description }}*/}
-            {/*/>}*/}
-
-          {/*</div>}*/}
-
-        {/*</Col>*/}
-
-
-      {/*</Row>*/}
-
-      {elements.html && <div
-        className="d-inline-block item-icon-wrapper mt-3 ki765rfg hgfd"
-        dangerouslySetInnerHTML={{ __html: elements.html }}
-      />}
-      <Style css={elements.css}/>
-      {/*<PageBuilder elements={elements}/>*/}
+      {/*{elements.html && <div*/}
+        {/*className="d-inline-block item-icon-wrapper mt-3 ki765rfg hgfd"*/}
+        {/*dangerouslySetInnerHTML={{ __html: elements.html }}*/}
+      {/*/>}*/}
+      {/*<Style css={elements.css}/>*/}
+      <PageBuilder elements={elements.pages[0].frames[0].component.components}/>
     </Container>
   );
 }

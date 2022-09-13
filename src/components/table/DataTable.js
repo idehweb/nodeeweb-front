@@ -124,7 +124,7 @@ function DataTable({
                      t,
                      newText,
                      buttonText,
-
+                     model,
                      actions,
                      rules
                    }) {
@@ -269,7 +269,7 @@ function DataTable({
                                     outline
                                     theme="info"
                                     size="sm"
-                                    to={'edit/' + row['_id']}>
+                                    to={'/admin/'+model+'/edit/' + row['_id']}>
                                     {HC.button_text || t('edit')}
                                   </Link>
                                 ) : null}
@@ -279,7 +279,7 @@ function DataTable({
                                     theme="danger"
                                     size="sm"
                                     className="ml-2"
-                                    to={'delete'}
+                                    to={'/admin/'+model+'/delete/'}
                                   >
                                     {t('delete')}
                                   </Link>
@@ -290,7 +290,7 @@ function DataTable({
                                     theme="danger"
                                     size="sm"
                                     className="ml-2"
-                                    to={'edit-page/' + row['_id']}
+                                    to={'/admin/'+model+'/edit-page/' + row['_id']}
                                   >
                                     {t('edit with page builder')}
                                   </Link>

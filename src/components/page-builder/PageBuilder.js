@@ -3,11 +3,15 @@ import Swiper from "#c/components/swiper";
 import ProductsSlider, {ProductsSliderServer} from "#c/components/components-overview/ProductsSlider";
 
 export function ShowElement(p) {
-    console.log("ShowElement", p);
+    console.log("\n\n\nShowElement", p);
 
     let {element, content} = p;
     let {name, type} = element;
-    // console.log("name", name);
+    if(element['custom-name']){
+      name=element['custom-name'];
+    }
+    console.log("name:", name);
+    console.log("type:", type);
 
     switch (type) {
         case "text":
@@ -102,7 +106,7 @@ export function SWIPER({element}) {
 export function SWIPERWrapper(props) {
     let {element, content} = props;
     let {type, components, classes} = element;
-    console.clear()
+    // console.clear()
     console.log("SWIPERWrapper", components)
 
     if (components)
@@ -137,8 +141,8 @@ export function SWIPERWrapper(props) {
 export function SWIPERSlide(props) {
     let {element, content} = props;
     let {type, components, classes,kind,text,src} = element;
-    console.clear();
-    console.log('props',props)
+    // console.clear();
+    // console.log('props',props)
     if (components)
         return components.map((com, index) => {
             // console.log("SWIPERSlide", com)
@@ -242,7 +246,7 @@ export function GRID_COL(props) {
 export function Content(props) {
 //    console.clear();
     const {element, content} = props;
-    console.log("props ", element, content);
+    console.log("Content ");
 
     // const {payload, type, components, classes} = element;
     if (element && element.content && content && content[element.content])
@@ -257,7 +261,7 @@ export function Content(props) {
 
 
 export default function PageBuilder(props) {
-    console.log('props', props)
+    // console.log('props', props)
     let {elements, content} = props;
     // let html = elements.html;
     // if (elements && elements.pages && elements.pages[0] && elements.pages[0].frames && elements.pages[0].frames[0] && elements.pages[0].frames[0].component && elements.pages[0].frames[0].component.components)

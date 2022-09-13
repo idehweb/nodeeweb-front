@@ -10,6 +10,7 @@ export default ()=>({
   "Change Language": "انتخاب زبان...",
   "English": "انگلیسی",
   "Arabic": "عربی",
+  "Are you sure to logout?": "برای خروج مطمئن هستین؟",
   "please choose combination": "لطفا انتخاب کنید",
   "WhatsApp": "واتس‌اپ",
   "SMS": "اس ام اس",

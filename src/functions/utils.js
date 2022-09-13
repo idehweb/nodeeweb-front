@@ -157,6 +157,7 @@ export const getData = (
 
     }
     option["headers"]["lan"] = store.getState().store.lan;
+    option["headers"]["response"] = "json";
     if (isClient)
       if (f) option["headers"]["token"] = store.getState().store.user.token || '';
       else if (f && !token && isClient) {

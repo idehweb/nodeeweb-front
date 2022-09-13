@@ -30,14 +30,19 @@ const Nohf = ({children, width, noNavbar, onChange = () => null}) => {
   console.log('Nohf...', width);
   return (
 
-      <Container fluid>
-        <Row>
+    <main>
 
+      <Col
+        className="main-content p-0"
+        lg={{size: 12, offset: 0}}
+        md={{size: 12, offset: 0}}
+        sm="12"
+        // tag="main"
+      >
 
-            {children}
-
-        </Row>
-      </Container>
+      {children}
+      </Col>
+    </main>
 
   );
 };

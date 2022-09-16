@@ -128,6 +128,7 @@ function DataTable({
                      actions,
                      rules
                    }) {
+
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -146,7 +147,7 @@ function DataTable({
   if (headCells && !headCells[0] && rows && rows[0]) {
     // console.log(Object.keys(rows[0]))
     Object.keys(rows[0]).forEach((head) => {
-      // console.log('typeof rows[0].head', typeof rows[0][head])
+      console.log('typeof rows[0].head',  rows[0][head])
       // if (typeof rows[0][head] != 'object')
       headCells.push({
         id: head,
@@ -157,15 +158,16 @@ function DataTable({
     })
 
   }
-  headCells.push({
-    id: 'actions',
-    numeric: false,
-    disablePadding: true,
-    label: 'actions',
-    edit: true,
-    delete: true,
-    pageBuilder: pageBuilder,
-  })
+  console.log('headCells',headCells)
+  // headCells.push({
+  //   id: 'actions',
+  //   numeric: false,
+  //   disablePadding: true,
+  //   label: 'actions',
+  //   edit: true,
+  //   delete: true,
+  //   pageBuilder: pageBuilder,
+  // })
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -214,7 +216,7 @@ function DataTable({
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-
+console.log('headCells',headCells)
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -256,8 +258,9 @@ function DataTable({
                         {/*inputProps={{ 'aria-labelledby': labelId }}*/}
                         {/*/>*/}
                         {/*</TableCell>*/}
-                        {headCells.map((HC, index) => {
-                          if (HC.id === 'actions') {
+                        {headCells.map((HC, index) => {console.log('HC',HC)
+
+                          if (HC.type === 'actions') {
                             return (
                               <TableCell
                                 component="td"

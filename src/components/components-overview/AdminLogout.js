@@ -50,6 +50,13 @@ class LogoutForm extends React.Component {
         })
 
   };
+  handleCancel = (e) => {
+    e.preventDefault();
+        this.setState({
+          redirect: '/admin/dashboard'
+        })
+
+  };
 
   render() {
     const {
@@ -86,7 +93,7 @@ class LogoutForm extends React.Component {
                   block
                   type="submit"
                   className="center"
-                  onClick={this.cancel}>
+                  onClick={this.handleCancel}>
                   {t("Cancel")}
                 </Button>
               </Form>

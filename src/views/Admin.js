@@ -5,7 +5,7 @@ import Login from '#c/components/admin/Login';
 import Logout from '#c/components/admin/Logout';
 import Dashboard from '#c/components/admin/Dashboard';
 
-import {Col, Container, Row} from 'shards-react';
+import {Col, Row} from 'shards-react';
 // Import Swiper styles
 import {
   enableAdmin,
@@ -99,7 +99,7 @@ const Admin = (props) => {
     console.log('model,action', model, action, themeData)
   }, [model, action, themeData]);
   const getData = () => {
-    console.clear()
+    // console.clear()
     //   const { t } = this.props;
     let headers = {
       fields: []
@@ -128,6 +128,11 @@ const Admin = (props) => {
         numeric: false,
         disablePadding: true,
         label: l.name,
+        type: l.type || "string",
+        edit: l.edit || false,
+        delete: l.delete || false,
+        pageBuilder: l.pageBuilder || false,
+        button_text: l.button_text || 'edit',
       })
 
     })

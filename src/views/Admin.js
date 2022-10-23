@@ -4,6 +4,7 @@ import Table from '#c/components/table/DataTable';
 import Login from '#c/components/admin/Login';
 import Logout from '#c/components/admin/Logout';
 import Dashboard from '#c/components/admin/Dashboard';
+import {toast} from "react-toastify";
 
 import {Col, Row} from 'shards-react';
 // Import Swiper styles
@@ -20,9 +21,13 @@ import store from "#c/functions/store";
 
 import {withTranslation} from 'react-i18next';
 import MainSidebarNavItems from "#c/components/layout/MainSidebar/MainSidebarNavItems";
+import Delete from "#c/components/Delete";
 import Edit from "#c/components/Edit";
 import Create from "#c/components/Create";
 import {useSelector} from "react-redux";
+import MainNavbar from '#c/components/layout/MainNavbar/MainNavbar';
+import MainMobileNavbar from '#c/components/layout/MainNavbar/MainMobileNavbar';
+import MainSidebar from '#c/components/layout/MainSidebar/MainSidebar';
 
 const Admin = (props) => {
   let {match, location, history, t} = props
@@ -41,12 +46,12 @@ const Admin = (props) => {
       let childs = [];
       ['List', 'Create'].forEach((ch, c) => {
         childs.push({
-          _id: mod + ch, title: {fa: ch}, slug: mod.toLowerCase(), onClick: () => {
+          _id: mod + ch, title: {fa: t(ch),en:ch}, slug: mod.toLowerCase(), onClick: () => {
           }, parent: null, to: ch.toLowerCase()
         })
       })
       models.push({
-        _id: mod, title: {fa: mod}, slug: mod.toLowerCase(), onClick: () => {
+        _id: mod, title: {fa: t(mod),en:mod}, slug: mod.toLowerCase(), onClick: () => {
         }, parent: null, to: '', child: childs
       })
     });
@@ -94,12 +99,15 @@ const Admin = (props) => {
   // }, [model, action]);
   useEffect(() => {
     // setSelectedCats(items)
+    console.log('model',model);
     if (action == 'list')
       getData();
     console.log('model,action', model, action, themeData)
   }, [model, action, themeData]);
   const getData = () => {
     // console.clear()
+    setData([]);
+
     //   const { t } = this.props;
     let headers = {
       fields: []
@@ -115,7 +123,14 @@ const Admin = (props) => {
     console.log("headers['fields']", headers['fields'])
     // return;
     getTheData('admin', model, headers).then((data = []) => {
-      setData(data);
+      console.log('data',data)
+      if(data.success==false){
+        toast(data.message, {
+          type: "error"
+        });
+      }else {
+        setData(data);
+      }
     });
   }
   // if(!data)
@@ -124,6 +139,7 @@ const Admin = (props) => {
     headCells = [];
     themeData.rules[model].list.header.forEach((l) => {
       headCells.push({
+        ...l,
         id: l.name,
         numeric: false,
         disablePadding: true,
@@ -132,7 +148,8 @@ const Admin = (props) => {
         edit: l.edit || false,
         delete: l.delete || false,
         pageBuilder: l.pageBuilder || false,
-        button_text: l.button_text || 'edit',
+        button_text: l.button_text || t('edit'),
+
       })
 
     })
@@ -144,7 +161,8 @@ const Admin = (props) => {
     parent: null,
     slug: "dashboard",
     title: {
-      fa: 'Dashboard'
+      fa: t('Dashboard'),
+      en: ('Dashboard'),
     },
     to: "",
     _id: "Dashboard"
@@ -155,7 +173,8 @@ const Admin = (props) => {
     parent: null,
     slug: "logout",
     title: {
-      fa: 'Logout'
+      fa: t('Logout'),
+      en: ('Logout'),
     },
     to: "",
     _id: "Logout"
@@ -168,6 +187,12 @@ const Admin = (props) => {
       {action == 'login' && <Login/>}
 
       {(action !== 'login' && action !== 'logout') && <Row className={"m-0"}>
+        {/*<MainNavbar />*/}
+        <MainSidebar>
+          <MainSidebarNavItems items={menu}/>
+
+        </MainSidebar>
+        <MainMobileNavbar search={false} />
         <Col tag="aside" lg={{size: 3}} md={{size: 4}} className={"sidebar white mobilenone"}>
           <Row className={""}>
             <Col lg={{size: 12}} md={{size: 12}}>
@@ -203,9 +228,11 @@ const Admin = (props) => {
               <Row><Create model={model} rules={rules[model] ? rules[model].create : {}}/></Row>}
               {(action == 'edit' && model && rules) &&
               <Row><Edit model={model} _id={_id} rules={rules[model] ? rules[model].edit : {}}/></Row>}
-              {/*{action}*/}
-              {/*{model}*/}
-              {_id}
+
+              {(action == 'delete' && model && rules) &&
+              <Row><Delete model={model} _id={_id} rules={rules[model] ? rules[model].delete : {}}/></Row>}
+
+              {/*{_id}*/}
             </Col>
           </Row>
         </Col>

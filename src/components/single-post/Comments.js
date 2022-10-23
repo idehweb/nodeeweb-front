@@ -3,7 +3,7 @@ import { Card, CardBody, CardFooter, CardHeader, Col, Row } from "shards-react";
 
 import store from "#c/functions/store";
 import { dateFormat } from "#c/functions/utils";
-import CreateForm from "#c/components/components-overview/CreateForm";
+import CreateForm from "#c/components/components-overview/CreateForm_old";
 import { withTranslation } from "react-i18next";
 import { getComments, getTheChaparPrice, getTheSettings, goToProduct, savePost, sendComment } from "#c/functions/index";
 import { toast } from "react-toastify";

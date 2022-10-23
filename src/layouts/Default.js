@@ -1,71 +1,33 @@
-import React from 'react';
+import React ,{useEffect} from 'react';
 import PropTypes from 'prop-types';
 import {Col, Container, Row} from 'shards-react';
-
-import MainNavbar from '#c/components/layout/MainNavbar/MainNavbar';
-import MainMobileNavbar from '#c/components/layout/MainNavbar/MainMobileNavbar';
-import MainSidebar from '#c/components/layout/MainSidebar/MainSidebar';
+import {useSelector} from "react-redux";
+import PageBuilder from "#c/components/page-builder/PageBuilder";
 import CardSidebar from '#c/components/layout/MainSidebar/CardSidebar';
-import StickyCard from '#c/components/layout/StickyCard';
-import MainFooter from '#c/components/layout/MainFooter';
-import SiteStatus from '#c/components/SiteStatus';
-// import useWindowSize from '#c/components/common/useWindowSize';
 
 
-const DefaultLayout = (props) => {
-  // console.clear();
-  console.log('==> DefaultLayout');
-  let {children, width=1200, noNavbar, onChange = () => null,location}=props;
-  // console.log(width);
-  // let [width2, setWindowSize] = useState(width);
-  // useEffect(() => {
-  //   console.log('DefaultLayout...', window.innerWidth, width);
-  //
-  //   function handleResize() {
-  //     // Set window width/height to state
-  //     console.log('DefaultLayout...', window.innerWidth, width);
-  //
-  //     if ((width > 1200 && window.innerWidth < 1200) || (width < 1200 && window.innerWidth > 1200)) {
-  //
-  //       setWindowSize(window.innerWidth);
-  //     }
-  //
-  //   }
-  //
-  //   // Add event listener
-  //   window.addEventListener("resize", handleResize);
-  //   handleResize();
-  //   // Remove event listener on cleanup
-  //   return () => window.removeEventListener("resize", handleResize);
-  // }, []);
+const DefaultLayout = ({children, width, noNavbar, onChange = () => null}) => {
 
-  console.log('DefaultLayout...', width);
-  {/*<SiteStatus/>,*/}
+  const themeData = useSelector((st) => st.store.themeData);
+  const homeData = useSelector((st) => st.store.homeData);
+  useEffect(() => {
+    console.log('homeData', themeData)
+  }, []);
+  console.log('DefaultLayout...');
   return (
-    [
-      <main key={1}>
-        {/*<div>*/}
-          {width < 1200 && <MainSidebar {...children.props} />}
-          {width > 1199 && <StickyCard {...children.props} />}
 
-          <CardSidebar {...children.props} />
+    <>
+      {themeData.header && themeData.header.elements && <header className="main-header d-flex pt-3 pb-1 px-3 bg-white" key={0}>
+        <PageBuilder elements={themeData.header.elements} maxWidth={themeData.header.maxWidth}/>
+      </header>}
+      {children}
+      <CardSidebar  />
 
-          <Col
-            className="main-content p-0"
-            lg={{size: 12, offset: 0}}
-            md={{size: 12, offset: 0}}
-            sm="12"
-            // tag="main"
-          >
-            {(!noNavbar && width > 1199) && <MainNavbar onChange={onChange}/>}
-            {(!noNavbar && width < 1200) && <MainMobileNavbar onChange={onChange}/>}
+      {themeData.footer && themeData.footer.elements && <footer className="main-footer p-2 px-3 border-top" key={2}>
+        <PageBuilder elements={themeData.footer.elements} maxWidth={themeData.header.maxWidth}/></footer>}
 
-            {children}
-            <MainFooter/>
-          </Col>
-        {/*</div>*/}
-      </main>
-    ]
+    </>
+
   );
 };
 
@@ -86,3 +48,4 @@ DefaultLayout.defaultProps = {
 };
 
 export default DefaultLayout;
+

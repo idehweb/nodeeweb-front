@@ -23,6 +23,7 @@ import {
   goToProduct,
   register,
   savePost,
+  Logout,
   setPassWithPhoneNumber
 } from "#c/functions/index";
 import { withTranslation } from "react-i18next";
@@ -64,6 +65,7 @@ class LoginForm extends React.Component {
       CameFromPost: st.CameFromPost,
       goToProduct: st.goToProduct,
       goToCheckout: st.goToCheckout,
+      goToChat: st.goToChat,
       timer: globalTimerSet
     };
     window.scrollTo(0, 0);
@@ -285,6 +287,7 @@ class LoginForm extends React.Component {
       });
       return;
     }
+    console.log('setPassWithPhoneNumber...')
     setPassWithPhoneNumber({
       phoneNumber: fd + phoneNumber,
       firstName,
@@ -294,8 +297,8 @@ class LoginForm extends React.Component {
       internationalCode,
       password
     }).then((res) => {
-      // console.log('store.getState().store', store.getState().store.token, res.token);
-      if (res.success) {
+      console.log('store.getState().store', store.getState().store.user.token, res);
+      if (res.success || (res.firstName && res.lastName && res.internationalCode)) {
         this.setState({
           // token: res.token,
           setPassword: false,
@@ -361,6 +364,7 @@ class LoginForm extends React.Component {
   }
 
   render() {
+    // console.clear()
     const {
       isDisplay,
       goToProfile,
@@ -375,6 +379,7 @@ class LoginForm extends React.Component {
       enterActivationCodeMode,
       internationalCodeClass,
       goToCheckout,
+      goToChat,
       loginMethod,
       timer
     } = this.state;
@@ -394,6 +399,13 @@ class LoginForm extends React.Component {
       savePost({ goToCheckout: false });
 
       return <Navigate to={"/checkout/"}/>;
+    }
+    console.log(token,goToChat,firstName ,lastName ,internationalCode ,!setPassword)
+    // if (token && goToChat && firstName && lastName && internationalCode && !setPassword) {
+    if (token && goToChat) {
+      savePost({ goToChat: false });
+
+      return <Navigate to={"/chat/"}/>;
     }
     if (token && CameFromPost && !setPassword) {
       this.fd(false);
@@ -443,38 +455,38 @@ class LoginForm extends React.Component {
 
                     </Row>
                     <Row form>
-                      <Col md="12" className="form-group">
-                        <p className={"mb-0"}>{"ارسال کد یکبار مصرف از طریق:"}</p>
+                      {/*<Col md="12" className="form-group">*/}
+                        {/*<p className={"mb-0"}>{"ارسال کد یکبار مصرف از طریق:"}</p>*/}
 
-                        <RadioGroup className={"jhgfghhhh"}>
+                        {/*<RadioGroup className={"jhgfghhhh"}>*/}
 
-                          <FormControlLabel
-                            className={"jhgfgh"}
-                            value={"whatsapp"}
-                            label={t("WhatsApp")}
-                            control={<Radio/>}
-                            // checked={ans === idx2}
-                            checked={loginMethod === "whatsapp"}
-                            onChange={() => {
-                              this.checkResponse("whatsapp");
-                            }}
-                          />
-                          <FormControlLabel
-                            className={"jhgfgh"}
-                            value={"sms"}
-                            label={t("SMS")}
-                            control={<Radio/>}
-                            // checked={ans === idx2}
-                            checked={loginMethod === "sms"}
-                            onChange={() => {
-                              this.checkResponse("sms");
+                          {/*<FormControlLabel*/}
+                            {/*className={"jhgfgh"}*/}
+                            {/*value={"whatsapp"}*/}
+                            {/*label={t("WhatsApp")}*/}
+                            {/*control={<Radio/>}*/}
+                            {/*// checked={ans === idx2}*/}
+                            {/*checked={loginMethod === "whatsapp"}*/}
+                            {/*onChange={() => {*/}
+                              {/*this.checkResponse("whatsapp");*/}
+                            {/*}}*/}
+                          {/*/>*/}
+                          {/*<FormControlLabel*/}
+                            {/*className={"jhgfgh"}*/}
+                            {/*value={"sms"}*/}
+                            {/*label={t("SMS")}*/}
+                            {/*control={<Radio/>}*/}
+                            {/*// checked={ans === idx2}*/}
+                            {/*checked={loginMethod === "sms"}*/}
+                            {/*onChange={() => {*/}
+                              {/*this.checkResponse("sms");*/}
 
-                            }}
-                          />
+                            {/*}}*/}
+                          {/*/>*/}
 
 
-                        </RadioGroup>
-                      </Col>
+                        {/*</RadioGroup>*/}
+                      {/*</Col>*/}
                     </Row>
                     <Button
                       block
@@ -674,6 +686,12 @@ class LoginForm extends React.Component {
                       className="center btn-block"
                       onClick={this.savePasswordAndData}>
                       {t("Register")}
+                    </Button>
+                    <Button
+                      type="submit"
+                      className="center btn-block"
+                      onClick={Logout}>
+                      {t("Logout")}
                     </Button>
                   </Form>
                 </Col>

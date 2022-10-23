@@ -81,8 +81,10 @@ class Checkout extends React.Component {
       deliveryPrice: deliveryPrice,
       total: total,
       customer: user._id,
-      order_id: order_id
     };
+    if(order_id){
+      order['order_id']=order_id
+    }
     // console.log('user',user);
     // return;
     if (!user.internationalCode) {
@@ -113,8 +115,9 @@ class Checkout extends React.Component {
     toast(t("Submitting order..."), {
       type: "success"
     });
-    // console.clear();
-    // console.log('order',order);
+    console.clear();
+    console.log('order',order);
+    console.log('paymentMethod',paymentMethod);
     // return;
     if (paymentMethod === "zarinpal") {
 

@@ -3,7 +3,9 @@ import {Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, Col, Row} f
 
 import store from "#c/functions/store";
 import CustomModal from "#c/components/Modal";
-import CreateForm from "#c/components/components-overview/CreateForm";
+import CreateForm from "#c/components/components-overview/CreateForm_old";
+
+// import CreateForm from "#c/components/form/CreateForm";
 import {withTranslation} from 'react-i18next';
 import {
   buy,

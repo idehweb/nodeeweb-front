@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { Badge, Button, ButtonGroup, Col, Container, Nav, NavItem, NavLink, Row } from "shards-react";
-import { Link, useParams } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {Badge, Button, ButtonGroup, Col, Container, Nav, NavItem, NavLink, Row} from "shards-react";
+import {Link, useParams} from "react-router-dom";
 import Gallery from "#c/components/single-post/Gallery";
 import Theprice from "#c/components/single-post/Theprice";
 import SidebarActions from "#c/components/single-post/SidebarActions";
 import RelatedProducts from "#c/components/single-post/RelatedProducts";
 import Comments from "#c/components/single-post/Comments";
-import { withTranslation } from "react-i18next";
-import { dFormat, PriceFormat } from "#c/functions/utils";
+import {withTranslation} from "react-i18next";
+import {dFormat, PriceFormat} from "#c/functions/utils";
 
-import { addBookmark, clearPost, getPost, isClient, loadProduct, loveIt, MainUrl, savePost } from "#c/functions/index";
-import { SnapChatIcon } from "#c/assets/index";
+import {addBookmark, clearPost, getPost, isClient, loadProduct, loveIt, MainUrl, savePost} from "#c/functions/index";
+import {SnapChatIcon} from "#c/assets/index";
 import Loading from "#c/components/Loading";
 import store from "../functions/store";
-import { useSelector } from "react-redux";
+import {useSelector} from "react-redux";
 import CONFIG from "#c/config";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -27,9 +27,9 @@ import SupportAgentIcon from '@mui/icons-material/SupportAgent';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import VerifiedIcon from '@mui/icons-material/Verified';
 // let obj = ;
-import { toast } from "react-toastify";
+import {toast} from "react-toastify";
 // let the_id='';
-import { RWebShare } from "react-web-share";
+import {RWebShare} from "react-web-share";
 
 import DescriptionIcon from "@mui/icons-material/Description";
 import EditAttributesIcon from "@mui/icons-material/EditAttributes";
@@ -37,7 +37,7 @@ import ReviewsIcon from "@mui/icons-material/Reviews";
 
 const Product = (props) => {
 
-  let { match, location, history, t, url } = props;
+  let {match, location, history, t, url} = props;
 
   let product = useSelector((st) => {
     // console.log("st.store", st.store.productSliderData);
@@ -51,26 +51,30 @@ const Product = (props) => {
   // let search = false;
   // let history = useNavigate();
 
-
+  let st = store.getState().store;
+  let admin_token = null;
+  if (st.admin && st.admin.admin_token) {
+    admin_token = st.admin.admin_token;
+  }
   const [mainId, setMainId] = useState(the_id);
   const [tab, setTab] = useState("description");
   const [state, setState] = useState(isClient ? [] : (product || []));
   const [lan, setLan] = useState(store.getState().store.lan || "fa");
-  const [enableAdmin] = useState(store.getState().store.enableAdmin || false);
+  // const [enableAdmin] = useState(store.getState().store.enableAdmin || false);
 
 
   const getThePost = (_id) => {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
 
       getPost(_id).then((d = {}) => {
         console.log("set _id to show:", d);
-        savePost({
-          mainList: d.mainList,
-          catChoosed: d.catChoosed,
-          countryChoosed: d.countryChoosed,
-          categories: d.categories,
-          mainCategory: d.mainCategory
-        });
+        // savePost({
+        //   mainList: d.mainList,
+        //   catChoosed: d.catChoosed,
+        //   countryChoosed: d.countryChoosed,
+        //   categories: d.categories,
+        //   mainCategory: d.mainCategory
+        // });
         resolve({
           load: true,
           title: d.title,
@@ -99,6 +103,7 @@ const Product = (props) => {
           thumbnail: d.thumbnail,
           labels: d.labels,
           excerpt: d.excerpt,
+          categories: d.categories,
           extra_attr: d.extra_attr,
           views: d.views,
           like: d.like,
@@ -110,7 +115,7 @@ const Product = (props) => {
   if (isClient)
     useEffect(() => {
       // let mounted = true;
-      let { _id, title } = params;
+      let {_id, title} = params;
 
       console.log("useEffect", _id, the_id, mainId);
 
@@ -155,6 +160,7 @@ const Product = (props) => {
     secondCategory,
     thirdCategory,
     sections,
+    categories,
     combinations,
     options,
     quantity,
@@ -182,7 +188,7 @@ const Product = (props) => {
                         console.log("res", res);
                         if (res.like) {
                           like = res.like;
-                          setState({ ...state, like: like });
+                          setState({...state, like: like});
                         }
                         toast(t(res.message), {
                           type: "success"
@@ -229,16 +235,19 @@ const Product = (props) => {
 
             }}><BookmarkAddIcon/></Button>
 
-            {enableAdmin &&
-            <Button onClick={() => {
-              // console.log('item',_id);
-              if (isClient) {
-                // let filePath = path.join(__dirname, "/site_setting/config.js", name);
+            {admin_token &&
+            <Link to={"/admin/product/edit/" + _id} class={"btn btn-primary"}>
+              {/*<Button onClick={() => {*/}
+              {/*// console.log('item',_id);*/}
+              {/*if (isClient) {*/}
+              {/*// let filePath = path.join(__dirname, "/site_setting/config.js", name);*/}
 
-                window.open(VARIABLE.ADMIN_URL + "#/product/"+_id, "_blank").focus();
-              }
-            }}>
-              <EditIcon/></Button>}
+              {/*// window.open(VARIABLE.ADMIN_URL + "/product/edit/"+_id, "_blank").focus();*/}
+              {/*}*/}
+              {/*}}>*/}
+              <EditIcon/>
+              {/*</Button>*/}
+            </Link>}
           </ButtonGroup>
         </div>
       </Row>,
@@ -301,7 +310,7 @@ const Product = (props) => {
 
               {(excerpt && excerpt[lan]) && <div
                 className="d-inline-block item-icon-wrapper mt-3 ki765rfg hgfd"
-                dangerouslySetInnerHTML={{ __html: excerpt[lan] }}
+                dangerouslySetInnerHTML={{__html: excerpt[lan]}}
               />}
 
 
@@ -424,7 +433,7 @@ const Product = (props) => {
           {tab === "description" && <div className={"pt-5"} id={"description"}>
             {(description && description[lan]) && <div
               className="d-inline-block item-icon-wrapper ki765rfg  hgfd mb-5"
-              dangerouslySetInnerHTML={{ __html: description[lan] }}
+              dangerouslySetInnerHTML={{__html: description[lan]}}
             />}
 
           </div>}
@@ -441,7 +450,7 @@ const Product = (props) => {
                     <td>
                       <div key={key}
                            className="d-inline-block item-icon-wrapper ki765rfg hgfd"
-                           dangerouslySetInnerHTML={{ __html: item.des }}/>
+                           dangerouslySetInnerHTML={{__html: item.des}}/>
                     </td>
                   </tr>;
                 })}

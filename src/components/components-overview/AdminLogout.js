@@ -72,7 +72,7 @@ class LogoutForm extends React.Component {
         <ListGroupItem className="p-3">
           <Row>
             <Col>
-              <Form onSubmit={this.handleLogin}>
+              <Form onSubmit={this.handleLogout}>
                 <Row form>
 
                   <Col md="12" className="form-group ltr">

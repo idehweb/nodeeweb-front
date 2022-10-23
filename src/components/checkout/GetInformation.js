@@ -3,7 +3,8 @@ import {Button,ButtonGroup, Card, CardBody, CardFooter, CardHeader, Col, Row} fr
 
 import store from "#c/functions/store";
 // import State from "#c/data/state";
-import CreateForm from "#c/components/components-overview/CreateForm";
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import CreateForm from "#c/components/components-overview/CreateForm_old";
 import {withTranslation} from 'react-i18next';
 import {
   buy,
@@ -83,7 +84,11 @@ class GetInformation extends React.Component {
               },
               onChange: (text) => {
                 this.state.checkOutPhoneNumber.add.data['firstName'] = text;
-                let user = this.state.user.firstName = text;
+               // console.log('text',text)
+                this.state.user.firstName = text;
+                let user = text;
+                // console.log('user',user)
+
                 savePost(user);
               },
               className: 'rtl',
@@ -203,7 +208,7 @@ class GetInformation extends React.Component {
                   type: 'error'
                 });
                 return;
-              }else{onNext()}}}>{t('next')}<i className="material-icons">{'chevron_left'}</i></Button>
+              }else{onNext()}}}>{t('next')}<ChevronLeftIcon/></Button>
           </ButtonGroup>
         </CardFooter>
       </Card>

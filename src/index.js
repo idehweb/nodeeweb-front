@@ -30,7 +30,7 @@ import '@splidejs/react-splide/css/skyblue';
 // import * as serviceWorker from './serviceWorker';
 // store.dispatch(fetchCats());
 // store.dispatch(siteStatus);
-console.log('index');
+console.log('fetchTheme index.js');
 store.dispatch(fetchTheme());
 const container = document.getElementById('root');
 const root = createRoot(container);

@@ -39,8 +39,8 @@ const initialState = {
 };
 
 const reducer = (state = initialState, {type, data, payload}) => {
-    // console.log('dispatch type:',type);
-    // console.log('dispatch data:',data);
+    console.log('dispatch type:',type);
+    console.log('dispatch state:',state);
     // console.log('dispatch payload:',payload);
 
     switch (type) {

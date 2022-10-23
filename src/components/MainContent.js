@@ -75,7 +75,9 @@ const MainContent = (props) => {
             kind: d.kind,
             elements: d.elements,
             thumbnail: d.thumbnail,
+            maxWidth: d.maxWidth,
             excerpt: d.excerpt,
+            kind: d.kind,
             views: d.views
           });
         }else{
@@ -131,6 +133,8 @@ const MainContent = (props) => {
     thumbnail,
     excerpt,
     notfound,
+    kind,
+    maxWidth,
     enableAdmin = false,
     views = null,elements=null
   } = state;
@@ -141,15 +145,7 @@ const MainContent = (props) => {
   console.log('isClient',isClient);
   return (
 
-    <Container className="main-content-container p-0 pb-4 kiuytyuioiu bg-white" key={0}>
-
-      {/*{elements.html && <div*/}
-        {/*className="d-inline-block item-icon-wrapper mt-3 ki765rfg hgfd"*/}
-        {/*dangerouslySetInnerHTML={{ __html: elements.html }}*/}
-      {/*/>}*/}
-      {/*<Style css={elements.css}/>*/}
-      <PageBuilder elements={elements.pages[0].frames[0].component.components}/>
-    </Container>
+      <PageBuilder elements={elements} kind={kind} maxWidth={maxWidth}/>
   );
 }
 export default withTranslation()(MainContent);

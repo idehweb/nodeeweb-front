@@ -5,7 +5,7 @@ import {toast} from "react-toastify";
 import store from "../functions/store";
 
 import PageTitle from "../components/common/PageTitle";
-import CreateForm from "../components/components-overview/CreateForm";
+import CreateForm from "../components/form/CreateForm";
 import pageData from "./../functions/pageData"
 // import UserDetails from "../components/profile/UserDetails";
 import {withTranslation} from 'react-i18next';

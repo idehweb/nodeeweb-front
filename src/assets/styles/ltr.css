@@ -571,6 +571,9 @@ body .ltr .loadNotFound {
 }
 
 @media (min-width: 1200px) {
+  .main-navbar.main-mobile{
+    display: none;
+  }
   body .ltr .container {
     max-width: 100%;
   }

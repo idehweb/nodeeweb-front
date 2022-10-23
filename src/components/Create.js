@@ -1,7 +1,8 @@
 import React from 'react';
 import {getTheSingleData,createRecord} from '#c/functions/index';
-import CreateForm from "#c/components/components-overview/CreateForm";
+import CreateForm from "#c/components/form/CreateForm";
 import {withTranslation} from 'react-i18next';
+import {toast} from "react-toastify";
 
 function Create(props) {
   console.log('props', props)
@@ -62,18 +63,41 @@ function Create(props) {
 
     console.log('values', values);
     createRecord(model,values).then(e=>{
-      console.log('e',e)
+      console.log('e',e);
+      if(e.success || e._id) {
+        toast('created successfully!', {
+          type: "success"
+        });
+      }else{
+        let message=e.message;
+        if(e.err && e.err.message){
+          message=e.err.message;
+        }
+        toast(message, {
+          type: "error"
+        });
+      }
     })
   }
 
-  console.clear()
+  // console.clear()
   // console.log('rules', rules);
   let c = {};
   if (fields)
     fields.forEach((d) => {
       c[d.name] = ''
+
+      if(d.type=='object'){
+        c[d.name] ={}
+
+      }
+      if(d.type=='array'){
+        c[d.name] =[]
+
+      }
+      // c[d.name]=d.type
     });
-  // console.log('fields', fields)
+  console.log('fields', fields)
   return (
     <CreateForm
       onSubmit={onSubmit}

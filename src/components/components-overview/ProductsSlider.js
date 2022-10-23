@@ -30,9 +30,14 @@ const ProductsSlider = ({ cat_id = null, delay = 2500, t }) => {
       <div className={"rtl "}>
         {(tracks && tracks.length > 0) && <Swiper>
 
-          {tracks.map((i, idx) => (
-            <div className={"swiper-slide"} key={idx}><PostCard item={i}/></div>
-          ))}
+          {tracks.map((i, idx) => {
+            if(!i.slug){
+              i.slug='kjhjk'
+            }
+            return(
+              <div className={"swiper-slide"} key={idx}><PostCard item={i}/></div>
+            )
+          })}
         </Swiper>}
 
       </div>

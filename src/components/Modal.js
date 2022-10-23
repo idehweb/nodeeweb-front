@@ -64,7 +64,7 @@ function CustomModal({
       disablePortal
       disableEnforceFocus
       disableAutoFocus
-      disableBackdropClick
+      disablebackdropclick="true"
       onClose={onClose}>
       <Slide direction="up" in={open} mountOnEnter unmountOnExit>
         <Card className={clsx(cls.card, className)}>

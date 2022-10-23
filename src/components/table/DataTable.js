@@ -10,12 +10,19 @@ import TableRow from '@mui/material/TableRow';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Toolbar from '@mui/material/Toolbar';
 import Paper from '@mui/material/Paper';
-import {Alert, Col, Row} from 'shards-react';
+import {Alert, Button, Col, Row} from 'shards-react';
+import Check from "@mui/icons-material/Check";
+import Close from "@mui/icons-material/Close";
+import store from "#c/functions/store";
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import {withTranslation} from 'react-i18next';
 // import {Button, Col, Container, Nav, Na .vItem, NavLink, Row} from 'shards-react';
 import {Link} from 'react-router-dom';
 
 import useStyles from './styles';
+import {dateFormat, PriceFormat} from '#c/functions/utils';
+import {MainUrl} from '#c/functions';
+
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) return -1;
@@ -47,7 +54,7 @@ function stableSort(array, comparator) {
   }
 }
 
-function EnhancedTableHead({headCells, classes, order, orderBy}) {
+function EnhancedTableHead({headCells, classes, order, orderBy, t}) {
   // const createSortHandler = property => event => {
   //   onRequestSort(event, property);
   // };
@@ -66,7 +73,7 @@ function EnhancedTableHead({headCells, classes, order, orderBy}) {
               direction={orderBy === headCell.id ? order : 'asc'}
               // onClick={createSortHandler(headCell.id)}
             >
-              {headCell.label}
+              {t(headCell.label)}
               {orderBy === headCell.id ? (
                 <span className={classes.visuallyHidden}>
                   {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
@@ -128,26 +135,27 @@ function DataTable({
                      actions,
                      rules
                    }) {
+  let lan = store.getState().store.lan || 'fa';
 
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(20);
-  let buttonLink = '',pageBuilder=false;
+  const [rowsPerPage, setRowsPerPage] = React.useState(50);
+  let buttonLink = '', pageBuilder = false;
   // console.clear()
   // console.log('rules',rules)
-  if(rules.url){
-    buttonLink=rules.url;
+  if (rules.url) {
+    buttonLink = rules.url;
   }
-  if(rules.pageBuilder){
-    pageBuilder=true;
+  if (rules.pageBuilder) {
+    pageBuilder = true;
   }
   if (headCells && !headCells[0] && rows && rows[0]) {
     // console.log(Object.keys(rows[0]))
     Object.keys(rows[0]).forEach((head) => {
-      console.log('typeof rows[0].head',  rows[0][head])
+      // console.log('typeof rows[0].head',  rows[0][head])
       // if (typeof rows[0][head] != 'object')
       headCells.push({
         id: head,
@@ -158,7 +166,7 @@ function DataTable({
     })
 
   }
-  console.log('headCells',headCells)
+  // console.log('headCells',headCells)
   // headCells.push({
   //   id: 'actions',
   //   numeric: false,
@@ -216,10 +224,13 @@ function DataTable({
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-console.log('headCells',headCells)
+// console.log('headCells',headCells)
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
+        <div className={'extra-menu-top ltr mb-3'}>
+          <Link to={'/admin/' + model + '/create/'}><Button className={'circle'}><AddCircleOutlineIcon/></Button></Link>
+        </div>
         {rows && rows.length > 0 && (
           <EnhancedTableToolbar numSelected={selected.length}/>
         )}
@@ -232,6 +243,7 @@ console.log('headCells',headCells)
                 numSelected={selected.length}
                 order={order}
                 orderBy={orderBy}
+                t={t}
                 onSelectAllClick={handleSelectAllClick}
                 onRequestSort={handleRequestSort}
                 rowCount={rows.length || 0}
@@ -258,9 +270,66 @@ console.log('headCells',headCells)
                         {/*inputProps={{ 'aria-labelledby': labelId }}*/}
                         {/*/>*/}
                         {/*</TableCell>*/}
-                        {headCells.map((HC, index) => {console.log('HC',HC)
+                        {headCells.map((HC, index) => {
 
-                          if (HC.type === 'actions') {
+                          if (HC.type === 'object') {
+                            return (
+                              <TableCell
+                                component="td"
+                                key={index}
+                                scope="row"
+                                padding="none">
+                                {(HC.keys && row[HC.id]) && HC.keys.map((key) => {
+                                  return <div>{row[HC.id][key]}</div>;
+                                })}
+                                {(!HC.keys && row[HC.id]) && Object.keys(row[HC.id]).map((key) => {
+                                  return <div>{row[HC.id][key]}</div>;
+                                })}
+                                {/*{JSON.stringify(row[HC.id])}*/}
+                              </TableCell>
+                            );
+                          } else if (HC.type === 'multiLang') {
+                            return (
+                              <TableCell
+                                component="td"
+                                key={index}
+                                scope="row"
+                                padding="none">
+                                {row[HC.id] && row[HC.id][lan]}
+                              </TableCell>
+                            );
+                          } else if (HC.type === 'image') {
+                            return (
+                              <TableCell
+                                component="td"
+                                key={index}
+                                scope="row"
+                                padding="none">
+                                {row[HC.id] && <img src={MainUrl + '/' + row[HC.id]}/>}
+                              </TableCell>
+                            );
+                          } else if (HC.type === 'boolean') {
+                            return (
+                              <TableCell
+                                component="td"
+                                key={index}
+                                scope="row"
+                                padding="none">
+                                {row[HC.id] && <Check/>}
+                                {!row[HC.id] && <Close/>}
+                              </TableCell>
+                            );
+                          } else if (HC.type === 'date') {
+                            return (
+                              <TableCell
+                                component="td"
+                                key={index}
+                                scope="row"
+                                padding="none">
+                                {dateFormat(row[HC.id])}
+                              </TableCell>
+                            );
+                          } else if (HC.type === 'actions') {
                             return (
                               <TableCell
                                 component="td"
@@ -270,9 +339,10 @@ console.log('headCells',headCells)
                                 {HC.edit ? (
                                   <Link
                                     outline
+                                    className={'btn btn-primary btn-sm'}
                                     theme="info"
                                     size="sm"
-                                    to={'/admin/'+model+'/edit/' + row['_id']}>
+                                    to={'/admin/' + model + '/edit/' + row['_id']}>
                                     {HC.button_text || t('edit')}
                                   </Link>
                                 ) : null}
@@ -280,9 +350,9 @@ console.log('headCells',headCells)
                                   <Link
                                     outline
                                     theme="danger"
+                                    className={'btn btn-primary ml-2 mr-2 btn-outline-danger btn-sm'}
                                     size="sm"
-                                    className="ml-2"
-                                    to={'/admin/'+model+'/delete/'}
+                                    to={'/admin/' + model + '/delete/' + row['_id']}
                                   >
                                     {t('delete')}
                                   </Link>
@@ -292,13 +362,51 @@ console.log('headCells',headCells)
                                     outline
                                     theme="danger"
                                     size="sm"
-                                    className="ml-2"
-                                    to={'/admin/'+model+'/edit-page/' + row['_id']}
+                                    className={'btn btn-primary ml-2 mr-2 btn-outline-warning btn-sm'}
+
+                                    to={'/admin/' + model + '/edit-page/' + row['_id']}
                                   >
+
                                     {t('edit with page builder')}
                                   </Link>
                                 ) : null}
                                 {actions && actions(row['_id'])}
+                              </TableCell>
+                            );
+                          } else if (HC.type === 'string') {
+                            return (
+                              <TableCell
+                                component="td"
+                                key={index}
+                                scope="row"
+                                padding="none">
+                                <div className={row[HC.id + '_cl']}>
+                                  {row[HC.id]}
+                                </div>
+                              </TableCell>
+                            );
+                          } else if (HC.type === 'number') {
+                            return (
+                              <TableCell
+                                component="td"
+                                key={index}
+                                scope="row"
+                                padding="none">
+                                <div className={row[HC.id + '_cl']}>
+                                  {row[HC.id]}
+                                </div>
+                              </TableCell>
+                            );
+                          } else if (HC.type === 'price') {
+                            return (
+                              <TableCell
+                                component="td"
+                                key={index}
+                                scope="row"
+                                padding="none">
+                                <div className={row[HC.id + '_cl']}>
+                                  {PriceFormat(row[HC.id])}
+                                </div>
                               </TableCell>
                             );
                           } else {
@@ -329,7 +437,7 @@ console.log('headCells',headCells)
         )}
         {rows && rows.length > 0 && (
           <TablePagination
-            rowsPerPageOptions={[5, 10, 25]}
+            rowsPerPageOptions={[10, 20, 50, 100]}
             component="div"
             count={rows.length}
             rowsPerPage={rowsPerPage}
@@ -342,8 +450,8 @@ console.log('headCells',headCells)
                 'from'
               )} ${count} ${t('item')}`
             }
-            onChangePage={handleChangePage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
+            onPageChange={handleChangePage}
+            // onChangeRowsPerPage={handleChangeRowsPerPage}
           />
         )}
         {rows && !rows.length && (

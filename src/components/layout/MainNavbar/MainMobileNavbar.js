@@ -13,7 +13,7 @@ import {Link} from 'react-router-dom';
 // import Logo from '#c/images/logo-256x512.png';
 import NavbarMobileButton from './NavbarMobileButton';
 
-export default function MainMobileNavbar({layout, stickyTop = true, onChange}) {
+export default function MainMobileNavbar({layout,search, stickyTop = true, onChange}) {
   const classes = clsx('main-navbar main-mobile', 'bg-white', stickyTop && 'sticky-top');
   const searchform = useSelector((st) => !!st.store.searchvisible);
 
@@ -24,7 +24,7 @@ console.log("MainMobileNavbar",logoImg);
       <Container className="p-0 bgblurbefore">
         <Navbar type="light" className="align-items-stretch flex-md-nowrap p-0 bgblur">
           <NavbarToggle/>
-          <SearchToggle/>
+          {search && <SearchToggle/>}
 
 
           {/*center logo*/}
@@ -32,13 +32,13 @@ console.log("MainMobileNavbar",logoImg);
             {/*<Link to="/">{logoImg && <img style={{maxWidth: 58}} src={logoImg} alt="mainNavBar logo"/>}</Link>*/}
           </div>
 
-          <NavbarMobileButton/>
+          <NavbarMobileButton cartButton={false} logo={false} isAdmin={true} loginUrl={'/admin/login'}/>
           {/*<NavbarNavMobile/>*/}
 
 
         </Navbar>
       </Container>
-      {searchform && <NavbarSearch type={'append'}/>}
+      {(search && searchform) && <NavbarSearch type={'append'}/>}
 
     </div>
   );

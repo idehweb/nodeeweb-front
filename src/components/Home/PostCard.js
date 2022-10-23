@@ -25,11 +25,15 @@ function PostCard({ onClick, item, method, t }) {
     backgroundImage = MainUrl + "/" + item.thumbnail;
   // let title = encodeURIComponent(item.title.fa.replace(/\\|\//g, ""));
   let slug = item.slug;
-  let cat_inLink = item.firstCategory.slug;
-  if (item.secondCategory && item.secondCategory.slug)
-    cat_inLink = item.secondCategory.slug;
-  if (item.thirdCategory && item.thirdCategory.slug)
-    cat_inLink = item.thirdCategory.slug;
+  let cat_inLink=slug;
+  if(item.firstCategory) {
+     cat_inLink = item.firstCategory.slug;
+    if (item.secondCategory && item.secondCategory.slug)
+      cat_inLink = item.secondCategory.slug;
+    if (item.thirdCategory && item.thirdCategory.slug)
+      cat_inLink = item.thirdCategory.slug;
+  }
+  cat_inLink='product/'+item._id;
   // console.log('item.labels', item.labels);
   return (
     <div

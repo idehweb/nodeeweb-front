@@ -1,12 +1,20 @@
 import Admin from '#c/views/Admin';
 import CreatePage from '#c/views/CreatePage';
 import Home from '#c/views/Home';
+import Product from '#c/views/Product';
 import Login from '#c/views/Login';
+import Contacts from '#c/views/Contacts';
+import Chat from '#c/views/Chat';
+import Entities from '#c/views/Entities';
 import Page from '#c/views/Page';
 import Profile from '#c/views/Profile';
+import Transaction from '#c/views/Transaction';
+import Checkout from '#c/views/Checkout';
+import Post from '#c/views/Post';
 import {DefaultLayout, Nof, Nohf} from '#c/layouts/index';
+
 export default function createRoutes(themeRoutes) {
-  let DefaultRoute= [
+  let DefaultRoute = [
     {
       path: '/admin/:model',
       element: Admin,
@@ -36,22 +44,77 @@ export default function createRoutes(themeRoutes) {
 
     },
     {
-      path: '/admin/page/edit-page/:_id',
+      path: '/admin/:model/edit-page/:_id',
       element: CreatePage,
       layout: Nohf,
       exact: true,
 
     },
     {
+      path: '/post/:_id',
+      element: Post,
+      layout: DefaultLayout,
+      exact: true,
+
+    }, {
+      path: '/post/:_id/:slug',
+      element: Post,
+      layout: DefaultLayout,
+      exact: true,
+
+    }, {
       path: '/page/:_id',
       element: Page,
-      layout: Nohf,
+      layout: DefaultLayout,
+      exact: true,
+
+    }, {
+      path: '/product/:_id/:_slug',
+      element: Product,
+      layout: DefaultLayout,
       exact: true,
 
     },
     {
       path: '/login',
       element: Login,
+      layout: DefaultLayout,
+      exact: true,
+
+    }, {
+      path: '/transaction',
+      element: Login,
+      layout: Transaction,
+      exact: true,
+
+    }, {
+      path: '/login/:_state',
+      element: Login,
+      layout: DefaultLayout,
+      exact: true,
+
+    },
+    {
+      path: '/checkout',
+      element: Checkout,
+      layout: DefaultLayout,
+      exact: true,
+
+    }, {
+      path: '/chat',
+      element: Chat,
+      layout: Nohf,
+      exact: true,
+
+    }, {
+      path: '/chat/:user_id',
+      element: Chat,
+      layout: Nohf,
+      exact: true,
+
+    }, {
+      path: '/contacts',
+      element: Contacts,
       layout: Nohf,
       exact: true,
 
@@ -59,13 +122,25 @@ export default function createRoutes(themeRoutes) {
     {
       path: '/profile',
       element: Profile,
-      layout: Nohf,
+      layout: DefaultLayout,
       exact: true,
 
-    }
+    }, {
+      path: '/a/:_entity/:_id/:_slug',
+      element: Entities,
+      layout: DefaultLayout,
+      exact: true,
+
+    }, {
+      path: '/:_id',
+      element: Page,
+      layout: DefaultLayout,
+      exact: true,
+
+    },
   ];
 
-  let routes=DefaultRoute;
+  let routes = DefaultRoute;
   themeRoutes.forEach((e, j) => {
     if (e.element == 'Admin') {
       e.element = Admin;
@@ -75,8 +150,20 @@ export default function createRoutes(themeRoutes) {
       e.element = Home;
 
     }
+    if (e.element == 'Checkout') {
+      e.element = Checkout;
+
+    }
     if (e.layout == 'Nohf') {
       e.layout = Nohf;
+
+    }
+    if (e.layout == 'Transaction') {
+      e.layout = Transaction;
+
+    }
+    if (e.layout == 'DefaultLayout') {
+      e.layout = DefaultLayout;
 
     }
     if (e.layout && e.element && e.path) {

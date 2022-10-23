@@ -3,7 +3,17 @@ import Types from "#c/functions/types";
 import store, {storeAttrValue, storePosts, storeProduct, storeProducts} from "#c/functions/store";
 import CONFIG from "#c/config";
 import {createContext} from "react";
-import {clearState, deleteData, getData, postData, PriceFormat, putData} from "#c/functions/utils";
+import {
+  clearState,
+  deleteData,
+  getAdminData,
+  getData,
+  postAdminData,
+  postData,
+  PriceFormat,
+  putAdminData,
+  putData
+} from "#c/functions/utils";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 
 const DataContext = createContext(null);
@@ -52,6 +62,23 @@ export const loadPostItems = (cat_id = null, include = null) => {
         resolve(resp);
 
       });
+  });
+};
+export const loadEntityItems = (entity, cat_id = null, include = null) => {
+  console.log("======> loadPostItems");
+  if (!entity) {
+    return;
+  }
+  return new Promise(function (resolve, reject) {
+    // if (cat_id)
+    //   getEntities(0, 8, cat_id, "", {}, include).then((resp) => {
+    //     resolve(resp);
+    //   });
+    // else
+    getEntities(0, 12, "").then((resp) => {
+      resolve(resp);
+
+    });
   });
 };
 export const loadItem = (_id = null) => {
@@ -119,13 +146,17 @@ export const receive_error = (data) => ({
 });
 
 export const SaveData = (data) =>
-  store.dispatch({
-    type: Types.SaveData,
-    data
-  });
-
+{
+  if(data) {
+    console.log('SaveData', data)
+    return store.dispatch({
+      type: Types.SaveData,
+      data
+    });
+  }
+}
 const handleErr = (err) => {
-  // console.error('err => ', err);
+  console.error('err => ', err);
   store.dispatch(receive_error(err));
 };
 
@@ -338,7 +369,7 @@ export const SidebarCategoriesData = (i = "") =>
       return err;
     });
 export const getThemeData = (i = "") =>
-  getData(`${THEME_URL}`, {}, true)
+  getAdminData(`${THEME_URL}`, {}, true)
     .then((res) => {
       return res.data;
     })
@@ -421,38 +452,85 @@ export const getMyPosts = (offset = 0, limit = 100) =>
       return err;
     });
 
-export const SaveBuilder = (_id = null, data, headers) => {
-  console.log('SaveBuilder')
+export const getContacts = () => {
+  console.log('getContacts')
+  return new Promise(function (resolve, reject) {
+    let c = [];
+    getData(`${ApiUrl}/session/contacts/mine`, {},true)
+      .then(({data = {}}) => {
+        console.clear()
+        resolve(data);
+      })
+      .catch(err => {
+        reject(err);
+      });
+
+  });
+};
+export const addToMyContacts = (phoneNumber) => {
+  console.log('getContacts')
+  return new Promise(function (resolve, reject) {
+    let c = [];
+    putData(`${ApiUrl}/session/contacts/mine`, {phoneNumber:phoneNumber},true)
+      .then(({data = {}}) => {
+        console.clear()
+        resolve(data);
+      })
+      .catch(err => {
+        reject(err);
+      });
+
+  });
+};
+export const startChat = (phoneNumber, from) => {
+  console.log('startChat from', from, 'with', phoneNumber)
+  return new Promise(function (resolve, reject) {
+    let c = [];
+
+    getData(`${ApiUrl}/session/` + phoneNumber, true)
+      .then(({data = {}}) => {
+        console.clear()
+        resolve(data);
+      })
+      .catch(err => {
+        reject(err);
+      });
+
+  });
+};
+export const SaveBuilder = (model = 'page', _id = null, data, headers) => {
+  console.log('SaveBuilder', _id, data)
   return new Promise(function (resolve, reject) {
     let c = [];
     if (_id)
-      putData(`${AdminRoute}/page/` + _id, {elements: data}, true)
+      putAdminData(`${AdminRoute}/${model}/` + _id, data, true)
         .then(({data = {}}) => {
-          let mainD = data["data"];
-
-          resolve(mainD);
+          // console.clear()
+          // let mainD = data["data"];
+// console.log('data',data)
+          resolve(data);
         })
         .catch(err => {
           reject(err);
         });
-    else
-      postData(`${AdminRoute}/page/`, {title: '1', slug: '1', elements: data}, true)
-        .then(({data = {}}) => {
-          let mainD = data["data"];
-
-          resolve(mainD);
-        })
-        .catch(err => {
-          reject(err);
-        });
+    // else
+    //   postData(`${AdminRoute}/page/`, {title: '1', slug: '1', elements: data}, true)
+    //     .then(({data = {}}) => {
+    //       let mainD = data["data"];
+    //
+    //       resolve(mainD);
+    //     })
+    //     .catch(err => {
+    //       reject(err);
+    //     });
   });
 };
-export const GetBuilder = (_id) => {
+export const GetBuilder = (model = 'page', _id) => {
   // console.log('GetBuilder()==>')
 
   return new Promise(function (resolve, reject) {
     let c = [];
-    getData(`${AdminRoute}/page/${_id}`).then(({data = {}}) => {
+    getData(`${AdminRoute}/${model}/${_id}`).then(({data = {}}) => {
       // console.log('resolve GetBuilder')
 
       //     let mainD = data["data"];
@@ -474,7 +552,7 @@ export const GetBuilder = (_id) => {
 
 export const getTheData = (role = 'admin', model, headers, offset = 0, limit = 50) => {
   console.log('getTheData header...', headers)
-  return getData(`${AdminRoute}/${model}/${offset}/${limit}`, {headers: headers}, true)
+  return getAdminData(`${AdminRoute}/${model}/${offset}/${limit}`, {headers: headers}, true)
     .then((res) => {
       return res.data;
     })
@@ -484,7 +562,7 @@ export const getTheData = (role = 'admin', model, headers, offset = 0, limit = 5
     });
 }
 export const getTheSingleData = (role = 'admin', model, _id) =>
-  getData(`${AdminRoute}/${model}/${_id}`, {}, true)
+  getAdminData(`${AdminRoute}/${model}/${_id}`, {}, true)
     .then((res) => {
       return res.data;
     })
@@ -654,6 +732,32 @@ export const getBlogPosts = (offset = 0, limit = 24, search, filter = {}) => {
       });
   });
 };
+export const getEntities = (entity, offset = 0, limit = 24, search = false, filter = {}) => {
+  return new Promise(function (resolve, reject) {
+    // console.log('getPosts...',store.getState().store.country)
+    let params = {};
+    const {country} = store.getState().store;
+    if (country) {
+      params = {
+        country: country
+      };
+    }
+    if (filter) {
+      if (filter["type"]) params["type"] = filter["type"];
+    }
+    let url = `${ApiUrl}/${entity}/${offset}/${limit}/`;
+    if (search)
+      url += search;
+    getData(url, {params}, true)
+      .then((data) => {
+        resolve(data.data);
+      })
+      .catch((err) => {
+        handleErr(err);
+        reject(err);
+      });
+  });
+};
 
 export const getPostsByCat = (
   offset = 0,
@@ -754,7 +858,7 @@ export const sendExtra = (d, obj) => {
 };
 export const createRecord = (model, obj) => {
   return new Promise(function (resolve, reject) {
-    postData(`${AdminRoute}/${model}`, obj, true)
+    postAdminData(`${AdminRoute}/${model}`, obj, true)
       .then((data) => {
         let mainD = data["data"];
 
@@ -768,7 +872,7 @@ export const createRecord = (model, obj) => {
 export const editRecord = (model, _id, obj) => {
   console.log('editRecord')
   return new Promise(function (resolve, reject) {
-    putData(`${AdminRoute}/${model}/${_id}`, obj, true)
+    putAdminData(`${AdminRoute}/${model}/${_id}`, obj, true)
       .then((data) => {
         let mainD = data["data"];
 
@@ -1196,7 +1300,7 @@ export const createOrder = (obj) => {
     // console.log(the_order);
 
     // return 0;
-    postData(`${ApiUrl}/order`, {...obj, ...the_order}, true)
+    postData(`${ApiUrl}/order/createByCustomer`, {...obj, ...the_order}, true)
       .then((data) => {
         let mainD = data["data"];
 
@@ -1334,35 +1438,39 @@ export const getContactData = (i) => {
   });
 };
 
-export const uploadPostFile = (file = {}, onUploadProgress, id) => {
-  const formData = new FormData();
-  formData.append("file", file);
-  formData.append("type", file.type);
+export const uploadMedia = (file = {}, onUploadProgress, id) => {
+  return new Promise(function (resolve, reject) {
 
-  let cancel;
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("type", file.type);
 
-  const config = {
-    headers: {
-      "content-type": "multipart/form-data",
-      token: store.getState().store.token
-    },
-    cancelToken: new axios.CancelToken((c) => {
-      cancel = c;
-    }),
-    onUploadProgress: (ev) => {
-      const percent = (ev.loaded / ev.total) * 100;
-      onUploadProgress(percent, id, cancel);
-    }
-  };
-  return axios
-    .post(`${ApiUrl}/course/fileUpload`, formData, config)
-    .then((res) => {
-      return res.data;
-    })
-    .catch((err) => {
-      console.error("err in axios => ", err);
-      return err;
-    });
+    let cancel;
+
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+        token: store.getState().store.token
+      },
+      cancelToken: new axios.CancelToken((c) => {
+        cancel = c;
+      }),
+      onUploadProgress: (ev) => {
+        const percent = (ev.loaded / ev.total) * 100;
+        onUploadProgress(percent, id, cancel);
+      }
+    };
+    return axios
+      .post(`${AdminRoute}/media/fileUpload`, formData, config)
+      .then((res) => {
+        return resolve(res.data);
+      })
+      .catch((err) => {
+        console.error("err in axios => ", err);
+        return reject(err);
+      });
+  });
+
 };
 
 export const CameFromPost = (bool) => {
@@ -1632,25 +1740,25 @@ export const submitPost = () => {
     }
   });
 };
-export const deletePost = (id) => {
+export const deleteModel = (model, id) => {
   let _id = id;
 
   if (!id) _id = store.getState().store._id;
 
   return new Promise(function (resolve, reject) {
     if (_id) {
-      deleteData(`${ApiUrl}/course/${_id}`, true)
+      deleteData(`${ApiUrl}/${model}/${_id}`, true)
         .then((data) => {
           let mainD = data["data"];
 
-          SaveData({
-            description: "",
-            title: "",
-            mainCategory: {},
-            categories: [],
-            mainList: [],
-            catChoosed: []
-          });
+          // SaveData({
+          //   description: "",
+          //   title: "",
+          //   mainCategory: {},
+          //   categories: [],
+          //   mainList: [],
+          //   catChoosed: []
+          // });
 
           // }
           resolve(mainD);

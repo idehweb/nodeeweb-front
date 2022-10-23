@@ -1,23 +1,26 @@
-import React,{useState} from "react";
-import { Card, Col, Container, Row } from "shards-react";
-import { withTranslation } from "react-i18next";
-import { Link, useParams } from "react-router-dom";
+import React, {useState} from "react";
+import {Card, Col, Container, Row} from "shards-react";
+import {withTranslation} from "react-i18next";
+import {useParams} from "react-router-dom";
 
 import PageTitle from "#c/components/common/PageTitle";
 import LoginForm from "#c/components/components-overview/LoginForm";
-import { defaultImg } from "#c/assets/index";
-import { savePost } from "#c/functions/index";
+import {defaultImg} from "#c/assets/index";
+import {savePost} from "#c/functions/index";
 
 // class Login extends React.PureComponent {
-const Login = ({ t }) => {
-
+const Login = ({t}) => {
+  console.clear()
   // constructor(props) {
   //   super(props);
   let params = useParams();
 
   console.log("params", params);
-  if(params._state==='goToCheckout'){
+  if (params._state === 'goToCheckout') {
     savePost({goToCheckout: true})
+  }
+  if (params._state === 'goToChat') {
+    savePost({goToChat: true})
   }
   const [state, setState] = useState({
     customer: {

@@ -39,32 +39,40 @@ const initialState = {
 };
 
 const reducer = (state = initialState, {type, data, payload}) => {
-    console.log('dispatch type:',type);
-    console.log('dispatch state:',state);
+    // console.log('dispatch type:',type);
+    // console.log('dispatch state:',state);
     // console.log('dispatch payload:',payload);
 
     switch (type) {
-        case Types.Home:
-            return Object.assign({}, state, {
-                data: {},
-                loading: true
-            });
+        case Types.Home: {
+          console.log("Types.Home",state);
 
-        case Types.Receive:
-            return Object.assign({}, state, {
-                data,
-                loading: false
-            });
-        case Types.Error:
-            return Object.assign({}, state, {
-                loading: false
-            });
+          return Object.assign({}, state, {
+            data: {},
+            loading: true
+          });
+        }
+        case Types.Receive: {
+          console.log("Types.Receive",state);
+
+          return Object.assign({}, state, {
+            data,
+            loading: false
+          });
+        }
+        case Types.Error: {
+          console.log("Types.Error",state);
+
+          return Object.assign({}, state, {
+            loading: false
+          });
+        }
         case Types.SaveData: {
             console.log("Types.SaveData",state);
             return Object.assign({}, state, data);
         }
         case "cats/catsLoaded": {
-            // console.log('dispatch',data,payload);
+            console.log('dispatch',"cats/catsLoaded");
 
             // Replace the existing state entirely by returning the new value
             return {...state, allCategories: payload.allCategories, cat: payload.cat, searchvisible: false};

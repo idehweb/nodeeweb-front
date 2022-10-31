@@ -21,7 +21,7 @@ const CardSidebar = ({ props, t }) => {
 // const function CardSidebar({props,t}) {
   const cardVisible = useSelector((st) => !!st.store.cardVisible);
   const card = useSelector((st) => st.store.card);
-  console.log("card", card);
+  // console.log("card", card);
   const handleToggleCardbar = () => toggleCardbar(true);
 
   const classes = clsx("main-sidebar", "card-sidebar", "px-0", "col-12", cardVisible && "open");
@@ -46,7 +46,7 @@ const CardSidebar = ({ props, t }) => {
       }
       return;
     });
-    console.log("cardddd", arr);
+    // console.log("cardddd", arr);
     if (sum < 0 || arr.length < 1) {
       sum = 0;
     }
@@ -137,7 +137,7 @@ const CardSidebar = ({ props, t }) => {
 
     });
   };
-  console.log("card********************", card, classes);
+  // console.log("card********************", card, classes);
   let tsum = 0;
   // return <></>/;
   return (

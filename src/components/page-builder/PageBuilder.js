@@ -6,6 +6,7 @@ import NavbarSearch from '#c/components/layout/MainNavbar/NavbarSearch';
 import MainNavbar from '#c/components/layout/MainNavbar/MainNavbar';
 import {getEntities, Logout, MainUrl, toggleCardbar, toggleSearch} from "#c/functions/index";
 import PostCard from "#c/components/Home/PostCard";
+import LoadMore from "#c/components/page-builder/loadmore";
 import * as Icons from "@mui/icons-material";
 import {Button} from "shards-react";
 import {useSelector} from "react-redux";
@@ -56,6 +57,8 @@ export function ShowElement(p) {
       return <SLIDER element={element} content={content}/>;
     case "slider":
       return <SWIPERWrapper element={element} content={content}/>;
+    case "loadmore":
+      return <TheLoadMore element={element} content={content}/>;
     case "Slide":
       return <SWIPERSlide element={element} content={content}/>;
     case "ProductSlider":
@@ -129,7 +132,7 @@ export function TheMainNavbar({element}) {
   let {text, iconFont, direction, link, display, target = "_blank"} = fields;
   let style = setStyles({...fields, direction: direction, display: display});
 
-  return <MainNavbar element={element} setStyles={setStyles}/>
+  return <MainNavbar element={element} style={style} setStyles={setStyles}/>
 
   // }
   // return <div style={style}>{text}</div>
@@ -148,7 +151,7 @@ export function TheButton({element}) {
       // console.log(handleCard)
       return <Button onClick={() => {
         // console.clear()
-        console.log('element',element)
+        console.log('element', element)
         handleCard();
       }} className={' posrel ' + classess} style={style}>{Icons[iconFont] &&
       <span>{React.createElement(Icons[iconFont])}</span>}<span className={'badge'}
@@ -306,10 +309,32 @@ export function SWIPERWrapper(props) {
       className={"p-0 m-0 " + (classes ? classes.map(ob => (ob.name ? ob.name : ob)).join(" ") : "")}
     >
 
-      {children && children[0] && children[0].map((com, index) => {
+      {(children && children[0] instanceof Array) ? children[0].map((com, index) => {
         return <ShowElement key={index} element={com} content={content}/>
-      })}
+      }) : (children instanceof Array) ? children.map((com, index) => {
+        // return 'false'
+        return <ShowElement key={index} element={com} content={content}/>
+      }) : ''}
+
     </Swiper>
+
+}
+
+export function TheLoadMore(props) {
+  let {element, content} = props;
+  let {type, children, settings, classes} = element;
+  let {general} = settings;
+  let {fields} = general;
+  if (!fields) {
+    return
+  }
+  let {entity, arrows = true, perPage = 1} = fields;
+  // console.clear()
+  if (arrows == 'false') {
+    arrows = false;
+  }
+// return JSON.stringify(element.data)
+  return <LoadMore element={element}/>
 
 }
 
@@ -403,12 +428,21 @@ export function SLIDER(props) {
 
 export function GRID_LAYOUT(props) {
   let {element, content} = props
-  let {type, components, children, classes, handleCard, card} = element;
+  // let {type, components, children, classes, handleCard, card} = element;
   // console.log("GRID_LAYOUT", props);
+  let {type, components, classes, children, settings, handleCard, card} = element;
+  let {general} = settings;
+  let {fields} = general;
+  if (!fields) {
+    return
+  }
+  let {link, title, src} = fields;
+  let style = setStyles(fields);
 
 
   return <div
-    className={"posrel row grid-layout " + (classes ? classes.map(ob => (ob.name ? ob.name : ob)).join(" ") : "")}>
+    className={"posrel row grid-layout " + (classes ? classes.map(ob => (ob.name ? ob.name : ob)).join(" ") : "")}
+    style={style}>
     {children && children.map((item, k) => {
       // console.log("item.name", item.name);
       // return <div
@@ -438,7 +472,7 @@ export function GRID_COL(props) {
 
   const {element, content} = props;
 
-  const {payload, type, components, classes, children,settings,handleCard,card} = element;
+  const {payload, type, components, classes, children, settings, handleCard, card} = element;
   let {general} = settings;
   let {fields} = general;
   let {showInDesktop, showInMobile} = fields;
@@ -475,7 +509,7 @@ export default function PageBuilder(props) {
   // console.clear();
 
   // console.log('PageBuilder ===>', props)
-  let {elements, content, kind = 'container-fluid', maxWidth = '100%'} = props;
+  let {elements, content, kind = 'container-fluid', maxWidth = '100%',data} = props;
   // let html = elements.html;
   // if (elements && elements.pages && elements.pages[0] && elements.pages[0].frames && elements.pages[0].frames[0] && elements.pages[0].frames[0].component && elements.pages[0].frames[0].component.components)
   //     elements = elements.pages[0].frames[0].component.components;
@@ -501,6 +535,7 @@ export default function PageBuilder(props) {
           handleTheCard()
         };
         element.card = card;
+        element.data = data;
         return <ShowElement content={content} key={index} element={element}/>
       })}
     </div>

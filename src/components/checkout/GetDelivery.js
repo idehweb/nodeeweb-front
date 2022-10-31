@@ -87,25 +87,26 @@ class GetDelivery extends React.Component {
             }
         }
       }
-      if (setting && setting.theid == 'chapar') {
-        console.log('chapar',setting.theid);
-        if (address.City_no)
-          getTheChaparPrice(address.City_no, sum, 1).then((res) => {
-            if (res.result) {
-              let tl = parseInt(res.objects.order.quote) / 10;
-              tl = parseInt(tl);
-              let total = parseInt(sum) + tl;
-              resolve({deliveryPrice: tl, total: total, setting});
-            } else {
-              reject({});
-            }
-          })
-
-      } else {
+      // if (setting && setting.theid == 'chapar') {
+      //   console.log('chapar',setting.theid);
+      //   if (address.City_no)
+      //     getTheChaparPrice(address.City_no, sum, 1).then((res) => {
+      //       if (res.result) {
+      //         let tl = parseInt(res.objects.order.quote) / 10;
+      //         tl = parseInt(tl);
+      //         let total = parseInt(sum) + tl;
+      //         resolve({deliveryPrice: tl, total: total, setting});
+      //       } else {
+      //         reject({});
+      //       }
+      //     })
+      //
+      // }
+      // {
         let total = parseInt(sum) + parseInt(varprice);
         console.log({deliveryPrice: varprice, total: total});
         resolve({deliveryPrice: varprice, total: total});
-      }
+      // }
       // this.setState({deliveryPrice: varprice, total: total});
       // return parseInt(varprice);
     });
@@ -322,10 +323,10 @@ class GetDelivery extends React.Component {
         <CardFooter className={'pd-1'}>
           <ButtonGroup size="sm left">
             {!loading2 && <Row>{loader2}</Row>}
-            {loading2 && [<Button className={''} left={"true"} onClick={onPrev}><i
+            {loading2 && [<Button key={'xo0'} className={''} left={"true"} onClick={onPrev}><i
               className="material-icons">{'chevron_right'}</i>{t('prev')}
             </Button>,
-              <Button className={''} left={"true"} onClick={onNext}>{t('next')}<i
+              <Button key={'xo1'} className={''} left={"true"} onClick={onNext}>{t('next')}<i
                 className="material-icons">{'chevron_left'}</i></Button>
             ]}
 

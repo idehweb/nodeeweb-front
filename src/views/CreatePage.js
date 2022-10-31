@@ -196,11 +196,14 @@ const CreatePage = ({t}) => {
   };
   const deleteItem = (id) => {
     console.log('deleteItem...', id)
+    console.log('components in:', components)
+
     let tempArray = [];
     components.forEach((comp, j) => {
       let deleteItem = false;
       if (id === comp.id) {
         //  delete this
+        console.log('we found it...')
         deleteItem = true;
       }
       if (comp.children && !deleteItem) {
@@ -222,8 +225,8 @@ const CreatePage = ({t}) => {
       if (!deleteItem)
         tempArray.push(comp);
     });
-    console.log('components', tempArray)
-    // setState({...state, components: tempArray});
+    console.log('components out:', tempArray)
+    setState({...state, components: tempArray});
 
   };
 
@@ -396,7 +399,11 @@ const CreatePage = ({t}) => {
             toggleOptionBox={toggleOptionBox}
             moveContent={moveContent}
             component={component}
-            deleteItem={deleteItem}
+            deleteItem={(e)=>{
+              // e.preventDefault();
+              console.log('delete Item',e)
+              deleteItem(component.id)
+            }}
 
             // setSourceAddress={(e)=>{
             //   console.log('e',e)

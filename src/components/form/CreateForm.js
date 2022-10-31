@@ -4,10 +4,10 @@ import {Field, Form} from 'react-final-form'
 import {Button, Col, Container, Row} from 'shards-react';
 import {useSelector} from "react-redux";
 import {MainUrl, uploadMedia} from "#c/functions/index";
-import {FieldArray, FieldObject,FieldBoolean,FieldSelect,FieldPrice,FieldCheckbox} from "#c/components/form/fields";
+import {FieldArray,FieldText,FieldTextarea, FieldObject,FieldBoolean,FieldSelect,FieldPrice,FieldCheckbox,FieldServer,FieldNumber,FieldJson} from "#c/components/form/fields";
 
 function CreateForm(props) {
-  let {fields, rules = {fields: []}} = props;
+  let {fields, rules = {fields: []},t} = props;
   // console.clear();
   console.log('fields', fields);
   console.log('rules', rules);
@@ -84,6 +84,11 @@ function CreateForm(props) {
 
       return <FieldPrice field={field} />
     }
+    if (type == 'json') {
+      // console.log('string')
+
+      return <FieldJson field={field} />
+    }
     if (type == 'object') {
       return <FieldObject field={field}/>
     }
@@ -92,6 +97,12 @@ function CreateForm(props) {
 
     }
     if (type == 'checkbox') {
+      // console.clear()
+      // console.log(field)
+      return <FieldCheckbox field={field}/>
+
+    }
+    if (type == 'radio') {
       // console.clear()
       // console.log(field)
       return <FieldCheckbox field={field}/>
@@ -106,19 +117,21 @@ function CreateForm(props) {
 
     }
     if (type == 'number') {
-      return <Col
-        sm={size ? size.sm : ''}
-        lg={size ? size.lg : ''}
-        className={'MGD ' + className}>
-        <label htmlFor={name}>{label}</label>
-        <Field
-          name={name}
-          component="input"
-          type="number"
-          placeholder={placeholder || label}
-          className="mb-2 form-control"
-        />
-      </Col>
+      return <FieldNumber field={field} />
+
+      // return <Col
+      //   sm={size ? size.sm : ''}
+      //   lg={size ? size.lg : ''}
+      //   className={'MGD ' + className}>
+      //   <label htmlFor={name}>{t(label)}</label>
+      //   <Field
+      //     name={name}
+      //     component="input"
+      //     type="number"
+      //     placeholder={placeholder || label}
+      //     className="mb-2 form-control"
+      //   />
+      // </Col>
     }
     if (type == 'textarea') {
       return <Col
@@ -144,7 +157,7 @@ function CreateForm(props) {
         sm={size ? size.sm : ''}
         lg={size ? size.lg : ''}
         className={'MGD ' + className}>
-        <label htmlFor={name}>{label}</label>
+        <label htmlFor={name}>{t(label)}</label>
         <Field
           name={name} className="mb-2 form-control">
           {props => {
@@ -318,7 +331,7 @@ function CreateForm(props) {
                   })}
                   <div className="buttons">
                     <Button type="submit">
-                      Submit
+                      {t('Submit')}
                     </Button>
                   </div>
                 </Row>

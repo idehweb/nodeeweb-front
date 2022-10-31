@@ -5,6 +5,7 @@ import CONFIG from "#c/config";
 import {createContext} from "react";
 import {
   clearState,
+  deleteAdminData,
   deleteData,
   getAdminData,
   getData,
@@ -119,7 +120,7 @@ export const SearchIt = (_id) => {
           }
           let title = encodeURIComponent(ir.title.fa.replace(/\\|\//g, ""));
 
-          c.push({title: ir.title, photo: ph, url: "/p/" + ir._id + "/" + title});
+          c.push({title: ir.title, photo: ph, url: "/product/" + ir._id + "/" + title});
 
         });
 
@@ -145,9 +146,8 @@ export const receive_error = (data) => ({
   data
 });
 
-export const SaveData = (data) =>
-{
-  if(data) {
+export const SaveData = (data) => {
+  if (data) {
     console.log('SaveData', data)
     return store.dispatch({
       type: Types.SaveData,
@@ -456,7 +456,7 @@ export const getContacts = () => {
   console.log('getContacts')
   return new Promise(function (resolve, reject) {
     let c = [];
-    getData(`${ApiUrl}/session/contacts/mine`, {},true)
+    getData(`${ApiUrl}/session/contacts/mine`, {}, true)
       .then(({data = {}}) => {
         console.clear()
         resolve(data);
@@ -471,7 +471,7 @@ export const addToMyContacts = (phoneNumber) => {
   console.log('getContacts')
   return new Promise(function (resolve, reject) {
     let c = [];
-    putData(`${ApiUrl}/session/contacts/mine`, {phoneNumber:phoneNumber},true)
+    putData(`${ApiUrl}/session/contacts/mine`, {phoneNumber: phoneNumber}, true)
       .then(({data = {}}) => {
         console.clear()
         resolve(data);
@@ -732,7 +732,64 @@ export const getBlogPosts = (offset = 0, limit = 24, search, filter = {}) => {
       });
   });
 };
-export const getEntities = (entity, offset = 0, limit = 24, search = false, filter = {}) => {
+export const getDiscountCode = (code = null,order_id) => {
+  console.log('==> getDiscountCode(',code,',',order_id,')')
+  return new Promise(function (resolve, reject) {
+
+    getData(`${ApiUrl}/discount/set/${order_id}/${code}`, {}, true)
+      .then((res) => {
+        if (res.data.success == false)
+          reject(false);
+        resolve(res.data);
+      })
+      .catch((err) => {
+        // handleErr(err);
+        reject(false);
+
+      });
+  })
+}
+
+export const getEntities = (entity, offset = 0, limit = 24, search = false, filter) => {
+  return new Promise(function (resolve, reject) {
+    console.log('filter',filter)
+    // console.log('getPosts...',store.getState().store.country)
+    // if(typeof filter!='object'){
+    //   filter=false
+    // }
+    let params = {};
+    const {country} = store.getState().store;
+    if (country) {
+      params = {
+        country: country
+      };
+    }
+
+    let url = `${ApiUrl}/${entity}/${offset}/${limit}/`;
+
+    if (search)
+      url += search;
+    // if (filter) {
+
+      // if (filter["type"]) params["type"] = filter["type"];
+    // }
+    console.log('filter',filter)
+
+    if (filter) {
+      url += "?filter=" + filter;
+      // if (filter["type"]) params["type"] = filter["type"];
+    }
+    getData(url, {params}, true)
+      .then((data) => {
+        resolve(data.data);
+      })
+      .catch((err) => {
+        handleErr(err);
+        reject(err);
+      });
+  });
+};
+export const getEntitiesForAdmin = (entity, offset = 0, limit = 24, search = false, filter = {}) => {
   return new Promise(function (resolve, reject) {
     // console.log('getPosts...',store.getState().store.country)
     let params = {};
@@ -745,10 +802,10 @@ export const getEntities = (entity, offset = 0, limit = 24, search = false, filt
     if (filter) {
       if (filter["type"]) params["type"] = filter["type"];
     }
-    let url = `${ApiUrl}/${entity}/${offset}/${limit}/`;
+    let url = `${AdminRoute}/${entity}/${offset}/${limit}/`;
     if (search)
       url += search;
-    getData(url, {params}, true)
+    getAdminData(url, {params}, true)
       .then((data) => {
         resolve(data.data);
       })
@@ -858,6 +915,7 @@ export const sendExtra = (d, obj) => {
 };
 export const createRecord = (model, obj) => {
   return new Promise(function (resolve, reject) {
+    console.log('obj', obj)
     postAdminData(`${AdminRoute}/${model}`, obj, true)
       .then((data) => {
         let mainD = data["data"];
@@ -871,6 +929,8 @@ export const createRecord = (model, obj) => {
 };
 export const editRecord = (model, _id, obj) => {
   console.log('editRecord')
+  console.log('obj', obj)
+
   return new Promise(function (resolve, reject) {
     putAdminData(`${AdminRoute}/${model}/${_id}`, obj, true)
       .then((data) => {
@@ -1747,7 +1807,7 @@ export const deleteModel = (model, id) => {
 
   return new Promise(function (resolve, reject) {
     if (_id) {
-      deleteData(`${ApiUrl}/${model}/${_id}`, true)
+      deleteAdminData(`${AdminRoute}/${model}/${_id}`, true)
         .then((data) => {
           let mainD = data["data"];
 

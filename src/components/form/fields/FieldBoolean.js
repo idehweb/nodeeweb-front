@@ -6,7 +6,7 @@ import {MainUrl, uploadMedia} from "#c/functions/index";
 import Switch from '@mui/material/Switch';
 function FieldBoolean(props) {
   // console.clear();
-  let {field} = props;
+  let {field,t} = props;
   const {type, kind, size, className, name, label, placeholder, value = false} = field;
   console.log('***field',value)
 
@@ -19,7 +19,7 @@ function FieldBoolean(props) {
     sm={size ? size.sm : ''}
     lg={size ? size.lg : ''}
     className={'MGD ' + className}>
-    <label htmlFor={name}>{label}</label>
+    <label htmlFor={name}>{label ? t(label) : t(name)}</label>
 
     <Field
       name={name}

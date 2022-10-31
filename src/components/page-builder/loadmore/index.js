@@ -29,13 +29,18 @@ import {withTranslation} from "react-i18next";
 import PostCard from "#c/components/Home/PostCard";
 import {useSelector} from "react-redux";
 //
-// const Entities = (props) => {
-//   console.log('Entities...',props);
-// return <></>;
-// }
-const Entities = (props) => {
+const LoadMore2 = (props) => {
+  console.log('LoadMore...',props);
+  let {element={}}=props;
+  let {data={}}=element;
+return <>{JSON.stringify(data)}</>;
+}
+const LoadMore = (props) => {
   let {match, location, history, t, url} = props;
-  let params = useParams();
+  let {element={}}=props;
+  let {data={}}=element;
+  // let params = useParams();
+  let params = data;
   history = useNavigate();
   url = isClient ? new URL(window.location.href) : "";
   let filter = isClient ? (url.searchParams.get("filter") || {}) : {};
@@ -126,15 +131,15 @@ const Entities = (props) => {
     //   });
     //   return;
     // } else {
-      // console.clear();
-      // console.log('v',params._entity)
-      await setoffset(newOffset);
-      await setInitialLoad(false);
-      await setLoadingMoreItems(true);
-      getEntities(params._entity, newOffset, 24, search || "", filter).then((resp) => {
-        setLoadingMoreItems(false);
-        afterGetData(resp);
-      });
+    // console.clear();
+    // console.log('v',params._entity)
+    await setoffset(newOffset);
+    await setInitialLoad(false);
+    await setLoadingMoreItems(true);
+    getEntities(params._entity, newOffset, 24, search || "", filter).then((resp) => {
+      setLoadingMoreItems(false);
+      afterGetData(resp);
+    });
 
 
     // }
@@ -164,18 +169,18 @@ const Entities = (props) => {
   //     setoffset(-24);
   //   }
   // }, [params._id, catid]);
-  useEffect(() => {
-    console.log("we changed value...");
-    filter = isClient ? (url.searchParams.get("filter") || false) : false;
-
-    setoffset(-24);
-
-    // settracks([]);
-    sethasMoreItems(true);
-    settracks([]);
-    //
-    loadProductItems(0,filter);
-  }, []);
+  // useEffect(() => {
+  //   console.log("we changed value...");
+  //   filter = isClient ? (url.searchParams.get("filter") || false) : false;
+  //
+  //   setoffset(-24);
+  //
+  //   // settracks([]);
+  //   sethasMoreItems(true);
+  //   settracks([]);
+  //   //
+  //   loadProductItems(0,filter);
+  // }, []);
 
   const afterGetData = (resp) => {
     let trackss = [...tracks];
@@ -295,4 +300,4 @@ export const HomeServer = [
 // export const HomeServer = loadProducts;
 // export const HomeServerArgument = "61d58e37d931414fd78c7fba";
 // export const HomeServer = fetchData("61d58e37d931414fd78c7fba");
-export default withTranslation()(Entities);
+export default withTranslation()(LoadMore);

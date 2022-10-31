@@ -4,7 +4,7 @@ import {Field} from 'react-final-form'
 import {Col} from 'shards-react';
 import {MainUrl, uploadMedia} from "#c/functions/index";
 
-function FieldPrice(props) {
+function FieldText(props) {
   // console.clear();
   let {field,t} = props;
   const {type, kind, size, className, name, label,options, placeholder,value} = field;
@@ -21,26 +21,12 @@ function FieldPrice(props) {
     lg={size ? size.lg : ''}
     className={'MGD ' + className}>
     <label htmlFor={name}>{label ? t(label) : t(name)}</label>
-
     <Field
       name={name}
       component="input"
       type="text"
       placeholder={placeholder ? placeholder : (label ? t(label) : t(name))}
 
-      format={v => {
-        if (!v) return;
-
-        return v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-      }}
-      parse={v => {
-        if (!v) return;
-
-        return v.toString().replace(/,/g, "");
-
-      }}
-      // format={formatPrice}
-      // formatOnBlur
       className="mb-2 form-control ltr"
     />
 
@@ -49,4 +35,4 @@ function FieldPrice(props) {
   </Col>
 }
 
-export default withTranslation()(FieldPrice);
+export default withTranslation()(FieldText);

@@ -17,6 +17,7 @@ import {
   updateAddress,
   updateCard
 } from "#c/functions/index"
+import GetDiscount from "./GetDiscount";
 
 class LastPart extends React.Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class LastPart extends React.Component {
       user: store.getState().store.user || {},
       card: store.getState().store.card || [],
       address: theParams.address,
-      order_id: null,
+      order_id: store.getState().store.order_id || null,
       paymentMethod: 'zarinpal',
       sum: theParams.sum || 0,
       return_url: '',//window.location.origin + window.location.pathname + 'my-orders',
@@ -45,7 +46,9 @@ class LastPart extends React.Component {
     console.log('theParams', theParams);
     let {address, setting, total, sum, deliveryPrice} = theParams;
     let {order_id, return_url, card, lan} = this.state;
-let temp=total;
+    console.log(' this.state',  this.state);
+
+    let temp = total;
     return (
       <Card className="mb-3 pd-1">
         <CardHeader className={'pd-1'}>
@@ -110,11 +113,21 @@ let temp=total;
 
               </ListGroupItem>
               <ListGroupItem className={'d-flex px-3 border-0 '}>
-                {[<div className={'flex-1'}>
+                <div className={'flex-1'}>
+                  <div className={'ttl'}>{t('discount code') + ": "}</div>
+
+                </div>
+                <div className={'flex-1'}>
+
+                  <GetDiscount price={total} setDiscount={this.setDiscount} order_id={order_id}/>
+                </div>
+              </ListGroupItem>
+              <ListGroupItem className={'d-flex px-3 border-0 '}>
+                {[<div className={'flex-1'} key={'xo2'}>
                   <div className={'ttl'}>{t('sum') + ": "}</div>
 
                 </div>,
-                  <div className={'flex-1 textAlignRight'}>
+                  <div className={'flex-1 textAlignRight'} key={'xo3'}>
                     {sum && <div
                       className={'ttl '}>{sum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + t(' UZS')}</div>}
 
@@ -123,11 +136,11 @@ let temp=total;
               </ListGroupItem>
               <ListGroupItem className={'d-flex px-3 border-0 '}>
 
-                {[<div className={'flex-1'}>
+                {[<div className={'flex-1'} key={'xo4'}>
                   <div className={'ttl'}>{t('delivery') + ": "}</div>
 
                 </div>,
-                  <div className={'flex-1 textAlignRight'}>
+                  <div key={'xo5'} className={'flex-1 textAlignRight'}>
                     <div className={'ttl '}>
                       {(deliveryPrice !== 0) && <div
                         className={'ttl '}>
@@ -144,26 +157,26 @@ let temp=total;
               </ListGroupItem>
               <ListGroupItem className={'d-flex px-3 border-0 '}>
 
-                {[<div className={'flex-1'}>
+                {[<div className={'flex-1'} key={'xo6'}>
                   <div className={'ttl'}>{t('total') + ": "}</div>
 
                 </div>,
-                  <div className={'flex-1 textAlignRight'}>
+                  <div key={'xo7'} className={'flex-1 textAlignRight'}>
                     <div
                       className={'ttl '}>{total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + t(' UZS')}</div>
 
 
                   </div>]}
               </ListGroupItem>
-              {Boolean(total>50000000) && <ListGroupItem className={'d-flex px-3 border-0 '}>
+              {Boolean(total > 50000000) && <ListGroupItem className={'d-flex px-3 border-0 '}>
 
-                {[<div className={'flex-1'}>
+                {[<div className={'flex-1'} key={'xo8'}>
                   <div className={'ttl'}>{'سقف پرداخت اینترنتی ۵۰ میلیون تومان است.'}</div>
                   <div className={'ttl'}>{'باید در چند مرحله پرداخت کنید:'}</div>
 
                 </div>,
-                  <div className={'flex-1 textAlignRight'}>
-<PriceChunker price={total} onPlaceOrder={onPlaceOrder}/>
+                  <div className={'flex-1 textAlignRight'} key={'xo9'}>
+                    <PriceChunker price={total} onPlaceOrder={onPlaceOrder}/>
                   </div>]}
               </ListGroupItem>}
             </ListGroup>
@@ -196,10 +209,11 @@ let temp=total;
         </CardBody>
         <CardFooter className={'pd-1'}>
           <ButtonGroup size="sm right">
-            <Button className={''} left={"true"} onClick={onPrev}><i className="material-icons">{'chevron_right'}</i>{t('prev')}</Button>
+            <Button className={''} left={"true"} onClick={onPrev}><i
+              className="material-icons">{'chevron_right'}</i>{t('prev')}</Button>
           </ButtonGroup>
-          {Boolean(total<=50000000) && <ButtonGroup size="sm left">
-            <Button className={''} left={"true"} onClick={()=>onPlaceOrder(0)}>{t('Place Order')}</Button>
+          {Boolean(total <= 50000000) && <ButtonGroup size="sm left">
+            <Button className={''} left={"true"} onClick={() => onPlaceOrder(0)}>{t('Place Order')}</Button>
 
           </ButtonGroup>}
 

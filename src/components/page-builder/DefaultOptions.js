@@ -254,7 +254,8 @@ const DefaultOptions = [
       },
       "design": [{"name": "padding", "type": "string"}],
     }
-  }, {
+  },
+  {
     "label": "Grid Entity",
     "name": "grid",
     "addable": false,
@@ -265,6 +266,24 @@ const DefaultOptions = [
           {"name": "colCount", "type": "number"},
           ...rules
 
+        ]
+      },
+      "design": [{"name": "padding", "type": "string"}],
+    }
+  }, {
+    "label": "Load More",
+    "name": "loadmore",
+    "addable": false,
+    "settings": {
+      "general": {
+        "fields": {"entity": "", "include": "","perPage":1,"breakpoints":{},"classess":"","customQuery":{},...fields},
+        "rules": [
+          {"name": "entity", "type": "string"},
+          {"name": "include", "type": "string","class":"ltr"},
+          {"name": "perPage", "type": "number"},
+          {"name": "breakpoints", "type": "object"},
+          {"name": "customQuery", "type": "object"},
+          ...rules
         ]
       },
       "design": [{"name": "padding", "type": "string"}],

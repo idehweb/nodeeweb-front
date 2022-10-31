@@ -119,13 +119,13 @@ export default [
     },
 
     {
-        path: '/p/:_id/:title',
+        path: '/product/:_id/:title',
         layout: DefaultLayout,
         exact: true,
         element: Product,
     },
     {
-        path: '/p/:_id/:title/:bowl',
+        path: '/product/:_id/:title/:bowl',
         layout: DefaultLayout,
         exact: true,
         element: Product,

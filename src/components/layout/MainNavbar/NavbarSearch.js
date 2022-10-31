@@ -152,7 +152,7 @@ function NavbarSearch({className, type = 'prepend', t}) {
             </NavLink>
           </div>);
         }),<div className={'search_item textAlignCenter'}>
-          <NavLink exact tag={RouteNavLink} to={'/?search='+searchT} onClick={()=>{onCloseSearch()}}>
+          <NavLink exact tag={RouteNavLink} to={'/a/product/0/10?search='+searchT} onClick={()=>{onCloseSearch()}}>
             <div className={'search_title'}> {t('show all')}</div>
           </NavLink>
         </div>]}

@@ -5,19 +5,19 @@ import {Navbar} from 'shards-react';
 import {CustomNavItem} from './NavbarNav';
 // import useWindowSize from '#c/components/common/useWindowSize';
 
-export default function MainNavbar({layout, element,setStyles, stickyTop = true, onChange}) {
+export default function MainNavbar({layout, element,style,setStyles, stickyTop = true, onChange}) {
   // const classes = clsx('main-navbar', 'bg-white', stickyTop && 'sticky-top');
   const classes = clsx('navbar', 'p-0');
   // let [width] = useWindowSize();
   let {children = []} = element;
-  console.log('children',children)
+  // console.log('children',children)
 
   return (
-    <div className={classes}>
-      <Navbar type="light" className="align-items-stretch flex-md-nowrap p-0 top-bar-menu" >
+    <div className={classes} >
+      <Navbar type="light" className="align-items-stretch flex-md-nowrap p-0 top-bar-menu" style={style}>
         {(children && children instanceof Array) && children.map((ch, cx) => {
           // return child.map((ch,cx)=>{
-          console.log('ch', ch);
+          // console.log('ch', ch);
           let {settings={},children} = ch;
           let {general = {}} = settings;
           let {fields = {}} = general;

@@ -23,16 +23,16 @@ class Theprice extends React.PureComponent {
     let { price, salePrice, t, className, combinations, type } = this.props;
     if (price) price = PriceFormat(price);
     if (salePrice) salePrice = PriceFormat(salePrice);
-    console.log("salePrice", salePrice);
+    // console.log("salePrice", salePrice);
     // price = getMinPrice(combinations);
-    console.log("price2", price);
+    // console.log("price2", price);
 
     if (price == 0 || price == null) {
       console.log("error...", price);
 
       return <></>;
     }
-    console.log("price3", price);
+    // console.log("price3", price);
 
     return (
       <div className={"thePrice rtl " + className}>

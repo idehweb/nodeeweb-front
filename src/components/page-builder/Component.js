@@ -38,8 +38,13 @@ const Component = (props) => {
     address = 0,
     setExcludeArray
   } = props;
+  let {settings={}}=component;
+  let {general={}}=settings;
+  let {fields={}}=general;
+  let {text=""}=fields;
   const [componentForSetting, setComponentForSetting] = useState(false);
   const returnArrayOfComponent = (component) => {
+    console.log('returnArrayOfComponent');
     let tempArr = [];
     let xx = 1
     if (component.settings && component.settings.general && component.settings.general.fields && component.settings.general.fields.colCount) {
@@ -70,8 +75,10 @@ const Component = (props) => {
         <div className={' component name-'+component.name }>
           <div className={'npb-d-flex ' + (component.addable ? "border-bottom" : '')}>
             <div style={{direction: 'ltr'}}>
-              <span className={'component-address'}>{component.name + ' ' + (index+1) + ' from ' + length}</span>
-              <label className={'component-id'} style={{direction: 'ltr'}}>{'#' + component.id}</label>
+              <span className={'component-address'}>{component.name + ' ' + (index+1)}</span>
+              {/*<span className={'component-address'}>{component.name + ' ' + (index+1) + ' from ' + length}</span>*/}
+              <label className={'component-id'} style={{direction: 'ltr',display:'none'}}>{'#' + component.id}</label>
+              {text && <label className={'component-id'} style={{direction: 'ltr'}}>{JSON.stringify(text)}</label>}
 
             </div>
             <span className={'npb-settings'}>
@@ -89,84 +96,63 @@ const Component = (props) => {
         </div>
 
         {component.addable && <div className={'add-part name-'+component.name}>
-          {returnArrayOfComponent(component) && returnArrayOfComponent(component).map((item, index2) => {
-            console.log('component.children', component.children)
-            if (component.children)
-              console.log('component.children[index2]', component.children[index2])
-            return <div className={'element-wrapper-child'} key={index2}>
-              {Boolean(component.children && (component.children[index2] instanceof Array)) && component.children[index2].map((comp, jj) => {
 
-                return (<Component
-                  key={jj}
-                  index={jj}
-                  component={comp}
-                  moveContent={moveContent}
-                  setComponentForSetting={setComponentForSetting}
-                  toggleComponentOptionsBox={toggleComponentOptionsBox}
-                  setExcludeArray={() => setExcludeArray([])}
-                  changeComponentSetting={(e, j, d) => changeComponentSetting(e, j, d)}
-                  deleteItem={deleteItem}
-                  // setSourceAddress={()=>{
-                  //   let address = component.id + "_" + index2;
-                  //   console.log('component.id', address)
-                  //
-                  //   setSourceAddress(address)
-                  // }}
-                  toggleOptionBox={toggleOptionBox}
-                  length={component.children[index2].length}
-                  address={component.id + "_" + index2}
-                />)
-              })}
-              {Boolean(component.children && !(component.children[index2] instanceof Array)) && component.children.map((comp, jj) => {
+          <div className={'element-wrapper-child'}>
+            {Boolean(component.children && (component.children instanceof Array)) && component.children.map((comp, jj) => {
 
-                return (<Component
-                  key={jj}
-                  index={jj}
-                  component={comp}
-                  moveContent={moveContent}
-                  setComponentForSetting={setComponentForSetting}
-                  toggleComponentOptionsBox={toggleComponentOptionsBox}
-                  setExcludeArray={() => setExcludeArray([])}
-                  changeComponentSetting={(e, j, d) => changeComponentSetting(e, j, d)}
-                  deleteItem={deleteItem}
-                  // setSourceAddress={()=>{
-                  //   let address = component.id + "_" + index2;
-                  //   console.log('component.id', address)
-                  //
-                  //   setSourceAddress(address)
-                  // }}
-                  toggleOptionBox={toggleOptionBox}
-                  length={component.children.length}
-                  address={component.id + "_" + index2}
-                />)
-              })}
-              <div className={'add-component element'} onClick={(e) => {
-                // console.clear();
-                let address = component.id + "_" + index2;
-                // console.log('component.id', address)
-                let mainAddress = address.split('_');
-                // let update = {sourceAddress: address};
-                console.log('component.id', component.id, index2)
+              return (<Component
+                key={jj}
+                index={jj}
+                component={comp}
+                moveContent={moveContent}
+                setComponentForSetting={setComponentForSetting}
+                toggleComponentOptionsBox={toggleComponentOptionsBox}
+                setExcludeArray={() => setExcludeArray([])}
+                changeComponentSetting={(e, j, d) => changeComponentSetting(e, j, d)}
+                deleteItem={(e)=>{
+                  e.preventDefault();
+                  console.log('delete Item 2')
 
-                let update = {sourceAddress: component.id};
-                if (mainAddress[4]) {
-                  console.log('setExclude')
-                  update['excludeArray'] = ['row']
-                } else {
-                  update['excludeArray'] = []
+                  deleteItem(comp.id)}}
 
-                }
-                // setSourceAddress(address);
-                console.log('open toggle with:', update);
-                // setExcludeArray([]);
+                // setSourceAddress={()=>{
+                //   let address = component.id + "_" + index2;
+                //   console.log('component.id', address)
+                //
+                //   setSourceAddress(address)
+                // }}
+                toggleOptionBox={toggleOptionBox}
+                length={component.children.length}
+                address={component.id + "_" + jj}
+              />)
+            })
+            }
+            <div className={'add-component element'} onClick={(e) => {
+              // console.clear();
+              // let address = component.id + "_" + index2;
+              let address = component.id + "_";
+              // console.log('component.id', address)
+              let mainAddress = address.split('_');
+              // let update = {sourceAddress: address};
+              // console.log('component.id', component.id, index2)
 
-                toggleOptionBox(update)
-              }}>
-                <AddIcon/>
-              </div>
+              let update = {sourceAddress: component.id};
+              if (mainAddress[4]) {
+                console.log('setExclude')
+                update['excludeArray'] = ['row']
+              } else {
+                update['excludeArray'] = []
+
+              }
+              // setSourceAddress(address);
+              console.log('open toggle with:', update);
+              // setExcludeArray([]);
+
+              toggleOptionBox(update)
+            }}>
+              <AddIcon/>
             </div>
-          })}
-
+          </div>
         </div>}
       </>}
       {componentForSetting && <>
@@ -177,7 +163,12 @@ const Component = (props) => {
             // toggleComponentOptionsBox()
           }}><DisplaySettingsIcon/></Button>
           <Button
-            onClick={() => deleteItem(component.id)}>
+            onClick={(e) => {
+              e.preventDefault()
+              console.log('delete Item 4')
+
+              deleteItem(component.id)
+            }}>
             <DeleteForeverIcon/>
           </Button>
         </div>

@@ -95,7 +95,7 @@ function AddToCardButton({item, text = '',variable=false,children, t}) {
       <Button size="md" className={'kjhgfgh empty-card'} theme="primary" onClick={(e) => {
         if (text && text === t('options') && !item.single) {
           let title=encodeURIComponent(item.title.fa.replace(/\\|\//g,''));
-          SetNavigate('/p/' + item._id + '/' + title);
+          SetNavigate('/product/' + item._id + '/' + title);
         }
         else {
           // console.log('item',item);

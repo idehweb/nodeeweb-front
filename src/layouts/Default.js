@@ -6,14 +6,20 @@ import PageBuilder from "#c/components/page-builder/PageBuilder";
 import CardSidebar from '#c/components/layout/MainSidebar/CardSidebar';
 
 
-const DefaultLayout = ({children, width, noNavbar, onChange = () => null}) => {
+const DefaultLayout = (props) => {
+  console.log('DefaultLayout...',props);
 
-  const themeData = useSelector((st) => st.store.themeData);
-  const homeData = useSelector((st) => st.store.homeData);
-  useEffect(() => {
-    console.log('homeData', themeData)
-  }, []);
-  console.log('DefaultLayout...');
+  let {children, width, noNavbar, onChange = () => null,themeData} = props;
+  // const themeData = useSelector((st) => st.store.themeData);
+  // const themeData = useSelector((st) => st.store.themeData);
+  // const homeData = useSelector((st) => st.store.homeData);
+  // useEffect(() => {
+  //   console.log('homeData', themeData)
+  // }, []);
+  if(!themeData){
+    return
+  }
+  console.log('children',children)
   return (
 
     <>

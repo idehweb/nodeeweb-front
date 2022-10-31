@@ -9,6 +9,7 @@ import Entities from '#c/views/Entities';
 import Page from '#c/views/Page';
 import Profile from '#c/views/Profile';
 import Transaction from '#c/views/Transaction';
+import DynamicPage from '#c/views/DynamicPage';
 import Checkout from '#c/views/Checkout';
 import Post from '#c/views/Post';
 import {DefaultLayout, Nof, Nohf} from '#c/layouts/index';
@@ -164,6 +165,11 @@ export default function createRoutes(themeRoutes) {
     }
     if (e.layout == 'DefaultLayout') {
       e.layout = DefaultLayout;
+
+    }
+    if (e.element == 'DynamicPage' ) {
+      console.log('set up DynamicPage')
+      e.element = DynamicPage;
 
     }
     if (e.layout && e.element && e.path) {

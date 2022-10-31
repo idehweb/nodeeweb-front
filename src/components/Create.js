@@ -86,7 +86,9 @@ function Create(props) {
   if (fields)
     fields.forEach((d) => {
       c[d.name] = ''
-
+      if(d.defaultValue==null){
+        delete c[d.name]
+      }
       if(d.type=='object'){
         c[d.name] ={}
 
@@ -95,9 +97,15 @@ function Create(props) {
         c[d.name] =[]
 
       }
+      if(d.defaultValue!=null){
+        c[d.name]=d.defaultValue;
+      }
+
       // c[d.name]=d.type
     });
+  console.clear()
   console.log('fields', fields)
+  console.log('c', c)
   return (
     <CreateForm
       onSubmit={onSubmit}

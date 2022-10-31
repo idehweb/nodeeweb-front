@@ -17,7 +17,7 @@ export default [
     params: HomeServerArgument
   },
   {
-    path: "/p/:_id/:title",
+    path: "/product/:_id/:title",
     layout: DefaultLayout,
     exact: true,
     element: Product,
@@ -25,7 +25,7 @@ export default [
     params: ProductServerArgument
   },
   {
-    path: "/p/:_id/:title/:bowl",
+    path: "/product/:_id/:title/:bowl",
     layout: DefaultLayout,
     exact: true,
     element: Product,

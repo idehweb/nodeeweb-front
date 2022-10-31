@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import { Card, Col, Container, Row } from "shards-react";
+import { Card, Col, Container, Row,Button } from "shards-react";
 import { withTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
 
@@ -27,9 +27,12 @@ const Dashboard = ({ t }) => {
 
   return (
     <Container fluid className="main-content-container px-4">
+      <Button className={'restart-system'} onClick={()=>{
+
+      }}>{t('R')}</Button>
       {/*<AreaChart />*/}
       {/*<BarChart />*/}
-      <BugReproduce />
+      {/*<BugReproduce />*/}
       {/*<RadarChart />*/}
       {/*<Curve />*/}
       {/*<FunnelChart />*/}

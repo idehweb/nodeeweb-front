@@ -23,6 +23,8 @@
     "grapesjs-preset-webpage": "^1.0.1",
     "i18next": "^21.8.2",
     "jalali-moment": "^3.3.11",
+    "jsoneditor": "^9.9.2",
+    "jsoneditor-react": "^3.1.2",
     "prettier": "^2.6.2",
     "react": "^18.1.0",
     "react-color": "^2.19.3",
@@ -47,9 +49,11 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.1",
+    "reselect": "^4.1.6",
     "shards-react": "^1.0.3",
     "socket.io-client": "^4.5.2",
-    "swiper": "^8.1.5"
+    "swiper": "^8.1.5",
+    "underscore": "^1.13.6"
   },
   "devDependencies": {
     "@craco/craco": "^6.4.3",

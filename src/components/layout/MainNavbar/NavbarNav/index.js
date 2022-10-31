@@ -54,9 +54,11 @@ export const ChildItem = (props) => {
         let {settings} = ch;
         let {general = {}} = settings;
         let {fields = {}} = general;
-        let {text = '', href=''} = fields;
+        let {text = '', href='',link=''} = fields;
         let style=setStyles(fields);
-
+if(!href && link){
+  href=link
+}
         return (<NavItem key={chx}>
           {containMainLink(href) && <a className="nav-link" href={href} style={style} target={"_blank"}>
             {text}

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {withTranslation} from 'react-i18next';
 import {Field} from 'react-final-form';
 import {Col} from 'shards-react';
-import {getEntities, MainUrl, uploadMedia} from "#c/functions/index";
+import {getEntitiesForAdmin, MainUrl, uploadMedia} from "#c/functions/index";
 
 function FieldCheckbox(props) {
   // console.clear();
@@ -16,7 +16,7 @@ console.log('checkbox')
   useEffect(() => {
     if(limit){limit=parseInt(limit)}
     if (entity && checkboxes.length === 0)
-      getEntities(entity, 0, limit).then((d) => {
+      getEntitiesForAdmin(entity, 0, limit).then((d) => {
         setCheckBoxes(d)
       }).catch((e) => {
 
@@ -42,7 +42,7 @@ console.log('checkbox')
     >
       {({input, meta}) => {
         return (
-          <div><label htmlFor={name}>{label}</label>
+          <div><label htmlFor={name}>{t(label)}</label>
             <div className={"checkbox-wrapper"}>
               {/*{searchbox && <input*/}
                 {/*className={'searchBox'}*/}

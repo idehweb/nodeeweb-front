@@ -108,6 +108,8 @@ export default ()=>({
   "get discount": "اعمال",
   "type": "نوع",
   "Code is wrong!": "کد اشتباه است!",
+  "System restarted!": "سیستم در حال ری استارت شدن است!",
+  "System did not restart!": "متاسفانه ری استارت سیستم با مشکل مواجه شد!",
   "slug": "نامک",
   "createdAt": "ساخته شده در",
   "updatedAt": "بروزرسانی در",

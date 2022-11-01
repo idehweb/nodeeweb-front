@@ -20,8 +20,12 @@ import {
 function FieldArray(props) {
   // console.clear();
   let {field, t} = props;
-  const {type, kind, size, className, name, label, placeholder, value, child,setValue} = field;
-  let [theArray, setArray] = useState([])
+  const {type, kind, size, className, name, label, placeholder, value=[], child,setValue} = field;
+ if(!(value instanceof Array)){
+   return
+ }
+  // return JSON.stringify(typeof value);
+  let [theArray, setArray] = useState(value || [])
   // let [theVal, setTheVal] = useState(value)
   // console.log('field object', field)
   const addChild = () => {
@@ -77,16 +81,20 @@ function FieldArray(props) {
               // return name+' '+ch2.name;
               // ch2.name=ch2.name+ch2x
               if(ch2.type=='object'){
-                return <FieldObject key={ch2x} field={{...ch2,name:name+"["+ke+"]["+ch2.name+"]",setValue:setValue}}/>
+                // return JSON.stringify(ch);
+                // return JSON.stringify(ch2);
+
+                return <FieldObject key={ch2x} field={{...ch2,value:(ch && ch2.name) ? ch[ch2.name] : {},name:name+"["+ke+"]["+ch2.name+"]",setValue:setValue}}/>
 
               }
               if (ch2.type == 'string') {
                 // return <span className={'col'}><input className={'form-control'} placeholder={ch2.name}/></span>
-                return <FieldText key={ch2x} field={{...ch2,name:name+"["+ke+"]["+ch2.name+"]"}}/>
+                return <FieldText key={ch2x} field={{...ch2,value:(ch && ch2.name) ? ch[ch2.name] : "",name:name+"["+ke+"]["+ch2.name+"]",setValue:setValue}}/>
               }
               if (ch2.type == 'color') {
                 // return <span className={'col'}><input className={'form-control'} placeholder={ch2.name}/></span>
-                return <FieldText key={ch2x} field={ch2}/>
+                return <FieldText key={ch2x} field={{...ch2,value:(ch && ch2.name) ? ch[ch2.name] : "",name:name+"["+ke+"]["+ch2.name+"]",setValue:setValue}}/>
+
               }
               if (ch2.type == 'price') {
                 // return <span className={'col'}><input className={'form-control'} placeholder={ch2.name}/></span>
@@ -98,7 +106,7 @@ function FieldArray(props) {
               }
               if (ch2.type == 'select') {
                 // return <span className={'col'}><input className={'form-control'} placeholder={ch2.name}/></span>
-                return <FieldSelect key={ch2x} field={ch2}/>
+                return <FieldSelect key={ch2x} field={{...ch2,name:name+"["+ke+"]["+ch2.name+"]",setValue:setValue}}/>
               }
               if (ch2.type == 'boolean') {
                 // return <span className={'col'}><input className={'form-control'} placeholder={ch2.name}/></span>

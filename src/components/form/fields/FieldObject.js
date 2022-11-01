@@ -8,6 +8,8 @@ function FieldObject(props) {
   // console.clear();
   let {field,t} = props;
   let {type, kind, size, className, name, label, placeholder, value={}} = field;
+  // return JSON.stringify(field);
+
 // console.clear()
 //   console.log('size',props)
   let [theVal, setTheVal] = useState(value)
@@ -44,18 +46,22 @@ function FieldObject(props) {
           if(Object.keys(obj).length==0){
             obj={"":""}
           }
+          // return  JSON.stringify(obj);
+
           // if (typeof input.value === 'object') {
             let y = Object.keys(obj).map((theKey, inx) => {
               // console.log('theKey',theKey)
+              // return  JSON.stringify(theVal);
+
               return (
                 <div className={'max-width100'}>
                   <div className={'width-less'}>
-                    <label htmlFor={theKey}>theKey</label>
+                    <label htmlFor={theKey}>the key</label>
                     <input
                       name={props.input.name}
                       className={'ltr form-control'}
                       type={'text'}
-                      value={'fa'}
+                      value={theKey || 'fa'}
                       placeholder={'key'}
                     />
                   </div>

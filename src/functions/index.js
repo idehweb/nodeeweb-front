@@ -927,6 +927,20 @@ export const createRecord = (model, obj) => {
       });
   });
 };
+export const restartSystem = () => {
+  return new Promise(function (resolve, reject) {
+    // console.log('obj', obj)
+    postAdminData(`${AdminRoute}/settings/restart`, {}, true)
+      .then((data) => {
+        let mainD = data["data"];
+
+        resolve(mainD);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
 export const editRecord = (model, _id, obj) => {
   console.log('editRecord')
   console.log('obj', obj)

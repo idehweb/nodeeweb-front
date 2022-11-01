@@ -110,7 +110,7 @@ const Component = (props) => {
                 setExcludeArray={() => setExcludeArray([])}
                 changeComponentSetting={(e, j, d) => changeComponentSetting(e, j, d)}
                 deleteItem={(e)=>{
-                  e.preventDefault();
+                  // e.preventDefault();
                   console.log('delete Item 2')
 
                   deleteItem(comp.id)}}

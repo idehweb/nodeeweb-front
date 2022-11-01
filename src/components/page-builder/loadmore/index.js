@@ -36,9 +36,14 @@ const LoadMore2 = (props) => {
 return <>{JSON.stringify(data)}</>;
 }
 const LoadMore = (props) => {
+  console.log('LoadMore...',props);
+
   let {match, location, history, t, url} = props;
   let {element={}}=props;
-  let {data={}}=element;
+  let {data={},settings={}}=element;
+  let {general={}}=settings;
+  let {fields={}}=general;
+  let {entity=''}=fields;
   // let params = useParams();
   let params = data;
   history = useNavigate();
@@ -103,15 +108,15 @@ const LoadMore = (props) => {
   //
   // }, [sortBy]);
   useEffect(() => {
-    if(theFilter!=filter) {
-      console.log('filter', filter);
-      setoffset(-24);
-      offset = -24;
-      sethasMoreItems(true);
-      settracks([]);
-      theFilter=filter;
-      loadProductItems(0, filter);
-    }
+    // if(theFilter!=filter) {
+    //   console.log('filter', filter);
+    //   setoffset(-24);
+    //   offset = -24;
+    //   sethasMoreItems(true);
+    //   settracks([]);
+    //   theFilter=filter;
+    //   loadProductItems(0, filter);
+    // }
   }, [filter]);
   const loadProductItems = async (page, filter = {}) => {
 
@@ -136,7 +141,7 @@ const LoadMore = (props) => {
     await setoffset(newOffset);
     await setInitialLoad(false);
     await setLoadingMoreItems(true);
-    getEntities(params._entity, newOffset, 24, search || "", filter).then((resp) => {
+    getEntities(params._entity || entity, newOffset, 24, search || "", filter=false).then((resp) => {
       setLoadingMoreItems(false);
       afterGetData(resp);
     });
@@ -149,10 +154,10 @@ const LoadMore = (props) => {
 
     let attr = url.searchParams.get("attr") || "";
     let value = url.searchParams.get("value") || "";
-    if (attr !== attrP)
-      setAttr(attr);
-    if (value !== valueP)
-      setValue(value);
+    // if (attr !== attrP)
+    //   setAttr(attr);
+    // if (value !== valueP)
+    //   setValue(value);
 
   }
   // useEffect(() => {
@@ -169,7 +174,7 @@ const LoadMore = (props) => {
   //     setoffset(-24);
   //   }
   // }, [params._id, catid]);
-  // useEffect(() => {
+  useEffect(() => {
   //   console.log("we changed value...");
   //   filter = isClient ? (url.searchParams.get("filter") || false) : false;
   //
@@ -179,8 +184,8 @@ const LoadMore = (props) => {
   //   sethasMoreItems(true);
   //   settracks([]);
   //   //
-  //   loadProductItems(0,filter);
-  // }, []);
+    loadProductItems(0);
+  }, []);
 
   const afterGetData = (resp) => {
     let trackss = [...tracks];
@@ -197,7 +202,7 @@ const LoadMore = (props) => {
       setLoad(false);
     }
   };
-
+// return JSON.stringify(params)
   const loader = (
     <div className="loadNotFound loader " key={23}>
       {t("loading...")}

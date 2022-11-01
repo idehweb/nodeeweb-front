@@ -2,52 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="06443989-9eed-404f-8640-c258027113f4" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/checkout/GetDiscount.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/checkout/GetGateways.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/form/fields/FieldJson.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/form/fields/FieldNumber.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/form/fields/FieldText.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/form/fields/FieldTextarea.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page-builder/loadmore/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/DynamicPage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/updateBack.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/site_setting/config.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/site_setting/config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DefaultRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/DefaultRoute.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/styles/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/styles/global.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Create.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Create.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/admin/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/admin/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/checkout/GetDelivery.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/checkout/GetDelivery.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/checkout/LastPart.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/checkout/LastPart.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/components-overview/AddToCardButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/components-overview/AddToCardButton.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/form/CreateForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/form/CreateForm.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/form/fields/FieldArray.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/form/fields/FieldArray.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/form/fields/FieldBoolean.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/form/fields/FieldBoolean.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/form/fields/FieldCheckbox.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/form/fields/FieldCheckbox.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/form/fields/FieldObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/form/fields/FieldObject.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/form/fields/FieldPrice.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/form/fields/FieldPrice.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/form/fields/FieldSelect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/form/fields/FieldSelect.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/form/fields/FieldServer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/form/fields/FieldServer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/form/fields/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/form/fields/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/MainNavbar/MainNavbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/MainNavbar/MainNavbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/MainNavbar/NavbarNav/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/MainNavbar/NavbarNav/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/MainNavbar/NavbarSearch.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/MainNavbar/NavbarSearch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/MainSidebar/CardSidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/MainSidebar/CardSidebar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/form/fields/FieldText.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/form/fields/FieldText.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/page-builder/Component.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page-builder/Component.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page-builder/DefaultOptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page-builder/DefaultOptions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page-builder/PageBuilder.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page-builder/PageBuilder.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/single-post/Theprice.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/single-post/Theprice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page-builder/loadmore/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page-builder/loadmore/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/functions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/functions/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/functions/reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/functions/reducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/language/fa/translation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/language/fa/translation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/layouts/Default.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/layouts/Default.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ssrRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/ssrRoutes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/CreatePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/CreatePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Entities.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Entities.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -58,22 +22,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="config.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/site_setting/config.js">
+      <file leaf-file-name="CreateForm.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/form/CreateForm.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+            <state relative-caret-position="378">
+              <caret line="14" column="42" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
+              <folding>
+                <element signature="e#0#49#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Dashboard.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/admin/Dashboard.js">
+      <file leaf-file-name="FieldSelect.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/form/fields/FieldSelect.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="179">
-              <caret line="24" column="20" lean-forward="true" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
+            <state relative-caret-position="385">
+              <caret line="47" column="23" selection-start-line="47" selection-start-column="23" selection-end-line="47" selection-end-column="23" />
               <folding>
-                <element signature="e#0#37#0" expanded="true" />
+                <element signature="e#0#48#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -82,8 +49,8 @@
       <file leaf-file-name="FieldArray.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/form/fields/FieldArray.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="85" column="15" lean-forward="true" selection-start-line="85" selection-start-column="15" selection-end-line="85" selection-end-column="15" />
+            <state relative-caret-position="-1566">
+              <caret line="21" column="15" lean-forward="true" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
               <folding>
                 <element signature="e#0#38#0" expanded="true" />
                 <element signature="n#!!block;n#ParseObjectToInput#0" />
@@ -92,33 +59,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FieldObject.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/form/fields/FieldObject.js">
+      <file leaf-file-name="FieldText.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/form/fields/FieldText.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="44" column="22" lean-forward="true" selection-start-line="44" selection-start-column="22" selection-end-line="44" selection-end-column="22" />
+            <state relative-caret-position="332">
+              <caret line="26" column="17" lean-forward="true" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
               <folding>
-                <element signature="e#1599#2829#0" />
-                <element signature="e#2964#3458#0" />
+                <element signature="e#0#38#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FieldText.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/form/fields/FieldText.js">
+      <file leaf-file-name="FieldObject.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/form/fields/FieldObject.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="594">
-              <caret line="26" column="17" lean-forward="true" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="global.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/assets/styles/global.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="1611" column="20" selection-start-line="1611" selection-start-column="20" selection-end-line="1611" selection-end-column="20" />
+            <state relative-caret-position="402">
+              <caret line="80" selection-start-line="80" selection-end-line="81" />
             </state>
           </provider>
         </entry>
@@ -135,18 +92,12 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>create</find>
-      <find>filter</find>
-      <find>getE</find>
-      <find>sortBy</find>
       <find>postCardMode</find>
       <find>store.ge</find>
       <find>Sort</find>
       <find>fetchTheme</find>
       <find>useEffect</find>
       <find>JSON.</find>
-      <find>getEntities</find>
-      <find>loadProductItems</find>
       <find>useEffect(()</find>
       <find>https://v2.golafshan.ir</find>
       <find>Disc</find>
@@ -160,14 +111,19 @@
       <find>useParams</find>
       <find>ltr</find>
       <find>entity</find>
-      <find>http://localhost:3000</find>
       <find>SWIPERWrapper</find>
       <find>$size</find>
       <find>https://parts.arandguarantee.shop</find>
+      <find>loadProductItems</find>
+      <find>params</find>
+      <find>post</find>
+      <find>restartSystem</find>
+      <find>getEntities</find>
+      <find>toast</find>
       <find>setValue</find>
+      <find>http://localhost:3000</find>
     </findStrings>
     <replaceStrings>
-      <replace>BOX</replace>
       <replace>outline:</replace>
       <replace>localhost</replace>
       <replace>mainAddress</replace>
@@ -197,6 +153,7 @@
       <replace>v2.golafshan.ir</replace>
       <replace>https://parts.arandguarantee.shop</replace>
       <replace>http://localhost:3000</replace>
+      <replace>https://cinemachoob.shop</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src/components/layout</dir>
@@ -209,8 +166,8 @@
       <dir>$PROJECT_DIR$/src/views</dir>
       <dir>$PROJECT_DIR$/src/components</dir>
       <dir>$PROJECT_DIR$/src/components/form/fields</dir>
-      <dir>$PROJECT_DIR$/src</dir>
       <dir>$PROJECT_DIR$/src/components/page-builder</dir>
+      <dir>$PROJECT_DIR$/src</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -219,8 +176,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/views/Product.js" />
-        <option value="$PROJECT_DIR$/src/components/layout/MainNavbar/NavbarSearch.js" />
         <option value="&lt;ce39571c-90df-4e04-b94e-47ff272b5444&gt;/home/golafshan/domains/golafshan.ir/public_html/v2/.env.local" />
         <option value="&lt;ce39571c-90df-4e04-b94e-47ff272b5444&gt;/home/gilbanu/domains/gilbanu.ir/public_html/.env.local" />
         <option value="&lt;ce39571c-90df-4e04-b94e-47ff272b5444&gt;/home/cinemachoo/domains/cinemachoob.shop/public_html/.env.local" />
@@ -233,8 +188,6 @@
         <option value="$PROJECT_DIR$/src/components/form/fields/FieldCheckbox.js" />
         <option value="$PROJECT_DIR$/src/components/Create.js" />
         <option value="$PROJECT_DIR$/src/views/CreatePage.js" />
-        <option value="$PROJECT_DIR$/src/components/page-builder/Component.js" />
-        <option value="$PROJECT_DIR$/src/components/form/fields/FieldText.js" />
         <option value="$PROJECT_DIR$/src/components/form/fields/FieldNumber.js" />
         <option value="$PROJECT_DIR$/src/components/form/fields/FieldPrice.js" />
         <option value="$PROJECT_DIR$/src/components/form/fields/FieldSelect.js" />
@@ -247,11 +200,9 @@
         <option value="$PROJECT_DIR$/src/components/checkout/GetDiscount.js" />
         <option value="$PROJECT_DIR$/src/functions/reducer.js" />
         <option value="$PROJECT_DIR$/src/index.js" />
-        <option value="$PROJECT_DIR$/src/functions/index.js" />
         <option value="$PROJECT_DIR$/src/views/Entities.js" />
         <option value="$PROJECT_DIR$/src/components/checkout/GetGateways.js" />
         <option value="$PROJECT_DIR$/src/components/layout/MainSidebar/CardSidebar.js" />
-        <option value="$PROJECT_DIR$/src/language/fa/translation.js" />
         <option value="$PROJECT_DIR$/src/components/checkout/GetDelivery.js" />
         <option value="$PROJECT_DIR$/src/components/checkout/LastPart.js" />
         <option value="$PROJECT_DIR$/src/components/form/fields/index.js" />
@@ -263,13 +214,19 @@
         <option value="$PROJECT_DIR$/src/components/page-builder/DefaultOptions.js" />
         <option value="$PROJECT_DIR$/src/App.js" />
         <option value="$PROJECT_DIR$/src/views/DynamicPage.js" />
-        <option value="$PROJECT_DIR$/src/components/page-builder/loadmore/index.js" />
         <option value="$PROJECT_DIR$/src/components/page-builder/PageBuilder.js" />
-        <option value="$PROJECT_DIR$/public/site_setting/config.js" />
         <option value="$PROJECT_DIR$/src/assets/styles/global.css" />
+        <option value="$PROJECT_DIR$/src/components/page-builder/Component.js" />
+        <option value="$PROJECT_DIR$/src/components/page-builder/loadmore/index.js" />
+        <option value="$PROJECT_DIR$/updateBack.sh" />
+        <option value="$PROJECT_DIR$/src/views/Product.js" />
+        <option value="$PROJECT_DIR$/src/language/fa/translation.js" />
         <option value="$PROJECT_DIR$/src/components/admin/Dashboard.js" />
+        <option value="$PROJECT_DIR$/src/functions/index.js" />
+        <option value="$PROJECT_DIR$/public/site_setting/config.js" />
         <option value="$PROJECT_DIR$/src/components/form/fields/FieldObject.js" />
         <option value="$PROJECT_DIR$/src/components/form/fields/FieldArray.js" />
+        <option value="$PROJECT_DIR$/src/components/form/fields/FieldText.js" />
       </list>
     </option>
   </component>
@@ -324,19 +281,6 @@
               <item name="nodeeweb-front" type="b2602c69:ProjectViewProjectNode" />
               <item name="nodeeweb-front" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nodeeweb-front" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nodeeweb-front" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="styles" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nodeeweb-front" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nodeeweb-front" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -345,27 +289,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nodeeweb-front" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nodeeweb-front" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="checkout" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nodeeweb-front" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nodeeweb-front" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nodeeweb-front" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nodeeweb-front" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="components-overview" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="nodeeweb-front" type="b2602c69:ProjectViewProjectNode" />
@@ -386,63 +309,7 @@
               <item name="nodeeweb-front" type="b2602c69:ProjectViewProjectNode" />
               <item name="nodeeweb-front" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="Home" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nodeeweb-front" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nodeeweb-front" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="layout" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nodeeweb-front" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nodeeweb-front" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="layout" type="462c0819:PsiDirectoryNode" />
-              <item name="MainSidebar" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nodeeweb-front" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nodeeweb-front" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="page-builder" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nodeeweb-front" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nodeeweb-front" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="page-builder" type="462c0819:PsiDirectoryNode" />
-              <item name="loadmore" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nodeeweb-front" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nodeeweb-front" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="language" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nodeeweb-front" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nodeeweb-front" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="language" type="462c0819:PsiDirectoryNode" />
-              <item name="fa" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nodeeweb-front" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nodeeweb-front" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="layouts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nodeeweb-front" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nodeeweb-front" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="functions" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -552,27 +419,27 @@
       <workItem from="1666853989114" duration="10620000" />
       <workItem from="1666894533428" duration="1058000" />
       <workItem from="1666955108951" duration="36634000" />
-      <workItem from="1667151424920" duration="5149000" />
+      <workItem from="1667151424920" duration="13135000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="481420000" />
+    <option name="totallyTimeSpent" value="489406000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.38550422" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.38550422" />
       <window_info anchor="right" id="Remote Host" order="3" weight="0.21611722" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23992674" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23992674" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Find" order="1" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
@@ -585,32 +452,31 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="File Transfer" order="8" weight="0.32983193" />
-      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
     <layout-to-restore>
-      <window_info anchor="bottom" id="Version Control" order="11" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" id="Remote Host" order="3" weight="0.21611722" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23748474" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23992674" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="TypeScript" order="12" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Command Line Tools Console" order="13" weight="0.32983193" />
       <window_info anchor="right" id="Database" order="4" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.26680672" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.38550422" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Version Control" order="11" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="File Transfer" order="14" weight="0.32983193" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info id="Favorites" order="2" side_tool="true" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -643,31 +509,10 @@
           <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="33" />
+      <option name="time" value="34" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/components/form/fields/FieldCheckbox.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="4" selection-start-line="4" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/views/Admin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="185" column="36" selection-start-line="185" selection-start-column="30" selection-end-line="185" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Edit.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="27">
-          <caret line="63" column="25" selection-start-line="63" selection-start-column="25" selection-end-line="63" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Create.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="169">
@@ -679,15 +524,8 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="134">
           <caret line="399" column="29" selection-start-line="399" selection-start-column="29" selection-end-line="399" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/page-builder/Component.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="106" column="25" lean-forward="true" selection-start-line="106" selection-start-column="25" selection-end-line="106" selection-end-column="25" />
           <folding>
-            <element signature="e#0#38#0" expanded="true" />
+            <element signature="e#6467#6825#0" />
           </folding>
         </state>
       </provider>
@@ -696,13 +534,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
           <caret line="20" column="17" lean-forward="true" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/form/fields/FieldSelect.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="34" selection-start-line="34" selection-end-line="35" />
         </state>
       </provider>
     </entry>
@@ -759,6 +590,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="98">
           <caret line="31" selection-start-line="31" selection-end-line="31" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -783,13 +617,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="181">
           <caret line="31" column="30" lean-forward="true" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/functions/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="836">
-          <caret line="775" column="28" selection-start-line="775" selection-start-column="28" selection-end-line="775" selection-end-column="28" />
+          <folding>
+            <element signature="e#468#508#0" expanded="true" />
+            <element signature="e#850#908#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -797,6 +628,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
           <caret line="10" selection-start-line="10" selection-end-line="11" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -804,6 +638,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="435">
           <caret line="23" column="10" selection-start-line="23" selection-start-column="10" selection-end-line="23" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#512#551#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -811,13 +649,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="111">
           <caret line="122" column="9" lean-forward="true" selection-start-line="122" selection-start-column="9" selection-end-line="122" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/language/fa/translation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="109" column="35" selection-start-line="109" selection-start-column="35" selection-end-line="109" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -825,6 +659,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="139">
           <caret line="328" column="31" selection-start-line="328" selection-start-column="31" selection-end-line="328" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+            <element signature="n#!!block;n#getSettings#0;n#GetDelivery#0" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -832,6 +670,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="498">
           <caret line="48" column="28" selection-start-line="48" selection-start-column="28" selection-end-line="48" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#312#358#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -856,13 +698,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="259">
           <caret line="37" column="38" selection-start-line="37" selection-start-column="38" selection-end-line="37" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/form/CreateForm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="6" column="43" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -877,6 +715,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="184">
           <caret line="102" column="21" lean-forward="true" selection-start-line="102" selection-start-column="21" selection-end-line="102" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -884,6 +725,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="116">
           <caret line="274" column="23" lean-forward="true" selection-start-line="274" selection-start-column="23" selection-end-line="274" selection-end-column="23" />
+          <folding>
+            <element signature="e#7555#7883#0" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -891,6 +735,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
           <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+          <folding>
+            <element signature="e#1354#2440#0" />
+            <element signature="e#2478#3010#0" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -919,6 +767,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
           <caret line="163" lean-forward="true" selection-start-line="163" selection-end-line="163" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -926,6 +777,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
           <caret line="122" column="35" lean-forward="true" selection-start-line="122" selection-start-column="35" selection-end-line="122" selection-end-column="35" />
+          <folding>
+            <element signature="e#21#48#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -940,13 +794,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="279">
           <caret line="141" column="40" selection-start-line="141" selection-start-column="40" selection-end-line="141" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/page-builder/loadmore/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="226">
-          <caret line="171" column="1" selection-start-line="171" selection-start-column="1" selection-end-line="182" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -961,6 +811,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="271">
           <caret line="316" column="10" selection-start-line="316" selection-start-column="10" selection-end-line="316" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -971,6 +824,79 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/page-builder/Component.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="318">
+          <caret line="146" column="30" selection-start-line="146" selection-start-column="30" selection-end-line="146" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/page-builder/loadmore/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="205" column="18" selection-start-line="205" selection-start-column="18" selection-end-line="205" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+            <element signature="e#4542#4747#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/functions/NativeHelper.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/updateBack.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/Product.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="293">
+          <caret line="192" column="21" selection-start-line="192" selection-start-column="21" selection-end-line="194" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/language/fa/translation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="111" column="72" selection-start-line="111" selection-start-column="72" selection-end-line="111" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/admin/Dashboard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="43" column="19" selection-start-line="43" selection-start-column="19" selection-end-line="43" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+            <element signature="e#917#963#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/functions/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="940" column="9" selection-start-line="940" selection-start-column="9" selection-end-line="940" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#19720#20115#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/site_setting/config.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
@@ -978,38 +904,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/admin/Dashboard.js">
+    <entry file="file://$PROJECT_DIR$/src/components/form/CreateForm.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="24" column="20" lean-forward="true" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
+        <state relative-caret-position="378">
+          <caret line="14" column="42" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
           <folding>
-            <element signature="e#0#37#0" expanded="true" />
+            <element signature="e#0#49#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/form/fields/FieldText.js">
+    <entry file="file://$PROJECT_DIR$/src/components/form/fields/FieldSelect.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="26" column="17" lean-forward="true" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+        <state relative-caret-position="385">
+          <caret line="47" column="23" selection-start-line="47" selection-start-column="23" selection-end-line="47" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/form/fields/FieldObject.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="44" column="22" lean-forward="true" selection-start-line="44" selection-start-column="22" selection-end-line="44" selection-end-column="22" />
+        <state relative-caret-position="402">
+          <caret line="80" selection-start-line="80" selection-end-line="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/form/fields/FieldText.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="26" column="17" lean-forward="true" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
           <folding>
-            <element signature="e#1599#2829#0" />
-            <element signature="e#2964#3458#0" />
+            <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/form/fields/FieldArray.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="85" column="15" lean-forward="true" selection-start-line="85" selection-start-column="15" selection-end-line="85" selection-end-column="15" />
+        <state relative-caret-position="-1566">
+          <caret line="21" column="15" lean-forward="true" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
           <folding>
             <element signature="e#0#38#0" expanded="true" />
             <element signature="n#!!block;n#ParseObjectToInput#0" />

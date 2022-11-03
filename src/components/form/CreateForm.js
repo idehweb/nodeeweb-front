@@ -4,10 +4,23 @@ import {Field, Form} from 'react-final-form'
 import {Button, Col, Container, Row} from 'shards-react';
 import {useSelector} from "react-redux";
 import {MainUrl, uploadMedia} from "#c/functions/index";
-import {FieldArray,FieldText,FieldTextarea, FieldObject,FieldBoolean,FieldSelect,FieldPrice,FieldCheckbox,FieldServer,FieldNumber,FieldJson} from "#c/components/form/fields";
+import {
+  FieldArray,
+  FieldBoolean,
+  FieldCheckbox,
+  FieldCheckboxes,
+  FieldJson,
+  FieldNumber,
+  FieldObject,
+  FieldPrice,
+  FieldSelect,
+  FieldServer,
+  FieldText,
+  FieldTextarea
+} from "#c/components/form/fields";
 
 function CreateForm(props) {
-  let {fields, rules = {fields: []},t} = props;
+  let {fields, rules = {fields: []}, t} = props;
   // console.clear();
   console.log('fields', fields);
   console.log('rules', rules);
@@ -39,7 +52,7 @@ function CreateForm(props) {
     if (!field) {
       return <>no field</>
     }
-    const {type, kind, size, className,options,disabled=false, name, label, placeholder} = field;
+    const {type, kind, size, className, options, disabled = false, name, label, placeholder} = field;
     // console.log('themeData',  themeData['models']);
     // moment(field.value, "YYYY-MM-DD[T]HH:mm:ss.SSS[Z]", true).isValid())
 
@@ -82,12 +95,12 @@ function CreateForm(props) {
     if (type == 'price') {
       // console.log('string')
 
-      return <FieldPrice field={field} />
+      return <FieldPrice field={field}/>
     }
     if (type == 'json') {
       // console.log('string')
 
-      return <FieldJson field={field} />
+      return <FieldJson field={field}/>
     }
     if (type == 'object') {
       return <FieldObject field={field}/>
@@ -102,6 +115,12 @@ function CreateForm(props) {
       return <FieldCheckbox field={field}/>
 
     }
+    if (type == 'checkboxes') {
+      // console.clear()
+      // console.log(field)
+      return <FieldCheckboxes field={field}/>
+
+    }
     if (type == 'radio') {
       // console.clear()
       // console.log(field)
@@ -109,15 +128,15 @@ function CreateForm(props) {
 
     }
     if (type == 'select') {
-      return <FieldSelect field={field} />
+      return <FieldSelect field={field}/>
 
     }
     if (type == 'server') {
-      return <FieldServer field={field} />
+      return <FieldServer field={field}/>
 
     }
     if (type == 'number') {
-      return <FieldNumber field={field} />
+      return <FieldNumber field={field}/>
 
       // return <Col
       //   sm={size ? size.sm : ''}
@@ -298,7 +317,7 @@ function CreateForm(props) {
             <form onSubmit={handleSubmit}>
               <Container>
                 <Row>
-                  {theRules && theRules.fields && theRules.fields.map((field, index) => {
+                  {theRules?.fields?.map((field, index) => {
                     // console.log(',', field)
                     if (fields[field.name]) {
                       field.value = fields[field.name]

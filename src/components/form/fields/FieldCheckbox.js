@@ -6,21 +6,30 @@ import {getEntitiesForAdmin, MainUrl, uploadMedia} from "#c/functions/index";
 
 function FieldCheckbox(props) {
   // console.clear();
-console.log('checkbox')
+  console.log('checkbox')
   let {field, t} = props;
-  let {type, kind, size, className, entity, searchbox = true, limit = 1000, name, label, placeholder, value} = field;
-
-  let [checkboxes, setCheckBoxes] = useState([])
+  let {type, kind, size, className, entity, searchbox = true, limit = 1000, name, options = [], label, placeholder, value} = field;
+  let [checkboxes, setCheckBoxes] = useState(options)
+  // return JSON.stringify(options)
+// if(options!==checkboxes){
+//   setCheckBoxes([...options])
+// }
   let [search, setSearch] = useState('')
   // console.log('field object', field)
   useEffect(() => {
-    if(limit){limit=parseInt(limit)}
+    if (limit) {
+      limit = parseInt(limit)
+    }
     if (entity && checkboxes.length === 0)
       getEntitiesForAdmin(entity, 0, limit).then((d) => {
         setCheckBoxes(d)
       }).catch((e) => {
 
       })
+  }, [])
+  useEffect(() => {
+  //   if (options != checkboxes)
+  //     setCheckBoxes([...options])
   }, [])
   // useEffect(() => {
   //   // if(limit){limit=parseInt(limit)}
@@ -38,19 +47,19 @@ console.log('checkbox')
     lg={size ? size.lg : ''}
     className={'MGD ' + className}>
     <Field name={name}
-           // initialValue={()=> []}
+      // initialValue={()=> []}
     >
       {({input, meta}) => {
         return (
           <div><label htmlFor={name}>{t(label)}</label>
             <div className={"checkbox-wrapper"}>
               {/*{searchbox && <input*/}
-                {/*className={'searchBox'}*/}
-                {/*type="text"*/}
-                {/*onChange={(e) => {*/}
-                  {/*setSearch(e.target.value)*/}
-                {/*}}*/}
-                {/*value={search}*/}
+              {/*className={'searchBox'}*/}
+              {/*type="text"*/}
+              {/*onChange={(e) => {*/}
+              {/*setSearch(e.target.value)*/}
+              {/*}}*/}
+              {/*value={search}*/}
               {/*/>}*/}
               {checkboxes && checkboxes.map((ch, i) => {
                 // console.log('checkboxes', checkboxes)
@@ -59,7 +68,7 @@ console.log('checkbox')
                   name={name}
                   component="input"
                   type="checkbox"
-                  value={ch._id}
+                  value={ch._id || ch.slug}
                 /><span>{ch.name.fa}</span></label>
 
               })}

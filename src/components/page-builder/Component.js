@@ -77,7 +77,7 @@ const Component = (props) => {
             <div style={{direction: 'ltr'}}>
               <span className={'component-address'}>{component.name + ' ' + (index+1)}</span>
               {/*<span className={'component-address'}>{component.name + ' ' + (index+1) + ' from ' + length}</span>*/}
-              <label className={'component-id'} style={{direction: 'ltr',display:'none'}}>{'#' + component.id}</label>
+              <label className={'component-id'} style={{direction: 'ltr'}}>{'#' + component.id}</label>
               {text && <label className={'component-id'} style={{direction: 'ltr'}}>{JSON.stringify(text)}</label>}
 
             </div>
@@ -111,9 +111,9 @@ const Component = (props) => {
                 changeComponentSetting={(e, j, d) => changeComponentSetting(e, j, d)}
                 deleteItem={(e)=>{
                   // e.preventDefault();
-                  console.log('delete Item 2')
-
-                  deleteItem(comp.id)}}
+                  console.log('delete Item e',e)
+                  setComponentForSetting(false)
+                  deleteItem(e)}}
 
                 // setSourceAddress={()=>{
                 //   let address = component.id + "_" + index2;
@@ -165,8 +165,8 @@ const Component = (props) => {
           <Button
             onClick={(e) => {
               e.preventDefault()
-              console.log('delete Item 4')
-
+              console.log('delete Item',component.id)
+              setComponentForSetting(false)
               deleteItem(component.id)
             }}>
             <DeleteForeverIcon/>

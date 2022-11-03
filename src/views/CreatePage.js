@@ -9,7 +9,7 @@ import OptionBox from "#c/components/page-builder/OptionBox";
 import Component from "#c/components/page-builder/Component";
 // import ComponentOptionBox from "#c/components/page-builder/ComponentOptionBox";
 import "#c/assets/styles/nodeeweb-page-builder.css";
-
+import * as _ from 'lodash'
 import {
   addBookmark,
   clearPost,
@@ -195,9 +195,10 @@ const CreatePage = ({t}) => {
     setState({...state, components: tempArray})
   };
   const deleteItem = (id) => {
+    // console.clear()
+    let found_path = ''
     console.log('deleteItem...', id)
     console.log('components in:', components)
-
     let tempArray = [];
     components.forEach((comp, j) => {
       let deleteItem = false;
@@ -207,25 +208,67 @@ const CreatePage = ({t}) => {
         deleteItem = true;
       }
       if (comp.children && !deleteItem) {
-        console.log('comp.children', comp.children)
+        console.log('we need to check children...', comp.children)
         let tempChildren = []
-        comp.children.forEach((ch, j) => {
+        comp.children.forEach((ch, j2) => {
           let deleteItem2 = false;
-
           if (id == ch.id) {
+            console.log('we found it in: components[' + j + '][' + j2 + ']')
+
             deleteItem2 = true;
           }
+
+
+          if (ch.children && !deleteItem2) {
+            console.log('we need to check children 2...', ch.children)
+            let tempChildren3 = []
+            ch.children.forEach((ch3, j3) => {
+              let deleteItem3 = false;
+              if (id == ch3.id) {
+                console.log('we found it in: components[' + j + '][' + j2 + '][' + j3 + ']')
+
+                deleteItem3 = true;
+              }
+              if (ch3.children && !deleteItem3) {
+                console.log('we need to check children 3...', ch.children)
+                let tempChildren4 = []
+                ch3.children.forEach((ch4, j4) => {
+                  let deleteItem4 = false;
+                  if (id == ch4.id) {
+                    console.log('we found it in: components[' + j + '][' + j2 + '][' + j3 + '][' + j4 + ']')
+
+                    deleteItem4 = true;
+                  }
+
+                  if (!deleteItem4) {
+                    tempChildren4.push(ch4);
+                  }
+
+                });
+                ch3.children = tempChildren4;
+              }
+
+              if (!deleteItem3) {
+                tempChildren3.push(ch3);
+              }
+
+            });
+            ch.children=tempChildren3;
+          }
           if (!deleteItem2)
-            tempChildren.push(comp);
+            tempChildren.push(ch);
         });
-        comp.children = tempChildren;
+        comp.children=tempChildren;
       }
 
 
       if (!deleteItem)
         tempArray.push(comp);
     });
-    console.log('components out:', tempArray)
+
+    let r = [...tempArray];
+    console.log('components out:', r)
+
     setState({...state, components: tempArray});
 
   };
@@ -399,10 +442,10 @@ const CreatePage = ({t}) => {
             toggleOptionBox={toggleOptionBox}
             moveContent={moveContent}
             component={component}
-            deleteItem={(e)=>{
+            deleteItem={(e) => {
               // e.preventDefault();
-              console.log('delete Item',e)
-              deleteItem(component.id)
+              console.log('delete Item', e)
+              deleteItem(e || component.id)
             }}
 
             // setSourceAddress={(e)=>{

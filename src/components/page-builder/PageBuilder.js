@@ -475,9 +475,12 @@ export function GRID_COL(props) {
   const {payload, type, components, classes, children, settings, handleCard, card} = element;
   let {general} = settings;
   let {fields} = general;
-  let {showInDesktop, showInMobile} = fields;
+  let {showInDesktop, showInMobile,direction,display} = fields;
   // console.log("GRID_COL ", classes);
+  let style = setStyles({...fields, direction: direction, display: display});
+
   return <div
+    style={style}
     className={" col  " + (showInDesktop ? ' showInDesktop ' : '') + (showInMobile ? ' showInMobile ' : '') + (typeof classes == 'string' ? classes : classes ? classes.map(ob => (ob.name ? ob.name : ob)).join(" ") : "")}>
     {/*<div className={'m-2'}>{JSON.stringify(element.children)}</div>*/}
     {children && children.map((child, ch) => {

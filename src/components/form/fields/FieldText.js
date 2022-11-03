@@ -1,12 +1,12 @@
-import React, {useState} from 'react';
-import {withTranslation} from 'react-i18next';
+import React, {memo, useState} from 'react';
+import {useTranslation} from 'react-i18next';
 import {Field} from 'react-final-form'
 import {Col} from 'shards-react';
 import {MainUrl, uploadMedia} from "#c/functions/index";
 
-function FieldText(props) {
-  // console.clear();
-  let {field, t} = props;
+function FieldText({field}) {
+  const {t} = useTranslation();
+
   const {type, kind, size, className, name, label, options, placeholder, value} = field;
 // return JSON.stringify(value)
   let [theVal, setTheVal] = useState(value)
@@ -27,7 +27,7 @@ function FieldText(props) {
       type="text"
       placeholder={placeholder ? placeholder : (label ? t(label) : t(name))}
       onChange={(e) => {
-        console.log(e.target.value,name)
+        console.log(e.target.value, name)
         field.setValue(name, e.target.value)
 
       }}
@@ -38,4 +38,4 @@ function FieldText(props) {
   </Col>
 }
 
-export default withTranslation()(FieldText);
+export default memo(FieldText);

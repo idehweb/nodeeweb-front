@@ -107,18 +107,22 @@ export function TITLE({element}) {
   let {type, components, classes, settings} = element;
   let {general} = settings;
   let {fields} = general;
-  let {text, iconFont, direction, link, display, target = "_blank"} = fields;
+  let {text, iconFont, direction, link, display,showInDesktop,showInMobile, target = "_blank"} = fields;
   let style = setStyles({...fields, direction: direction, display: display});
   if (link) {
 
-    return <a href={link} target={target} style={style}>
+    return <a href={link} target={target} style={style} className={(showInDesktop ? ' showInDesktop ' : '') + (showInMobile ? ' showInMobile ' : '')}>
       {(iconFont && Icons[iconFont]) && <span>{React.createElement(Icons[iconFont])}</span>}
-      <span>{text}</span>
+      <span dangerouslySetInnerHTML={{__html: text}}/>
+      {/*<div*/}
+      {/*dangerouslySetInnerHTML={{__html: html}}*/}
+      {/*/>*/}
     </a>
   }
-  return <div style={style}>
+  return <div style={style} className={(showInDesktop ? ' showInDesktop ' : '') + (showInMobile ? ' showInMobile ' : '')}>
     {(iconFont && Icons[iconFont]) && <span>{React.createElement(Icons[iconFont])}</span>}
-    <span>{text}</span>
+    <span dangerouslySetInnerHTML={{__html: text}}/>
+
   </div>
 
   // }
@@ -144,7 +148,7 @@ export function TheButton({element}) {
   let {fields} = general;
   let {text, iconFont, action, classess} = fields;
   let style = setStyles(fields);
-
+// return JSON.stringify(fields)
   if (iconFont && action) {
 // return <CardSidebar />
     if (action == 'toggleCart') {
@@ -168,6 +172,8 @@ export function TheButton({element}) {
     <span>{React.createElement(Icons[iconFont])}</span>}<span>{text}</span></Button>
 
   }
+  if (action)
+    return <a href={action}><Button className={classess} style={style}>{text}</Button></a>
   return <Button className={classess} style={style}>{text}</Button>
 }
 
@@ -177,7 +183,7 @@ export function Hr({element}) {
   let {fields} = general;
   let {text, iconFont, action, classess} = fields;
   let style = setStyles(fields);
-
+// return JSON.stringify(style)
   return <hr className={classess} style={style}/>
 }
 
@@ -193,9 +199,20 @@ export function HEADER({element}) {
 
 function setStyles(fields) {
   let style = {};
-  let {textAlign, color, float, borderRadius, direction, width, maxWidth, height, maxHeight, backgroundColor, margin, padding, fontWeight, fontSize, lineHeight, display} = fields
+  let {
+    textAlign, position,
+    top,
+    bottom,
+    right,
+    border,
+    left,
+    color, float, borderRadius, direction, width, maxWidth, height, maxHeight, backgroundColor, margin, padding, fontWeight, fontSize, lineHeight, display
+  } = fields
   if (borderRadius) {
     style['borderRadius'] = borderRadius;
+  }
+  if (border) {
+    style['border'] = border;
   }
   if (color) {
     style['color'] = color;
@@ -244,6 +261,22 @@ function setStyles(fields) {
   if (lineHeight) {
     style['lineHeight'] = lineHeight;
   }
+  if (position) {
+    style['position'] = position;
+  }
+  if (bottom) {
+    style['bottom'] = bottom;
+  }
+
+  if (right) {
+    style['right'] = right;
+  }
+  if (left) {
+    style['left'] = left;
+  }
+  if (top) {
+    style['top'] = top;
+  }
   return style;
 }
 
@@ -273,19 +306,21 @@ export function SWIPERWrapper(props) {
   if (!fields) {
     return
   }
-  let {entity, arrows = true, perPage = 1} = fields;
+  let {entity, arrows = true, perPage = 1, margin,customQuery} = fields;
   // console.clear()
+  let style = setStyles(fields);
+
   if (arrows == 'false') {
     arrows = false;
   }
   // console.log('fields', Boolean(arrows))
   if (entity) {
     if (entity == 'product')
-      return <ProductsSlider/>
+      return <ProductsSlider customQuery={customQuery}/>
     if (entity == 'post')
-      return <PostSlider/>
+      return <PostSlider customQuery={customQuery}/>
   } else
-    return <Swiper
+    return <div className={'the-swipppper-parent'} style={style}><Swiper
       perPage={parseInt(perPage)}
       arrows={Boolean(arrows)}
       type={"slide"}
@@ -316,7 +351,7 @@ export function SWIPERWrapper(props) {
         return <ShowElement key={index} element={com} content={content}/>
       }) : ''}
 
-    </Swiper>
+    </Swiper></div>
 
 }
 
@@ -475,13 +510,13 @@ export function GRID_COL(props) {
   const {payload, type, components, classes, children, settings, handleCard, card} = element;
   let {general} = settings;
   let {fields} = general;
-  let {showInDesktop, showInMobile,direction,display} = fields;
+  let {showInDesktop, showInMobile, direction, display, classess} = fields;
   // console.log("GRID_COL ", classes);
   let style = setStyles({...fields, direction: direction, display: display});
-
+// return JSON.stringify(style);
   return <div
     style={style}
-    className={" col  " + (showInDesktop ? ' showInDesktop ' : '') + (showInMobile ? ' showInMobile ' : '') + (typeof classes == 'string' ? classes : classes ? classes.map(ob => (ob.name ? ob.name : ob)).join(" ") : "")}>
+    className={" col  " + classess + (showInDesktop ? ' showInDesktop ' : '') + (showInMobile ? ' showInMobile ' : '') + (typeof classes == 'string' ? classes : classes ? classes.map(ob => (ob.name ? ob.name : ob)).join(" ") : "")}>
     {/*<div className={'m-2'}>{JSON.stringify(element.children)}</div>*/}
     {children && children.map((child, ch) => {
       // return JSON.stringify(child);
@@ -512,7 +547,7 @@ export default function PageBuilder(props) {
   // console.clear();
 
   // console.log('PageBuilder ===>', props)
-  let {elements, content, kind = 'container-fluid', maxWidth = '100%',data} = props;
+  let {elements, content, kind = 'container-fluid', maxWidth = '100%', data} = props;
   // let html = elements.html;
   // if (elements && elements.pages && elements.pages[0] && elements.pages[0].frames && elements.pages[0].frames[0] && elements.pages[0].frames[0].component && elements.pages[0].frames[0].component.components)
   //     elements = elements.pages[0].frames[0].component.components;

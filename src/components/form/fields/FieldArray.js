@@ -13,7 +13,7 @@ const Condition = ({ when, is, children }) => (
   </Field>
 )
 function FieldArray({field}) {
-
+console.log('FieldArray',field)
   const {t} = useTranslation();
 
   const {type, kind, size, className, name, label, placeholder, value = [], child, setValue} = field;

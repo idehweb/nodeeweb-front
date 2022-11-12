@@ -49,13 +49,19 @@ function FieldSelect(props) {
         setTheVal(e.target.value);
         if (onChange) {
           let ty = list.filter((i, idx) => {
-              console.log(i[optionValue], e.target.value)
-              return (i[optionValue] === e.target.value)
+              console.log(i['value'], e.target.value)
+              if (optionValue)
+                return (i[optionValue] == e.target.value)
+              if (!optionValue)
+                return (i['value'] == e.target.value)
+
             }
           );
           // console.log('ty', ty)
           if (ty && ty[0] && ty[0].values)
             e.list = ty[0].values;
+          field.setValue(name, e.target.value);
+
           onChange(e)
         }
         else

@@ -18,6 +18,7 @@ import {
   updateCard
 } from "#c/functions/index"
 import GetDiscount from "./GetDiscount";
+import GetGateways from "./GetGateways";
 
 class LastPart extends React.Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class LastPart extends React.Component {
       token: store.getState().store.user.token || '',
       user: store.getState().store.user || {},
       card: store.getState().store.card || [],
-      address: theParams.address,
+
       order_id: store.getState().store.order_id || null,
       paymentMethod: 'zarinpal',
       sum: theParams.sum || 0,
@@ -46,7 +47,7 @@ class LastPart extends React.Component {
     console.log('theParams', theParams);
     let {address, setting, total, sum, deliveryPrice} = theParams;
     let {order_id, return_url, card, lan} = this.state;
-    console.log(' this.state',  this.state);
+    // console.log(' this.state', this.state);
 
     let temp = total;
     return (
@@ -167,6 +168,11 @@ class LastPart extends React.Component {
 
 
                   </div>]}
+              </ListGroupItem>
+              <ListGroupItem className={'d-flex px-3 border-0 '}>
+                {/*<ListGroup className={'width100'}>*/}
+                  <GetGateways setPaymentMethod={this.props.theParams.setPaymentMethod}/>
+                {/*</ListGroup>*/}
               </ListGroupItem>
               {Boolean(total > 50000000) && <ListGroupItem className={'d-flex px-3 border-0 '}>
 

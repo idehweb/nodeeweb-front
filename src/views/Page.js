@@ -62,6 +62,7 @@ const Page = (props) => {
             _id: d._id,
             updatedAt: d.updatedAt,
             kind: d.kind,
+            classes: d.classes,
             elements: d.elements,
             thumbnail: d.thumbnail,
             excerpt: d.excerpt,
@@ -120,6 +121,7 @@ const Page = (props) => {
     _id,
     thumbnail,
     kind,
+    classes,
     excerpt,
     maxWidth,
     notfound,
@@ -133,7 +135,7 @@ const Page = (props) => {
   console.log('isClient', isClient);
   return (
 
-    <Container className="main-content-container p-0 pb-4 kiuytyuioiu bg-white" key={0}>
+    <Container className={"main-content-container p-0 pb-4 kiuytyuioiu bg-white "+classes} key={0}>
 
       <div className={'the-body'} key={1}>
         <MainContent elements={elements} kind={kind} maxWidth={maxWidth}/>

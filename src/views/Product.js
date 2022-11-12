@@ -200,7 +200,9 @@ const Product = (props) => {
                         });
                       });
                     }}>
-              <FavoriteBorderIcon className={"beforehov"}/><FavoriteIcon className={"hov"}/><Badge
+              <FavoriteBorderIcon className={"beforehov"}/>
+              <FavoriteIcon className={"hov"}/>
+              <Badge
               theme="info">{like}</Badge></Button>
 
             {Boolean(isClient && title) && <RWebShare
@@ -217,7 +219,9 @@ const Product = (props) => {
                 <ShareIcon/>
               </Button>
             </RWebShare>}
-            {views && <Button><RemoveRedEyeIcon/><Badge theme="info">{views}</Badge></Button>}
+            {views && <Button><RemoveRedEyeIcon/>
+              {/*<Badge theme="info">{views}</Badge>*/}
+            </Button>}
             <Button onClick={() => {
               addBookmark(_id).then(res => {
                 console.log("res", res);

@@ -46,10 +46,11 @@ const DraggableBox = ({i, item}) => {
             <div id={item.name} style={boxStyle}>
                 <div id={'dr' + i} className={'handle'}>
                     <div className={'  table'} key={i}><label className={'the-head'}>{item.name}</label>
-                        {item.schema && Object.keys(item.schema).map((sh, j) => {
+                        {item.schema && item.schema.map((sh, j) => {
                             console.log()
                             return <div className={'d-flex'}>
-                                <label>{sh}</label><label>{item.schema[sh].instance}</label><label>{item.schema[sh].ref}</label>
+                                <label>{sh.name}</label><label>{sh.type}</label>
+                              {/*<label>{item.schema[sh].ref}</label>*/}
                             </div>
                         })}
                     </div>
@@ -58,7 +59,8 @@ const DraggableBox = ({i, item}) => {
         </Draggable>
     );
 };
-const Home_db = (props) => {
+const Db = (props) => {
+  console.log('Db...')
     // const Recipe = React.lazy(() =>
     //     import(`../../../public_media/theme/shomeis/shomeis.json`)
     //         .catch(() => ({ default: () => <div>Not found</div> }))
@@ -68,10 +70,10 @@ const Home_db = (props) => {
     useEffect(() => {
         if (!tables)
             getModelsData().then(r => {
-                if (r && r.tables) {
-                    console.log('r.tables', r.tables)
-                    setTables(r.tables);
-                }
+                // if (r && r.tables) {
+                //     console.log('r.tables', r.tables)
+                    setTables(r);
+                // }
             })
     }, []);
     const handleStart = (e) => {
@@ -134,10 +136,10 @@ const Home_db = (props) => {
                     <Xarrow start={'Settings'} end="Action"/>
                     <Xarrow start={'Post'} end="Settings"/>
                     <Xarrow start={'Discount'} end="Order"/>
-
-
+                    {/**/}
+                    {/**/}
                     <Xarrow start={'Customer'} end="Transaction"/>
-
+                    {/**/}
                     <Xarrow start={'PostCategory'} end="Menu"/>
                     <Xarrow start={'Link'} end="Menu"/>
                     <Xarrow start={'Media'} end="Menu"/>
@@ -194,4 +196,4 @@ export const HomeServer = [
 // export const HomeServer = loadProducts;
 // export const HomeServerArgument = "61d58e37d931414fd78c7fba";
 // export const HomeServer = fetchData("61d58e37d931414fd78c7fba");
-export default withTranslation()(Home_db);
+export default withTranslation()(Db);

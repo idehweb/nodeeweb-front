@@ -49,47 +49,47 @@ function FieldObject(props) {
           // return  JSON.stringify(obj);
 
           // if (typeof input.value === 'object') {
-            let y = Object.keys(obj).map((theKey, inx) => {
-              // console.log('theKey',theKey)
-              // return  JSON.stringify(theVal);
+          let y = Object.keys(obj).map((theKey, inx) => {
+            // console.log('theKey',theKey)
+            // return  JSON.stringify(theVal);
 
-              return (
-                <div className={'max-width100'}>
-                  <div className={'width-less'}>
-                    <label htmlFor={theKey}>the key</label>
-                    <input
-                      name={props.input.name}
-                      className={'ltr form-control'}
-                      type={'text'}
-                      value={theKey || 'fa'}
-                      placeholder={'key'}
-                    />
-                  </div>
-                  <div className={'width-more'}>
-
-                    <label htmlFor={name}>value</label>
-                    <input
-                      className={'form-control'}
-                      name={props.input.name}
-                      onChange={(e) => {
-                        let obj = {};
-                        console.log('theVal',theVal)
-                        obj['fa'] = e.target.value;
-                        let tt=theVal;
-                        tt['fa']=obj['fa'];
-                        setTheVal(tt)
-                        field.setValue(name, obj)
-                      }}
-                      type={'text'}
-                      placeholder={'value'}
-                      value={theVal['fa']}
-
-                    />
-                  </div>
+            return (
+              <div className={'max-width100'}>
+                <div className={'width-less'}>
+                  <label htmlFor={theKey}>the key</label>
+                  <input
+                    name={props.input.name}
+                    className={'ltr form-control'}
+                    type={'text'}
+                    value={theKey || 'fa'}
+                    placeholder={'key'}
+                  />
                 </div>
-              )
-            });
-            return y;
+                <div className={'width-more'}>
+
+                  <label htmlFor={name}>value</label>
+                  <input
+                    className={'form-control'}
+                    name={props.input.name}
+                    onChange={(e) => {
+                      let obj = {};
+                      console.log('theVal',theVal)
+                      obj['fa'] = e.target.value;
+                      let tt=theVal;
+                      tt['fa']=obj['fa'];
+                      setTheVal(tt)
+                      field.setValue(name, obj)
+                    }}
+                    type={'text'}
+                    placeholder={'value'}
+                    value={theVal['fa']}
+
+                  />
+                </div>
+              </div>
+            )
+          });
+          return y;
           // }
           if (typeof input.value == 'string') {
 

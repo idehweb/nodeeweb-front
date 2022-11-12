@@ -170,7 +170,7 @@ const Post = (props) => {
 
                             {excerpt && <div
                                 className="d-inline-block item-icon-wrapper mt-3 ki765rfg hgfd"
-                                dangerouslySetInnerHTML={{ __html: excerpt.fa }}
+                                dangerouslySetInnerHTML={{ __html: excerpt.fa ? excerpt.fa : excerpt }}
                             />}
 
 
@@ -185,7 +185,7 @@ const Post = (props) => {
                     {tab === "description" && <div className={"pt-5"} id={"description"}>
                         {description && <div
                             className="d-inline-block item-icon-wrapper ki765rfg  hgfd mb-5"
-                            dangerouslySetInnerHTML={{ __html: description.fa }}
+                            dangerouslySetInnerHTML={{ __html: description.fa ? description.fa : description }}
                         />}
 
                     </div>}

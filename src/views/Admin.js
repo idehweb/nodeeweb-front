@@ -4,6 +4,7 @@ import Table from '#c/components/table/DataTable';
 import Login from '#c/components/admin/Login';
 import Logout from '#c/components/admin/Logout';
 import Dashboard from '#c/components/admin/Dashboard';
+// import Db from '#c/components/admin/Db';
 import {toast} from "react-toastify";
 
 import {Col, Row} from 'shards-react';
@@ -40,6 +41,7 @@ const Admin = (props) => {
     admin_token = st.admin.admin_token;
   }
   const [data, setData] = useState([]);
+  const [count, setCount] = useState(0);
   let models = [];
   if (themeData.models)
     themeData.models.forEach((mod, m) => {
@@ -97,6 +99,10 @@ const Admin = (props) => {
   //     getData();
   //   console.log('model,action', model, action)
   // }, [model, action]);
+  const renewData=(offset)=>{
+
+    getData(offset);
+  }
   useEffect(() => {
     // setSelectedCats(items)
     console.log('model',model);
@@ -104,9 +110,9 @@ const Admin = (props) => {
       getData();
     console.log('model,action', model, action, themeData)
   }, [model, action, themeData]);
-  const getData = () => {
+  const getData = (offset=0) => {
     // console.clear()
-    setData([]);
+    // setData([]);
 
     //   const { t } = this.props;
     let headers = {
@@ -122,14 +128,17 @@ const Admin = (props) => {
     }
     console.log("headers['fields']", headers['fields'])
     // return;
-    getTheData('admin', model, headers).then((data = []) => {
+    getTheData('admin', model, headers,offset).then(({data = [],headers}) => {
       console.log('data',data)
       if(data.success==false){
         toast(data.message, {
           type: "error"
         });
       }else {
-        setData(data);
+        setData([...data]);
+        if(headers['x-total-count']){
+          setCount(headers['x-total-count'])
+        }
       }
     });
   }
@@ -218,7 +227,9 @@ const Admin = (props) => {
               {(action == 'list' && data && model && rules) && <Table
                 base={model + '/'}
                 data={data}
+                count={count}
                 model={model}
+                renewData={renewData}
                 rules={rules[model] ? rules[model].list : {}}
                 headCells={headCells}
                 newText={t('No records found. Please create one')}

@@ -27,9 +27,9 @@ class Checkout extends React.Component {
       sum: 0,
       card: store.getState().store.card || [],
       user: store.getState().store.user || [],
-      order_id: store.getState().store.order_id || [],
+      order_id: store.getState().store.order_id || "",
       setting: {},
-      paymentMethod: "zarinpal",
+      paymentMethod: "",
       deliveryPrice: 0,
       token: store.getState().store.user.token || "",
       firstName: store.getState().store.user.firstName || "",
@@ -56,6 +56,11 @@ class Checkout extends React.Component {
 
   }
 
+  setPaymentMethod(e) {
+    console.log("setPaymentMethod", e);
+
+    this.setState({paymentMethod:e})
+  }
   onChooseDelivery(params) {
     console.log("onChooseDelivery", params);
     this.setState(params);
@@ -63,9 +68,12 @@ class Checkout extends React.Component {
   }
 
   placeOrder(theprice = 0) {
-    console.log("placeOrder...", theprice);
+
     let { address, hover, deliveryPrice, hoverD, order_id, card, setting, user, sum, paymentMethod, return_url, total, the_address } = this.state;
     const { t } = this.props;
+    console.log("placeOrder...", this.state);
+    console.log("placeOrder...", store.getState().store.order_id);
+    // return;
     sum = 0;
     card.map((item, idx2) => {
 
@@ -84,6 +92,9 @@ class Checkout extends React.Component {
     };
     if(order_id){
       order['order_id']=order_id
+    }
+    if(store.getState().store.order_id){
+      order['order_id']=store.getState().store.order_id
     }
     // console.log('user',user);
     // return;
@@ -115,11 +126,10 @@ class Checkout extends React.Component {
     toast(t("Submitting order..."), {
       type: "success"
     });
-    console.clear();
+    // console.clear();
     console.log('order',order);
     console.log('paymentMethod',paymentMethod);
     // return;
-    if (paymentMethod === "zarinpal") {
 
       createOrder(order).then((res) => {
 
@@ -134,9 +144,11 @@ class Checkout extends React.Component {
         toast(t("Submitting transaction..."), {
           type: "success"
         });
-        buy(res.order._id, {}, theprice).then((add) => {
+        buy(res.order._id, {
+          method:this.state.paymentMethod
+        }, theprice).then((add) => {
           if (add.success)
-            toast(t("Navigateing..."), {
+            toast(t("Navigating..."), {
               type: "success"
             });
           if (!add.success)
@@ -148,15 +160,7 @@ class Checkout extends React.Component {
             window.location.replace(add.url);
         });
       });
-    }
 
-    if (paymentMethod === "mellat") {
-
-      toast(t("Mellat payment gateway is not accessible!"), {
-        type: "error"
-      });
-      return;
-    }
 
   }
 
@@ -166,7 +170,7 @@ class Checkout extends React.Component {
     let { renTimes, order_id, paymentMethod, deletModals, return_url, the_address, redirect, redirect_url, page, sum, modals, token, address, hover, hoverD, total, deliveryPrice, setting, firstName, lastName, internationalCode } = this.state;
     // sum = 0;
     let dp = 0;
-    // console.log('sum', sum);
+    console.log('this.state.checkout', this.state);
     // console.log('card', card);
     // console.log('settings', settings);
 
@@ -240,7 +244,10 @@ class Checkout extends React.Component {
           <Col lg="8">
             <LastPart onPrev={() => this.goNext("3")} onPlaceOrder={(e) => {
               this.placeOrder(e);
-            }} theParams={{ sum, total, deliveryPrice, address: the_address, setting }}/>
+            }} theParams={{ sum, total, deliveryPrice, address: the_address, setting,setPaymentMethod:(e)=>{
+              console.log('e',e)
+              this.setPaymentMethod(e)
+            } }}/>
           </Col>
           <Col lg="2"></Col>
 

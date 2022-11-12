@@ -35,20 +35,26 @@ export const THEME_URL = CONFIG.THEME_URL || CONFIG.BASE_URL + 'customer';
 export const token = (typeof window === "undefined") ? null : store.getState().store.user.token;
 export const admin_token = (typeof window === "undefined") ? null : store.getState().store.admin.admin_token;
 
-export const loadProductItems = (cat_id = null, include = null, filter = {}) => {
+export const loadProductItems = (cat_id = null, filter = {}) => {
   console.log("======> loadProductItems");
   return new Promise(function (resolve, reject) {
-    if (cat_id)
-      getPostsByCat(0, 8, cat_id, "", {}, include).then((resp) => {
-        resolve(resp);
-      });
-    else
-      getPosts(0, 12, "").then((resp) => {
+    // if (cat_id)
+    //   getPostsByCat(0, 8, cat_id, "", {}, include).then((resp) => {
+    //     resolve(resp);
+    //   });
+    // else
+      getEntities('product', 0, 12, "", filter).then((resp) => {
         // setLoadingMoreItems(false);
         // afterGetData(resp);
-        resolve(resp);
+          resolve(resp);
 
       });
+      // getPosts(0, 12, "").then((resp) => {
+      //   // setLoadingMoreItems(false);
+      //   // afterGetData(resp);
+      //   resolve(resp);
+      //
+      // });
   });
 };
 export const loadPostItems = (cat_id = null, include = null) => {
@@ -378,7 +384,7 @@ export const getThemeData = (i = "") =>
       return err;
     });
 export const getModelsData = (i = "") =>
-  getData(`http://localhost:3000/db`, {}, true)
+  getAdminData(`${AdminRoute}/settings/db`, {}, true)
     .then((res) => {
       return res.data;
     })
@@ -554,7 +560,9 @@ export const getTheData = (role = 'admin', model, headers, offset = 0, limit = 5
   console.log('getTheData header...', headers)
   return getAdminData(`${AdminRoute}/${model}/${offset}/${limit}`, {headers: headers}, true)
     .then((res) => {
-      return res.data;
+      // console.clear();
+      // console.log('res', res)
+      return {data: res.data, headers: res.headers};
     })
     .catch((err) => {
       handleErr(err);
@@ -732,8 +740,8 @@ export const getBlogPosts = (offset = 0, limit = 24, search, filter = {}) => {
       });
   });
 };
-export const getDiscountCode = (code = null,order_id) => {
-  console.log('==> getDiscountCode(',code,',',order_id,')')
+export const getDiscountCode = (code = null, order_id) => {
+  console.log('==> getDiscountCode(', code, ',', order_id, ')')
   return new Promise(function (resolve, reject) {
 
     getData(`${ApiUrl}/discount/set/${order_id}/${code}`, {}, true)
@@ -750,9 +758,9 @@ export const getDiscountCode = (code = null,order_id) => {
   })
 }
 
-export const getEntities = (entity, offset = 0, limit = 24, search = false, filter) => {
+export const getEntities = (entity, offset = 0, limit = 24, search = false, filter,populate) => {
   return new Promise(function (resolve, reject) {
-    console.log('filter',filter)
+    console.log('filter', filter)
     // console.log('getPosts...',store.getState().store.country)
     // if(typeof filter!='object'){
     //   filter=false
@@ -771,13 +779,19 @@ export const getEntities = (entity, offset = 0, limit = 24, search = false, filt
       url += search;
     // if (filter) {
 
-      // if (filter["type"]) params["type"] = filter["type"];
+    // if (filter["type"]) params["type"] = filter["type"];
     // }
-    console.log('filter',filter)
+    console.log('filter', filter)
 
     if (filter) {
       url += "?filter=" + filter;
       // if (filter["type"]) params["type"] = filter["type"];
+    }
+    if (filter && populate) {
+      url += "&populate=" + populate;
+    }
+    if (!filter && populate) {
+      url += "?populate=" + populate;
     }
     getData(url, {params}, true)
       .then((data) => {
@@ -1086,10 +1100,11 @@ export const updatetStatus = (status) => {
   });
 };
 export const updateCard = (card, sum = 0) => {
+  console.log('updateCard')
   return new Promise(async function (resolve, reject) {
     let {order_id, user} = await store.getState().store;
     // let token = store.getState().store.user.token;
-
+    console.log('order_id:', order_id)
     await SaveData({card, sum});
     sum = 0;
     let sendAuth = false;

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate,useParams} from "react-router-dom";
 import _ from 'underscore';
 
 import {Col, Row} from "shards-react";
@@ -21,29 +21,29 @@ import {
   SaveData,
   setCountry
 } from "#c/functions/index";
-import store from "#c/functions/store";
 import {ProductsSliderServer} from "#c/components/components-overview/ProductsSlider";
 import {PostSliderServer} from "#c/components/components-overview/PostSlider";
-let theFilter=false;
 import {withTranslation} from "react-i18next";
 import PostCard from "#c/components/Home/PostCard";
 import {useSelector} from "react-redux";
+
+let theFilter = false;
 //
 const LoadMore2 = (props) => {
-  console.log('LoadMore...',props);
-  let {element={}}=props;
-  let {data={}}=element;
-return <>{JSON.stringify(data)}</>;
+  console.log('LoadMore...', props);
+  let {element = {}} = props;
+  let {data = {}} = element;
+  return <>{JSON.stringify(data)}</>;
 }
 const LoadMore = (props) => {
-  console.log('LoadMore...',props);
+  console.log('LoadMore...', props);
 
   let {match, location, history, t, url} = props;
-  let {element={}}=props;
-  let {data={},settings={}}=element;
-  let {general={}}=settings;
-  let {fields={}}=general;
-  let {entity=''}=fields;
+  let {element = {}} = props;
+  let {data = {}, settings = {}} = element;
+  let {general = {}} = settings;
+  let {fields = {}} = general;
+  let {entity = '', customQuery,populateQuery} = fields;
   // let params = useParams();
   let params = data;
   history = useNavigate();
@@ -77,6 +77,18 @@ const LoadMore = (props) => {
   // const theValue = useSelector((st) => st.store.value);
   // console.log("theAttr", theAttr, "theValue", theValue);
   // if (isClient) {
+  useEffect(() => {
+    console.log('data changed',data)
+    // settracks([])
+    params = data;
+    setoffset(-24)
+    offset=-24
+    settracks([])
+     setInitialLoad(true);
+     setLoadingMoreItems(false);
+     // setLoadingMoreItems(false);
+    loadProductItems(0)
+  }, [data]);
   //   useEffect(() => {
   //
   //     let url = new URL(window.location.href);
@@ -119,9 +131,25 @@ const LoadMore = (props) => {
     // }
   }, [filter]);
   const loadProductItems = async (page, filter = {}) => {
+    console.log('loadProductItems',params)
+    setLoadingMoreItems(true);
 
-    console.log("==> loadProductItems():", offset,filter);
+    settracks([...[]]);
 
+    let query = {};
+    // params = useParams();
+    if (customQuery)
+      Object.keys(customQuery).forEach((item) => {
+        let main=customQuery[item];
+        main = main.replace('params._id', JSON.stringify(params._id))
+        console.log('customQuery[item]', item, customQuery, customQuery[item])
+        query[item] = JSON.parse(main)
+      })
+
+    console.log("==> loadProductItems() offset:", offset, "filter:", filter, "query:", query);
+    if (query) {
+      filter = JSON.stringify(query)
+    }
     // if(!loadingMoreItems){
     let newOffset = (await offset) + 24;
     // if (!catId && !showSlide) {
@@ -141,7 +169,7 @@ const LoadMore = (props) => {
     await setoffset(newOffset);
     await setInitialLoad(false);
     await setLoadingMoreItems(true);
-    getEntities(params._entity || entity, newOffset, 24, search || "", filter=false).then((resp) => {
+    getEntities(params._entity || entity, newOffset, 24, search || "", filter,JSON.stringify(populateQuery)).then((resp) => {
       setLoadingMoreItems(false);
       afterGetData(resp);
     });
@@ -175,19 +203,20 @@ const LoadMore = (props) => {
   //   }
   // }, [params._id, catid]);
   useEffect(() => {
-  //   console.log("we changed value...");
-  //   filter = isClient ? (url.searchParams.get("filter") || false) : false;
-  //
-  //   setoffset(-24);
-  //
-  //   // settracks([]);
-  //   sethasMoreItems(true);
-  //   settracks([]);
-  //   //
+    //   console.log("we changed value...");
+    //   filter = isClient ? (url.searchParams.get("filter") || false) : false;
+    //
+    //   setoffset(-24);
+    //
+    //   // settracks([]);
+    //   sethasMoreItems(true);
+    //   settracks([]);
+    //   //
     loadProductItems(0);
   }, []);
 
-  const afterGetData = (resp) => {
+  const afterGetData = (resp,tracks=[]) => {
+    console.log('afterGetData',resp,tracks)
     let trackss = [...tracks];
     if (resp.length < 24) sethasMoreItems(false);
     // console.log("resp", resp);
@@ -213,7 +242,7 @@ const LoadMore = (props) => {
   if (catid || search)
     showSlide = false;
 
-
+  // return JSON.stringify(customQuery) + ' ' + JSON.stringify(params)
   return (<div className="main-content-container fghjkjhgf ">
 
       <Row className={"m-0"}>

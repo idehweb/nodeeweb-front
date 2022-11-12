@@ -24,6 +24,7 @@ import Test from '#c/views/Test';
 import Best from '#c/views/Best';
 import Wishlist from "#c/views/Wishlist";
 import CreatePage from "#c/views/CreatePage";
+import Db from "#c/views/Db";
 import _404 from "./views/_404";
 export default [
     {
@@ -50,6 +51,12 @@ export default [
         exact: true,
         layout: Nohf,
         element: CreatePage,
+    },
+  {
+        path: '/db',
+        exact: true,
+        layout: Nohf,
+        element: Db,
     },
     {
         path: '/Wishlist',

@@ -1605,7 +1605,12 @@ body .ltr .mobilenone .sizeless.nav.sidecategories .nav-item {
 #react-file-drop-demo {
   float: left;
 }
+.width100.list-group{
+  /*width: 100% !important;*/
+}
+.flex-d.list-group-item{
 
+}
 .restart-system{
   border-radius: 50%;
   height: 100px;
@@ -1617,7 +1622,10 @@ body .ltr .mobilenone .sizeless.nav.sidecategories .nav-item {
   text-align: center;
   margin: auto;
 }
-
+.flex-d .custom-radio{
+  width: 100%;
+  display: flex;
+}
 .restart-system:hover,
 .restart-system:active,
 .restart-system:focus,
@@ -2957,7 +2965,13 @@ img[alt="payment"] {
 .nocardstyle .ttl {
   padding-top: 7px;
 }
-
+.removeImage{
+  position: absolute;
+  padding: 2px;
+  background-color: red;
+  right: 10px;
+  bottom: 10px;
+}
 .floating-tools {
   position: absolute;
   right: -60px;
@@ -3118,9 +3132,13 @@ img[alt="payment"] {
   }
 }
 
-@media (max-width: 1199px) {
+@media (min-width: 1199px) {
+  .showInMobile {
+  display: none !important;
+  }
+}@media (max-width: 1199px) {
   .showInDesktop {
-    display: none;
+  display: none !important;
   }
 
   div.navbar {

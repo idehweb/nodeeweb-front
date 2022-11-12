@@ -128,6 +128,8 @@ function DataTable({
                      data: rows = [],
                      headCells = [],
                      base = '',
+                     count,
+                     renewData,
                      t,
                      newText,
                      buttonText,
@@ -135,6 +137,7 @@ function DataTable({
                      actions,
                      rules
                    }) {
+  console.log('DataTable',)
   let lan = store.getState().store.lan || 'fa';
 
   const classes = useStyles();
@@ -211,7 +214,11 @@ function DataTable({
   //   setSelected(newSelected);
   // };
 
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = (event, newPage,{renewData,rowsPerPage}) => {
+    // console.log('event',event)
+    // console.log('newPage',newPage)
+    // console.log('renewData',renewData)
+    renewData(newPage*rowsPerPage);
     setPage(newPage);
   };
 
@@ -223,18 +230,18 @@ function DataTable({
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
   const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-// console.log('headCells',headCells)
+    rowsPerPage - Math.min(rowsPerPage, count - page * rowsPerPage);
+console.log('rows',stableSort(rows, getComparator(order, orderBy)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage))
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <div className={'extra-menu-top ltr mb-3'}>
           <Link to={'/admin/' + model + '/create/'}><Button className={'circle'}><AddCircleOutlineIcon/></Button></Link>
         </div>
-        {rows && rows.length > 0 && (
+        {rows && count > 0 && (
           <EnhancedTableToolbar numSelected={selected.length}/>
         )}
-        {rows && rows.length > 0 && (
+        {rows && count > 0 && (
           <TableContainer>
             <Table className={classes.table} size="small">
               <EnhancedTableHead
@@ -246,13 +253,14 @@ function DataTable({
                 t={t}
                 onSelectAllClick={handleSelectAllClick}
                 onRequestSort={handleRequestSort}
-                rowCount={rows.length || 0}
+                rowCount={count || 0}
               />
               <TableBody>
+                {/*.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)*/}
+
                 {rows && stableSort(rows, getComparator(order, orderBy))
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row, idx) => {
-                    // console.log('row is:', row);
+                    console.log('row is:', row);
                     const isItemSelected = isSelected(row.name);
                     // const labelId = `enhanced-table-checkbox-${index}`;
 
@@ -273,6 +281,7 @@ function DataTable({
                         {headCells.map((HC, index) => {
 
                           if (HC.type === 'object') {
+                            // return JSON.stringify(row[HC.id])
                             return (
                               <TableCell
                                 component="td"
@@ -282,8 +291,11 @@ function DataTable({
                                 {(HC.keys && row[HC.id]) && HC.keys.map((key) => {
                                   return <div>{row[HC.id][key]}</div>;
                                 })}
-                                {(!HC.keys && row[HC.id]) && Object.keys(row[HC.id]).map((key) => {
-                                  return <div>{row[HC.id][key]}</div>;
+                                {(!HC.keys && row[HC.id] && (typeof row[HC.id] == 'object' && !(row[HC.id] instanceof Array))) && Object.keys(row[HC.id]).map((key) => {
+                                  return <div>{JSON.stringify(row[HC.id][key])}</div>;
+                                })}
+                                {(!HC.keys && row[HC.id] && (typeof row[HC.id] == 'object' && (row[HC.id] instanceof Array))) && row[HC.id].map((key) => {
+                                  return <div>{(key && key.slug) ? key.slug : ''}</div>;
                                 })}
                                 {/*{JSON.stringify(row[HC.id])}*/}
                               </TableCell>
@@ -435,11 +447,11 @@ function DataTable({
             </Table>
           </TableContainer>
         )}
-        {rows && rows.length > 0 && (
+        {rows && count > 0 && (
           <TablePagination
             rowsPerPageOptions={[10, 20, 50, 100]}
             component="div"
-            count={rows.length}
+            count={parseInt(count)}
             rowsPerPage={rowsPerPage}
             page={page}
             labelRowsPerPage={t('number per row:')}
@@ -450,11 +462,11 @@ function DataTable({
                 'from'
               )} ${count} ${t('item')}`
             }
-            onPageChange={handleChangePage}
+            onPageChange={(e,newPage)=>handleChangePage(e,newPage,{renewData,rowsPerPage})}
             // onChangeRowsPerPage={handleChangeRowsPerPage}
           />
         )}
-        {rows && !rows.length && (
+        {rows && !count && (
           <Alert className="mb-0 p-4">
             <Row>
               <Col lg="8" md="6" sm="12" className={'cebter'}>

@@ -4,6 +4,8 @@ import {Field, Form} from 'react-final-form'
 import {Button, Col, Container, Row} from 'shards-react';
 import {useSelector} from "react-redux";
 import {MainUrl, uploadMedia} from "#c/functions/index";
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+
 import {
   FieldArray,
   FieldBoolean,
@@ -202,7 +204,9 @@ function CreateForm(props) {
 
                   type={'file'}
                 />}
-                {props.input.value && <img src={MainUrl + '/' + props.input.value}/>}
+                {props.input.value && <div className={'posrel'}><img src={MainUrl + '/' + props.input.value}/><Button onClick={(e)=>{
+                  field.setValue(name, '')
+                }} className={'removeImage'}><RemoveCircleOutlineIcon/></Button></div>}
               </div>
             )
           }}
@@ -277,9 +281,22 @@ function CreateForm(props) {
 
   }
 
-  const onSubmit = async values => {
-    console.log(values)
+  const onSubmit = async v => {
+    console.log('onSubmit',v)
     if (props.onSubmit) {
+      let values = v;
+      if (theRules && theRules.fields)
+        theRules.fields.forEach((item, i) => {
+          if (item.type == 'object' && values[item.name] instanceof Array && item.value) {
+            console.log('can we fix:', item)
+            let obj = {};
+            item.value.forEach((its) => {
+              if (its)
+                obj[its.property] = its.value
+            })
+            values[item.name] = obj;
+          }
+        })
       props.onSubmit(values)
     }
   }
@@ -287,24 +304,42 @@ function CreateForm(props) {
   // console.log("rules:", rules)
 
   // console.clear()
-  // console.log('fields', fields)
+
+  // console.log('iValues', iValues)
   // console.log('render')
   if (themeData)
     return (
       <div className="fields pt-2">
         <Form
           onSubmit={onSubmit}
-          // validate={values =>{
-          //   console.clear()
-          //   console.log('validate*********',values)
-          //   console.log('fields*********',fields)
+          // validate={v => {
+          //   // console.clear()
+          //   let values = v;
+          //   if (theRules && theRules.fields)
+          //     theRules.fields.forEach((item, i) => {
+          //       if (item.type == 'object' && values[item.name] instanceof Object && item.value) {
+          //         console.log('can we fix:', item)
+          //         let arr = [];
+          //         Object.keys(item.value).forEach((it) => {
+          //           let obj = {
+          //             property: it,
+          //             value: item.value[it]
+          //           }
+          //           arr.push(obj)
+          //         })
+          //         values[item.name] = arr;
+          //       }
+          //     })
+          //   console.log('validate*********', values)
+          //   console.log('theRules*********', theRules)
+          //   // return values
           // }}
           initialValues={fields}
           mutators={{
             setValue: ([field, value], state, {changeValue}) => {
               // console.clear();
 
-              console.log('setValue', state, field)
+              console.log('setValue',field,value)
               changeValue(state, field, () => value)
             },
             // setMin: (args, state, utils) => {

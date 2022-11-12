@@ -8,7 +8,7 @@ function FieldBoolean(props) {
   // console.clear();
   let {field,t} = props;
   const {type, kind, size, className, name, label, placeholder, value = false} = field;
-  console.log('***field',value)
+  // console.log('***field',value)
 
   // let [theVal, setTheVal] = useState(value)
   // console.log('field object', field)
@@ -34,7 +34,7 @@ function FieldBoolean(props) {
         let {input} = props;
         let {value,checked} = input;
 // console.clear()
-        console.log(checked)
+//         console.log(checked)
         return  <Switch
           // defaultChecked
           checked={checked}

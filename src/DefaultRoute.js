@@ -1,6 +1,8 @@
 import Admin from '#c/views/Admin';
 import CreatePage from '#c/views/CreatePage';
+import Db from '#c/views/Db';
 import Home from '#c/views/Home';
+// import HomeDb from '#c/views/Home_db';
 import Product from '#c/views/Product';
 import Login from '#c/views/Login';
 import Contacts from '#c/views/Contacts';
@@ -16,6 +18,13 @@ import {DefaultLayout, Nof, Nohf} from '#c/layouts/index';
 
 export default function createRoutes(themeRoutes) {
   let DefaultRoute = [
+    {
+      path: '/admin/db',
+      element: Db,
+      layout: Nohf,
+      exact: true,
+
+    },
     {
       path: '/admin/:model',
       element: Admin,
@@ -120,6 +129,7 @@ export default function createRoutes(themeRoutes) {
       exact: true,
 
     },
+
     {
       path: '/profile',
       element: Profile,

@@ -16,7 +16,7 @@ import {useSelector} from "react-redux";
 // let the_id='';
 
 const DynamicPage = (props) => {
-  // console.clear()
+  console.clear()
   let {match, location, history, t, url,elements} = props;
 
   let page = useSelector((st) => {
@@ -79,7 +79,10 @@ const DynamicPage = (props) => {
   //   });
   // };
   // if (isClient)
-  //   useEffect(() => {
+    useEffect(() => {
+          console.log('i fire once');
+
+    },[]);
   //     console.log('i fire once');
   //     // let mounted = true;
   //     let {_id, title} = params;

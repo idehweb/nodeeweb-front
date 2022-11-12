@@ -35,7 +35,7 @@ const DefaultOptions = [
           {"name": "arrows", "type": "boolean"},
           {"name": "perPage", "type": "number"},
           {"name": "breakpoints", "type": "string"},
-          {"name": "customQuery", "type": "string"},
+          {"name": "customQuery", "type": "object"},
           ...rules
         ]
       },
@@ -47,7 +47,7 @@ const DefaultOptions = [
     "addable": true,
     "settings": {
       "general": {
-        "fields": {"text": "", "action": "","float": "","fontSize":"13px","lineHeight":"1","iconImage":"","iconFont":"","iconPosition":"top","iconColor":"","fontWeight":"normal",...fields},
+        "fields": {"text": "", "action": "","float": "","borderRadius": "","fontSize":"13px","lineHeight":"1","iconImage":"","iconFont":"","iconPosition":"top","iconColor":"","fontWeight":"normal","border":"",...fields},
         "rules": [
           {"name": "text", "type": "string"},
           {"name": "action", "type": "string"},
@@ -59,6 +59,9 @@ const DefaultOptions = [
           {"name": "iconColor", "type": "string"},
           {"name": "iconPosition", "type": "string"},
           {"name": "fontWeight", "type": "string"},
+          {"name": "borderRadius", "type": "string"},
+          {"name": "border", "type": "string"},
+
           ...rules
         ]
       },
@@ -70,8 +73,10 @@ const DefaultOptions = [
     "addable": true,
     "settings": {
       "general": {
-        "fields": {...fields},
+        "fields": {"height":"",...fields},
         "rules": [
+          {"name": "height", "type": "string"},
+
           ...rules
         ]
       },
@@ -157,9 +162,11 @@ const DefaultOptions = [
     "addable": false,
     "settings": {
       "general": {
-        "fields": {"type":"solid","width":"100%",...fields},
+        "fields": {"type":"solid","width":"100%","height":"100%",...fields},
         "rules": [
           {"name": "color", "type": "textarea"},
+          {"name": "width", "type": "string"},
+          {"name": "height", "type": "string"},
           {"name": "type", "type": "string"},
           ...rules
 
@@ -276,13 +283,14 @@ const DefaultOptions = [
     "addable": false,
     "settings": {
       "general": {
-        "fields": {"entity": "", "include": "","perPage":1,"breakpoints":{},"classess":"","customQuery":{},...fields},
+        "fields": {"entity": "", "include": "","perPage":1,"breakpoints":{},"classess":"","customQuery":{},"populateQuery":{},...fields},
         "rules": [
           {"name": "entity", "type": "string"},
           {"name": "include", "type": "string","class":"ltr"},
           {"name": "perPage", "type": "number"},
           {"name": "breakpoints", "type": "object"},
           {"name": "customQuery", "type": "object"},
+          {"name": "populateQuery", "type": "object"},
           ...rules
         ]
       },

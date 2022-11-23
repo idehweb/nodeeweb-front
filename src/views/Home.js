@@ -31,6 +31,7 @@ const Home = (props) => {
 
   const themeData = useSelector((st) => st.store.themeData);
   const homeData = useSelector((st) => st.store.homeData);
+
   useEffect(() => {
     console.log('homeData', themeData)
   }, []);
@@ -43,7 +44,7 @@ const Home = (props) => {
       {themeData.body && themeData.body.map((body, h) => {
 
         if (body.name === 'MainContent') {
-          return <div className={'the-body'} key={1}><MainContent {...props}/></div>
+          return <div className={'the-body'} key={1} ><MainContent {...props}/></div>
 
         }
 

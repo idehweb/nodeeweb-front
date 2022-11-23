@@ -3061,6 +3061,21 @@ img[alt="payment"] {
 }
 
 @media (max-width: 1200px) {
+
+  .responsive-menu > nav{
+    /*display: block;*/
+    display: none;
+  }
+  .responsive-menu{
+    display: none;
+    top: 0;
+    right: 0;
+    position: fixed;
+    left: 0;
+    background-color: #fff;
+    height:100vh;
+    z-index: 999;
+  }
   .main-navbar__search .frtyuioiuy .input-group-text {
     height: 40px;
   }
@@ -3313,6 +3328,9 @@ img[alt="payment"] {
 @media (max-width: 780px) {
   .col {
     flex: auto;
+  }
+  .f-d-c-r{
+    flex-direction: column-reverse;
   }
 }
 

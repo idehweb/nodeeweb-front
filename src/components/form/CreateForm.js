@@ -185,6 +185,7 @@ function CreateForm(props) {
             console.log('props', props)
             return (
               <div className={'max-width100'}>
+                <img style={{width:"100px"}} src={MainUrl + '/' + props.input.value}/>
                 {!props.input.value && <input
                   name={props.input.name}
                   onChange={(props) => {

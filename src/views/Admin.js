@@ -197,6 +197,7 @@ const Admin = (props) => {
 
       {(action !== 'login' && action !== 'logout') && <Row className={"m-0"}>
         {/*<MainNavbar />*/}
+        {/*{JSON.stringify(menu)}*/}
         <MainSidebar>
           <MainSidebarNavItems items={menu}/>
 

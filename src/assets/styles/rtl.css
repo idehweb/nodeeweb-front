@@ -1557,7 +1557,12 @@ body .rtl .input-group.input-group-seamless > .input-group-prepend {
 }
 
 body .rtl .main-sidebar .sizeless.nav.sidecategories .nav-item .childern .nav-link-child {
-  padding-right: 20px !important;
+  padding-right: 30px !important;
+  position: relative;
+
+}
+body .rtl .main-sidebar .sizeless.nav.sidecategories .nav-item .childern .nav-link-child + ul .nav-link-child {
+  padding-right: 60px !important;
   position: relative;
 
 }

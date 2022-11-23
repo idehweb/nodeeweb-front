@@ -6,7 +6,7 @@ import {dFormat, PriceFormat} from "#c/functions/utils";
 import MainContent from '#c/components/MainContent';
 
 import {addBookmark, clearPost, getPage, isClient, loadPost, loveIt, MainUrl, savePost} from "#c/functions/index";
-import {SnapChatIcon} from "#c/assets/index";
+import {SnapChatIcon,setStyles} from "#c/assets/index";
 import Loading from "#c/components/Loading";
 import store from "../functions/store";
 import {useSelector} from "react-redux";
@@ -124,6 +124,7 @@ const Page = (props) => {
     classes,
     excerpt,
     maxWidth,
+    backgroundColor,
     notfound,
     enableAdmin = false,
     views = null, elements = null

@@ -34,6 +34,92 @@ export const THEME_URL = CONFIG.THEME_URL || CONFIG.BASE_URL + 'customer';
 // export const ApiUrl = "http://localhost:3003/customer";
 export const token = (typeof window === "undefined") ? null : store.getState().store.user.token;
 export const admin_token = (typeof window === "undefined") ? null : store.getState().store.admin.admin_token;
+export const setStyles = (fields) => {
+  let style = {};
+  let {
+    textAlign, position,
+    top,
+    bottom,
+    right,
+    border,
+    left,
+    boxShadow,
+    color, float, borderRadius, direction, width, maxWidth, height, maxHeight, backgroundColor, margin, padding, fontWeight, fontSize, lineHeight, display
+  } = fields
+  if (borderRadius) {
+    style['borderRadius'] = borderRadius;
+  }
+  if (border) {
+    style['border'] = border;
+  }
+  if (color) {
+    style['color'] = color;
+  }
+  if (textAlign) {
+    style['textAlign'] = textAlign;
+  }
+  if (display) {
+    style['display'] = display;
+  }
+  if (direction) {
+    style['direction'] = direction;
+  }
+
+  if (width) {
+    style['width'] = width;
+  }
+  if (maxWidth) {
+    style['maxWidth'] = maxWidth;
+  }
+  if (height) {
+    style['height'] = height;
+  }
+  if (maxHeight) {
+    style['maxHeight'] = maxHeight;
+  }
+
+  if (float) {
+    style['float'] = float;
+  }
+  if (backgroundColor) {
+    style['backgroundColor'] = backgroundColor;
+  }
+  if (margin) {
+    style['margin'] = margin;
+  }
+  if (padding) {
+    style['padding'] = padding;
+  }
+  if (fontWeight) {
+    style['fontWeight'] = fontWeight;
+  }
+  if (fontSize) {
+    style['fontSize'] = fontSize;
+  }
+  if (lineHeight) {
+    style['lineHeight'] = lineHeight;
+  }
+  if (position) {
+    style['position'] = position;
+  }
+  if (bottom) {
+    style['bottom'] = bottom;
+  }
+  if (boxShadow) {
+    style['boxShadow'] = boxShadow;
+  }
+
+  if (right) {
+    style['right'] = right;
+  }
+  if (left) {
+    style['left'] = left;
+  }
+  if (top) {
+    style['top'] = top;
+  }
+  return style;
+}
 
 export const loadProductItems = (cat_id = null, filter = {}) => {
   console.log("======> loadProductItems");
@@ -43,18 +129,18 @@ export const loadProductItems = (cat_id = null, filter = {}) => {
     //     resolve(resp);
     //   });
     // else
-      getEntities('product', 0, 12, "", filter).then((resp) => {
-        // setLoadingMoreItems(false);
-        // afterGetData(resp);
-          resolve(resp);
+    getEntities('product', 0, 12, "", filter).then((resp) => {
+      // setLoadingMoreItems(false);
+      // afterGetData(resp);
+      resolve(resp);
 
-      });
-      // getPosts(0, 12, "").then((resp) => {
-      //   // setLoadingMoreItems(false);
-      //   // afterGetData(resp);
-      //   resolve(resp);
-      //
-      // });
+    });
+    // getPosts(0, 12, "").then((resp) => {
+    //   // setLoadingMoreItems(false);
+    //   // afterGetData(resp);
+    //   resolve(resp);
+    //
+    // });
   });
 };
 export const loadPostItems = (cat_id = null, include = null) => {
@@ -758,7 +844,7 @@ export const getDiscountCode = (code = null, order_id) => {
   })
 }
 
-export const getEntities = (entity, offset = 0, limit = 24, search = false, filter,populate) => {
+export const getEntities = (entity, offset = 0, limit = 24, search = false, filter, populate) => {
   return new Promise(function (resolve, reject) {
     console.log('filter', filter)
     // console.log('getPosts...',store.getState().store.country)

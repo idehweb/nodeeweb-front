@@ -4,7 +4,7 @@ import ProductsSlider, {ProductsSliderServer} from "#c/components/components-ove
 import PostSlider, {PostSliderServer} from "#c/components/components-overview/PostSlider";
 import NavbarSearch from '#c/components/layout/MainNavbar/NavbarSearch';
 import MainNavbar from '#c/components/layout/MainNavbar/MainNavbar';
-import {getEntities, Logout, MainUrl, toggleCardbar, toggleSearch} from "#c/functions/index";
+import {getEntities, Logout, MainUrl, setStyles, toggleCardbar, toggleSearch, toggleSidebar} from "#c/functions/index";
 import PostCard from "#c/components/Home/PostCard";
 import LoadMore from "#c/components/page-builder/loadmore";
 import * as Icons from "@mui/icons-material";
@@ -107,11 +107,12 @@ export function TITLE({element}) {
   let {type, components, classes, settings} = element;
   let {general} = settings;
   let {fields} = general;
-  let {text, iconFont, direction, link, display,showInDesktop,showInMobile, target = "_blank"} = fields;
+  let {text, iconFont, direction, link, display, showInDesktop, showInMobile, target = "_blank"} = fields;
   let style = setStyles({...fields, direction: direction, display: display});
   if (link) {
 
-    return <a href={link} target={target} style={style} className={(showInDesktop ? ' showInDesktop ' : '') + (showInMobile ? ' showInMobile ' : '')}>
+    return <a href={link} target={target} style={style}
+              className={(showInDesktop ? ' showInDesktop ' : '') + (showInMobile ? ' showInMobile ' : '')}>
       {(iconFont && Icons[iconFont]) && <span>{React.createElement(Icons[iconFont])}</span>}
       <span dangerouslySetInnerHTML={{__html: text}}/>
       {/*<div*/}
@@ -119,7 +120,8 @@ export function TITLE({element}) {
       {/*/>*/}
     </a>
   }
-  return <div style={style} className={(showInDesktop ? ' showInDesktop ' : '') + (showInMobile ? ' showInMobile ' : '')}>
+  return <div style={style}
+              className={(showInDesktop ? ' showInDesktop ' : '') + (showInMobile ? ' showInMobile ' : '')}>
     {(iconFont && Icons[iconFont]) && <span>{React.createElement(Icons[iconFont])}</span>}
     <span dangerouslySetInnerHTML={{__html: text}}/>
 
@@ -146,7 +148,7 @@ export function TheButton({element}) {
   let {type, components, classes, settings, handleCard, card} = element;
   let {general} = settings;
   let {fields} = general;
-  let {text, iconFont, action, classess} = fields;
+  let {text, iconFont, action, classess, showInMobile, showInDesktop} = fields;
   let style = setStyles(fields);
 // return JSON.stringify(fields)
   if (iconFont && action) {
@@ -157,24 +159,36 @@ export function TheButton({element}) {
         // console.clear()
         console.log('element', element)
         handleCard();
-      }} className={' posrel ' + classess} style={style}>{Icons[iconFont] &&
+      }} className={' posrel ' + classess + (showInMobile ? ' showInMobile ' : '')} style={style}>{Icons[iconFont] &&
       <span>{React.createElement(Icons[iconFont])}</span>}<span className={'badge'}
                                                                 theme="info">{card && card.length}</span><span>{text}</span></Button>
 
     }
-    return <a href={action} className={classess}><Button style={style}>{Icons[iconFont] &&
+    if (action == 'toggleMenu') {
+      // console.log(handleCard)
+      return <Button onClick={() => {
+        // console.clear()
+        console.log('element', element)
+        toggleSidebar();
+      }} className={' posrel ' + classess + (showInMobile ? ' showInMobile ' : '')} style={style}>{Icons[iconFont] &&
+      <span>{React.createElement(Icons[iconFont])}</span>}<span>{text}</span></Button>
+
+    }
+    return <a href={action} className={classess + (showInMobile ? ' showInMobile ' : '')}><Button
+      style={style}>{Icons[iconFont] &&
     <span>{React.createElement(Icons[iconFont])}</span>}<span>{text}</span></Button></a>
 
   }
   if (iconFont) {
 
-    return <Button className={classess} style={style}>{Icons[iconFont] &&
+    return <Button className={classess + (showInMobile ? ' showInMobile ' : '')} style={style}>{Icons[iconFont] &&
     <span>{React.createElement(Icons[iconFont])}</span>}<span>{text}</span></Button>
 
   }
   if (action)
-    return <a href={action}><Button className={classess} style={style}>{text}</Button></a>
-  return <Button className={classess} style={style}>{text}</Button>
+    return <a href={action}><Button className={classess + (showInMobile ? ' showInMobile ' : '')}
+                                    style={style}>{text}</Button></a>
+  return <Button className={classess + (showInMobile ? ' showInMobile ' : '')} style={style}>{text}</Button>
 }
 
 export function Hr({element}) {
@@ -197,88 +211,6 @@ export function HEADER({element}) {
   return <div style={style}>{text}</div>
 }
 
-function setStyles(fields) {
-  let style = {};
-  let {
-    textAlign, position,
-    top,
-    bottom,
-    right,
-    border,
-    left,
-    color, float, borderRadius, direction, width, maxWidth, height, maxHeight, backgroundColor, margin, padding, fontWeight, fontSize, lineHeight, display
-  } = fields
-  if (borderRadius) {
-    style['borderRadius'] = borderRadius;
-  }
-  if (border) {
-    style['border'] = border;
-  }
-  if (color) {
-    style['color'] = color;
-  }
-  if (textAlign) {
-    style['textAlign'] = textAlign;
-  }
-  if (display) {
-    style['display'] = display;
-  }
-  if (direction) {
-    style['direction'] = direction;
-  }
-
-  if (width) {
-    style['width'] = width;
-  }
-  if (maxWidth) {
-    style['maxWidth'] = maxWidth;
-  }
-  if (height) {
-    style['height'] = height;
-  }
-  if (maxHeight) {
-    style['maxHeight'] = maxHeight;
-  }
-
-  if (float) {
-    style['float'] = float;
-  }
-  if (backgroundColor) {
-    style['backgroundColor'] = backgroundColor;
-  }
-  if (margin) {
-    style['margin'] = margin;
-  }
-  if (padding) {
-    style['padding'] = padding;
-  }
-  if (fontWeight) {
-    style['fontWeight'] = fontWeight;
-  }
-  if (fontSize) {
-    style['fontSize'] = fontSize;
-  }
-  if (lineHeight) {
-    style['lineHeight'] = lineHeight;
-  }
-  if (position) {
-    style['position'] = position;
-  }
-  if (bottom) {
-    style['bottom'] = bottom;
-  }
-
-  if (right) {
-    style['right'] = right;
-  }
-  if (left) {
-    style['left'] = left;
-  }
-  if (top) {
-    style['top'] = top;
-  }
-  return style;
-}
 
 export function CAROUSEL({element}) {
   let {type, fields} = element;
@@ -306,7 +238,7 @@ export function SWIPERWrapper(props) {
   if (!fields) {
     return
   }
-  let {entity, arrows = true, perPage = 1, margin,customQuery} = fields;
+  let {entity, arrows = true, perPage = 1, margin, customQuery} = fields;
   // console.clear()
   let style = setStyles(fields);
 
@@ -465,18 +397,19 @@ export function GRID_LAYOUT(props) {
   let {element, content} = props
   // let {type, components, children, classes, handleCard, card} = element;
   // console.log("GRID_LAYOUT", props);
-  let {type, components, classes, children, settings, handleCard, card} = element;
+  let {type, components, classess, children, settings, handleCard, card} = element;
   let {general} = settings;
   let {fields} = general;
   if (!fields) {
     return
   }
-  let {link, title, src} = fields;
+  let {link, title, src, classes} = fields;
   let style = setStyles(fields);
 
 
   return <div
-    className={"posrel row grid-layout " + (classes ? classes.map(ob => (ob.name ? ob.name : ob)).join(" ") : "")}
+    // className={"posrel row grid-layout " + (classes ? classes.map(ob => (ob.name ? ob.name : ob)).join(" ") : "")}
+    className={"posrel row grid-layout " + (classes ? classes : "")}
     style={style}>
     {children && children.map((item, k) => {
       // console.log("item.name", item.name);
@@ -507,16 +440,16 @@ export function GRID_COL(props) {
 
   const {element, content} = props;
 
-  const {payload, type, components, classes, children, settings, handleCard, card} = element;
+  const {payload, type, components, children, settings, handleCard, card} = element;
   let {general} = settings;
   let {fields} = general;
-  let {showInDesktop, showInMobile, direction, display, classess} = fields;
+  let {showInDesktop, showInMobile, direction, display, classess, classes} = fields;
   // console.log("GRID_COL ", classes);
   let style = setStyles({...fields, direction: direction, display: display});
 // return JSON.stringify(style);
   return <div
     style={style}
-    className={" col  " + classess + (showInDesktop ? ' showInDesktop ' : '') + (showInMobile ? ' showInMobile ' : '') + (typeof classes == 'string' ? classes : classes ? classes.map(ob => (ob.name ? ob.name : ob)).join(" ") : "")}>
+    className={" col  " + (classess ? classess + ' ' : ' ') + (showInDesktop ? ' showInDesktop ' : '') + (showInMobile ? ' showInMobile ' : '') + (typeof classes == 'string' ? classes : classes ? classes.map(ob => (ob.name ? ob.name : ob)).join(" ") : "")}>
     {/*<div className={'m-2'}>{JSON.stringify(element.children)}</div>*/}
     {children && children.map((child, ch) => {
       // return JSON.stringify(child);
@@ -547,22 +480,26 @@ export default function PageBuilder(props) {
   // console.clear();
 
   // console.log('PageBuilder ===>', props)
-  let {elements, content, kind = 'container-fluid', maxWidth = '100%', data} = props;
+  let {elements, content, style = {}, kind = 'container-fluid', maxWidth = '100%', data} = props;
   // let html = elements.html;
   // if (elements && elements.pages && elements.pages[0] && elements.pages[0].frames && elements.pages[0].frames[0] && elements.pages[0].frames[0].component && elements.pages[0].frames[0].component.components)
   //     elements = elements.pages[0].frames[0].component.components;
   // console.log('elements', elements)
   const cardVisible = useSelector((st) => !!st.store.cardVisible);
   let card = useSelector((st) => st.store.card || []);
+  // let menu = useSelector((st) => st.store.menuVisible);
 
   const handleTheCard = () => {
     // console.log('handleTheCard')
     toggleCardbar(cardVisible)
   };
-
+  let elemStyle = {...style}
 // console.clear();
+  if (maxWidth) {
+    elemStyle['maxWidth'] = maxWidth;
+  }
   return (
-    <div className={kind} style={{maxWidth: maxWidth}}>
+    <div className={kind} style={elemStyle}>
       {/*<div*/}
       {/*dangerouslySetInnerHTML={{__html: html}}*/}
       {/*/>*/}

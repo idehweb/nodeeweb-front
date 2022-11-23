@@ -214,11 +214,11 @@ function DataTable({
   //   setSelected(newSelected);
   // };
 
-  const handleChangePage = (event, newPage,{renewData,rowsPerPage}) => {
+  const handleChangePage = (event, newPage, {renewData, rowsPerPage}) => {
     // console.log('event',event)
     // console.log('newPage',newPage)
     // console.log('renewData',renewData)
-    renewData(newPage*rowsPerPage);
+    renewData(newPage * rowsPerPage);
     setPage(newPage);
   };
 
@@ -231,7 +231,11 @@ function DataTable({
 
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, count - page * rowsPerPage);
-console.log('rows',stableSort(rows, getComparator(order, orderBy)).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage))
+  console.log('rows', stableSort(rows, getComparator(order, orderBy)))
+  // return JSON.stringify(stableSort(rows, getComparator(order, orderBy)))
+  if(!count){
+    count=rows.length
+  }
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -279,9 +283,12 @@ console.log('rows',stableSort(rows, getComparator(order, orderBy)).slice(page * 
                         {/*/>*/}
                         {/*</TableCell>*/}
                         {headCells.map((HC, index) => {
+                          console.log('typeof row[HC.id]',HC.id,typeof row[HC.id])
 
                           if (HC.type === 'object') {
-                            // return JSON.stringify(row[HC.id])
+                            if(typeof row[HC.id]=='string'){
+                              return JSON.stringify(row[HC.id])
+                            }
                             return (
                               <TableCell
                                 component="td"
@@ -307,7 +314,7 @@ console.log('rows',stableSort(rows, getComparator(order, orderBy)).slice(page * 
                                 key={index}
                                 scope="row"
                                 padding="none">
-                                {row[HC.id] && row[HC.id][lan]}
+                                {row[HC.id] && JSON.stringify(row[HC.id][lan])}
                               </TableCell>
                             );
                           } else if (HC.type === 'image') {
@@ -342,6 +349,7 @@ console.log('rows',stableSort(rows, getComparator(order, orderBy)).slice(page * 
                               </TableCell>
                             );
                           } else if (HC.type === 'actions') {
+
                             return (
                               <TableCell
                                 component="td"
@@ -386,6 +394,7 @@ console.log('rows',stableSort(rows, getComparator(order, orderBy)).slice(page * 
                               </TableCell>
                             );
                           } else if (HC.type === 'string') {
+
                             return (
                               <TableCell
                                 component="td"
@@ -393,7 +402,7 @@ console.log('rows',stableSort(rows, getComparator(order, orderBy)).slice(page * 
                                 scope="row"
                                 padding="none">
                                 <div className={row[HC.id + '_cl']}>
-                                  {row[HC.id]}
+                                  {JSON.stringify(row[HC.id])}
                                 </div>
                               </TableCell>
                             );
@@ -405,7 +414,7 @@ console.log('rows',stableSort(rows, getComparator(order, orderBy)).slice(page * 
                                 scope="row"
                                 padding="none">
                                 <div className={row[HC.id + '_cl']}>
-                                  {row[HC.id]}
+                                  {JSON.stringify(row[HC.id])}
                                 </div>
                               </TableCell>
                             );
@@ -417,7 +426,7 @@ console.log('rows',stableSort(rows, getComparator(order, orderBy)).slice(page * 
                                 scope="row"
                                 padding="none">
                                 <div className={row[HC.id + '_cl']}>
-                                  {PriceFormat(row[HC.id])}
+                                  {JSON.stringify(PriceFormat(row[HC.id]))}
                                 </div>
                               </TableCell>
                             );
@@ -462,7 +471,7 @@ console.log('rows',stableSort(rows, getComparator(order, orderBy)).slice(page * 
                 'from'
               )} ${count} ${t('item')}`
             }
-            onPageChange={(e,newPage)=>handleChangePage(e,newPage,{renewData,rowsPerPage})}
+            onPageChange={(e, newPage) => handleChangePage(e, newPage, {renewData, rowsPerPage})}
             // onChangeRowsPerPage={handleChangeRowsPerPage}
           />
         )}

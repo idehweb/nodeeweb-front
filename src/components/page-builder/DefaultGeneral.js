@@ -1,7 +1,7 @@
 const DefaultGeneral = {
-        "fields": {"classess": "","margin": "","display": "","padding":"","backgroundColor":"","textAlign":"","color":"","backgroundImage":"","position":"","right":"","left":"","bottom":"","top":""},
+        "fields": {"classes": "","margin": "","display": "","padding":"","backgroundColor":"","textAlign":"","color":"","backgroundImage":"","position":"","right":"","left":"","bottom":"","top":""},
         "rules": [
-          {"name": "classess", "type": "string"},
+          {"name": "classes", "type": "string"},
           {"name": "margin", "type": "string"},
           {"name": "display", "type": "string"},
           {"name": "padding", "type": "string"},
@@ -14,8 +14,8 @@ const DefaultGeneral = {
           {"name": "top", "type": "string"},
           {"name": "right", "type": "string"},
           {"name": "bottom", "type": "string"},
-          {"name": "showInDesktop", "type": "boolean"},
-          {"name": "showInMobile", "type": "boolean"},
+          {"name": "showInDesktop", "type": "boolean","value":false},
+          {"name": "showInMobile", "type": "boolean","value":false},
         ]
       };
 export default DefaultGeneral

@@ -88,7 +88,7 @@ const DefaultOptions = [
     "addable": true,
     "settings": {
       "general": {
-        "fields": {"width": "auto",...fields},
+        "fields": {"width": "",...fields},
         "rules": [
           {"name": "width", "type": "string"},
           ...rules
@@ -198,12 +198,14 @@ const DefaultOptions = [
     "addable": true,
     "settings": {
       "general": {
-        "fields": {"text": "","link":"simple","lineHeight":"1","borderRadious":"0","fontWeight":"","hoverColor":"","hoverBackgroundColor":"","activeBackgroundColor":"",...fields},
+        "fields": {"text": "","link":"simple","lineHeight":"1","borderRadious":"0","border":"","boxShadow":"","fontWeight":"","hoverColor":"","hoverBackgroundColor":"","activeBackgroundColor":"",...fields},
         "rules": [
           {"name": "text", "type": "string"},
           {"name": "link", "type": "string"},
           {"name": "lineHeight", "type": "string"},
           {"name": "borderRadius", "type": "string"},
+          {"name": "border", "type": "string"},
+          {"name": "boxShadow", "type": "string"},
           {"name": "fontWeight", "type": "string"},
           {"name": "padding", "type": "string"},
           {"name": "margin", "type": "string"},

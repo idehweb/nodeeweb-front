@@ -83,6 +83,7 @@ const Product = (props) => {
           files: d.files,
           photos: d.photos,
           _id: d._id,
+          extra_button: d.extra_button,
           customer: d.customer,
           catChoosed: d.catChoosed,
           countryChoosed: d.countryChoosed,
@@ -165,6 +166,7 @@ const Product = (props) => {
     options,
     quantity,
     thumbnail,
+    extra_button,
     in_stock,
     extra_attr,
     excerpt,
@@ -317,8 +319,8 @@ const Product = (props) => {
                 dangerouslySetInnerHTML={{__html: excerpt[lan]}}
               />}
 
-
-              {type == "normal" && <div>
+              {extra_button &&  <div className="AddToCardButton outOfStock">{extra_button}</div>}
+              {!extra_button && type == "normal" && <div>
                 {options && !options.length &&
                 <Theprice className={"single"} price={price} salePrice={salePrice} in_stock={in_stock}/>}
                 {!options && <Theprice className={"single"} price={price} salePrice={salePrice} in_stock={in_stock}/>}
@@ -343,7 +345,7 @@ const Product = (props) => {
 
         </Col>
         <Col lg={12} md={12} sm={12} xs={12}>
-          {type == "variable" && <Row>
+          {!extra_button && type == "variable" && <Row>
             <Col lg="12" md="12" className={"single-product mb-3"}>
 
               <SidebarActions className={"mobilenone "} add={false} edit={true} _id={_id} customer={customer}

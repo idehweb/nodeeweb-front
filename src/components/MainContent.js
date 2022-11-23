@@ -1,37 +1,32 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { Badge, Button, ButtonGroup, Col, Container, Row } from "shards-react";
-import Gallery from "#c/components/single-post/Gallery";
+import React, {useEffect, useState} from "react";
+import {useParams} from "react-router-dom";
 
 import store from "../functions/store";
-import { withTranslation } from "react-i18next";
+import {withTranslation} from "react-i18next";
 import {
   addBookmark,
   clearPost,
   getBlogPost,
-  isClient,
   getPage,
+  isClient,
   loadPost,
   loveIt,
   MainUrl,
-  savePost
+  savePost,
+  setStyles
 } from "#c/functions/index";
-import { SnapChatIcon } from "#c/assets/index";
+import {SnapChatIcon} from "#c/assets/index";
 import Loading from "#c/components/Loading";
 import PageBuilder from "#c/components/page-builder/PageBuilder";
-import Style from "#c/components/Style";
-import { useSelector } from "react-redux";
-import CONFIG from "#c/config";
-import ShareIcon from "@mui/icons-material/Share";
+
+import {useSelector} from "react-redux";
 // import { Link, useNavigate, useParams } from "react-router-dom";
-import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 // let obj = ;
 // let the_id='';
-import { RWebShare } from "react-web-share";
 
 const MainContent = (props) => {
   console.log("props", props);
-  let { match, location, history, t, url } = props;
+  let {match, location, history, t, url} = props;
 
   let page = useSelector((st) => {
     // console.log("st.store", st.store.productSliderData);
@@ -50,13 +45,13 @@ const MainContent = (props) => {
   const [lan, setLan] = useState(store.getState().store.lan || "fa");
 
 
-  const getThePost = (_id='home') => {
-    return new Promise(function(resolve, reject) {
+  const getThePost = (_id = 'home') => {
+    return new Promise(function (resolve, reject) {
 
       // getBlogPost(_id).then((d = {}) => {
       getPage(_id).then((d = {}) => {
         console.log("set _id to show:", d);
-        if(d._id) {
+        if (d._id) {
           savePost({
             mainList: d.mainList,
             catChoosed: d.catChoosed,
@@ -77,13 +72,13 @@ const MainContent = (props) => {
             thumbnail: d.thumbnail,
             maxWidth: d.maxWidth,
             excerpt: d.excerpt,
-            kind: d.kind,
+            backgroundColor: d.backgroundColor,
             views: d.views
           });
-        }else{
+        } else {
           reject({
             load: true,
-            notfound:true
+            notfound: true
           });
         }
       });
@@ -92,7 +87,7 @@ const MainContent = (props) => {
   if (isClient)
     useEffect(() => {
       // let mounted = true;
-      let { _id, title } = params;
+      let {_id, title} = params;
 
       console.log("useEffect", _id, the_id, mainId);
 
@@ -104,7 +99,7 @@ const MainContent = (props) => {
           if (isClient)
             window.scrollTo(0, 0);
           // }
-        }).catch(e=>{
+        }).catch(e => {
         setState(e);
 
 
@@ -135,17 +130,22 @@ const MainContent = (props) => {
     notfound,
     kind,
     maxWidth,
+    backgroundColor,
     enableAdmin = false,
-    views = null,elements=null
+    views = null, elements = null
   } = state;
   if (redirect && isClient) return <Navigate to={redirect}/>;
   if (!load && isClient) return <Loading/>;
   if (load && notfound && isClient) return <div>not found</div>;
+  let style = setStyles({
+    backgroundColor: backgroundColor
+  })
+  console.log('style', style)
   // console.log("product", title, lan, encodeURIComponent(title[lan]));
-  console.log('isClient',isClient);
+  console.log('isClient', isClient);
   return (
 
-      <PageBuilder elements={elements} kind={kind} maxWidth={maxWidth}/>
+    <PageBuilder elements={elements} kind={kind} maxWidth={maxWidth} style={style}/>
   );
 }
 export default withTranslation()(MainContent);

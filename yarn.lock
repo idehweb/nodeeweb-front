@@ -3503,21 +3503,6 @@ babel-preset-react-app@^10.0.1:
     babel-plugin-macros "^3.1.0"
     babel-plugin-transform-react-remove-prop-types "^0.4.24"
 
-backbone-undo@^0.2.5:
-  version "0.2.6"
-  resolved "https://registry.npmjs.org/backbone-undo/-/backbone-undo-0.2.6.tgz"
-  integrity sha512-AsfpNiljLXlk7TcffDUu3EAUq7CxWbyTNwARWrql5XTzN4vh6WzEEBZYaKK4kTTz+iW1tSzqUooaGRIwO83kWA==
-  dependencies:
-    backbone ">=1.0.0"
-    underscore ">=1.4.4"
-
-backbone@1.4.1, backbone@>=1.0.0:
-  version "1.4.1"
-  resolved "https://registry.npmjs.org/backbone/-/backbone-1.4.1.tgz"
-  integrity sha512-ADy1ztN074YkWbHi8ojJVFe3vAanO/lrzMGZWUClIP7oDD/Pjy2vrASraUP+2EVCfIiTtCW4FChVow01XneivA==
-  dependencies:
-    underscore ">=1.8.3"
-
 balanced-match@^1.0.0:
   version "1.0.2"
   resolved "https://registry.npmjs.org/balanced-match/-/balanced-match-1.0.2.tgz"
@@ -3947,16 +3932,6 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/code-point-at/-/code-point-at-1.1.0.tgz"
   integrity sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=
-
-codemirror-formatting@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/codemirror-formatting/-/codemirror-formatting-1.0.0.tgz"
-  integrity sha512-br9yM6eJI3pJHekEnoyHaBEb1B7XxxDjju+vRyBe8QGLp5saTIXXkZ+eFCTqXSAtI8QEZDFVEX2/SOjH2sVWRQ==
-
-codemirror@^5.63.0:
-  version "5.65.8"
-  resolved "https://registry.npmjs.org/codemirror/-/codemirror-5.65.8.tgz"
-  integrity sha512-TNGkSkkoAsmZSf6W6g35LMVQJBHKasc2CKwhr/fTxSYun7cn6J+CbtyNjV/MYlFVkNTsqZoviegyCZimWhoMMA==
 
 collect-v8-coverage@^1.0.0:
   version "1.0.1"
@@ -4772,13 +4747,6 @@ dom-serializer@^1.0.1:
     domelementtype "^2.0.1"
     domhandler "^4.2.0"
     entities "^2.0.0"
-
-dom7@^4.0.4:
-  version "4.0.4"
-  resolved "https://registry.npmjs.org/dom7/-/dom7-4.0.4.tgz"
-  integrity sha512-DSSgBzQ4rJWQp1u6o+3FVwMNnT5bzQbMb+o31TjYYeRi05uAcpF8koxdfzeoe5ElzPmua7W7N28YJhF7iEKqIw==
-  dependencies:
-    ssr-window "^4.0.0"
 
 domelementtype@1:
   version "1.3.1"
@@ -5908,18 +5876,6 @@ grapesjs-preset-webpage@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/grapesjs-preset-webpage/-/grapesjs-preset-webpage-1.0.1.tgz"
   integrity sha512-vSAPzVQjoPN3GwSVWR2fb9joWJTgRzLFtsb4lHsMnZW8R2OydV90PuJlkLqbqqNZpVcL4m5ze+AssAOpVQPNWw==
-
-grapesjs@^0.20.1:
-  version "0.20.1"
-  resolved "https://registry.npmjs.org/grapesjs/-/grapesjs-0.20.1.tgz"
-  integrity sha512-uUMsgu6z7uUYHQdc9YEAvktTbfUc9WmxfhJHH54Qcwb3KheYsV/HUB6VhjeCU0mvY+gahTR5boS2iX5APHh0ng==
-  dependencies:
-    backbone "1.4.1"
-    backbone-undo "^0.2.5"
-    codemirror "^5.63.0"
-    codemirror-formatting "^1.0.0"
-    promise-polyfill "^8.1.3"
-    underscore "^1.13.1"
 
 gud@^1.0.0:
   version "1.0.0"
@@ -8976,11 +8932,6 @@ promise-polyfill@8.1.3:
   resolved "https://registry.npmjs.org/promise-polyfill/-/promise-polyfill-8.1.3.tgz"
   integrity sha512-MG5r82wBzh7pSKDRa9y+vllNHz3e3d4CNj1PQE4BQYxLme0gKYYBm9YENq+UkEikyZ0XbiGWxYlVw3Rl9O/U8g==
 
-promise-polyfill@^8.1.3:
-  version "8.2.3"
-  resolved "https://registry.npmjs.org/promise-polyfill/-/promise-polyfill-8.2.3.tgz"
-  integrity sha512-Og0+jCRQetV84U8wVjMNccfGCnMQ9mGs9Hv78QFe+pSDD3gWTpz0y+1QCuxy5d/vBFuZ3iwP2eycAkvqIMPmWg==
-
 promise@^8.1.0:
   version "8.1.0"
   resolved "https://registry.npmjs.org/promise/-/promise-8.1.0.tgz"
@@ -10265,11 +10216,6 @@ ssh2@^0.8.9:
   dependencies:
     ssh2-streams "~0.4.10"
 
-ssr-window@^4.0.0, ssr-window@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.npmjs.org/ssr-window/-/ssr-window-4.0.2.tgz"
-  integrity sha512-ISv/Ch+ig7SOtw7G2+qkwfVASzazUnvlDTwypdLoPoySv+6MqlOV10VwPSE6EWkGjhW50lUmghPmpYZXMu/+AQ==
-
 stable@^0.1.8:
   version "0.1.8"
   resolved "https://registry.npmjs.org/stable/-/stable-0.1.8.tgz"
@@ -10547,14 +10493,6 @@ svgo@^2.7.0:
     csso "^4.2.0"
     picocolors "^1.0.0"
     stable "^0.1.8"
-
-swiper@^8.1.5:
-  version "8.1.5"
-  resolved "https://registry.npmjs.org/swiper/-/swiper-8.1.5.tgz"
-  integrity sha512-wJv4Ro5R4FunzN4WADpag/i3p0BkDOATwCDbBKnGooENgHKFWxqDAe25kK6PLI6+pwM0hJQrpsRKGJXXkIeIHg==
-  dependencies:
-    dom7 "^4.0.4"
-    ssr-window "^4.0.2"
 
 symbol-tree@^3.2.4:
   version "3.2.4"
@@ -10902,11 +10840,6 @@ unbox-primitive@^1.0.2:
     has-bigints "^1.0.2"
     has-symbols "^1.0.3"
     which-boxed-primitive "^1.0.2"
-
-underscore@>=1.4.4, underscore@>=1.8.3, underscore@^1.13.1:
-  version "1.13.4"
-  resolved "https://registry.npmjs.org/underscore/-/underscore-1.13.4.tgz"
-  integrity sha512-BQFnUDuAQ4Yf/cYY5LNrK9NCJFKriaRbD9uR1fTeXnBeoa97W0i41qkZfGO9pSo8I5KzjAcSY2XYtdf0oKd7KQ==
 
 underscore@^1.13.6:
   version "1.13.6"

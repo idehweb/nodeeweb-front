@@ -1,6 +1,6 @@
 {
   "name": "@nodeeweb/front",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "homepage": ".",
   "dependencies": {
     "@emotion/react": "^11.9.0",
@@ -19,7 +19,6 @@
     "eslint-plugin-prettier": "^4.0.0",
     "final-form": "^4.20.7",
     "firebase": "^9.8.1",
-    "grapesjs": "^0.20.1",
     "grapesjs-preset-webpage": "^1.0.1",
     "i18next": "^21.8.2",
     "jalali-moment": "^3.3.11",
@@ -52,7 +51,6 @@
     "reselect": "^4.1.6",
     "shards-react": "^1.0.3",
     "socket.io-client": "^4.5.2",
-    "swiper": "^8.1.5",
     "underscore": "^1.13.6"
   },
   "devDependencies": {

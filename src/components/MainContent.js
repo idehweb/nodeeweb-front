@@ -140,12 +140,13 @@ const MainContent = (props) => {
   let style = setStyles({
     backgroundColor: backgroundColor
   })
-  console.log('style', style)
+  // console.log('style', style)
   // console.log("product", title, lan, encodeURIComponent(title[lan]));
-  console.log('isClient', isClient);
+  // console.log('isClient', isClient);
   return (
-
-    <PageBuilder elements={elements} kind={kind} maxWidth={maxWidth} style={style}/>
+    <div className={'the-body pt-1'} key={1} style={style}>
+      <PageBuilder elements={elements} kind={kind} maxWidth={maxWidth}/>
+    </div>
   );
 }
 export default withTranslation()(MainContent);

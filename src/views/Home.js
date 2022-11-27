@@ -44,7 +44,7 @@ const Home = (props) => {
       {themeData.body && themeData.body.map((body, h) => {
 
         if (body.name === 'MainContent') {
-          return <div className={'the-body'} key={1} ><MainContent {...props}/></div>
+          return <MainContent {...props}/>
 
         }
 

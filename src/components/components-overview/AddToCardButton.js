@@ -11,6 +11,8 @@ import {useSelector} from 'react-redux';
 import { useNavigate } from "react-router-dom"
 import {toast} from "react-toastify";
 import CloseIcon from '@mui/icons-material/Close';
+import { toggleCardbar } from "#c/functions/index";
+
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
@@ -85,6 +87,7 @@ function AddToCardButton({item, text = '',variable=false,children, t}) {
         {count}
         <AddCircleOutlineIcon className={""} onClick={(e) => {
           addItem(item).then((x)=>{
+            toggleCardbar();
             toast(t('Added to cart successfully!'), {
               type: 'success'
             })
@@ -101,6 +104,8 @@ function AddToCardButton({item, text = '',variable=false,children, t}) {
           // console.log('item',item);
           // return;
           addItem(item).then((x) => {
+            toggleCardbar();
+
             toast(t('Added to cart successfully!'), {
               type: 'success'
             })
@@ -109,7 +114,7 @@ function AddToCardButton({item, text = '',variable=false,children, t}) {
       }}>
         {!item.single && <span>{text}</span>}
         {!item.single && <ShoppingBagIcon className="center"/>}
-        {item.single && <span>{t("add to cart")}</span>}
+        {!variable && <span>{t("add to cart")}</span>}
       </Button>}
       {children}
     </div>

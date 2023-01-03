@@ -30,16 +30,16 @@ const theChip = (props) => {
 
   // console.log("allOptions", allOptions);
   const [lan, setLan] = useState(store.getState().store.lan);
-  const [actives, setActives] = useState({});
+  const [actives, setActives] = useState(combinations[0].options || {});
   const [count, setCount] = useState(options.length);
-  const [theCombination, setTheCombination] = useState([]);
+  const [theCombination, setTheCombination] = useState(combinations[0] || {});
 
   // const goToPage = (post) => {
   //
   // };
   //
   const onClickChip = (name, e) => {
-    // console.log("onClickChip");
+    console.log("onClickChip",name,e);
     // console.log(count);
     // console.log(name, ":", e.name);
     let obj = { ...actives };
@@ -49,16 +49,18 @@ const theChip = (props) => {
       // console.log('condition',condition,Object.is(comb.options,condition));
 
       if (isEqual(comb.options, obj)) {
-        // console.log("comb", comb.price, comb.quantity);
+        console.log("comb", comb);
         setTheCombination(comb);
       }
     });
     setActives(obj);
     showPrice(obj);
-    // console.log("combination", theCombination);
+    console.log("obj", obj);
   };
 
   useEffect(() => {
+    console.log("useEffect...", actives);
+    showPrice(actives);
     // loadProductItems();
   }, []);
 
@@ -80,7 +82,7 @@ const theChip = (props) => {
         <div className={"col-md-4"}>{Boolean(theCombination) && <div className={"the-option-price text-center"}>
 
           <div className={"gfd"}>
-            {theCombination.price}/
+            {/*{theCombination.price}/*/}
           <Theprice className={"single single-let " + theCombination.salePrice + " - " + theCombination.price}
                     price={theCombination.price}
                     in_stock={inS}

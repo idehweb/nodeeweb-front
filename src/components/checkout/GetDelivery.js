@@ -120,38 +120,41 @@ class GetDelivery extends React.Component {
     let {hoverD, address} = this.state;
     getTheSettings().then((res) => {
       console.log('after get settings...', res);
-      ref.setState({
-        settings: res
-      });
-      console.log(res, hoverD, address);
-      ref.calculateAddress(res, hoverD, address).then((obj) => {
-        console.log('after calculateAddress...', obj);
+      if(!res || (res && !res.length)){
+        this.props.onNext();
+      }else {
         ref.setState({
-          renTimes: obj,
-          loading: true
+          settings: res
         });
-        // this.chooseDelivery({
-        //   deliveryPrice: obj.deliveryPrice,
-        //   total: obj.total,
-        //   sum: obj.sum,
-        //   hoverD: 0
-        // }).then(res=>{
-        //   this.setState({
-        //     settings: res,
-        //     loading: true,
-        //     // deliveryPrice: obj.deliveryPrice,
-        //     // total: obj.total,
-        //     renTimes: obj.renTimes,
-        //     // sum: sum
-        //   });
-        // });
+        console.log(res, hoverD, address);
+        ref.calculateAddress(res, hoverD, address).then((obj) => {
+          console.log('after calculateAddress...', obj);
+          ref.setState({
+            renTimes: obj,
+            loading: true
+          });
+          // this.chooseDelivery({
+          //   deliveryPrice: obj.deliveryPrice,
+          //   total: obj.total,
+          //   sum: obj.sum,
+          //   hoverD: 0
+          // }).then(res=>{
+          //   this.setState({
+          //     settings: res,
+          //     loading: true,
+          //     // deliveryPrice: obj.deliveryPrice,
+          //     // total: obj.total,
+          //     renTimes: obj.renTimes,
+          //     // sum: sum
+          //   });
+          // });
 
-        // });
+          // });
 
 
-        // });
-      });
-
+          // });
+        });
+      }
     });
   }
 
@@ -255,6 +258,10 @@ class GetDelivery extends React.Component {
               // console.log('we are here');
               renTimes.push(adr);
             }
+          }
+          else {
+            renTimes.push(adr);
+
           }
         });
         console.log('renTimes...', renTimes);

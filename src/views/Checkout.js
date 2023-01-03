@@ -23,13 +23,15 @@ class Checkout extends React.Component {
       redirect_url: "/login",
       redirect: null,
       page: "1",
-      total: 0,
+      amount: 0,
       sum: 0,
       card: store.getState().store.card || [],
       user: store.getState().store.user || [],
       order_id: store.getState().store.order_id || "",
       setting: {},
       paymentMethod: "",
+      discount: "",
+      discountCode: "",
       deliveryPrice: 0,
       token: store.getState().store.user.token || "",
       firstName: store.getState().store.user.firstName || "",
@@ -41,7 +43,11 @@ class Checkout extends React.Component {
   }
 
   updateTheStatus(status = "checkout") {
-    updatetStatus(status);
+    updatetStatus(status).then(e=>{
+      console.log('e',e)
+      let {discountCode,discount,amount}=e;
+      this.setState({discountCode,discount,amount})
+    });
   }
 
   goNext(page) {
@@ -61,6 +67,16 @@ class Checkout extends React.Component {
 
     this.setState({paymentMethod:e})
   }
+  setDiscount(e,d) {
+    console.log("setDiscount", e,d);
+
+    this.setState({discount:e,discountCode:d})
+  }
+  setamount(e) {
+    console.log("setamount", e);
+
+    this.setState({amount:e})
+  }
   onChooseDelivery(params) {
     console.log("onChooseDelivery", params);
     this.setState(params);
@@ -69,7 +85,7 @@ class Checkout extends React.Component {
 
   placeOrder(theprice = 0) {
 
-    let { address, hover, deliveryPrice, hoverD, order_id, card, setting, user, sum, paymentMethod, return_url, total, the_address } = this.state;
+    let { address, hover, deliveryPrice, hoverD, order_id, card, setting, user, sum, paymentMethod, return_url, amount, the_address,discountCode,discount } = this.state;
     const { t } = this.props;
     console.log("placeOrder...", this.state);
     console.log("placeOrder...", store.getState().store.order_id);
@@ -87,7 +103,9 @@ class Checkout extends React.Component {
       customer_data: user,
       sum: sum,
       deliveryPrice: deliveryPrice,
-      total: total,
+      amount: amount,
+      discountCode: discountCode,
+      discount: discount,
       customer: user._id,
     };
     if(order_id){
@@ -167,7 +185,7 @@ class Checkout extends React.Component {
   render() {
     const { t, _id } = this.props;
     // let sum = 0;
-    let { renTimes, order_id, paymentMethod, deletModals, return_url, the_address, redirect, redirect_url, page, sum, modals, token, address, hover, hoverD, total, deliveryPrice, setting, firstName, lastName, internationalCode } = this.state;
+    let { renTimes, order_id, paymentMethod, deletModals, return_url, the_address, redirect, redirect_url, page, sum, modals, token, address, hover, hoverD, amount, deliveryPrice, setting, firstName, lastName, internationalCode,discount,discountCode } = this.state;
     // sum = 0;
     let dp = 0;
     console.log('this.state.checkout', this.state);
@@ -244,9 +262,15 @@ class Checkout extends React.Component {
           <Col lg="8">
             <LastPart onPrev={() => this.goNext("3")} onPlaceOrder={(e) => {
               this.placeOrder(e);
-            }} theParams={{ sum, total, deliveryPrice, address: the_address, setting,setPaymentMethod:(e)=>{
-              console.log('e',e)
+            }} theParams={{ sum,discount,discountCode, amount, deliveryPrice, address: the_address, setting,setPaymentMethod:(e)=>{
+              console.log('setPaymentMethod',e)
               this.setPaymentMethod(e)
+            },setamount:(e)=>{
+              console.log('setamount',e)
+              this.setamount(e)
+            },setDiscount:(e,d='')=>{
+              console.log('setDiscount',e,d)
+              this.setDiscount(e,d)
             } }}/>
           </Col>
           <Col lg="2"></Col>

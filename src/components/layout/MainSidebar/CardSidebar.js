@@ -19,6 +19,10 @@ import store from "#c/functions/store";
 const CardSidebar = ({ props, t }) => {
 
 // const function CardSidebar({props,t}) {
+  const themeData = useSelector((st) => st.store.themeData);
+  if(!themeData.currency){
+    themeData.currency='toman';
+  }
   const cardVisible = useSelector((st) => !!st.store.cardVisible);
   const card = useSelector((st) => st.store.card);
   // console.log("card", card);
@@ -199,11 +203,11 @@ const CardSidebar = ({ props, t }) => {
             <div className={"flex-8 mr-2"}>
               <div className={"ttl"}>{item.title[lan]}</div>
               {(item.price && !item.salePrice) && <div
-                className={"prc"}>{item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + t(" UZS")}</div>}
+                className={"prc"}>{item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +" "+ t(themeData.currency)}</div>}
               {(item.price && item.salePrice) && <div
-                className={"prc"}>{item.salePrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + t(" UZS")}
+                className={"prc"}>{item.salePrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +" "+ t(themeData.currency)}
                 <del
-                  className={"ml-2"}>{item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + t(" UZS")}</del>
+                  className={"ml-2"}>{item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +" "+ t(themeData.currency)}</del>
               </div>}
             </div>
             <div className={"flex-1"}>
@@ -221,7 +225,7 @@ const CardSidebar = ({ props, t }) => {
           <span className={"gfdfghj"}>{t("Checkout")}</span>
           <span className={"juytrftyu"}>
           {tsum && <span
-            className={"ttl gtrf"}>{tsum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + t(" UZS")}</span>}
+            className={"ttl gtrf"}>{tsum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +" "+ t(themeData.currency)}</span>}
         </span>
         </Link>}
         {!card || !card.length && <Button
@@ -231,7 +235,7 @@ const CardSidebar = ({ props, t }) => {
           <span className={"gfdfghj"}>{t("Checkout")}</span>
           <span className={"juytrftyu"}>
           {tsum && <span
-            className={"ttl gtrf"}>{tsum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + t(" UZS")}</span>}
+            className={"ttl gtrf"}>{tsum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +" "+ t(themeData.currency)}</span>}
         </span>
         </Button>}
       </div>

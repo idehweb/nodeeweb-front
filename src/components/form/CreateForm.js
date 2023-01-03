@@ -24,15 +24,20 @@ import {
 function CreateForm(props) {
   let {fields, rules = {fields: []}, t} = props;
   // console.clear();
-  console.log('fields', fields);
-  console.log('rules', rules);
+
 
   const themeData = useSelector((st) => st.store.themeData);
   if (!themeData) {
+    console.log('not themeData', themeData);
+
     return
   }
-  const [theRules, setTheRules] = useState(rules);
+  console.log('fields', fields);
+  console.log('rules', {...{fields:rules.fields}});
+  const [theRules, setTheRules] = useState({...{fields:rules.fields}});
   useEffect(() => {
+    console.log('useEffect',rules)
+
     if (!theRules || (theRules && !theRules.fields) || (theRules.fields && !theRules.fields[0])) {
       Object.keys(fields).forEach((fi) => {
         let typ = typeof fields[fi];
@@ -46,11 +51,14 @@ function CreateForm(props) {
         })
       })
       setTheRules(rules)
+    }else{
+      setTheRules(rules)
+
     }
   }, []);
 
   const TheField = (field) => {
-    // console.log('field', field);
+    console.log('field', field);
     if (!field) {
       return <>no field</>
     }
@@ -76,7 +84,7 @@ function CreateForm(props) {
       </Col>
     }
     if (type == 'string' || !type) {
-      // console.log('string')
+      console.log('string')
 
       return <Col
         sm={size ? size.sm : ''}
@@ -307,7 +315,7 @@ function CreateForm(props) {
   // console.clear()
 
   // console.log('iValues', iValues)
-  // console.log('render')
+  console.log('render',theRules)
   if (themeData)
     return (
       <div className="fields pt-2">

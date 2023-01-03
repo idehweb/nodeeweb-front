@@ -88,7 +88,8 @@ class SidebarActions extends React.PureComponent {
                 {type == "normal" &&
                 <Col lg={12} md={12} sm={12} xs={12} className="mb-3 mt-3">
                     <Theprice price={price} className={"text-center"} salePrice={salePrice} combinations={combinations} type={type} t={t}/>
-                    <AddToCardButton item={{
+
+                  <AddToCardButton item={{
                         _id: _id,
                         title: title,
                         photos: photos,

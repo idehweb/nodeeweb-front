@@ -179,6 +179,10 @@ const Post = (props) => {
               className="d-inline-block item-icon-wrapper ki765rfg  hgfd mb-5"
               dangerouslySetInnerHTML={{__html: description.fa ? description.fa : description}}
             />}
+            {description && description.fa && description.fa.rendered && <div
+              className="d-inline-block item-icon-wrapper ki765rfg  hgfd mb-5"
+              dangerouslySetInnerHTML={{__html: description.fa.rendered}}
+            />}
 
           </div>}
           <PageBuilder elements={elements}/>

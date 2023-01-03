@@ -5,9 +5,18 @@ import {withTranslation} from "react-i18next";
 import {dFormat, PriceFormat} from "#c/functions/utils";
 import MainContent from '#c/components/MainContent';
 
-import {addBookmark, clearPost, getPage, isClient, loadPost, loveIt, MainUrl, savePost} from "#c/functions/index";
+import {
+  addBookmark,
+  clearPost,
+  getPage,
+  isClient,
+  loadPost,
+  loveIt,
+  MainUrl,
+  savePost,
+  setStyles
+} from "#c/functions/index";
 import {SnapChatIcon} from "#c/assets/index";
-import { setStyles} from "#c/functions/index";
 
 import Loading from "#c/components/Loading";
 import store from "../functions/store";
@@ -17,7 +26,7 @@ import {useSelector} from "react-redux";
 // let the_id='';
 
 const Page = (props) => {
-  console.clear()
+  // console.clear()
   // console.log("props", props);
   let {match, location, history, t, url} = props;
 
@@ -135,14 +144,14 @@ const Page = (props) => {
   if (!load && isClient) return <Loading/>;
   if (load && notfound && isClient) return <div>not found</div>;
   // console.log("product", title, lan, encodeURIComponent(title[lan]));
-  let style=setStyles({backgroundColor});
+  let style = setStyles({backgroundColor});
   console.log('isClient', isClient);
   return (
 
-    <Container  className={"main-content-container p-0 pb-4 kiuytyuioiu bg-white "+classes} key={0}>
+    <Container className={"main-content-container p-0 pb-4 kiuytyuioiu bg-white " + classes} key={0}>
 
       {/*<div style={style} className={'the-body ghui'} key={1}>*/}
-        <MainContent elements={elements} kind={kind} maxWidth={maxWidth}/>
+      <MainContent elements={elements} kind={kind} maxWidth={maxWidth} backgroundColor={backgroundColor}/>
       {/*</div>*/}
 
     </Container>

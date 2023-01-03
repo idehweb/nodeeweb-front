@@ -9,7 +9,9 @@
 .ltr, .ltr * {
   direction: ltr;
 }
-
+.page table,.page table th,.page table td{
+border:1px solid
+}
 header img {
   max-width: 100%;
 }
@@ -1141,7 +1143,7 @@ body .ltr .mobilenone .sizeless.nav.sidecategories .nav-item {
 }
 
 .ad-card-main-div {
-  border-radius: 3px;
+  border-radius: 20px;
   background-color: #fff;
   /* border: solid var(--primary)ab;
   border-width: 0 0px 1px 0px; */
@@ -2401,9 +2403,11 @@ div.title {
 .sidecategories.nav > .nav-item {
 
   /*padding: 0 5px !important;*/
-  border-bottom: 1px solid #eee;
+  /*border-bottom: 1px solid #eee;*/
 }
-
+a.nav-link.active {
+  text-decoration: underline;
+}
 .sidecategories.nav > .nav-item > .nav-link {
   padding: 0 0 0 10px !important;
 }
@@ -2776,10 +2780,20 @@ del {
 .splide__slide img {
   max-width: 100%;
 }
+.the-label-head{
+  font-weight: bold;
+}
+.the-label-hr{
 
+}
+.the-attribute-link{
+  padding-right: 10px;
+  line-height: 35px;
+  padding-left: 10px;
+}
 .the-body .container > div {
-  margin-top: 15px !important;
-  margin-bottom: 15px !important;
+  padding-top: 15px !important;
+  padding-bottom: 15px !important;
 }
 
 .main-navbar__search {
@@ -3238,7 +3252,7 @@ img[alt="payment"] {
 
   .fdsdf {
     bottom: auto;
-    top: calc(100vh - 90px);
+    top: calc(100vh - 180px);
     /*position: absolute;*/
   }
 

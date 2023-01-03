@@ -22,9 +22,10 @@ class Transaction extends React.Component {
       Status: Status,
       Authority: Authority
     };
-    updateStatus(Status, Authority).then(() => {
+    if (Authority)
+      updateStatus(Status, Authority).then(() => {
 
-    });
+      });
 
   }
 

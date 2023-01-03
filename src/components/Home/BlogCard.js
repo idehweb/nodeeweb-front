@@ -21,7 +21,8 @@ function BlogCard({ onClick, item, method, t }) {
     backgroundImage = MainUrl + "/" + item.photos[0];
   if (item.thumbnail)
     backgroundImage = MainUrl + "/" + item.thumbnail;
-  let title = encodeURIComponent(item.title.fa.replace(/\\|\//g, ""));
+  let url = (item && item.title && item.title.fa) ? encodeURIComponent(item.title.fa.replace(/\\|\//g, "")) : (item && typeof item.title==='string') ? item.title : "";
+  let title = (item && item.title && item.title.fa) ? (item.title.fa) : (item && item.title && !item.title.fa) ? item.title : "";
   // console.log('item.labels', item.labels);
   return (
     <div
@@ -33,12 +34,12 @@ function BlogCard({ onClick, item, method, t }) {
         <div
           className="card-post__image"
           onClick={onClick}
-        ><Link to={"/post/" + item._id + "/" + title}>
-          <img alt={item.title["fa"]} loading={"lazy"} src={backgroundImage || defaultImg}/></Link></div>
+        ><Link to={"/post/" + item._id + "/" + url}>
+          <img alt={title} loading={"lazy"} src={backgroundImage || defaultImg}/></Link></div>
         <div className={"post-content-style"}>
           <div className="ad-card-content">
             <span className="a-card-title">
-              <Link to={"/post/" + item._id + "/" + title}>{_truncate(item.title["fa"], { length: 120 })}</Link>
+              <Link to={"/post/" + item._id + "/" + url}>{_truncate(title, { length: 120 })}</Link>
             </span>
             <div className={"wer textAlignLeft"}>
               {date}

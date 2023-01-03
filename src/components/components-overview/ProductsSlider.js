@@ -29,6 +29,7 @@ const ProductsSlider = ({cat_id = null, customQuery, delay = 2500, t}) => {
           if (params)
             main = main.replace('params._id', JSON.stringify(params._id))
           console.log('customQuery[item]', item, customQuery, customQuery[item])
+        console.log('main',main)
           query[item] = JSON.parse(main)
         })
 

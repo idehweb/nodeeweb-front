@@ -8,8 +8,8 @@ import {addItem, getDiscountCode, MainUrl, removeItem} from "#c/functions/index"
 import {defaultImg} from "#c/assets/index";
 import {store} from "#c/functions/store";
 
-function GetDiscount({price, setDiscount,order_id, children, t}) {
-  console.log('order_id',order_id);
+function GetDiscount({price, setDiscount, order_id, children, t}) {
+  console.log('order_id', order_id);
   let [dis, setDis] = useState('');
   return (
     <div className="PriceChunker">
@@ -24,16 +24,20 @@ function GetDiscount({price, setDiscount,order_id, children, t}) {
         />
 
         <Button size="sm left" className={'ghvhvghv'} left={"true"} onClick={(e) => {
-          console.log('order_id', dis,order_id)
+          console.log('order_id', dis, order_id)
 
-          getDiscountCode(dis,order_id).then(r => {
-            console.log('r.price', r.price,order_id)
-            setDiscount(r.price);
+          getDiscountCode(dis, order_id).then(r => {
+            console.log('r.price', r.price, r.percent, order_id)
+            if (r.percent)
+              setDiscount(r.percent, 'percent',dis);
+            if (r.price)
+              setDiscount(r.price, 'price',dis);
             toast(t("successfully done!"), {
               type: "success"
             });
           }).catch(er => {
-            toast(t("Code is wrong!"), {
+            console.log('er',er)
+            toast(t((er && er.message) ? er.message : "Code is wrong!"), {
               type: "warning"
             });
           });

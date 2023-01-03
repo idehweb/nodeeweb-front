@@ -12,6 +12,7 @@ import { defaultImg } from "#c/assets/index";
 import AddToCardButton from "#c/components/components-overview/AddToCardButton";
 
 function PostCard({ onClick, item, method, t }) {
+  // return
   // let card = store.getState().store.card || [];
   let date = dFormat(item.updatedAt, t);
   let price = null;
@@ -48,7 +49,7 @@ function PostCard({ onClick, item, method, t }) {
         <div
           className="card-post__image"
           onClick={onClick}
-        ><Link to={"/" + cat_inLink + "/" + slug}><img alt={item.title["fa"]} loading={"lazy"} src={
+        ><Link to={"/" + cat_inLink + "/" + slug}><img alt={item.title ? item.title["fa"] : ''} loading={"lazy"} src={
           backgroundImage || defaultImg
         }/></Link></div>
         <div className={"post-content-style"}>
@@ -110,7 +111,7 @@ function PostCard({ onClick, item, method, t }) {
                     comb.values.map((val, ct) => {
                       // console.log('val',val.name);
 
-                      string.push(<li key={ct}>{val.name}</li>);
+                      string.push(<li key={ct}>{val.name && (val.name.fa ? val.name.fa : (typeof val.name == 'string' ? val.name : ''))}</li>);
                       // return <div className={'option-name'}>{val.name.join('\n')}</div>;
                     });
                   }

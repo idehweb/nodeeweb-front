@@ -25,7 +25,6 @@ import {useSelector} from "react-redux";
 // let the_id='';
 
 const MainContent = (props) => {
-  console.log("props", props);
   let {match, location, history, t, url} = props;
 
   let page = useSelector((st) => {
@@ -90,20 +89,25 @@ const MainContent = (props) => {
       let {_id, title} = params;
 
       console.log("useEffect", _id, the_id, mainId);
+      if (!elements)
+        getThePost(the_id)
+          .then(items => {
+            // console.log('items',items,the_id);
+            // if (mounted) {
+            setState(items);
+            if (isClient)
+              window.scrollTo(0, 0);
+            // }
+          }).catch(e => {
+          setState(e);
 
-      getThePost(the_id)
-        .then(items => {
-          // console.log('items',items,the_id);
-          // if (mounted) {
-          setState(items);
-          if (isClient)
-            window.scrollTo(0, 0);
-          // }
-        }).catch(e => {
-        setState(e);
 
+        });
+      else {
+        let obj = {load: true}
+        setState({...obj});
 
-      });
+      }
       // return () => mounted = false;
     }, [the_id]);
 
@@ -120,19 +124,20 @@ const MainContent = (props) => {
 
   let {
     load,
-    title,
-    description,
+    title = props ? props.title : null,
+    description = props ? props.description : null,
     photos,
     redirect,
     _id,
     thumbnail,
     excerpt,
     notfound,
-    kind,
-    maxWidth,
-    backgroundColor,
+    kind = props ? props.kind : null,
+    maxWidth = props ? props.maxWidth : null,
+    backgroundColor = props ? props.backgroundColor : null,
+    elements = props ? props.elements : null,
     enableAdmin = false,
-    views = null, elements = null
+    views = null
   } = state;
   if (redirect && isClient) return <Navigate to={redirect}/>;
   if (!load && isClient) return <Loading/>;
@@ -142,10 +147,11 @@ const MainContent = (props) => {
   })
   // console.log('style', style)
   // console.log("product", title, lan, encodeURIComponent(title[lan]));
-  // console.log('isClient', isClient);
+  console.log('elements', elements);
   return (
     <div className={'the-body pt-1'} key={1} style={style}>
-      <PageBuilder elements={elements} kind={kind} maxWidth={maxWidth}/>
+
+      <PageBuilder elements={elements} kind={kind} maxWidth={maxWidth} description={description}/>
     </div>
   );
 }

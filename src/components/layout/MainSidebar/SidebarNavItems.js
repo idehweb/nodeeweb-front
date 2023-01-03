@@ -12,13 +12,13 @@ import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded';
 import CategoryRoundedIcon from '@mui/icons-material/CategoryRounded';
 import WidgetsIcon from '@mui/icons-material/Widgets';
 import ConstructionIcon from '@mui/icons-material/Construction';
-const SidebarNavItems = ({ t }) => {
+const SidebarNavItems = ({ t,appAllCategories,title }) => {
   const { _id } = useParams();
   const cat = useSelector((st) => st.store.cat);
   const menu = useSelector((st) => st.store.menuVisible);
   const handleClick = () => toggleSidebar(menu);
-  const appAllCategories = useSelector((st) => st.store.allCategories);
-
+  // const appAllCategories = useSelector((st) => st.store.allCategories);
+console.log('appAllCategories',appAllCategories)
   let [selectedCats, setSelectedCats] = useState(appAllCategories || []);
 
 
@@ -79,9 +79,10 @@ const SidebarNavItems = ({ t }) => {
   };
   return (
     <div className="nav-wrapper">
+
       <div className={"mt-2"}>
         {selectedCats && (
-          <Nav className="nav--no-borders flex-column sizeless sidecategories">
+          <Nav className="nav--no-borders flex-column  sidecategories">
 
             {selectedCats.length > 0 && selectedCats.map((item, index) => (
               <SidebarCatItem

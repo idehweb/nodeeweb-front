@@ -833,17 +833,28 @@ export const getDiscountCode = (code = null, order_id) => {
     getData(`${ApiUrl}/discount/set/${order_id}/${code}`, {}, true)
       .then((res) => {
         if (res.data.success == false)
-          reject(false);
+          reject(res.data);
         resolve(res.data);
       })
       .catch((err) => {
         // handleErr(err);
-        reject(false);
+        reject(err);
 
       });
   })
 }
 
+export const getEntity= (entity, _id) => {
+  return new Promise(function (resolve, reject) {
+    getData(`${ApiUrl}/${entity}/${_id}`, {}, true)
+      .then((res) => {
+        return resolve(res.data);
+      })
+      .catch((err) => {
+        handleErr(err);
+      });
+  });
+};
 export const getEntities = (entity, offset = 0, limit = 24, search = false, filter, populate) => {
   return new Promise(function (resolve, reject) {
     console.log('filter', filter)
@@ -882,6 +893,54 @@ export const getEntities = (entity, offset = 0, limit = 24, search = false, filt
     getData(url, {params}, true)
       .then((data) => {
         resolve(data.data);
+      })
+      .catch((err) => {
+        handleErr(err);
+        reject(err);
+      });
+  });
+};
+export const getEntitiesWithCount = (entity, offset = 0, limit = 24, search = false, filter, populate) => {
+  return new Promise(function (resolve, reject) {
+    console.log('filter', filter)
+    // console.log('getPosts...',store.getState().store.country)
+    // if(typeof filter!='object'){
+    //   filter=false
+    // }
+    let params = {};
+    const {country} = store.getState().store;
+    if (country) {
+      params = {
+        country: country
+      };
+    }
+
+    let url = `${ApiUrl}/${entity}/${offset}/${limit}/`;
+
+    if (search)
+      url += search;
+    // if (filter) {
+
+    // if (filter["type"]) params["type"] = filter["type"];
+    // }
+    console.log('filter', filter)
+
+    if (filter) {
+      url += "?filter=" + filter;
+      // if (filter["type"]) params["type"] = filter["type"];
+    }
+    if (filter && populate) {
+      url += "&populate=" + populate;
+    }
+    if (!filter && populate) {
+      url += "?populate=" + populate;
+    }
+    getData(url, {params}, true)
+      .then((d) => {
+        let {data,headers}=d;
+        resolve({
+          items: data, count: headers ? headers['x-total-count'] : 0
+        });
       })
       .catch((err) => {
         handleErr(err);
@@ -1175,6 +1234,7 @@ export const updatetStatus = (status) => {
     postData(`${ApiUrl}/order/cart/${The_id}`, order, sendAuth)
       .then((data) => {
         let mainD = data["data"];
+        resolve(mainD)
         // console.log('mainD');
 
 
@@ -1182,7 +1242,7 @@ export const updatetStatus = (status) => {
       .catch((err) => {
         reject(err);
       });
-    resolve({});
+    // resolve({});
   });
 };
 export const updateCard = (card, sum = 0) => {
@@ -1221,7 +1281,7 @@ export const updateCard = (card, sum = 0) => {
       amount: sum,
       package: packaged,
       // deliveryPrice: deliveryPrice,
-      total: sum,
+      // total: sum,
       status: "cart"
     };
     if (user) {

@@ -790,7 +790,10 @@ body .rtl .MuiTableCell-root *{
   font-family: IRANSans;
 
 }
+body .rtl .MuiTablePagination-root *{
+  font-family: IRANSans;
 
+}
 body .rtl .MuiChip-root:first-child{
   margin-left: 8px;
 
@@ -898,10 +901,10 @@ body .rtl .card-post__image {
 }
 
 body .rtl .card-post__image img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  /*position: absolute;*/
+  /*top: 50%;*/
+  /*left: 50%;*/
+  /*transform: translate(-50%, -50%);*/
 
 }
 
@@ -1150,6 +1153,11 @@ body .rtl .main-sidebar {
   right: 0;
   left: auto;
 }
+body .rtl .MuiList-root > *,
+body .rtl .MuiListItemText-root > *{
+  direction: rtl;
+  text-align: right;
+}
 body .rtl .jhgfgh{
   flex-basis: 50%;
 }
@@ -1161,7 +1169,7 @@ body .rtl .card-title,
 body .rtl .text-fiord-blue {
   cursor: pointer;
   width: 100%;
-  padding-top: 100%;
+  /*padding-top: 100%;*/
   min-height: auto !important;
   border-top-left-radius: 0.625rem;
   border-top-right-radius: 0.625rem;
@@ -1172,11 +1180,11 @@ body .rtl .text-fiord-blue {
 
 body .rtl .card-post__image > a {
   display: block;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  /*position: absolute;*/
+  /*top: 0;*/
+  /*right: 0;*/
+  /*bottom: 0;*/
+  /*left: 0;*/
 
 }
 
@@ -1572,7 +1580,8 @@ body .rtl .footer-vab.nav .nav-item i {
 }
 
 body .rtl .thePrice.rtl .wer .card-non-title-item {
-  display: inline-block;
+  display: block;
+  line-height: 20px;
 }
 
 body .rtl .sizeless.nav.sidecategories .nav-item .nav-link-child {

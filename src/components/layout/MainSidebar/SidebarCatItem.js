@@ -15,13 +15,7 @@ const SidebarCatItem = ({item, onClick, onHandle, parent, className, children}) 
             className={!parent ? 'nav-link-child' : !item.parent ? '' : 'active'}
             // tag={RouteNavLink}
             tag={(props) => <RouteNavLink {...props} />}
-            to={
-              parent
-                ? parent !== 'root'
-                ? `/category/${parent.to}/${parent.title.fa}`
-                : '/'
-                : `/category/${item.to}/${item.title.fa}`
-            }
+            to={'/product-category/'+item.slug+'/0/10'}
           >
             {parent && (
               <div
@@ -29,12 +23,12 @@ const SidebarCatItem = ({item, onClick, onHandle, parent, className, children}) 
                 dangerouslySetInnerHTML={{__html: item.htmlBefore}}
               />
             )}
-            {item.title && (
+            {item.name && (
               <span
                 onClick={onHandle}
 
                 className={item.parent && !parent ? 'nav-link-child-text' : ''}>
-              {item.title.fa}
+              {item.name.fa}
             </span>
             )}
             {(item.child && item.child.length > 0) && (

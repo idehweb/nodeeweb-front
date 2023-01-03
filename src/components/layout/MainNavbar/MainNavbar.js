@@ -30,7 +30,7 @@ export default function MainNavbar({layout, element, style, setStyles, stickyTop
       // let {children = [],type, components, settings} = ch;
       let allFields = ch.settings.general.fields;
       let allFieldsChildren = ch.children;
-      console.log('children', allFields)
+      // console.log('children', allFields)
       if (allFieldsChildren) {
         allFieldsChildren.forEach((ch2, cx2) => {
           let allFields2 = ch2.settings.general.fields;

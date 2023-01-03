@@ -57,7 +57,7 @@ const Product = (props) => {
     admin_token = st.admin.admin_token;
   }
   const [mainId, setMainId] = useState(the_id);
-  const [tab, setTab] = useState("description");
+  const [tab, setTab] = useState("attributes");
   const [state, setState] = useState(isClient ? [] : (product || []));
   const [lan, setLan] = useState(store.getState().store.lan || "fa");
   // const [enableAdmin] = useState(store.getState().store.enableAdmin || false);
@@ -419,15 +419,16 @@ const Product = (props) => {
 
           <Nav justified={true} tabs={true} className={"post-product-nav"}>
             <NavItem>
-              <NavLink active={tab === "description"} href="#description"
-                       onClick={() => setTab("description")}><DescriptionIcon className={"ml-2"}/><span
-                className={"d-xs-none"}>{t("description")}</span></NavLink>
-            </NavItem>
-            <NavItem>
               <NavLink active={tab === "attributes"} href="#attributes"
                        onClick={() => setTab("attributes")}><EditAttributesIcon className={"ml-2"}/><span
                 className={"d-xs-none"}>{t("attributes")}</span></NavLink>
             </NavItem>
+            <NavItem>
+              <NavLink active={tab === "description"} href="#description"
+                       onClick={() => setTab("description")}><DescriptionIcon className={"ml-2"}/><span
+                className={"d-xs-none"}>{t("description")}</span></NavLink>
+            </NavItem>
+
             <NavItem>
               <NavLink active={tab === "comments"} href="#comments" onClick={() => setTab("comments")}><ReviewsIcon
                 className={"ml-2"}/><span className={"d-xs-none"}>{t("comments")}</span></NavLink>

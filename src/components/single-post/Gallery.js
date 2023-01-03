@@ -15,6 +15,7 @@ function moveArrayItemToNewIndex(arr, old_index, new_index) {
 };
 const Gallery = (params) => {
   let photos = params.photos;
+  let thumbnail = params.thumbnail;
 
 
 
@@ -37,7 +38,8 @@ const Gallery = (params) => {
         })}
 
       </Swiper>}
-      {(!photos || photos && photos.length===0) && <div className={'the-defaultImg'}> <img src={defaultImg}/></div>}
+      {((!photos || photos && photos.length===0) && thumbnail) && <div className={''}><img src={MainUrl + '/' + thumbnail}/></div>}
+      {((!photos || photos && photos.length===0) && !thumbnail) && <div className={'the-defaultImg'}> <img src={defaultImg}/></div>}
     </div>
   );
 };

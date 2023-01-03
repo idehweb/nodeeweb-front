@@ -26,12 +26,7 @@ import {PostSliderServer} from "#c/components/components-overview/PostSlider";
 import {withTranslation} from "react-i18next";
 import PostCard from "#c/components/Home/PostCard";
 import {useSelector} from "react-redux";
-let theUrl={
-  _entity:'',
-  newOffset:'',
-  filter:'',
 
-};
 let theFilter = false;
 //
 const LoadMore2 = (props) => {
@@ -42,7 +37,7 @@ const LoadMore2 = (props) => {
 }
 const LoadMore = (props) => {
   console.log('LoadMore...', props);
-// return
+
   let {match, location, history, t, url} = props;
   let {element = {}} = props;
   let {data = {}, settings = {}} = element;
@@ -51,7 +46,6 @@ const LoadMore = (props) => {
   let {entity = '', customQuery,populateQuery} = fields;
   // let params = useParams();
   let params = data;
-  console.log('params',params)
   history = useNavigate();
   url = isClient ? new URL(window.location.href) : "";
   let filter = isClient ? (url.searchParams.get("filter") || {}) : {};
@@ -83,18 +77,18 @@ const LoadMore = (props) => {
   // const theValue = useSelector((st) => st.store.value);
   // console.log("theAttr", theAttr, "theValue", theValue);
   // if (isClient) {
-  // useEffect(() => {
-  //   console.log('data changed',data)
+  useEffect(() => {
+    console.log('data changed',data)
     // settracks([])
-    // params = data;
-    // setoffset(-24)
-    // offset=-24
-    // settracks([])
-    // setInitialLoad(true);
-    // setLoadingMoreItems(false);
-    // setLoadingMoreItems(false);
-    // loadProductItems(0)
-  // }, [data]);
+    params = data;
+    setoffset(-24)
+    offset=-24
+    settracks([])
+     setInitialLoad(true);
+     setLoadingMoreItems(false);
+     // setLoadingMoreItems(false);
+    loadProductItems(0)
+  }, [data]);
   //   useEffect(() => {
   //
   //     let url = new URL(window.location.href);
@@ -125,7 +119,7 @@ const LoadMore = (props) => {
   //   console.log('sortBy', sortBy);
   //
   // }, [sortBy]);
-  // useEffect(() => {
+  useEffect(() => {
     // if(theFilter!=filter) {
     //   console.log('filter', filter);
     //   setoffset(-24);
@@ -135,10 +129,9 @@ const LoadMore = (props) => {
     //   theFilter=filter;
     //   loadProductItems(0, filter);
     // }
-  // }, [filter]);
+  }, [filter]);
   const loadProductItems = async (page, filter = {}) => {
-    // return
-    console.log('loadProductItems',params,offset)
+    console.log('loadProductItems',params)
     // setLoadingMoreItems(true);
 
     // settracks([...[]]);
@@ -173,29 +166,14 @@ const LoadMore = (props) => {
     // } else {
     // console.clear();
     // console.log('v',params._entity)
-    // await setoffset(newOffset);
-    // await setInitialLoad(false);
-    // await setLoadingMoreItems(true);
-    // console.log('')
-    if(theUrl.filter!==params.filter || theUrl.newOffset!==params.newOffset || theUrl._entity!==params._entity) {
-      theUrl._entity = params._entity;
-      theUrl.newOffset = newOffset;
-      theUrl.filter = filter;
-      getEntities(params._entity || entity, newOffset, 24, search || "", filter, JSON.stringify(populateQuery)).then((resp) => {
-        // setLoadingMoreItems(false);
-        afterGetData(resp);
-      });
-    }
-    // if(theUrl.filter==params.filter || theUrl.newOffset==params.newOffset || theUrl._entity==params._entity) {
-    //   newOffset+=24;
-    //   theUrl._entity = params._entity;
-    //   theUrl.newOffset = newOffset;
-    //   theUrl.filter = filter;
-    //   getEntities(params._entity || entity, newOffset, 24, search || "", filter, JSON.stringify(populateQuery)).then((resp) => {
-    //     setLoadingMoreItems(false);
-    //     afterGetData(resp);
-    //   });
-    // }
+    await setoffset(newOffset);
+    await setInitialLoad(false);
+    await setLoadingMoreItems(true);
+    getEntities(params._entity || entity, newOffset, 24, search || "", filter,JSON.stringify(populateQuery)).then((resp) => {
+      setLoadingMoreItems(false);
+      afterGetData(resp);
+    });
+
 
     // }
     // }
@@ -215,18 +193,16 @@ const LoadMore = (props) => {
   // }, [catid]);
 
 
-  useEffect(() => {
-    console.log("match.params._id", match, "and:", catid);
+  // useEffect(() => {
+  //   console.log("match.params._id", match, "and:", catid);
   //   if (params._id !== catid) {
   //     setcatid(params._id);
   //     sethasMoreItems(true);
-      settracks([]);
-      loadProductItems(0);
-
-    //     setoffset(-24);
+  //     settracks([]);
+  //     setoffset(-24);
   //   }
-  }, [params._id]);
-  // useEffect(() => {
+  // }, [params._id, catid]);
+  useEffect(() => {
     //   console.log("we changed value...");
     //   filter = isClient ? (url.searchParams.get("filter") || false) : false;
     //
@@ -236,8 +212,8 @@ const LoadMore = (props) => {
     //   sethasMoreItems(true);
     //   settracks([]);
     //   //
-    // loadProductItems(0);
-  // }, []);
+    loadProductItems(0);
+  }, []);
 
   const afterGetData = (resp,tracks=[]) => {
     console.log('afterGetData',resp,tracks)
@@ -248,7 +224,6 @@ const LoadMore = (props) => {
       resp.forEach((item) => {
         trackss.push(item);
       });
-      console.log('set data:',trackss)
       settracks(trackss);
       if (resp && resp.length < 1) sethasMoreItems(false);
     } else {
@@ -280,8 +255,7 @@ const LoadMore = (props) => {
         {/*</Col>}*/}
 
 
-        {/*{(!showSlide) && */}
-        <Col
+        {(!showSlide) && <Col
           className="main-content iuytfghj pb-5 "
           lg={{size: 12}}
           md={{size: 12}}
@@ -300,7 +274,7 @@ const LoadMore = (props) => {
             hasMore={hasMoreItems}
             // catid={catid}
             loader={loader}
-            offset={offset}
+            // offset={offset}
             className={"row p-3 productsmobile "}
             element="div">
             {tracks && tracks.map((i, idxx) => (
@@ -315,15 +289,14 @@ const LoadMore = (props) => {
             ))}
           </InfiniteScroll>
 
-          {/*{single && (*/}
-            {/*<div className={"kjuyhgfdfgh modallllll " + single}>*/}
-              {/*<div className="col-sm-12 col-md-9 offset-md-3 col-lg-10 offset-lg-2">*/}
-                {/*<Product match={{params: {_id: single_id}}}></Product>*/}
-              {/*</div>*/}
-            {/*</div>*/}
-          {/*)}*/}
-        </Col>
-        {/*}*/}
+          {single && (
+            <div className={"kjuyhgfdfgh modallllll " + single}>
+              <div className="col-sm-12 col-md-9 offset-md-3 col-lg-10 offset-lg-2">
+                <Product match={{params: {_id: single_id}}}></Product>
+              </div>
+            </div>
+          )}
+        </Col>}
       </Row>
     </div>
   );
@@ -361,4 +334,7 @@ export const HomeServer = [
     func: fetchCats,
     params: null
   }];
+// export const HomeServer = loadProducts;
+// export const HomeServerArgument = "61d58e37d931414fd78c7fba";
+// export const HomeServer = fetchData("61d58e37d931414fd78c7fba");
 export default withTranslation()(LoadMore);

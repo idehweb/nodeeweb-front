@@ -16,7 +16,7 @@ import {useSelector} from "react-redux";
 // let the_id='';
 
 const DynamicPage = (props) => {
-  console.clear()
+  // console.clear()
   let {match, location, history, t, url,elements} = props;
 
   let page = useSelector((st) => {
@@ -136,14 +136,14 @@ const DynamicPage = (props) => {
   // if (load && notfound && isClient) return <div>not found</div>;
   // console.log("product", title, lan, encodeURIComponent(title[lan]));
   console.log('isClient', isClient);
-  elements.data=params;
+  // elements.data=params;
   return (
 
     <Container className="main-content-container p-0 pb-4 kiuytyuioiu bg-white" key={0}>
 
       <div className={'the-body'} key={1}>
-        {/*{JSON.stringify(elements.data)}*/}
-        <PageBuilder elements={elements} data={params} kind={kind} maxWidth={maxWidth}/>
+        {/*{JSON.stringify(params)}*/}
+        <PageBuilder elements={elements} data={params} params={params} kind={kind} maxWidth={maxWidth}/>
 
         {/*<MainContent  elements={elements} kind={kind} maxWidth={maxWidth}/>*/}
       </div>

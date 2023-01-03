@@ -120,6 +120,13 @@ const reducer = (state = initialState, {type, data, payload}) => {
 
             return {...state, product: initialState.product};
         }
+        case "persist/REHYDRATE": {
+          // initialState.product = payload;
+
+          // console.log('************* persist/REHYDRATE ************',state,payload.store)
+           if(payload)
+            return {...state,...payload.store};
+        }
         default:
             return state
     }

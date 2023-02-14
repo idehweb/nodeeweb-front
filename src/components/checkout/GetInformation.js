@@ -200,7 +200,7 @@ class GetInformation extends React.Component {
         </CardBody>
         <CardFooter className={'pd-1'}>
           <ButtonGroup size="sm left">
-            <Button className={''} left={'true'} onClick={()=>{
+            <Button className={'go-to-checkout-part-address'} left={'true'} onClick={()=>{
               this.state.card=store.getState().store.card;
               console.log(' this.state.card', this.state.card);
               if (!this.state.card || (this.state.card && !this.state.card[0])) {

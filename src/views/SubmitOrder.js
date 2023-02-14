@@ -116,7 +116,7 @@ class SubmitOrder extends React.Component {
               body: ['title', 'text'],
               url: '/order/',
               name: 'submit order and pay',
-              className: 'ml-auto ffgg btn btn-accent btn-lg',
+              className: 'place-order ml-auto ffgg btn btn-accent btn-lg',
               size: {
                 sm: 12,
                 lg: 12,

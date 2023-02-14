@@ -22,7 +22,9 @@ import {
 } from "#c/components/form/fields";
 
 function CreateForm(props) {
-  let {fields, rules = {fields: []}, t} = props;
+  // console.clear()
+  console.log('==> input: ',props)
+  let {fields, rules = {fields: []},theFields=false, t} = props;
   // console.clear();
 
 
@@ -83,7 +85,7 @@ function CreateForm(props) {
 
       </Col>
     }
-    if (type == 'string' || !type) {
+    if ((type == 'string' || type=='input') || !type) {
       console.log('string')
 
       return <Col
@@ -316,6 +318,7 @@ function CreateForm(props) {
 
   // console.log('iValues', iValues)
   console.log('render',theRules)
+  // return JSON.stringify(theRules)
   if (themeData)
     return (
       <div className="fields pt-2">
@@ -361,7 +364,38 @@ function CreateForm(props) {
             <form onSubmit={handleSubmit}>
               <Container>
                 <Row>
-                  {theRules?.fields?.map((field, index) => {
+                  {theFields && theFields.map((field, index) => {
+                    // console.log(',', field)
+                    if (fields[field.name]) {
+                      field.value = fields[field.name]
+                    }
+                    let lastObj = {
+                      id: index,
+                      type: field.type,
+                      label: field.name,
+                      name: field.name,
+                      size: {
+                        sm: 6,
+                        lg: 6,
+                      },
+                      onChange: (text) => {
+                        // setFields([...fields,])
+                        // this.state.checkOutBillingAddress.add.data[d] = text;
+                      },
+                      className: 'rtl',
+                      placeholder: '',
+                      child: [],
+                      ...field
+
+                    };
+                    if (field.value) {
+                      // console.log('##########################the vvalue is:',field.value)
+                      lastObj['value'] = field.value;
+                    }
+                    // console.log('lastObj', lastObj, form.mutators.setValue)
+                    return (<TheField key={index} {...lastObj} setValue={form.mutators.setValue}/>);
+                  })}
+                  {!theFields && theRules?.fields?.map((field, index) => {
                     // console.log(',', field)
                     if (fields[field.name]) {
                       field.value = fields[field.name]

@@ -1,27 +1,27 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 
 import clsx from "clsx";
-import { Button, Col, ListGroupItem } from "shards-react";
-import { Link } from "react-router-dom";
+import {Button, Col, ListGroupItem} from "shards-react";
+import {Link} from "react-router-dom";
 
 
-import { useSelector } from "react-redux";
-import { MainUrl, toggleCardbar, updateCard } from "#c/functions/index";
+import {useSelector} from "react-redux";
+import {MainUrl, toggleCardbar, updateCard} from "#c/functions/index";
 
-import { toast } from "react-toastify";
-import { withTranslation } from "react-i18next";
+import {toast} from "react-toastify";
+import {withTranslation} from "react-i18next";
 import CardbarMainNavbar from "./CardbarMainNavbar";
 import Swiper from "#c/components/swiper";
 
 import store from "#c/functions/store";
 
 // export const APP_VERSION = process.env.REACT_APP_VERSION_NUM;
-const CardSidebar = ({ props, t }) => {
+const CardSidebar = ({props, t}) => {
 
 // const function CardSidebar({props,t}) {
   const themeData = useSelector((st) => st.store.themeData);
-  if(!themeData.currency){
-    themeData.currency='toman';
+  if (!themeData.currency) {
+    themeData.currency = 'toman';
   }
   const cardVisible = useSelector((st) => !!st.store.cardVisible);
   const card = useSelector((st) => st.store.card);
@@ -141,11 +141,19 @@ const CardSidebar = ({ props, t }) => {
 
     });
   };
+  const returnPrice = (price) => {
+    if (themeData.tax && themeData.taxAmount) {
+      let ta = parseInt(themeData.taxAmount)
+      price = parseInt(((ta / 100) + 1) * parseInt(price))
+    }
+    if (price)
+      return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " " + t(themeData.currency)
+  }
   // console.log("card********************", card, classes);
   let tsum = 0;
   // return <></>/;
   return (
-    <Col tag="aside" className={classes} lg={{ size: 3 }} md={{ size: 4 }}>
+    <Col tag="aside" className={classes} lg={{size: 3}} md={{size: 4}}>
       <CardbarMainNavbar/>
 
       <div flush="true" className={"card-add"}>
@@ -203,11 +211,11 @@ const CardSidebar = ({ props, t }) => {
             <div className={"flex-8 mr-2"}>
               <div className={"ttl"}>{item.title[lan]}</div>
               {(item.price && !item.salePrice) && <div
-                className={"prc"}>{item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +" "+ t(themeData.currency)}</div>}
+                className={"prc"}>{returnPrice(item.price)}</div>}
               {(item.price && item.salePrice) && <div
-                className={"prc"}>{item.salePrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +" "+ t(themeData.currency)}
+                className={"prc"}>{returnPrice(item.salePrice)}
                 <del
-                  className={"ml-2"}>{item.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +" "+ t(themeData.currency)}</del>
+                  className={"ml-2"}>{returnPrice(item.price)}</del>
               </div>}
             </div>
             <div className={"flex-1"}>
@@ -221,21 +229,21 @@ const CardSidebar = ({ props, t }) => {
       <div className={"fdsdf pl-3 pr-3"} onClick={handleToggleCardbar}>
         {card && card.length > 0 && <Link
           to={"/checkout"}
-          className={"ml-auto ffgg btn btn-accent btn-lg mt-4 posrel textAlignLeft"}>
+          className={"go-to-checkout ml-auto ffgg btn btn-accent btn-lg mt-4 posrel textAlignLeft"}>
           <span className={"gfdfghj"}>{t("Checkout")}</span>
           <span className={"juytrftyu"}>
           {tsum && <span
-            className={"ttl gtrf"}>{tsum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +" "+ t(themeData.currency)}</span>}
+            className={"ttl gtrf"}>{returnPrice(tsum)}</span>}
         </span>
         </Link>}
         {!card || !card.length && <Button
           onClick={() => handleToast}
           // to={'/'}
-          className={"ml-auto ffgg btn btn-accent btn-lg mt-4 posrel textAlignLeft"}>
+          className={"go-to-checkout-without-items ml-auto ffgg btn btn-accent btn-lg mt-4 posrel textAlignLeft"}>
           <span className={"gfdfghj"}>{t("Checkout")}</span>
           <span className={"juytrftyu"}>
           {tsum && <span
-            className={"ttl gtrf"}>{tsum.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") +" "+ t(themeData.currency)}</span>}
+            className={"ttl gtrf"}>{returnPrice(tsum)}</span>}
         </span>
         </Button>}
       </div>

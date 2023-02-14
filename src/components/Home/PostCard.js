@@ -34,7 +34,7 @@ function PostCard({ onClick, item, method, t }) {
     if (item.thirdCategory && item.thirdCategory.slug)
       cat_inLink = item.thirdCategory.slug;
   }
-  cat_inLink='product/'+item._id;
+  cat_inLink='product/'+slug;
   // console.log('item.labels', item.labels);
   return (
     <div
@@ -49,7 +49,7 @@ function PostCard({ onClick, item, method, t }) {
         <div
           className="card-post__image"
           onClick={onClick}
-        ><Link to={"/" + cat_inLink + "/" + slug}><img alt={item.title ? item.title["fa"] : ''} loading={"lazy"} src={
+        ><Link to={"/" + cat_inLink + "/"}><img alt={item.title ? item.title["fa"] : ''} loading={"lazy"} src={
           backgroundImage || defaultImg
         }/></Link></div>
         <div className={"post-content-style"}>
@@ -69,7 +69,7 @@ function PostCard({ onClick, item, method, t }) {
 
             </div>
             <span className="a-card-title">
-            <Link to={"/" + cat_inLink + "/" + slug}>{_truncate(item.title["fa"], { length: 120 })}</Link>
+            <Link to={"/" + cat_inLink + "/"}>{_truncate(item.title["fa"], { length: 120 })}</Link>
           </span>
 
           </div>
@@ -103,7 +103,7 @@ function PostCard({ onClick, item, method, t }) {
           {method !== "list" && <>{item.type === "variable" &&
           <AddToCardButton item={item} text={t("options")} variable={true}>
             {(item.options && item.options.length > 0) &&
-            <div className={"show-options"}><Link to={"/" + cat_inLink + "/" + slug}>
+            <div className={"show-options"}><Link to={"/" + cat_inLink + "/"}>
               <ul>
                 {item.options.map((comb, c) => {
                   let string = [];

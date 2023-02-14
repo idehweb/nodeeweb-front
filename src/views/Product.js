@@ -322,11 +322,14 @@ const Product = (props) => {
               {extra_button &&  <div className="AddToCardButton outOfStock">{extra_button}</div>}
               {!extra_button && type == "normal" && <div>
                 {options && !options.length &&
-                <Theprice className={"single"} price={price} salePrice={salePrice} in_stock={in_stock}/>}
-                {!options && <Theprice className={"single"} price={price} salePrice={salePrice} in_stock={in_stock}/>}
+                <><Theprice className={"single"} price={price} salePrice={salePrice} in_stock={in_stock}/></>}
+                {!options && <><Theprice className={"single"} price={price} salePrice={salePrice} in_stock={in_stock}/></>}
                 <SidebarActions className={"mobilenone "} add={false} edit={true} _id={_id} customer={customer}
                                 updatedAt={updatedAt}
-                                countryChoosed={countryChoosed} type={type} price={price}
+                                countryChoosed={countryChoosed}
+                                type={type}
+                                price={price}
+                                salePrice={salePrice}
                                 firstCategory={firstCategory}
                                 secondCategory={secondCategory}
                                 photos={photos}

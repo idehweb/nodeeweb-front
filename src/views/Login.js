@@ -46,7 +46,7 @@ const Login = ({t}) => {
         <Col lg="4" className="mx-auto mb-4">
           <Card small>
 
-            <LoginForm/>
+            <LoginForm goToCheckout={params._state === 'goToCheckout'}/>
           </Card>
         </Col>
       </div>

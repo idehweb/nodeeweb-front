@@ -930,22 +930,22 @@ body .rtl .card-add {
 }
 body .rtl .main-mobile .main-navbar__search.w-100.d-md-flex{
   height: calc(100vh) !important;
-  background: hsla(0, 0%, 0%, 1);
+  /*background: hsla(0, 0%, 0%, 1);*/
 
-  background: linear-gradient(90deg, hsla(0, 0%, 0%, 0) 0%, hsla(0, 0%, 0%, 0.6) 82%);
+  /*background: linear-gradient(90deg, hsla(0, 0%, 0%, 0) 0%, hsla(0, 0%, 0%, 0.6) 82%);*/
 
-  background: -moz-linear-gradient(90deg, hsla(0, 0%, 0%, 0) 0%, hsla(0, 0%, 0%, 0.6) 82%);
+  /*background: -moz-linear-gradient(90deg, hsla(0, 0%, 0%, 0) 0%, hsla(0, 0%, 0%, 0.6) 82%);*/
 
-  background: -webkit-linear-gradient(90deg, hsla(0, 0%, 0%, 0) 0%, hsla(0, 0%, 0%, 0.6) 82%);
+  /*background: -webkit-linear-gradient(90deg, hsla(0, 0%, 0%, 0) 0%, hsla(0, 0%, 0%, 0.6) 82%);*/
 
-  filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#000000", endColorstr="#000000", GradientType=1 );
+  /*filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#000000", endColorstr="#000000", GradientType=1 );*/
 }
 body .rtl .main-navbar__search.w-100.d-md-flex.d-lg-flex.desktopnoned.stf.posrel.mindfghj {
   border-right: 1px solid #eee;
   padding-right: 5px;
   height: 60px;
   margin-right: 20px;
-  backdrop-filter: blur(7px);
+  /*backdrop-filter: blur(7px);*/
 
 }
 
@@ -1714,7 +1714,14 @@ body .rtl .iconleft {
 body .rtl .custom-control-description {
   padding-right: 1.5rem;
 }
+body .rtl .card-add.checkout .custom-radio .custom-control-description{
+  padding-right: 0.5rem;
 
+}
+body .rtl .card-add.checkout .custom-radio .custom-control-input{
+  margin-right: 2rem;
+
+}
 body .rtl .ql-editor {
 
   text-align: left;

@@ -1,12 +1,12 @@
 import React, {Suspense, useEffect, useState} from "react";
 import Swiper from "#c/components/swiper";
-import {isClient, loadProductItems, MainUrl} from "#c/functions/index";
+import {isClient, loadProductItems, MainUrl,isStringified} from "#c/functions/index";
 import PostCard from "#c/components/Home/PostCard";
 import {withTranslation} from "react-i18next";
 import {useSelector} from "react-redux";
-import {useNavigate,useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 
-const ProductsSlider = ({cat_id = null, customQuery, delay = 2500, t}) => {
+const ProductsSlider = ({cat_id = null, customQuery, delay = 2500,perPage,autoplay,pagination,breakpoints, t}) => {
   // console.log("\nProductsSlider==================>");
   let productSliderData = useSelector((st) => {
     return st.store.productSliderData;
@@ -23,16 +23,30 @@ const ProductsSlider = ({cat_id = null, customQuery, delay = 2500, t}) => {
       console.log("\nuseEffect ProductsSlider==================>");
 
       let query = {}, filter = {};
-      if (customQuery)
+      if (customQuery) {
+        console.log('customQuery main', customQuery)
+
+        if (typeof customQuery == 'string') {
+          customQuery = JSON.parse(customQuery)
+        }
+
         Object.keys(customQuery).forEach((item) => {
           let main = customQuery[item];
-          if (params)
+          if (params && params._id) {
+            console.log('main:',main)
             main = main.replace('params._id', JSON.stringify(params._id))
+          }
           console.log('customQuery[item]', item, customQuery, customQuery[item])
-        console.log('main',main)
-          query[item] = JSON.parse(main)
-        })
+          console.log('main', main)
+          const json = isStringified(main);
 
+          if (typeof json == 'object')
+            query[item] = json
+          else
+            query[item] = main
+
+        })
+      }
       // console.log("==> loadProductItems() offset:", offset, "filter:", filter, "query:", query);
       if (query) {
         filter = JSON.stringify(query)
@@ -47,7 +61,23 @@ const ProductsSlider = ({cat_id = null, customQuery, delay = 2500, t}) => {
   return (
     <Suspense fallback={<div> loading... </div>}>
       <div className={"rtl "}>
-        {(tracks && tracks.length > 0) && <Swiper>
+        {(tracks && tracks.length > 0) && <Swiper breakpoints={breakpoints || {
+          1024: {
+            perPage: 4
+          },
+          768: {
+
+            perPage: 3
+          },
+          640: {
+
+            perPage: 2
+          },
+          320: {
+
+            perPage: 1
+          }
+        }} perPage={perPage} autoplay={autoplay} pagination={pagination}>
 
           {tracks.map((i, idx) => {
             if (!i.slug) {

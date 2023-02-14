@@ -37,13 +37,15 @@ export const admin_token = (typeof window === "undefined") ? null : store.getSta
 export const setStyles = (fields) => {
   let style = {};
   let {
-    textAlign, position,
+    textAlign,
+    position,
     top,
     bottom,
     right,
     border,
     left,
     boxShadow,
+    zIndex,
     color, float, borderRadius, direction, width, maxWidth, height, maxHeight, backgroundColor, margin, padding, fontWeight, fontSize, lineHeight, display
   } = fields
   if (borderRadius) {
@@ -51,6 +53,9 @@ export const setStyles = (fields) => {
   }
   if (border) {
     style['border'] = border;
+  }
+  if (zIndex) {
+    style['zIndex'] = zIndex;
   }
   if (color) {
     style['color'] = color;
@@ -200,7 +205,7 @@ export const loadBlogItem = (_id = null) => {
 export const SearchIt = (_id) => {
   return new Promise(function (resolve, reject) {
     let c = [];
-    getData(`${ApiUrl}/product/0/5/${_id}`)
+    getData(`${ApiUrl}/product/0/15/${_id}`)
       .then((res) => {
         res.data.map((ir, i) => {
           let ph = "";
@@ -211,8 +216,9 @@ export const SearchIt = (_id) => {
             ph = MainUrl + "/" + ir.thumbnail;
           }
           let title = encodeURIComponent(ir.title.fa.replace(/\\|\//g, ""));
+          let slug = encodeURIComponent(ir.slug.replace(/\\|\//g, ""));
 
-          c.push({title: ir.title, photo: ph, url: "/product/" + ir._id + "/" + title});
+          c.push({title: ir.title, photo: ph, url: "/product/" + ir.slug + "/" });
 
         });
 
@@ -493,6 +499,17 @@ export const getHomeData = (i = "") => {
   //         return err;
   //     });
 }
+
+export const isStringified = (jsonValue) => {
+  try {
+    console.log("need to parse");
+    return JSON.parse(jsonValue);
+  } catch (err) {
+    console.log("not need to parse");
+
+    return jsonValue;
+  }
+}
 export const getCombination = async (combinations, condition) => {
   let r = await combinations.forEach(async (comb) => {
     // console.log('condition',condition,Object.is(comb.options,condition));
@@ -664,6 +681,21 @@ export const getTheSingleData = (role = 'admin', model, _id) =>
       handleErr(err);
       return err;
     });
+export const updateTransactionStatus = (method, S) => {
+  return new Promise(function (resolve, reject) {
+    postData(`${ApiUrl}/transaction/status/${method}`, S, false)
+      .then(data => {
+        let mainD = data["data"];
+        if (mainD.success) {
+          savePost({order_id: null, card: []});
+        }
+        resolve(mainD);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  });
+};
 export const updateStatus = (S, A) => {
   return new Promise(function (resolve, reject) {
     postData(`${ApiUrl}/transaction/status/`, {
@@ -695,7 +727,7 @@ export const getMyOrders = (offset = 0, limit = 100) =>
       return err;
     });
 export const getMyOrder = (_id) =>
-  getData(`${ApiUrl}/order/myOrder/mine/${_id}`, {}, true)
+  getData(`${ApiUrl}/order/myOrder/onlyMine/${_id}`, {}, true)
     .then((res) => {
       if (res.data.success == false)
         return [];
@@ -844,7 +876,29 @@ export const getDiscountCode = (code = null, order_id) => {
   })
 }
 
-export const getEntity= (entity, _id) => {
+export const getPath = (path) => {
+  return new Promise(function (resolve, reject) {
+    getData(`${ApiUrl}/${path}`, {}, true)
+      .then((res) => {
+        return resolve(res.data);
+      })
+      .catch((err) => {
+        handleErr(err);
+      });
+  });
+};
+export const postPath = (path) => {
+  return new Promise(function (resolve, reject) {
+    postData(`${ApiUrl}/${path}`, {}, true)
+      .then((res) => {
+        return resolve(res.data);
+      })
+      .catch((err) => {
+        handleErr(err);
+      });
+  });
+};
+export const getEntity = (entity, _id) => {
   return new Promise(function (resolve, reject) {
     getData(`${ApiUrl}/${entity}/${_id}`, {}, true)
       .then((res) => {
@@ -902,7 +956,7 @@ export const getEntities = (entity, offset = 0, limit = 24, search = false, filt
 };
 export const getEntitiesWithCount = (entity, offset = 0, limit = 24, search = false, filter, populate) => {
   return new Promise(function (resolve, reject) {
-    console.log('filter', filter)
+    // console.log('filter', filter)
     // console.log('getPosts...',store.getState().store.country)
     // if(typeof filter!='object'){
     //   filter=false
@@ -923,7 +977,7 @@ export const getEntitiesWithCount = (entity, offset = 0, limit = 24, search = fa
 
     // if (filter["type"]) params["type"] = filter["type"];
     // }
-    console.log('filter', filter)
+    // console.log('filter', filter)
 
     if (filter) {
       url += "?filter=" + filter;
@@ -937,7 +991,7 @@ export const getEntitiesWithCount = (entity, offset = 0, limit = 24, search = fa
     }
     getData(url, {params}, true)
       .then((d) => {
-        let {data,headers}=d;
+        let {data, headers} = d;
         resolve({
           items: data, count: headers ? headers['x-total-count'] : 0
         });

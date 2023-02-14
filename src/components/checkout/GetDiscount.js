@@ -8,7 +8,7 @@ import {addItem, getDiscountCode, MainUrl, removeItem} from "#c/functions/index"
 import {defaultImg} from "#c/assets/index";
 import {store} from "#c/functions/store";
 
-function GetDiscount({price, setDiscount, order_id, children, t}) {
+function GetDiscount({price, setDiscount, order_id, children, t,setDiscountCode=(e)=>{}}) {
   console.log('order_id', order_id);
   let [dis, setDis] = useState('');
   return (
@@ -23,7 +23,7 @@ function GetDiscount({price, setDiscount, order_id, children, t}) {
           }}
         />
 
-        <Button size="sm left" className={'ghvhvghv'} left={"true"} onClick={(e) => {
+        <Button size="sm left" className={'set-discount ghvhvghv'} left={"true"} onClick={(e) => {
           console.log('order_id', dis, order_id)
 
           getDiscountCode(dis, order_id).then(r => {
@@ -32,6 +32,9 @@ function GetDiscount({price, setDiscount, order_id, children, t}) {
               setDiscount(r.percent, 'percent',dis);
             if (r.price)
               setDiscount(r.price, 'price',dis);
+
+              setDiscountCode(dis)
+
             toast(t("successfully done!"), {
               type: "success"
             });

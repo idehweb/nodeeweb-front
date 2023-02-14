@@ -1,6 +1,5 @@
 import React from "react";
 import store from "#c/functions/store";
-import { FormControlLabel, Radio, RadioGroup } from "@mui/material";
 
 import {
   Button,
@@ -21,19 +20,21 @@ import {
   CameFromPost,
   checkCodeMeli,
   goToProduct,
+  Logout,
   register,
   savePost,
-  Logout,
   setPassWithPhoneNumber
 } from "#c/functions/index";
-import { withTranslation } from "react-i18next";
-import { Navigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import {withTranslation} from "react-i18next";
+import {Navigate} from "react-router-dom";
+import {toast} from "react-toastify";
 
-import { fNum } from "#c/functions/utils";
+import {fNum} from "#c/functions/utils";
 
 import CircularProgress from "@mui/material/CircularProgress";
-const globalTimerSet=60
+
+const globalTimerSet = 60
+
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
@@ -42,7 +43,7 @@ class LoginForm extends React.Component {
     if (st.user.token && (!st.user.firstName || !st.user.lastName || !st.user.internationalCode)) {
       shallweshowsubmitpass = true;
     }
-    console.log();
+    console.log(props);
 
     this.state = {
       phoneNumber: null,
@@ -78,7 +79,8 @@ class LoginForm extends React.Component {
   fc(d) {
     goToProduct(d);
   }
-  handleSendCodeAgain=(e)=>{
+
+  handleSendCodeAgain = (e) => {
     console.log('==> handleSendCodeAgain()')
     this.handleRegister = (e)
   }
@@ -108,13 +110,13 @@ class LoginForm extends React.Component {
       if (r.shallWeSetPass) {
         this.state.timer = globalTimerSet;
         this.myInterval = setInterval(() => {
-          this.setState(({ timer }) => ({
+          this.setState(({timer}) => ({
             timer: timer > 0 ? timer - 1 : (this.handleClearInterval())
           }));
         }, 1000);
         this.setState({
           enterActivationCodeMode: true,
-          activationCode:null,
+          activationCode: null,
           isDisplay: false
         });
       } else if (!r.shallWeSetPass && r.userWasInDbBefore) {
@@ -131,6 +133,9 @@ class LoginForm extends React.Component {
   };
   handlePassword = (e) => {
     e.preventDefault();
+
+    console.log('this.props',this.props)
+    // return;
     let fd = this.state.countryCode || "98";
     let ph = fd + this.state.phoneNumber;
     authCustomerWithPassword({
@@ -140,10 +145,21 @@ class LoginForm extends React.Component {
       .then((res) => {
         // console.log('store.getState().store', store.getState().store.token, res.token);
         if (res.success) {
-          this.setState({
-            token: res.customer.token,
-            goToProfile: true
-          });
+          if(this.props && this.props.goToCheckout){
+            console.log('this.props.goToCheckout',this.props.goToCheckout)
+            this.setState({
+              token: res.customer.token,
+              firstName: (res.customer && res.customer.firstName) ? res.customer.firstName : null,
+              lastName: (res.customer && res.customer.lastName) ? res.customer.lastName : null,
+              internationalCode: (res.customer && res.customer.internationalCode) ? res.customer.internationalCode : null,
+              goToCheckout: true
+            });
+          }else {
+            this.setState({
+              token: res.customer.token,
+              goToProfile: true
+            });
+          }
         } else {
           if (res.message) alert(res.message);
         }
@@ -207,7 +223,7 @@ class LoginForm extends React.Component {
       internationalCodeClass,
       address
     } = this.state;
-    const { t } = this.props;
+    const {t} = this.props;
     let fd = countryCode || "98";
     console.log(firstName, !firstName);
     console.log(lastName, !lastName);
@@ -309,7 +325,7 @@ class LoginForm extends React.Component {
   };
 
   checkResponse(res) {
-    this.setState({ loginMethod: res });
+    this.setState({loginMethod: res});
   }
 
   handleActivation = (e) => {
@@ -351,7 +367,7 @@ class LoginForm extends React.Component {
           th["internationalCodeClass"] = checkCodeMeli(res.internationalCode);
         }
         this.setState(th);
-      } else this.setState({ token: res.token });
+      } else this.setState({token: res.token});
     });
   };
 
@@ -383,7 +399,7 @@ class LoginForm extends React.Component {
       loginMethod,
       timer
     } = this.state;
-    const { t } = this.props;
+    const {t} = this.props;
     console.log("render Login form...", token, firstName, lastName, internationalCode, setPassword);
     console.log("did we come from a post while publishing?", CameFromPost, timer);
     if (token && !firstName && !lastName && !internationalCode) {
@@ -395,15 +411,20 @@ class LoginForm extends React.Component {
 
       return <Navigate to={"/submit-order/" + goToProduct}/>;
     }
+    console.log('goToCheckout',goToCheckout)
+    console.log('token',token)
+    console.log('lastName',lastName)
+    console.log('internationalCode',internationalCode)
+    console.log('!setPassword',!setPassword)
     if (token && goToCheckout && firstName && lastName && internationalCode && !setPassword) {
-      savePost({ goToCheckout: false });
+      savePost({goToCheckout: false});
 
       return <Navigate to={"/checkout/"}/>;
     }
-    console.log(token,goToChat,firstName ,lastName ,internationalCode ,!setPassword)
+    console.log(token, goToChat, firstName, lastName, internationalCode, !setPassword)
     // if (token && goToChat && firstName && lastName && internationalCode && !setPassword) {
     if (token && goToChat) {
-      savePost({ goToChat: false });
+      savePost({goToChat: false});
 
       return <Navigate to={"/chat/"}/>;
     }
@@ -432,7 +453,7 @@ class LoginForm extends React.Component {
                           <InputGroupAddon type="prepend">
                             <FormSelect
                               onChange={(e) =>
-                                this.setState({ countryCode: e.target.value })
+                                this.setState({countryCode: e.target.value})
                               }>
 
                               <option value="98">+98</option>
@@ -447,7 +468,7 @@ class LoginForm extends React.Component {
                             dir="ltr"
                             onChange={(e) =>
 
-                              this.setState({ phoneNumber: e.target.value })
+                              this.setState({phoneNumber: e.target.value})
                             }
                           />
                         </InputGroup>
@@ -456,36 +477,36 @@ class LoginForm extends React.Component {
                     </Row>
                     <Row form>
                       {/*<Col md="12" className="form-group">*/}
-                        {/*<p className={"mb-0"}>{"ارسال کد یکبار مصرف از طریق:"}</p>*/}
+                      {/*<p className={"mb-0"}>{"ارسال کد یکبار مصرف از طریق:"}</p>*/}
 
-                        {/*<RadioGroup className={"jhgfghhhh"}>*/}
+                      {/*<RadioGroup className={"jhgfghhhh"}>*/}
 
-                          {/*<FormControlLabel*/}
-                            {/*className={"jhgfgh"}*/}
-                            {/*value={"whatsapp"}*/}
-                            {/*label={t("WhatsApp")}*/}
-                            {/*control={<Radio/>}*/}
-                            {/*// checked={ans === idx2}*/}
-                            {/*checked={loginMethod === "whatsapp"}*/}
-                            {/*onChange={() => {*/}
-                              {/*this.checkResponse("whatsapp");*/}
-                            {/*}}*/}
-                          {/*/>*/}
-                          {/*<FormControlLabel*/}
-                            {/*className={"jhgfgh"}*/}
-                            {/*value={"sms"}*/}
-                            {/*label={t("SMS")}*/}
-                            {/*control={<Radio/>}*/}
-                            {/*// checked={ans === idx2}*/}
-                            {/*checked={loginMethod === "sms"}*/}
-                            {/*onChange={() => {*/}
-                              {/*this.checkResponse("sms");*/}
+                      {/*<FormControlLabel*/}
+                      {/*className={"jhgfgh"}*/}
+                      {/*value={"whatsapp"}*/}
+                      {/*label={t("WhatsApp")}*/}
+                      {/*control={<Radio/>}*/}
+                      {/*// checked={ans === idx2}*/}
+                      {/*checked={loginMethod === "whatsapp"}*/}
+                      {/*onChange={() => {*/}
+                      {/*this.checkResponse("whatsapp");*/}
+                      {/*}}*/}
+                      {/*/>*/}
+                      {/*<FormControlLabel*/}
+                      {/*className={"jhgfgh"}*/}
+                      {/*value={"sms"}*/}
+                      {/*label={t("SMS")}*/}
+                      {/*control={<Radio/>}*/}
+                      {/*// checked={ans === idx2}*/}
+                      {/*checked={loginMethod === "sms"}*/}
+                      {/*onChange={() => {*/}
+                      {/*this.checkResponse("sms");*/}
 
-                            {/*}}*/}
-                          {/*/>*/}
+                      {/*}}*/}
+                      {/*/>*/}
 
 
-                        {/*</RadioGroup>*/}
+                      {/*</RadioGroup>*/}
                       {/*</Col>*/}
                     </Row>
                     <Button
@@ -519,7 +540,8 @@ class LoginForm extends React.Component {
                         <div className={"your-timer"}>
                           <div className={"flex-item "}>
                             {Boolean(timer) && <div className={"flex-item-relative center "}>
-                              <CircularProgress className={'red-progress'} thickness={2} size={60} variant="determinate" value={parseInt((timer * 100) / globalTimerSet)}/>
+                              <CircularProgress className={'red-progress'} thickness={2} size={60} variant="determinate"
+                                                value={parseInt((timer * 100) / globalTimerSet)}/>
                               <div className={"flex-item-absolute "}>
                                 {timer}
                               </div>
@@ -539,7 +561,7 @@ class LoginForm extends React.Component {
                           {/*{t("get enter code")}*/}
                           {/*</label>*/}
                           <label
-                            style={{ fontSize: 12 }}
+                            style={{fontSize: 12}}
                             htmlFor="feEmailAddress">
                             {t("enter sent code")}
                           </label>
@@ -553,7 +575,7 @@ class LoginForm extends React.Component {
                             dir="ltr"
                             onChange={(e) => {
 
-                              this.setState({ activationCode: e.target.value });
+                              this.setState({activationCode: e.target.value});
                             }}
                           />
                         </InputGroup>
@@ -583,7 +605,7 @@ class LoginForm extends React.Component {
                         outline={true}
                         type="button"
                         className="center btn-block outline the-less-important the-no-border"
-                        onClick={(e)=>this.handleRegister(e)}>
+                        onClick={(e) => this.handleRegister(e)}>
                         {t("Send code again?")}
                       </Button>
                     </div>}
@@ -611,7 +633,7 @@ class LoginForm extends React.Component {
                             dir="rtl"
                             value={firstName}
                             onChange={(e) =>
-                              this.setState({ firstName: e.target.value })
+                              this.setState({firstName: e.target.value})
                             }
                           />
                         </InputGroup>
@@ -630,7 +652,7 @@ class LoginForm extends React.Component {
                             id="ollastname"
                             dir="rtl"
                             onChange={(e) =>
-                              this.setState({ lastName: e.target.value })
+                              this.setState({lastName: e.target.value})
                             }
                           />
                         </InputGroup>
@@ -671,7 +693,7 @@ class LoginForm extends React.Component {
                             id="oiuytpaswword"
                             dir="ltr"
                             onChange={(e) =>
-                              this.setState({ password: e.target.value })
+                              this.setState({password: e.target.value})
                             }
                           />
                         </InputGroup>
@@ -706,6 +728,12 @@ class LoginForm extends React.Component {
                     <Row form>
                       <Col md="12" className="form-group">
                         <div className={"your-phone-number d-flex justify-content-sb"}>
+                          <div className={"mb-2 flex-item"}>
+                            {t("You registered before, please enter your password.")}
+                          </div>
+
+                        </div>
+                        <div className={"your-phone-number d-flex justify-content-sb"}>
                           <div className={"flex-item "}>
                             {t("your phone number") + ":"}
                           </div>
@@ -724,7 +752,7 @@ class LoginForm extends React.Component {
                             id="oiuytgpaswword"
                             dir="ltr"
                             onChange={(e) =>
-                              this.setState({ password: e.target.value })
+                              this.setState({password: e.target.value})
                             }
                           />
                         </InputGroup>

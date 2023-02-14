@@ -345,7 +345,7 @@ export const getAdminData = (
 
       }
     // console.clear();
-    console.log('option',url, option)
+    console.log('option', url, option)
 
     axios
       .get(url, option)
@@ -444,7 +444,14 @@ export const PriceFormat = (p = 0) =>
     .toString()
     // .replace(/[٠-٩]/g, (d) => '٠١٢٣٤٥٦٧٨٩'.indexOf(d))
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+export const NormalizePrice = (p = 0) => {
+  if (p)
+    return p.toString().replace(/,/g, '');
+  else
+    return null;
 // .replace(/\d/g, (d) => '٠١٢٣٤٥٦٧٨٩'[d]);
+}
 
 export const $ = (el) => document.querySelector(el);
 

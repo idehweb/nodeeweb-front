@@ -18,7 +18,7 @@ import {useSelector} from "react-redux";
 const DynamicPage = (props) => {
   // console.clear()
   let {match, location, history, t, url,elements} = props;
-
+console.log('props',props)
   let page = useSelector((st) => {
     // console.log("st.store", st.store.productSliderData);
     return st.store.page || [];

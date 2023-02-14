@@ -26,7 +26,7 @@ function PriceChunker({ price,onPlaceOrder, children, t }) {
 
           <ButtonGroup size="sm left">
 
-          <Button className={''} left={"true"} onClick={(e)=>onPlaceOrder(p)}>{t('Place Order')}</Button>
+          <Button className={'place-order '} left={"true"} onClick={(e)=>onPlaceOrder(p)}>{t('Place Order')}</Button>
           </ButtonGroup>
         </div>)
       })}

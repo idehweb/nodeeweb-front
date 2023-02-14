@@ -24,7 +24,7 @@ export default function MainNavbar({layout, element, style, setStyles, stickyTop
   let {fields} = general;
   let {text, iconFont, direction, link, display, classes, target = "_blank"} = fields;
   let menu = [];
-  if (children && children instanceof Array && classes == 'responsive-menu')
+  if (children && children instanceof Array && (classes && classes.indexOf('responsive-menu')!==-1))
     children.forEach((ch, cx) => {
       let childMenu=[];
       // let {children = [],type, components, settings} = ch;
@@ -70,7 +70,7 @@ export default function MainNavbar({layout, element, style, setStyles, stickyTop
         "_id": cx
       })
     });
-
+// return JSON.stringify(classes);
   return (
     <>
       <div className={' ' + classess + ' ' + classes}>
@@ -91,7 +91,7 @@ export default function MainNavbar({layout, element, style, setStyles, stickyTop
           })}
         </Navbar>
       </div>
-      {classes == 'responsive-menu' && <MainSidebar>
+      {(classes && classes.indexOf('responsive-menu')!==-1) && <MainSidebar>
         <MainSidebarMobile items={menu}/>
       </MainSidebar>}</>
   );

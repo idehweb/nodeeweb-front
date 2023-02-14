@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import store from "#c/functions/store";
 // import Swiper from "#c/components/swiper";
-import { getCombination, getPosts, getPostsByCat, handleTitles, MainUrl } from "#c/functions/index";
+import {getCombination, getPosts, getPostsByCat, handleTitles, MainUrl} from "#c/functions/index";
 // import PostCard from "#c/components/Home/PostCard";
-import { withTranslation } from "react-i18next";
+import _ from 'lodash'
+
+import {withTranslation} from "react-i18next";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
 import Theprice from "#c/components/single-post/Theprice";
-import { isEqual } from "../../../functions";
+import {isEqual} from "../../../functions";
 import AddToCardButton from "#c/components/components-overview/AddToCardButton";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
@@ -29,20 +31,39 @@ const theChip = (props) => {
   let allOptions = [];
 
   // console.log("allOptions", allOptions);
+  console.log('combinations', combinations)
+  let choosed = combinations[0], doptions =combinations[0].options, lessPrice = combinations[0].salePrice || combinations[0].price,dstock=combinations[0].in_stock;
+  _.forEach(combinations, (combination, j) => {
+    let pr = combination.salePrice || combination.price
+    let st = combination.in_stock;
+    if(!dstock && st){
+      lessPrice = pr;
+      choosed = combination;
+      doptions = combination.options;
+      dstock = st;
+    }
+    if (pr < lessPrice && st) {
+      lessPrice = pr;
+      choosed = combination;
+      doptions = combination.options;
+    }
+// if(st)
+  })
+  // return JSON.stringify(lessPrice);
   const [lan, setLan] = useState(store.getState().store.lan);
-  const [actives, setActives] = useState(combinations[0].options || {});
+  const [actives, setActives] = useState(doptions || {});
   const [count, setCount] = useState(options.length);
-  const [theCombination, setTheCombination] = useState(combinations[0] || {});
+  const [theCombination, setTheCombination] = useState(choosed || {});
 
   // const goToPage = (post) => {
   //
   // };
   //
   const onClickChip = (name, e) => {
-    console.log("onClickChip",name,e);
+    console.log("onClickChip", name, e);
     // console.log(count);
     // console.log(name, ":", e.name);
-    let obj = { ...actives };
+    let obj = {...actives};
     obj[name] = e.name;
     // let co=getCombination(combinations,obj);
     combinations.forEach((comb) => {
@@ -67,10 +88,10 @@ const theChip = (props) => {
   let inS = ((theCombination.in_stock == "0" || theCombination.in_stock == null) ? false : true);
   // if (!inS && !single)
   //   return;
-  console.log('combinations',combinations,theCombination)
+  console.log('combinations', combinations, theCombination)
   return (
     [<div className={" mt-5 the-chip row"} key={0}>
-      <label className={"the-label-inline bigger"}>{t("please choose combination")+":"}</label>
+      <label className={"the-label-inline bigger"}>{t("please choose combination") + ":"}</label>
     </div>,
       <div className={" mt-2 the-chip row"} key={1}>
         <div className={"col-md-8"}> {options && options.map((opt, k) => {
@@ -83,10 +104,10 @@ const theChip = (props) => {
 
           <div className={"gfd"}>
             {/*{theCombination.price}/*/}
-          <Theprice className={"single single-let " + theCombination.salePrice + " - " + theCombination.price}
-                    price={theCombination.price}
-                    in_stock={inS}
-                    salePrice={theCombination.salePrice}/>
+            <Theprice className={"single single-let " + theCombination.salePrice + " - " + theCombination.price}
+                      price={theCombination.price}
+                      in_stock={inS}
+                      salePrice={theCombination.salePrice}/>
           </div>
           {inS && method === "list" && !single && <>
             <div className={"the-option-actions " + inS}>
@@ -130,7 +151,7 @@ const theChip = (props) => {
       </div>]
   );
 };
-const ChipInside = ({ opt, actives, onClickChip }) => {
+const ChipInside = ({opt, actives, onClickChip}) => {
   let [state, setState] = useState({});
   const onClick = (val, j) => {
     // console.log(val, j);

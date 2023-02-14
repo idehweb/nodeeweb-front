@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 
-import {Col, Row} from "shards-react";
+import {Button, Col, Row} from "shards-react";
 import LoadingComponent from "#c/components/components-overview/LoadingComponent";
 
 import {
@@ -25,6 +25,7 @@ import {PostSliderServer} from "#c/components/components-overview/PostSlider";
 import {withTranslation} from "react-i18next";
 import _ from "underscore";
 import {useSelector} from "react-redux";
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
 const getURIParts = (url) => {
   var loc = new URL(url)
@@ -39,6 +40,7 @@ const Sidemenu = (props) => {
   const [cats, setcats] = useState([]);
   const [counts, setcount] = useState(0);
   const [theload, settheload] = useState(false);
+  const [openFilter, setOpenFilter] = useState(false);
   const [theload2, settheload2] = useState(false);
   let {match, location, history, t, url} = props;
   let {element = {}, params = {}} = props;
@@ -90,7 +92,7 @@ const Sidemenu = (props) => {
       filter = JSON.stringify(query)
     }
     // let newOffset = (await offset) + 24;
-    getEntitiesWithCount('attributes', params.offset, params.limit, "", JSON.stringify({useInFilter:true}), JSON.stringify(populateQuery)).then((resp) => {
+    getEntitiesWithCount('attributes', params.offset, params.limit, "", JSON.stringify({useInFilter: true}), JSON.stringify(populateQuery)).then((resp) => {
       // setLoadingMoreItems(false);
       afterGetData(resp);
     });
@@ -243,22 +245,33 @@ const Sidemenu = (props) => {
                  md="12"
                  sm="12"
                  xs="12" className={"nbghjk post-style-"}>
-              <label className={'the-label-head'}>{'فیلتر ها'}</label>
+              <div className={'d-flex justify-content-space-between align-items-center'}>
+                <label className={'the-label-head'}>{'فیلتر ها'}</label>
+                {(window && window.innerWidth < 768) && <Button className={'set-filters'} onClick={() => {
+                  setOpenFilter(!openFilter)
+                }}><FilterAltIcon/></Button>}
+              </div>
               <hr className={'the-label-hr'}/>
             </Col>
           </Row>
-          <Collapsable defaultStatus={!(window && window.innerWidth<768)} title={t('product category')} values={cats} slug={'product-category'}/>
 
         </Col>}
         {!theload && <Col
-          className="main-content iuytfghj pb-5 "
+          className="main-content2 iuytfghj pb-5 "
           lg={{size: 12}}
           md={{size: 12}}
           sm="12"
           tag="main">
-
-          {tracks && tracks.map((i, idxx) => (<Collapsable title={i.name.fa} values={i.values} slug={i.slug}/>))}
-
+          {((window && window.innerWidth < 768) && openFilter) && <>
+            <Collapsable defaultStatus={!(window && window.innerWidth < 768)} title={t('product category')} values={cats}
+                         slug={'product-category'}/>
+            {tracks && tracks.map((i, idxx) => (<Collapsable title={i.name.fa} values={i.values} slug={i.slug}/>))}
+          </>}
+          {(window && window.innerWidth > 767) && <>
+            <Collapsable defaultStatus={!(window && window.innerWidth < 768)} title={t('product category')} values={cats}
+                         slug={'product-category'}/>
+            {tracks && tracks.map((i, idxx) => (<Collapsable title={i.name.fa} values={i.values} slug={i.slug}/>))}
+          </>}
 
         </Col>}
       </Row>

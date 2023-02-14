@@ -27,11 +27,12 @@ const DefaultOptions = [
     "addable": true,
     "settings": {
       "general": {
-        "fields": {"entity": "", "include": "", "category": "","arrows":"true","perPage":1,"breakpoints":{},"classess":"","customQuery":{},...fields},
+        "fields": {"entity": "", "include": "", "category": "","arrows":"true","pagination":"false","perPage":1,"breakpoints":{},"classess":"","customQuery":{},...fields},
         "rules": [
           {"name": "entity", "type": "string"},
           {"name": "include", "type": "string"},
           {"name": "category", "type": "string"},
+          {"name": "pagination", "type": "boolean"},
           {"name": "arrows", "type": "boolean"},
           {"name": "perPage", "type": "number"},
           {"name": "breakpoints", "type": "string"},
@@ -279,7 +280,23 @@ const DefaultOptions = [
       },
       "design": [{"name": "padding", "type": "string"}],
     }
-  }, {
+  },
+  {
+    "label": "category description",
+    "name": "description",
+    "addable": false,
+    "settings": {
+      "general": {
+        "fields": {"entity": ""},
+        "rules": [
+          {"name": "entity", "type": "string"},
+
+        ]
+      },
+      "design": [{"name": "padding", "type": "string"}],
+    }
+  },
+  {
     "label": "Load More",
     "name": "loadmore",
     "addable": false,
@@ -298,5 +315,7 @@ const DefaultOptions = [
       },
       "design": [{"name": "padding", "type": "string"}],
     }
-  }];
+  }
+
+  ];
 export default DefaultOptions

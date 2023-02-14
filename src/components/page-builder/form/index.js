@@ -105,12 +105,12 @@ const Form = (props) => {
         let {settings = {}} = d;
         let {general = {}} = settings;
         let {fields = []} = general;
-        let {name, value='', placeholder} = fields;
+        let {name,label, value='', placeholder,classes,sm,lg} = fields;
         formFields[name] = value;
 
         let lastObj = {
-          type: 'string',
-          label: name,
+          type: d.name || 'string',
+          label: label || name,
           name: name,
 
           size: {
@@ -121,7 +121,7 @@ const Form = (props) => {
             // setFields([...fields,])
             // this.state.checkOutBillingAddress.add.data[d] = text;
           },
-          className: 'rtl',
+          className: 'rtl '+ (classes ? classes.map(ob => (ob.name ? ob.name : ob)).join(" ") : ""),
           placeholder: placeholder,
           child: [],
           value: value,
@@ -170,11 +170,16 @@ const Form = (props) => {
           sm="12"
           tag="main">
           <Row className={" p-3 productsmobile"}>
+
+            {/*{JSON.stringify(tracks)}*/}
+            {/*{JSON.stringify(theformFields)}*/}
             {(theformFields && tracks) && <CreateForm
               rules={{fields: tracks}}
-              onSubmit={() => {
+              onSubmit={(e) => {
+                console.log('onSubmit',e)
               }}
               buttons={[]}
+              theFields={tracks}
               fields={theformFields}/>}
             {/*{JSON.stringify(tracks)}*/}
 
@@ -186,30 +191,7 @@ const Form = (props) => {
   );
 };
 export const HomeServer = [
-  {
-    func: loadProducts,
-    params: "61d58e38d931414fd78c7fca"
-  },
-  {
-    func: loadProducts,
-    params: "61d58e37d931414fd78c7fbd"
-  },
-  {
-    func: loadProducts,
-    params: "61d58e37d931414fd78c7fb7"
-  },
-  {
-    func: loadProducts,
-    params: "61d58e37d931414fd78c7fb9"
-  },
-  {
-    func: loadProducts,
-    params: "61d58e37d931414fd78c7fbc"
-  },
-  {
-    func: loadProducts,
-    params: "61d58e37d931414fd78c7fba"
-  },
+
   {
     func: loadPosts,
     params: null

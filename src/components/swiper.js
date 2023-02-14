@@ -1,22 +1,33 @@
 import React from "react";
 
-import { Splide, SplideSlide } from "@splidejs/react-splide";
+import {Splide, SplideSlide} from "@splidejs/react-splide";
+import {isStringified} from "#c/functions/index";
 
 export default (props) => {
-  const {
+  let theBreakpoints={};
+  if (props.breakpoints) {
+    const json = isStringified(props.breakpoints);
+    if (typeof json == 'object')
+      theBreakpoints = json
+    else
+      theBreakpoints = props.breakpoints
+  }
+  let {
     children,
     className,
-      type="loop",
-    perPage = 4,
-    pagination = false,
-    arrows = false,
-    autoplay = true,
+    type = "loop",
+    perPage = props.perPage || 4,
+    pagination = props.pagination || false,
+    arrows = props.arrows || false,
+    autoplay = props.autoplay,
     lazyLoad = true,
     interval = 2000,
-    gap="1rem",
-    breakpoints = {
+    pauseOnHover = true,
+    pauseOnFocus = true,
+    gap = "1rem",
+    breakpoints = theBreakpoints || {
       1024: {
-        perPage: 3
+        perPage: 4
       },
       768: {
 
@@ -32,9 +43,22 @@ export default (props) => {
       }
     }
   } = props;
+
+
+  if (autoplay == 'false') {
+    autoplay = false
+  }
   // console.log(breakpoints)
+  // return JSON.stringify(autoplay)
+  let y=isStringified(breakpoints)
+  if (typeof y == 'object')
+    breakpoints = y
+  // else
+  //   theBreakpoints = y
+  // {JSON.stringify({breakpoints:breakpoints,perPage:perPage})}
+  // return JSON.stringify(y);
   return (
-    <Splide
+    <><Splide
       options={{
         gap: gap,
         perPage: perPage,
@@ -55,6 +79,6 @@ export default (props) => {
         return <SplideSlide key={key}>{item}</SplideSlide>;
       })}
 
-    </Splide>
+    </Splide></>
   );
 };

@@ -5,7 +5,7 @@ import BlogCard from "#c/components/Home/BlogCard";
 import { withTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 
-const PostSlider = ({ cat_id=null, delay = 2500, include, t }) => {
+const PostSlider = ({ cat_id=null, delay = 2500,perPage,autoplay,pagination, include,breakpoints, t }) => {
   // console.log("\nPostSlider==================>");
   let postSliderData = useSelector((st) => {
     // if (st.store.postSliderData)
@@ -25,7 +25,23 @@ const PostSlider = ({ cat_id=null, delay = 2500, include, t }) => {
   return (
     <Suspense fallback={<div> loading... </div>}>
       <div className={"rtl "}>
-        {(tracks && tracks.length > 0) && <Swiper>
+        {(tracks && tracks.length > 0) && <Swiper breakpoints={breakpoints || {
+          1024: {
+            perPage: 4
+          },
+          768: {
+
+            perPage: 3
+          },
+          640: {
+
+            perPage: 2
+          },
+          320: {
+
+            perPage: 1
+          }
+        }} perPage={perPage} autoplay={autoplay} pagination={pagination}>
           {tracks.map((i, idx) => (
             <div className={"swiper-slide"} key={idx}><BlogCard item={i}/></div>
           ))}

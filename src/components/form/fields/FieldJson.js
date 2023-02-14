@@ -3,8 +3,8 @@ import {withTranslation} from 'react-i18next';
 import {Field} from 'react-final-form'
 import {Col} from 'shards-react';
 import {getEntities, MainUrl, uploadMedia} from "#c/functions/index";
-import { JsonEditor as Editor } from 'jsoneditor-react';
-import 'jsoneditor-react/es/editor.min.css';
+// import { JsonEditor as Editor } from 'jsoneditor-react';
+// import 'jsoneditor-react/es/editor.min.css';
 function FieldJson(props) {
   // console.clear();
   let {field,t} = props;

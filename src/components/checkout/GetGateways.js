@@ -11,7 +11,7 @@ function GetGateways(prop) {
 
   useEffect(() => {
     if (!gateways)
-      getEntities('gateway').then(r => {
+      getEntities('gateway',0,10,false,JSON.stringify({type:'bank'})).then(r => {
         // if (r && r.tables) {
         //     console.log('r.tables', r.tables)
         prop.setPaymentMethod(r[0].slug)
@@ -26,7 +26,7 @@ function GetGateways(prop) {
   return gateways.map((gt, k) => {
     if(k==0){
     }
-    return <div className={'d-flex '+gt.slug}> <FormRadio
+    return <div className={'d-flex '+gt.slug} key={k}> <FormRadio
       checked={k === choosed}
       onChange={(event) => {
         console.log('prop',prop)

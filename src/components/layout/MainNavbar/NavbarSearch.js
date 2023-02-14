@@ -14,7 +14,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 // class NavbarSearch extends React.Component {
 // history = useNavigate();
-function NavbarSearch({className, type = 'prepend', t}) {
+function NavbarSearch({className, type = 'prepend', t,style={},classes=''}) {
   let url = isClient ? new URL( window.location.href) : '';
   let searchd = isClient ?  (url.searchParams.get("search") || "") : '';
   let [searchT, SetSearchText] = useState(searchd || '');
@@ -109,8 +109,8 @@ function NavbarSearch({className, type = 'prepend', t}) {
 
   return (
 
-    <Form action={isClient ? window.location.origin : ''}
-          className={"main-navbar__search w-100  d-md-flex d-lg-flex desktopnoned stf posrel mindfghj " + className}>
+    <Form style={style} action={isClient ? window.location.origin+'/products/0/12' : ''}
+          className={"main-navbar__search w-100  d-md-flex d-lg-flex desktopnoned stf posrel mindfghj " + className + ' '+classes}>
       <InputGroup seamless className="">
 
         <FormInput
@@ -152,7 +152,7 @@ function NavbarSearch({className, type = 'prepend', t}) {
             </NavLink>
           </div>);
         }),<div className={'search_item textAlignCenter'}>
-          <NavLink exact tag={RouteNavLink} to={'/a/product/0/10?search='+searchT} onClick={()=>{onCloseSearch()}}>
+          <NavLink exact tag={RouteNavLink} to={'/products/0/20?search='+searchT} onClick={()=>{onCloseSearch()}}>
             <div className={'search_title'}> {t('show all')}</div>
           </NavLink>
         </div>]}

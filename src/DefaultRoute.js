@@ -1,15 +1,18 @@
 import Admin from '#c/views/Admin';
 import CreatePage from '#c/views/CreatePage';
-import Db from '#c/views/Db';
+// import Db from '#c/views/Db';
 import Home from '#c/views/Home';
 // import HomeDb from '#c/views/Home_db';
 import Product from '#c/views/Product';
 import Login from '#c/views/Login';
 import Contacts from '#c/views/Contacts';
+import Order from '#c/views/Order';
 import Chat from '#c/views/Chat';
 import Entities from '#c/views/Entities';
 import Page from '#c/views/Page';
 import Profile from '#c/views/Profile';
+import MyOrders from '#c/views/MyOrders';
+import OrderDetails from '#c/views/OrderDetails';
 import Transaction from '#c/views/Transaction';
 import DynamicPage from '#c/views/DynamicPage';
 import Checkout from '#c/views/Checkout';
@@ -18,48 +21,48 @@ import {DefaultLayout, Nof, Nohf} from '#c/layouts/index';
 
 export default function createRoutes(themeRoutes) {
   let DefaultRoute = [
-    {
-      path: '/admin/db',
-      element: Db,
-      layout: Nohf,
-      exact: true,
-
-    },
-    {
-      path: '/admin/:model',
-      element: Admin,
-      layout: Nohf,
-      exact: true,
-
-    },
-    {
-      path: '/admin/:model/:action',
-      element: Admin,
-      layout: Nohf,
-      exact: true,
-
-    },
-    {
-      path: '/admin/:model/:action/:_id',
-      element: Admin,
-      layout: Nohf,
-      exact: true,
-
-    },
-    {
-      path: '/admin/page/create-page',
-      element: CreatePage,
-      layout: Nohf,
-      exact: true,
-
-    },
-    {
-      path: '/admin/:model/edit-page/:_id',
-      element: CreatePage,
-      layout: Nohf,
-      exact: true,
-
-    },
+    // {
+    //   path: '/admin/db',
+    //   element: Db,
+    //   layout: Nohf,
+    //   exact: true,
+    //
+    // },
+    // {
+    //   path: '/admin/:model',
+    //   element: Admin,
+    //   layout: Nohf,
+    //   exact: true,
+    //
+    // },
+    // {
+    //   path: '/admin/:model/:action',
+    //   element: Admin,
+    //   layout: Nohf,
+    //   exact: true,
+    //
+    // },
+    // {
+    //   path: '/admin/:model/:action/:_id',
+    //   element: Admin,
+    //   layout: Nohf,
+    //   exact: true,
+    //
+    // },
+    // {
+    //   path: '/admin/page/create-page',
+    //   element: CreatePage,
+    //   layout: Nohf,
+    //   exact: true,
+    //
+    // },
+    // {
+    //   path: '/admin/:model/edit-page/:_id',
+    //   element: CreatePage,
+    //   layout: Nohf,
+    //   exact: true,
+    //
+    // },
     {
       path: '/post/:_id',
       element: Post,
@@ -84,6 +87,12 @@ export default function createRoutes(themeRoutes) {
       layout: DefaultLayout,
       exact: true,
 
+    }, {
+      path: '/product/:_id',
+      element: Product,
+      layout: DefaultLayout,
+      exact: true,
+
     },
     {
       path: '/login',
@@ -92,8 +101,14 @@ export default function createRoutes(themeRoutes) {
       exact: true,
 
     }, {
+      path: '/transaction/:method',
+      element: Transaction,
+      layout: Transaction,
+      exact: true,
+
+    },{
       path: '/transaction',
-      element: Login,
+      element: Transaction,
       layout: Transaction,
       exact: true,
 
@@ -136,7 +151,23 @@ export default function createRoutes(themeRoutes) {
       layout: DefaultLayout,
       exact: true,
 
-    }, {
+    },
+    {
+      path: '/my-orders',
+      layout: DefaultLayout,
+      element: MyOrders,
+    },
+    {
+      path: '/order-details/:_id',
+      layout: DefaultLayout,
+      element: OrderDetails,
+    },
+    {
+      path: '/order/:_id',
+      layout: DefaultLayout,
+      element: Order,
+    },
+    {
       path: '/a/:_entity/:_id/:_slug',
       element: Entities,
       layout: DefaultLayout,

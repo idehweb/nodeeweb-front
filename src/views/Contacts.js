@@ -4,7 +4,7 @@ import {Col, Container, Row,Button} from 'shards-react';
 import store from "#c/functions/store";
 import {getContacts,addToMyContacts} from "#c/functions";
 import {Navigate} from "react-router-dom";
-import {io} from "socket.io-client"
+// import {io} from "socket.io-client"
 import {withTranslation} from 'react-i18next';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 // Import Swiper styles

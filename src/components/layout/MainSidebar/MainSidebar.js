@@ -15,10 +15,12 @@ export default function NavbarToggle(props) {
   // let [width, height] = useWindowSize();
 
 
-  const classes = clsx('main-sidebar', 'px-0', 'col-12', menuVisible && 'open');
+  const classes = clsx('main-sidebar', 'px-0', 'col-9', menuVisible && 'open');
 // console.log('width',width);
   return (
-    <Col tag="aside" className={classes} lg={{size: 4}} md={{size: 5}} sm={{size: 5}}>
+    <>
+      {menuVisible && <div className={'back-drop'}></div>}
+      <Col tag="aside" className={classes} lg={{size: 4}} md={{size: 5}} sm={{size: 5}}>
       {/*<div className="version">Ver: {APP_VERSION}</div>*/}
       {/*<SidebarMainNavbar hideLogoText={props.hideLogoText}/>*/}
 
@@ -27,6 +29,6 @@ export default function NavbarToggle(props) {
 
       {/*<SidebarAttrItems {...props} />*/}
       <SidebarFooterNavbar hideLogoText={props.hideLogoText}/>
-    </Col>
+    </Col></>
   );
 }

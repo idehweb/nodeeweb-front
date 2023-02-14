@@ -53,7 +53,7 @@ function AddToCardButton({item, text = '',variable=false,children, t}) {
   if (Navigate) {
     console.log('Navigate',Navigate);
     // history(Navigate)
-    // return <Navigate to={Navigate}/>;
+    return <Navigate to={Navigate}/>;
   }
   if ((item.single && !item.in_stock) || (item.single && !item.quantity)) {
     return <div className={'outOfStock '+item.type}>
@@ -80,7 +80,7 @@ function AddToCardButton({item, text = '',variable=false,children, t}) {
 
   return (
     <div className="AddToCardButton">
-      {(count !== 0) && <Button size="md" className={'kjhgfgh'} theme="primary">
+      {(count !== 0) && <Button size="md" className={'buy-button kjhgfgh'} theme="primary">
         <RemoveCircleOutlineIcon className={"left"} onClick={(e) => {
           removeItem(item);
         }} />
@@ -95,10 +95,11 @@ function AddToCardButton({item, text = '',variable=false,children, t}) {
         }} />
       </Button>}
       {count === 0 &&
-      <Button size="md" className={'kjhgfgh empty-card'} theme="primary" onClick={(e) => {
+      <Button size="md" className={'buy-button kjhgfgh empty-card '} theme="primary" onClick={(e) => {
         if (text && text === t('options') && !item.single) {
           let title=encodeURIComponent(item.title.fa.replace(/\\|\//g,''));
-          SetNavigate('/product/' + item._id + '/' + title);
+          // SetNavigate('/product/' + item._id + '/' + title);
+          history('/product/' + item._id + '/' + title)
         }
         else {
           // console.log('item',item);

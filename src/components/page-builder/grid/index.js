@@ -28,66 +28,49 @@ import _ from "underscore";
 import {useSelector} from "react-redux/es/index";
 import {useNavigate, useParams} from "react-router-dom";
 
-let offset = 0
 const getURIParts = (url) => {
-  return new URL(url)
+  var loc = new URL(url)
+  return loc
 }
-const Pagination = (props) => {
-  let url = isClient ? new URL(window.location.href) : "";
-  let theurl = getURIParts(url);
+
+const Grid = (props) => {
+  console.log('Pagination...', props)
   let navigate = useNavigate();
+
   const [tracks, settracks] = useState([]);
   const [counts, setcount] = useState(0);
   const [theload, settheload] = useState(false);
-  let {match, location, history, t} = props;
+  let {match, location, history, t, url} = props;
   let {element = {}, params = {}} = props;
   let {data = {}, settings = {}} = element;
   let {general = {}} = settings;
   let {fields = {}} = general;
-  let {entity = '', customQuery, populateQuery} = fields;
+  let {entity = '', customQuery, populateQuery,limit,childClasses="col-6 col-sm-4 col-md-3 col-lg-3"} = fields;
   let mainParams = useParams();
-  offset = url.searchParams.get("offset")
-  limit = url.searchParams.get("limit")
-  if (!offset) {
-    offset = 0;
-  }
-  if (!limit) {
-    limit = 32;
-  }
-  console.log('Pagination...', props, offset, limit)
-
   // let params = data;
-  // if (!params.offset) {
-  //   params.offset = 0
-  // }
-  // if (!params.limit) {
-  //   params.limit = 24
-  // }
+  if (!params.offset) {
+    params.offset = 0
+  }
+  if (!params.limit) {
+    params.limit = 24
+  }
+  if(limit){
+    params.limit = limit
 
+  }
+  url = isClient ? new URL(window.location.href) : "";
+  let theurl = getURIParts(url);
   // theurl=theurl.split('/');
   // console.log('mainParams',theurl[1])
 
   const postCardMode = useSelector((st) => st.store.postCardMode, _.isEqual);
-  let device = isClient ? (url.searchParams.get("device") || "") : "";
-  let brand = isClient ? (url.searchParams.get("brand") || "") : "";
-  let productCategory = isClient ? (url.searchParams.get("productCategory") || "") : "";
-  offset = isClient ? (url.searchParams.get("offset") || "") : "";
-  let limit = isClient ? (url.searchParams.get("limit") || "") : "";
+
   // console.log('general', general)
   // console.log('params', params)
   // const params = useParams();
   const loadProductItems = async (page, filter = {}) => {
     // return
-    console.log('url', url)
-    offset = url.searchParams.get("offset")
-    if (!offset) {
-      offset = 0
-    }
-    limit = url.searchParams.get("limit")
-    if (!limit) {
-      limit = 32
-    }
-    console.log('loadProductItems', params, offset, limit)
+    console.log('loadProductItems', params, params.offset)
     // setLoadingMoreItems(true);
 
     // settracks([...[]]);
@@ -95,38 +78,42 @@ const Pagination = (props) => {
     settheload(true)
     let query = {};
     // params = useParams();
-    // console.log('customQuery', customQuery)
+    console.log('customQuery', customQuery)
     if (customQuery) {
       if (typeof customQuery == 'string') {
         customQuery = JSON.parse(customQuery);
       }
       Object.keys(customQuery).forEach((item) => {
-        // console.log('customQuery', customQuery)
+        console.log('customQuery', customQuery)
         let main = customQuery[item];
-        // console.log('main', main)
+        console.log('main', main)
         // console.log('params._id', params._id)
         if (params._id) {
-          let theVariable = params._id;
+          let theVariable=params._id;
           const json2 = isStringified(theVariable);
           if (typeof json2 == "object") {
-            console.log('theVariable', theVariable)
-          } else {
-            theVariable = JSON.stringify(theVariable)
+            console.log('theVariable',theVariable)
+          }else{
+            theVariable=JSON.stringify(theVariable)
 
           }
           main = main.replace('"params._id"', theVariable)
           main = main.replace("'params._id'", theVariable)
           main = main.replace('params._id', theVariable)
         }
-        // console.log('item', item)
-        // console.log('customQuery', customQuery)
-        // console.log('customQuery[item]', customQuery[item])
-        // console.log('main', main)
-
+        // main = main.replace('params._id', JSON.stringify(params._id))
+        console.log('item', item)
+        console.log('customQuery', customQuery)
+        console.log('customQuery[item]', customQuery[item])
+        console.log('main', main)
+        // if (typeof main == 'string')
         function isStringified(jsonValue) { // use this function to check
           try {
+            console.log("need to parse");
             return JSON.parse(jsonValue);
           } catch (err) {
+            console.log("not need to parse");
+
             return jsonValue;
           }
         }
@@ -134,51 +121,34 @@ const Pagination = (props) => {
         const json = isStringified(main);
 
         if (typeof json == "object") {
+          console.log("string is a valid json")
           query[item] = JSON.parse(main)
+
         } else {
-          main = main.replaceAll(/\"/g, "")
+          console.log("string is not a valid json", main)
+          //remove ""
+          main=main.replaceAll(/\"/g, "")
           query[item] = (main)
         }
 
       })
     }
-    console.log("==> loadProductItems() offset:", offset, "filter:", filter, "query:", query);
-    let search = isClient ? (url.searchParams.get("search") || "") : "";
-
-    if (search) {
-      query.search = search;
-    }
-    if (device) {
-      query.device = device;
-    }
-    if (brand) {
-      query.brand = brand;
-    }
-    if (productCategory) {
-      query.productCategory = productCategory;
-    }
+    console.log("==> loadProductItems() offset:", params.offset, "filter:", filter, "query:", query);
     if (query) {
       filter = JSON.stringify(query)
     }
-    console.log('limit', limit, 'offset', offset)
-    getEntitiesWithCount(entity || params.entity, offset, limit, "", filter, JSON.stringify(populateQuery)).then((resp) => {
+    // let newOffset = (await offset) + 24;
+    getEntitiesWithCount(entity || params.entity, params.offset, params.limit, "", filter, JSON.stringify(populateQuery)).then((resp) => {
+      // setLoadingMoreItems(false);
       afterGetData(resp);
     });
   };
 
+
   useEffect(() => {
-    console.log("\n\n\nuse effect");
-
-    if (isClient) {
-      if (url.searchParams.get("offset") != offset) {
-
-        offset = url.searchParams.get("offset");
-        loadProductItems(0);
-
-      }
-
-    }
-  }, []);
+    console.log("params.offset");
+    loadProductItems(0);
+  }, [params.offset]);
 
   useEffect(() => {
     console.log("params._id");
@@ -187,13 +157,14 @@ const Pagination = (props) => {
   //
 
   const handleChangePage = (event, newPage) => {
-    console.clear()
-
-    url = isClient ? new URL(window.location.href) : "";
-
     let mainPath = theurl.pathname.split('/');
-    // console.log('mainPath', mainPath[1])
+    console.log('mainPath', mainPath[1])
+
+    // theurl
     console.log('new offset:', newPage * params.limit)
+    // console.log('event',event)
+    // settracks([])
+    // settheload(true)
     if (isClient) {
       window.scrollTo(0, 0)
     }
@@ -201,31 +172,13 @@ const Pagination = (props) => {
     if (params._id) {
       x += `/${params._id}`
     }
-
-    if (isClient) {
-      offset = (url.searchParams.get("offset") || "");
-      limit = (url.searchParams.get("limit") || "");
-      console.log("offset:", offset, "limit:", limit)
-      if (limit) {
-        url.searchParams.set('limit', limit);
-
-      } else {
-        url.searchParams.set('limit', 32);
-        limit = 32
-      }
-      if (offset) {
-        url.searchParams.set('offset', newPage * limit);
-      } else {
-        url.searchParams.set('offset', newPage * limit);
-
-      }
-
-      console.log('url', url)
-      console.log('full url:', url.pathname + url.search, newPage * limit)
-      navigate(url.pathname + url.search)
-      loadProductItems(newPage * limit)
+    if (params.offset) {
+      x += `/${newPage * params.limit}`
     }
-
+    if (params.limit) {
+      x += `/${params.limit}`
+    }
+    navigate(x)
     // renewData(newPage * rowsPerPage);
     // setPage(newPage);
   };
@@ -267,13 +220,6 @@ const Pagination = (props) => {
     </div>
   );
   // return JSON.stringify(params)
-  console.log('offset', offset, 'limit', limit)
-  if (!offset) {
-    offset = 0;
-  }
-  if (!limit) {
-    limit = 32;
-  }
   return (<div className="main-content-container fghjkjhgf ">
 
       <Row className={"m-0"}>
@@ -286,38 +232,34 @@ const Pagination = (props) => {
           tag="main">
           {/*<Sort/>*/}
           <Row className={" p-3 productsmobile"}>
-
             {tracks && tracks.map((i, idxx) => (
-              <Col key={idxx} lg="3"
-                   md="3"
-                   sm="4"
-                   xs="6" className={"nbghjk post-style-" + postCardMode}>
+              <Col key={idxx} className={childClasses+" nbghjk post-style-" + postCardMode}>
                 {entity == 'post' && <BlogCard item={i} method={postCardMode}/>}
-                {entity != 'post' && <PostCard item={i} method={postCardMode}/>}
+                {entity != 'post' && <PostCard element={element} item={i} method={postCardMode}/>}
 
               </Col>
             ))}
           </Row>
           <Row className={" p-3 productsmobile"}>
-            {counts > 0 && (
-              <TablePagination
-                rowsPerPageOptions={[(limit), (limit * 2), (limit * 3), (limit * 4)]}
-                component="div"
-                count={parseInt(counts)}
-                rowsPerPage={limit}
-                page={parseInt(offset / limit)}
-                labelRowsPerPage={t('number per row:')}
-                nexticonbuttontext={t('next page')}
-                previousiconbuttontext={t('previous page')}
-                labelDisplayedRows={({from, to, count}) =>
-                  `${from} ${t('to')} ${to === -1 ? count : to} ${t(
-                    'from'
-                  )} ${counts} ${t('item')}`
-                }
-                onPageChange={(e, newPage) => handleChangePage(e, newPage)}
-                onRowsPerPageChange={(e, newLimit) => handleChangeRowsPerPage(e, newLimit)}
-              />
-            )}
+            {/*{counts > 0 && (*/}
+              {/*<TablePagination*/}
+                {/*rowsPerPageOptions={[10, 20, 50, 100]}*/}
+                {/*component="div"*/}
+                {/*count={parseInt(counts)}*/}
+                {/*rowsPerPage={params.limit}*/}
+                {/*page={parseInt(params.offset / params.limit)}*/}
+                {/*labelRowsPerPage={t('number per row:')}*/}
+                {/*nexticonbuttontext={t('next page')}*/}
+                {/*previousiconbuttontext={t('previous page')}*/}
+                {/*labelDisplayedRows={({from, to, count}) =>*/}
+                  {/*`${from} ${t('to')} ${to === -1 ? count : to} ${t(*/}
+                    {/*'from'*/}
+                  {/*)} ${counts} ${t('item')}`*/}
+                {/*}*/}
+                {/*onPageChange={(e, newPage) => handleChangePage(e, newPage)}*/}
+                {/*onRowsPerPageChange={(e, newLimit) => handleChangeRowsPerPage(e, newLimit)}*/}
+              {/*/>*/}
+            {/*)}*/}
 
 
           </Row>
@@ -359,4 +301,4 @@ export const HomeServer = [
     func: fetchCats,
     params: null
   }];
-export default withTranslation()(Pagination);
+export default withTranslation()(Grid);

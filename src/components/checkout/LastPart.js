@@ -28,7 +28,7 @@ const LastPart2 = (props) => {
 
 // class LastPart extends React.Component {
 const LastPart = (props) => {
-
+console.log('props',props)
   // constructor(props) {
   //   super(props);
   const {t, theParams} = props;

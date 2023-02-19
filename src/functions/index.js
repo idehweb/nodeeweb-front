@@ -1126,6 +1126,19 @@ export const sendExtra = (d, obj) => {
       });
   });
 };
+
+export const submitForm = (_id, obj) => {
+  return new Promise(function (resolve, reject) {
+    postData(`${ApiUrl}/form/entry/${_id}`, obj, false)
+      .then((data) => {
+        let mainD = data["data"];
+        resolve(mainD);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
 export const createRecord = (model, obj) => {
   return new Promise(function (resolve, reject) {
     console.log('obj', obj)

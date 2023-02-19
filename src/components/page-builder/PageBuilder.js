@@ -36,8 +36,6 @@ export function ShowElement(p) {
   switch (type) {
     case "text":
       return <TITLE element={element}/>;
-    // case "image":
-    //     return <IMAGE element={element}/>;
     case "textnode":
       return <TEXTNODE element={element}/>;
     case "swiper-wrapper":
@@ -406,10 +404,6 @@ export function TheForm(props) {
   let {type, children, settings, classes} = element;
   let {general} = settings;
   let {fields} = general;
-  if (!fields) {
-    return
-  }
-  let {entity} = fields;
 
   return <Form element={element}/>
 

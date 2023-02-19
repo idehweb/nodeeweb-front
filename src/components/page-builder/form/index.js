@@ -5,27 +5,14 @@ import LoadingComponent from "#c/components/components-overview/LoadingComponent
 import CreateForm from "#c/components/form/CreateForm";
 
 import {
-  enableAdmin,
-  enableAgent,
-  enableSell,
-  fetchCats,
-  getEntitiesWithCount,
   getEntity,
-  getPosts,
-  getPostsByCat,
   isClient,
-  loadPosts,
-  loadProducts,
-  SaveData,
-  setCountry
+  submitForm
 } from "#c/functions/index";
 
-import {ProductsSliderServer} from "#c/components/components-overview/ProductsSlider";
-import {PostSliderServer} from "#c/components/components-overview/PostSlider";
 import {withTranslation} from "react-i18next";
-import _ from "underscore";
-import {useSelector} from "react-redux/es/index";
 import {useNavigate, useParams} from "react-router-dom";
+import {toast} from "react-toastify";
 
 const getURIParts = (url) => {
   var loc = new URL(url)
@@ -55,14 +42,6 @@ const Form = (props) => {
   }
   url = isClient ? new URL(window.location.href) : "";
   let theurl = getURIParts(url);
-  // theurl=theurl.split('/');
-  // console.log('mainParams',theurl[1])
-
-  const postCardMode = useSelector((st) => st.store.postCardMode, _.isEqual);
-
-  // console.log('general', general)
-  // console.log('params', params)
-  // const params = useParams();
   const loadForm = async () => {
 
     getEntity('form', _id).then((resp) => {
@@ -177,11 +156,20 @@ const Form = (props) => {
               rules={{fields: tracks}}
               onSubmit={(e) => {
                 console.log('onSubmit',e)
+                submitForm(_id,e).then(d=>{
+                  if(d.success && d.message)
+                  toast(t(d.message), {
+                    type: "success"
+                  });
+                }).cache(d=>{
+                  toast(t('sth wrong happened!'), {
+                    type: "error"
+                  });
+                })
               }}
               buttons={[]}
               theFields={tracks}
               fields={theformFields}/>}
-            {/*{JSON.stringify(tracks)}*/}
 
           </Row>
 
@@ -192,12 +180,5 @@ const Form = (props) => {
 };
 export const HomeServer = [
 
-  {
-    func: loadPosts,
-    params: null
-  },
-  {
-    func: fetchCats,
-    params: null
-  }];
+  ];
 export default withTranslation()(Form);

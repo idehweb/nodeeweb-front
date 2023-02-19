@@ -23,22 +23,22 @@ import {
 
 function CreateForm(props) {
   // console.clear()
-  console.log('==> input: ',props)
+  // console.log('==> input: ',props)
   let {fields, rules = {fields: []},theFields=false, t} = props;
   // console.clear();
 
 
   const themeData = useSelector((st) => st.store.themeData);
   if (!themeData) {
-    console.log('not themeData', themeData);
+    // console.log('not themeData', themeData);
 
     return
   }
-  console.log('fields', fields);
-  console.log('rules', {...{fields:rules.fields}});
+  // console.log('fields', fields);
+  // console.log('rules', {...{fields:rules.fields}});
   const [theRules, setTheRules] = useState({...{fields:rules.fields}});
   useEffect(() => {
-    console.log('useEffect',rules)
+    // console.log('useEffect',rules)
 
     if (!theRules || (theRules && !theRules.fields) || (theRules.fields && !theRules.fields[0])) {
       Object.keys(fields).forEach((fi) => {
@@ -60,7 +60,7 @@ function CreateForm(props) {
   }, []);
 
   const TheField = (field) => {
-    console.log('field', field);
+    // console.log('field', field);
     if (!field) {
       return <>no field</>
     }
@@ -69,7 +69,7 @@ function CreateForm(props) {
     // moment(field.value, "YYYY-MM-DD[T]HH:mm:ss.SSS[Z]", true).isValid())
 
     if (type == 'date') {
-      console.log('date')
+      // console.log('date')
       return <Col
         sm={size ? size.sm : ''}
         lg={size ? size.lg : ''}
@@ -86,7 +86,7 @@ function CreateForm(props) {
       </Col>
     }
     if ((type == 'string' || type=='input') || !type) {
-      console.log('string')
+      // console.log('string')
 
       return <Col
         sm={size ? size.sm : ''}
@@ -203,10 +203,10 @@ function CreateForm(props) {
                     console.log(props)
                     console.log(target.files[0])
                     uploadMedia(target.files[0], (e) => {
-                      console.log('e', e)
+                      // console.log('e', e)
                     }).then(x => {
                       if (x.success && x.media && x.media.url) {
-                        console.log('set', name, x.media.url)
+                        // console.log('set', name, x.media.url)
 
                         field.setValue(name, x.media.url)
                       }
@@ -222,18 +222,7 @@ function CreateForm(props) {
             )
           }}
         </Field>
-        {/*<Field*/}
-        {/*name={field.name}*/}
-        {/*onClick={() => {*/}
-        {/*console.log('open box')*/}
-        {/*}}*/}
-        {/*component="input"*/}
-        {/*type="file"*/}
-        {/*placeholder={placeholder || field.label}*/}
-        {/*className="mb-2 form-control"*/}
-        {/*/>*/}
-        {/*{field.value}*/}
-        {/*<Button inline-block  >Choose Media</Button>*/}
+
 
       </Col>
     }
@@ -247,20 +236,16 @@ function CreateForm(props) {
         <Field
           name={name} className="mb-2 form-control">
           {props => {
-            // console.log('props', props)
             return (
               <div className={'max-width100'}>
                 {!props.input.value && <input
                   name={props.input.name}
                   onChange={(props) => {
                     let {target} = props
-                    console.log(props)
-                    console.log(target.files[0])
                     uploadMedia(target.files[0], (e) => {
                       console.log('e', e)
                     }).then(x => {
                       if (x.success && x.media && x.media.url) {
-                        console.log('set', name, x.media.url)
 
                         field.setValue(name, x.media.url)
                       }
@@ -274,18 +259,7 @@ function CreateForm(props) {
             )
           }}
         </Field>
-        {/*<Field*/}
-        {/*name={field.name}*/}
-        {/*onClick={() => {*/}
-        {/*console.log('open box')*/}
-        {/*}}*/}
-        {/*component="input"*/}
-        {/*type="file"*/}
-        {/*placeholder={placeholder || field.label}*/}
-        {/*className="mb-2 form-control"*/}
-        {/*/>*/}
-        {/*{field.value}*/}
-        {/*<Button inline-block  >Choose Media</Button>*/}
+
 
       </Col>
     }
@@ -299,7 +273,6 @@ function CreateForm(props) {
       if (theRules && theRules.fields)
         theRules.fields.forEach((item, i) => {
           if (item.type == 'object' && values[item.name] instanceof Array && item.value) {
-            console.log('can we fix:', item)
             let obj = {};
             item.value.forEach((its) => {
               if (its)
@@ -311,52 +284,17 @@ function CreateForm(props) {
       props.onSubmit(values)
     }
   }
-  // console.log("fields:", fields)
-  // console.log("rules:", rules)
-
-  // console.clear()
-
-  // console.log('iValues', iValues)
   console.log('render',theRules)
-  // return JSON.stringify(theRules)
   if (themeData)
     return (
       <div className="fields pt-2">
         <Form
           onSubmit={onSubmit}
-          // validate={v => {
-          //   // console.clear()
-          //   let values = v;
-          //   if (theRules && theRules.fields)
-          //     theRules.fields.forEach((item, i) => {
-          //       if (item.type == 'object' && values[item.name] instanceof Object && item.value) {
-          //         console.log('can we fix:', item)
-          //         let arr = [];
-          //         Object.keys(item.value).forEach((it) => {
-          //           let obj = {
-          //             property: it,
-          //             value: item.value[it]
-          //           }
-          //           arr.push(obj)
-          //         })
-          //         values[item.name] = arr;
-          //       }
-          //     })
-          //   console.log('validate*********', values)
-          //   console.log('theRules*********', theRules)
-          //   // return values
-          // }}
           initialValues={fields}
           mutators={{
             setValue: ([field, value], state, {changeValue}) => {
-              // console.clear();
-
-              console.log('setValue',field,value)
               changeValue(state, field, () => value)
             },
-            // setMin: (args, state, utils) => {
-            //   utils.changeValue(state, 'apples', () => 1)
-            // },
           }}
           render={({
                      handleSubmit, form, submitting, pristine, values
@@ -365,7 +303,6 @@ function CreateForm(props) {
               <Container>
                 <Row>
                   {theFields && theFields.map((field, index) => {
-                    // console.log(',', field)
                     if (fields[field.name]) {
                       field.value = fields[field.name]
                     }
@@ -379,8 +316,6 @@ function CreateForm(props) {
                         lg: 6,
                       },
                       onChange: (text) => {
-                        // setFields([...fields,])
-                        // this.state.checkOutBillingAddress.add.data[d] = text;
                       },
                       className: 'rtl',
                       placeholder: '',
@@ -389,14 +324,11 @@ function CreateForm(props) {
 
                     };
                     if (field.value) {
-                      // console.log('##########################the vvalue is:',field.value)
                       lastObj['value'] = field.value;
                     }
-                    // console.log('lastObj', lastObj, form.mutators.setValue)
                     return (<TheField key={index} {...lastObj} setValue={form.mutators.setValue}/>);
                   })}
                   {!theFields && theRules?.fields?.map((field, index) => {
-                    // console.log(',', field)
                     if (fields[field.name]) {
                       field.value = fields[field.name]
                     }
@@ -410,8 +342,6 @@ function CreateForm(props) {
                         lg: 6,
                       },
                       onChange: (text) => {
-                        // setFields([...fields,])
-                        // this.state.checkOutBillingAddress.add.data[d] = text;
                       },
                       className: 'rtl',
                       placeholder: '',
@@ -420,10 +350,8 @@ function CreateForm(props) {
 
                     };
                     if (field.value) {
-                      // console.log('##########################the vvalue is:',field.value)
                       lastObj['value'] = field.value;
                     }
-                    // console.log('lastObj', lastObj, form.mutators.setValue)
                     return (<TheField key={index} {...lastObj} setValue={form.mutators.setValue}/>);
                   })}
                   <div className="buttons">

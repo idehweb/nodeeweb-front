@@ -143,7 +143,7 @@ class LoginForm extends React.Component {
       password: this.state.password
     })
       .then((res) => {
-        // console.log('store.getState().store', store.getState().store.token, res.token);
+        console.log('store.getState().store',res);
         if (res.success) {
           if(this.props && this.props.goToCheckout){
             console.log('this.props.goToCheckout',this.props.goToCheckout)
@@ -164,8 +164,12 @@ class LoginForm extends React.Component {
           if (res.message) alert(res.message);
         }
       })
-      .then((e) => {
+      .catch((e) => {
         console.log("eee", e);
+        toast(this.props.t(e.message), {
+          type: "error"
+        });
+        // return;
       });
   };
   handleForgotPass = (e) => {
@@ -186,6 +190,12 @@ class LoginForm extends React.Component {
         lastName: r.lastName
 
       });
+      this.state.timer = globalTimerSet;
+      this.myInterval = setInterval(() => {
+        this.setState(({timer}) => ({
+          timer: timer > 0 ? timer - 1 : (this.handleClearInterval())
+        }));
+      }, 1000);
       // } else if (!r.shallWeSetPass && r.userWasInDbBefore) {
       //   this.setState({
       //     isDisplay: false,

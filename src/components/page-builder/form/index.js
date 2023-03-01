@@ -4,11 +4,7 @@ import {Col, Row} from "shards-react";
 import LoadingComponent from "#c/components/components-overview/LoadingComponent";
 import CreateForm from "#c/components/form/CreateForm";
 
-import {
-  getEntity,
-  isClient,
-  submitForm
-} from "#c/functions/index";
+import {getEntity, isClient, submitForm} from "#c/functions/index";
 
 import {withTranslation} from "react-i18next";
 import {useNavigate, useParams} from "react-router-dom";
@@ -63,6 +59,41 @@ const Form = (props) => {
   }, []);
   //
 
+  const returnVariable = (d) => {
+    let {settings = {}, children} = d;
+    let {general = {}} = settings;
+    let {fields = []} = general;
+    let {name, label, value = '', placeholder, classes, sm, lg} = fields;
+    let lastObj = {
+      type: ch.name || 'string',
+      label: label || name,
+      name: name,
+
+      size: {
+        sm: 6,
+        lg: 6,
+      },
+      onChange: (text) => {
+        // setFields([...fields,])
+        // this.state.checkOutBillingAddress.add.data[d] = text;
+      },
+      className: 'rtl ' + (classes ? classes.map(ob => (ob.name ? ob.name : ob)).join(" ") : ""),
+      placeholder: placeholder,
+      child: [],
+      children: children || [],
+      value: value,
+    };
+    if (typeof data[d] == 'object') {
+      lastObj.type = 'object';
+
+    }
+    if (typeof data[d] == 'number') {
+      lastObj.type = 'number';
+    }
+    if (typeof data[d] == 'string') {
+
+    }
+  }
   const afterGetData = (resp, tracks = []) => {
     // console.clear()
     console.log('afterGetData', resp, tracks)
@@ -81,12 +112,19 @@ const Form = (props) => {
       elements.forEach((d) => {
         console.log('d', d)
         // formFields.push()
-        let {settings = {}} = d;
+        let {settings = {}, children} = d;
         let {general = {}} = settings;
         let {fields = []} = general;
-        let {name,label, value='', placeholder,classes,sm,lg} = fields;
+        let {name, label, value = '', placeholder, classes, sm, lg} = fields;
         formFields[name] = value;
+        let theChildren = [];
+        if (children) {
+          children.forEach((ch) => {
 
+            // console.log('type of ',d,typeof data[d])
+            theChildren.push(lastObj)
+          })
+        }
         let lastObj = {
           type: d.name || 'string',
           label: label || name,
@@ -100,9 +138,10 @@ const Form = (props) => {
             // setFields([...fields,])
             // this.state.checkOutBillingAddress.add.data[d] = text;
           },
-          className: 'rtl '+ (classes ? classes.map(ob => (ob.name ? ob.name : ob)).join(" ") : ""),
+          className: 'rtl ' + (classes ? classes.map(ob => (ob.name ? ob.name : ob)).join(" ") : ""),
           placeholder: placeholder,
           child: [],
+          children: children || [],
           value: value,
         };
         if (typeof data[d] == 'object') {
@@ -155,13 +194,13 @@ const Form = (props) => {
             {(theformFields && tracks) && <CreateForm
               rules={{fields: tracks}}
               onSubmit={(e) => {
-                console.log('onSubmit',e)
-                submitForm(_id,e).then(d=>{
-                  if(d.success && d.message)
-                  toast(t(d.message), {
-                    type: "success"
-                  });
-                }).cache(d=>{
+                console.log('onSubmit', e)
+                submitForm(_id, e).then(d => {
+                  if (d.success && d.message)
+                    toast(t(d.message), {
+                      type: "success"
+                    });
+                }).cache(d => {
                   toast(t('sth wrong happened!'), {
                     type: "error"
                   });
@@ -178,7 +217,5 @@ const Form = (props) => {
     </div>
   );
 };
-export const HomeServer = [
-
-  ];
+export const HomeServer = [];
 export default withTranslation()(Form);

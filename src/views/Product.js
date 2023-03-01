@@ -53,8 +53,8 @@ const Product = (props) => {
 
   let st = store.getState().store;
   let admin_token = null;
-  if (st.admin && st.admin.admin_token) {
-    admin_token = st.admin.admin_token;
+  if (st.username) {
+    admin_token = st.username;
   }
   const [mainId, setMainId] = useState(the_id);
   const [tab, setTab] = useState("attributes");
@@ -242,17 +242,10 @@ const Product = (props) => {
             }}><BookmarkAddIcon/></Button>
 
             {admin_token &&
-            <Link to={"/admin/product/edit/" + _id} class={"btn btn-primary"}>
-              {/*<Button onClick={() => {*/}
-              {/*// console.log('item',_id);*/}
-              {/*if (isClient) {*/}
-              {/*// let filePath = path.join(__dirname, "/site_setting/config.js", name);*/}
+            <Link to={"/admin/#/product/" + _id} class={"btn btn-primary"}>
 
-              {/*// window.open(VARIABLE.ADMIN_URL + "/product/edit/"+_id, "_blank").focus();*/}
-              {/*}*/}
-              {/*}}>*/}
               <EditIcon/>
-              {/*</Button>*/}
+
             </Link>}
           </ButtonGroup>
         </div>

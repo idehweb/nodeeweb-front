@@ -8,13 +8,14 @@ import { defaultImg } from "#c/assets/index";
 import { store } from "#c/functions/store";
 
 function PriceChunker({ price,onPlaceOrder, children, t }) {
+  let LIMIT=100000000
   let temp = price,priceArr=[];
   // let [priceArr, SetPriceArr] = useState([]);
-  while (temp > 50000000) {
-    priceArr.push(50000000);
-    temp -= 50000000;
+  while (temp > LIMIT) {
+    priceArr.push(LIMIT);
+    temp -= LIMIT;
   }
-  if(temp>0 && temp <=50000000){
+  if(temp>0 && temp <=LIMIT){
     priceArr.push(temp);
 
   }

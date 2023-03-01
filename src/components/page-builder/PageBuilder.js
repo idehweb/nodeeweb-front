@@ -13,6 +13,7 @@ import Grid from "#c/components/page-builder/grid";
 import LoadMore from "#c/components/page-builder/loadmore";
 import Pagination from "#c/components/page-builder/pagination";
 import Form from "#c/components/page-builder/form";
+import Stepper from "#c/components/page-builder/stepper";
 import Description from "#c/components/page-builder/description";
 import * as Icons from "@mui/icons-material";
 import {Button} from "shards-react";
@@ -87,6 +88,14 @@ export function ShowElement(p) {
       return <PostSlider element={element} content={content} params={params}/>;
     case "row":
       return <GRID_LAYOUT element={element} content={content} params={params}/>;
+    case "tabs":
+      return <THE_TABS element={element} content={content} params={params}/>;
+    case "tab":
+      return <THE_TAB element={element} content={content} params={params}/>;
+    case "steps":
+      return <THE_STEPS element={element} content={content} params={params}/>;
+    case "step":
+      return <THE_STEP element={element} content={content} params={params}/>;
     case "Cell":
       return <GRID_COL element={element} content={content} params={params}/>;
     case "col":
@@ -530,36 +539,61 @@ export function GRID_LAYOUT(props) {
 
 
   return <div
-    // className={"posrel row grid-layout " + (classes ? classes.map(ob => (ob.name ? ob.name : ob)).join(" ") : "")}
     className={"posrel row grid-layout " + (classes ? classes : "") + (showInDesktop ? ' showInDesktop ' : '') + (showInMobile ? ' showInMobile ' : '')}
     style={style}>
-    {/*{JSON.stringify(style)}*/}
     {children && children.map((item, k) => {
-      // console.log("item.name", item.name);
-      // return <div
-      //   key={k}
-      //   className={"col " + (typeof classes == 'string' ? classes : classes ? classes.map(ob => (ob.name ? ob.name : ob)).join(" ") : "")}>
-      //   {item instanceof Array && item.map((tr,trx) => <ShowElement key={trx} element={{...tr,handleCard:handleCard,card:card}}/>)}
-      //   {!(item instanceof Array) && <ShowElement key={k+'98'} element={item} content={content}/>}
-      // </div>;
       return <ShowElement params={params} key={k} element={{...item, handleCard: handleCard, card: card}}/>
-      // {item instanceof Array && item.map((tr,trx) => <ShowElement key={trx} element={{...tr,handleCard:handleCard,card:card}}/>)}
 
     })}</div>;
-  // switc¬h (type) {
-  //     case 'SLIDER':
-  //         return "slider";
-  //     case "GRID_LAYOUT":
-  //         return "GRID_LAYOUT";
-  //     case "GRID_COL":
-  //         return "GRID_COL";
-  //     default :
-  //         return <></>
-  // }
 }
 
-export function GRID_COL(props) {
-  // console.clear();
+export function THE_TABS(props) {
+  let {element, content, params} = props
+  // let {type, components, children, classes, handleCard, card} = element;
+  // console.log("GRID_LAYOUT", props);
+  let {type, components, classess, children, settings, handleCard, card} = element;
+  let {general} = settings;
+  let {fields} = general;
+  if (!fields) {
+    return
+  }
+  let {link, title, src, classes, showInDesktop, showInMobile} = fields;
+  let style = setStyles(fields);
+
+
+  return <div
+    className={"posrel row grid-layout " + (classes ? classes : "") + (showInDesktop ? ' showInDesktop ' : '') + (showInMobile ? ' showInMobile ' : '')}
+    style={style}>
+    {children && children.map((item, k) => {
+      return <ShowElement params={params} key={k} element={{...item, handleCard: handleCard, card: card}}/>
+
+    })}</div>;
+}
+
+export function THE_STEPS(props) {
+  let {element, content, params} = props
+  // let {type, components, children, classes, handleCard, card} = element;
+  // console.log("GRID_LAYOUT", props);
+  let {type, components, classess, children, settings, handleCard, card} = element;
+  let {general} = settings;
+  let {fields} = general;
+  if (!fields) {
+    return
+  }
+  let {link, title, src, classes, showInDesktop, showInMobile} = fields;
+  let style = setStyles(fields);
+return 'jk'
+return <Stepper/>
+  return <div
+    className={"posrel row grid-layout " + (classes ? classes : "") + (showInDesktop ? ' showInDesktop ' : '') + (showInMobile ? ' showInMobile ' : '')}
+    style={style}>
+    {children && children.map((item, k) => {
+      return <ShowElement params={params} key={k} element={{...item, handleCard: handleCard, card: card}}/>
+
+    })}</div>;
+}
+
+export function THE_STEP(props) {
 
   const {element, content, params} = props;
 
@@ -567,15 +601,49 @@ export function GRID_COL(props) {
   let {general} = settings;
   let {fields} = general;
   let {showInDesktop, showInMobile, direction, display, classess, classes} = fields;
-  // console.log("GRID_COL ", classes);
   let style = setStyles({...fields, direction: direction, display: display});
-// return JSON.stringify(style);
   return <div
     style={style}
     className={" col  " + (classess ? classess + ' ' : ' ') + (showInDesktop ? ' showInDesktop ' : '') + (showInMobile ? ' showInMobile ' : '') + (typeof classes == 'string' ? classes : classes ? classes.map(ob => (ob.name ? ob.name : ob)).join(" ") : "")}>
-    {/*<div className={'m-2'}>{JSON.stringify(element.children)}</div>*/}
     {children && children.map((child, ch) => {
-      // return JSON.stringify(child);
+      return <ShowElement params={params} element={{...child, handleCard: handleCard, card: card}} key={ch}
+                          content={{}}/>
+
+    })}
+  </div>;
+}
+export function GRID_COL(props) {
+
+  const {element, content, params} = props;
+
+  const {payload, type, components, children, settings, handleCard, card} = element;
+  let {general} = settings;
+  let {fields} = general;
+  let {showInDesktop, showInMobile, direction, display, classess, classes} = fields;
+  let style = setStyles({...fields, direction: direction, display: display});
+  return <div
+    style={style}
+    className={" col  " + (classess ? classess + ' ' : ' ') + (showInDesktop ? ' showInDesktop ' : '') + (showInMobile ? ' showInMobile ' : '') + (typeof classes == 'string' ? classes : classes ? classes.map(ob => (ob.name ? ob.name : ob)).join(" ") : "")}>
+    {children && children.map((child, ch) => {
+      return <ShowElement params={params} element={{...child, handleCard: handleCard, card: card}} key={ch}
+                          content={{}}/>
+
+    })}
+  </div>;
+}
+export function THE_TAB(props) {
+
+  const {element, content, params} = props;
+
+  const {payload, type, components, children, settings, handleCard, card} = element;
+  let {general} = settings;
+  let {fields} = general;
+  let {showInDesktop, showInMobile, direction, display, classess, classes} = fields;
+  let style = setStyles({...fields, direction: direction, display: display});
+  return <div
+    style={style}
+    className={" col  " + (classess ? classess + ' ' : ' ') + (showInDesktop ? ' showInDesktop ' : '') + (showInMobile ? ' showInMobile ' : '') + (typeof classes == 'string' ? classes : classes ? classes.map(ob => (ob.name ? ob.name : ob)).join(" ") : "")}>
+    {children && children.map((child, ch) => {
       return <ShowElement params={params} element={{...child, handleCard: handleCard, card: card}} key={ch}
                           content={{}}/>
 

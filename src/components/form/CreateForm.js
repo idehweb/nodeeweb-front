@@ -5,6 +5,7 @@ import {Button, Col, Container, Row} from 'shards-react';
 import {useSelector} from "react-redux";
 import {MainUrl, uploadMedia} from "#c/functions/index";
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import Stepper from "#c/components/page-builder/stepper";
 
 import {
   FieldArray,
@@ -67,7 +68,6 @@ function CreateForm(props) {
     const {type, kind, size, className, options, disabled = false, name, label, placeholder} = field;
     // console.log('themeData',  themeData['models']);
     // moment(field.value, "YYYY-MM-DD[T]HH:mm:ss.SSS[Z]", true).isValid())
-
     if (type == 'date') {
       // console.log('date')
       return <Col
@@ -84,6 +84,11 @@ function CreateForm(props) {
         />
 
       </Col>
+    }
+    if (type == 'steps') {
+      // console.log('date')
+      return JSON.stringify(field)
+      return <Stepper/>
     }
     if ((type == 'string' || type=='input') || !type) {
       // console.log('string')

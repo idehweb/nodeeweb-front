@@ -145,6 +145,7 @@ console.log('props',props)
     if (price)
       return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " " + t(themeData.currency)
   }
+  let LIMIT=100000000
   let temp = amount;
   return (
     <Card className="mb-3 pd-1">
@@ -316,7 +317,7 @@ console.log('props',props)
               <GetGateways setPaymentMethod={props.theParams.setPaymentMethod}/>
               {/*</ListGroup>*/}
             </ListGroupItem>
-            {Boolean(amount > 50000000) && <ListGroupItem className={'d-flex px-3 border-0 '}>
+            {Boolean(amount > LIMIT) && <ListGroupItem className={'d-flex px-3 border-0 '}>
 
               {[<div className={'flex-1'} key={'xo8'}>
                 <div className={'ttl'}>{'سقف پرداخت اینترنتی ۵۰ میلیون تومان است.'}</div>
@@ -355,7 +356,7 @@ console.log('props',props)
             className="material-icons">{'chevron_right'}</i>{t('prev')}</Button>
         </ButtonGroup>
         {/*{amount}*/}
-        {Boolean(amount <= 50000000) && <ButtonGroup size="sm left">
+        {Boolean(amount <= LIMIT) && <ButtonGroup size="sm left">
           <Button className={'place-order '} left={"true"} onClick={() => onPlaceOrder(0)}>{t('Place Order')}</Button>
 
         </ButtonGroup>}

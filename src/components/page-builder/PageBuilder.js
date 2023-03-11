@@ -92,10 +92,7 @@ export function ShowElement(p) {
       return <THE_TABS element={element} content={content} params={params}/>;
     case "tab":
       return <THE_TAB element={element} content={content} params={params}/>;
-    case "steps":
-      return <THE_STEPS element={element} content={content} params={params}/>;
-    case "step":
-      return <THE_STEP element={element} content={content} params={params}/>;
+ 
     case "Cell":
       return <GRID_COL element={element} content={content} params={params}/>;
     case "col":

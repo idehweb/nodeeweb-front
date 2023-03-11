@@ -28,7 +28,6 @@ function FieldText(props) {
       type="text"
       placeholder={placeholder ? placeholder : (label ? t(label) : t(name))}
       onChange={(e) => {
-        console.log(e.target.value, name)
         field.setValue(name, e.target.value)
 
       }}

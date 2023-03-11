@@ -87,9 +87,7 @@ function CreateForm(props) {
       </Col>
     }
     if (type === 'steps') {
-      // console.log('date')
-      // return JSON.stringify(field)
-      return <DemoSteps/>
+      return <DemoSteps field={field}/>
     }
     if ((type === 'string' || type==='input') || !type) {
       // console.log('string')

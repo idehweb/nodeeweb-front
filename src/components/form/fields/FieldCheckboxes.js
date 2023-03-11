@@ -18,7 +18,7 @@ function FieldCheckboxes({field}) {
   const {t} = useTranslation();
 
   const {
-    type, kind, size, className, name, label, placeholder, value = [], child, setValue, initialChild = {
+    type, kind,style, size, className, name, label, placeholder, value = [], child, setValue, initialChild = {
       attribute: "",
       values: []
     }
@@ -68,6 +68,7 @@ function FieldCheckboxes({field}) {
     </div>
     <Field
       name={name}
+      style={style}
       className="mb-2 form-control">
       {() => {
 
@@ -110,7 +111,7 @@ function FieldCheckboxes({field}) {
                     name: fieldName,
                     setValue: setValue
                   }}/></>;
-                if (idx2 == 1 && (theVal[ke] && theVal[ke]['list'])) {
+                if (idx2 === 1 && (theVal[ke] && theVal[ke]['list'])) {
                   return <>
 
                     <Component key={idx2} field={{

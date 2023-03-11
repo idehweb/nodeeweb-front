@@ -19,15 +19,15 @@ import {
   FieldSelect,
   FieldServer,
   FieldText,
+  FieldRadio,
   FieldTextarea
 } from "#c/components/form/fields";
+import DemoSteps from "#c/components/page-builder/stepper/demo";
 
 function CreateForm(props) {
   // console.clear()
-  // console.log('==> input: ',props)
   let {fields, rules = {fields: []},theFields=false, t} = props;
   // console.clear();
-
 
   const themeData = useSelector((st) => st.store.themeData);
   if (!themeData) {
@@ -61,14 +61,14 @@ function CreateForm(props) {
   }, []);
 
   const TheField = (field) => {
-    // console.log('field', field);
+    console.log('fieldfieldfieldfield', field);
     if (!field) {
       return <>no field</>
     }
-    const {type, kind, size, className, options, disabled = false, name, label, placeholder} = field;
+    const {type,style, kind, size, className, options, disabled = false, name, label, placeholder} = field;
     // console.log('themeData',  themeData['models']);
     // moment(field.value, "YYYY-MM-DD[T]HH:mm:ss.SSS[Z]", true).isValid())
-    if (type == 'date') {
+    if (type === 'date') {
       // console.log('date')
       return <Col
         sm={size ? size.sm : ''}
@@ -81,16 +81,17 @@ function CreateForm(props) {
           type="date"
           placeholder={placeholder || label}
           className="mb-2 form-control"
+          style={style}
         />
 
       </Col>
     }
-    if (type == 'steps') {
+    if (type === 'steps') {
       // console.log('date')
-      return JSON.stringify(field)
-      return <Stepper/>
+      // return JSON.stringify(field)
+      return <DemoSteps/>
     }
-    if ((type == 'string' || type=='input') || !type) {
+    if ((type === 'string' || type==='input') || !type) {
       // console.log('string')
 
       return <Col
@@ -105,54 +106,64 @@ function CreateForm(props) {
           placeholder={placeholder || label}
           className="mb-2 form-control"
           disabled={disabled}
+          style={style}
         />
+        {/*<FieldText*/}
+        {/*  name={name}*/}
+        {/*  component="input"*/}
+        {/*  type="text"*/}
+        {/*  placeholder={placeholder || label}*/}
+        {/*  className="mb-2 form-control"*/}
+        {/*  disabled={disabled}*/}
+        {/*  style={style}*/}
+        {/*/>*/}
 
       </Col>
     }
-    if (type == 'price') {
+    if (type === 'price') {
       // console.log('string')
 
       return <FieldPrice field={field}/>
     }
-    if (type == 'json') {
+    if (type === 'json') {
       // console.log('string')
 
       return <FieldJson field={field}/>
     }
-    if (type == 'object') {
+    if (type === 'object') {
       return <FieldObject field={field}/>
     }
-    if (type == 'array') {
+    if (type === 'array') {
       return <FieldArray field={field}/>
 
     }
-    if (type == 'checkbox') {
+    if (type === 'checkbox') {
       // console.clear()
       // console.log(field)
       return <FieldCheckbox field={field}/>
 
     }
-    if (type == 'checkboxes') {
+    if (type === 'checkboxes') {
       // console.clear()
       // console.log(field)
       return <FieldCheckboxes field={field}/>
 
     }
-    if (type == 'radio') {
+    if (type === 'radio') {
       // console.clear()
       // console.log(field)
-      return <FieldCheckbox field={field}/>
+      return <FieldRadio field={field}/>
 
     }
-    if (type == 'select') {
+    if (type === 'select') {
       return <FieldSelect field={field}/>
 
     }
-    if (type == 'server') {
+    if (type === 'server') {
       return <FieldServer field={field}/>
 
     }
-    if (type == 'number') {
+    if (type === 'number') {
       return <FieldNumber field={field}/>
 
       // return <Col
@@ -169,25 +180,24 @@ function CreateForm(props) {
       //   />
       // </Col>
     }
-    if (type == 'textarea') {
+    if (type === 'textarea') {
       return <Col
         sm={size ? size.sm : ''}
         lg={size ? size.lg : ''}
         className={'MGD ' + className}>
         <label htmlFor={name}>{label}</label>
-        <Field
+        <FieldTextarea
           name={name}
-          component="input"
-          type="text"
+          style={style}
           placeholder={placeholder || label}
           className="mb-2 form-control"
         />
       </Col>
     }
-    if (type == 'boolean') {
+    if (type === 'boolean') {
       return <FieldBoolean field={field}/>
     }
-    if (type == 'image') {
+    if (type === 'image') {
       // console.log('image')
       return <Col
         sm={size ? size.sm : ''}
@@ -195,6 +205,7 @@ function CreateForm(props) {
         className={'MGD ' + className}>
         <label htmlFor={name}>{t(label)}</label>
         <Field
+          style={style}
           name={name} className="mb-2 form-control">
           {props => {
             console.log('props', props)
@@ -231,7 +242,7 @@ function CreateForm(props) {
 
       </Col>
     }
-    if (type == 'images') {
+    if (type === 'images') {
       // console.log('image')
       return <Col
         sm={size ? size.sm : ''}
@@ -239,6 +250,7 @@ function CreateForm(props) {
         className={'MGD ' + className}>
         <label htmlFor={name}>{label}</label>
         <Field
+          style={style}
           name={name} className="mb-2 form-control">
           {props => {
             return (
@@ -289,7 +301,6 @@ function CreateForm(props) {
       props.onSubmit(values)
     }
   }
-  console.log('render',theRules)
   if (themeData)
     return (
       <div className="fields pt-2">

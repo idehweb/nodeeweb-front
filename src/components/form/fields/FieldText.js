@@ -4,10 +4,11 @@ import {Field} from 'react-final-form'
 import {Col} from 'shards-react';
 import {MainUrl, uploadMedia} from "#c/functions/index";
 
-function FieldText({field}) {
+// function FieldText({field}) {
+function FieldText(props) {
   const {t} = useTranslation();
 
-  const {type, kind, size, className, name, label, options, placeholder, value} = field;
+  const {type, kind, size, className, name, label, options, placeholder, value} = props;
 // return JSON.stringify(value)
   let [theVal, setTheVal] = useState(value)
   // console.log('field object', field)

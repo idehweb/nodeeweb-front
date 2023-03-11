@@ -8,7 +8,7 @@ function FieldCheckbox(props) {
   // console.clear();
   console.log('checkbox')
   let {field, t} = props;
-  let {type, kind, size, className, entity, searchbox = true, limit = 1000, name, options = [], label, placeholder, value} = field;
+  let {type,style, kind, size, className, entity, searchbox = true, limit = 1000, name, options = [], label, placeholder, value} = field;
   let [checkboxes, setCheckBoxes] = useState(options)
   // return JSON.stringify(options)
 // if(options!==checkboxes){
@@ -67,6 +67,7 @@ function FieldCheckbox(props) {
                 return <label key={i} className={'checkbox-items'}><Field
                   name={name}
                   component="input"
+                  style={style}
                   type="checkbox"
                   value={ch._id || ch.slug}
                 /><span>{ch.name.fa}</span></label>

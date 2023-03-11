@@ -10,6 +10,7 @@ import FieldText from './FieldText';
 import FieldTextarea from './FieldTextarea';
 import FieldJson from './FieldJson';
 import FieldNumber from './FieldNumber';
+import FieldRadio from './FieldRadio';
 
 
 export {
@@ -24,7 +25,8 @@ export {
   FieldPrice,
   FieldCheckbox,
   FieldCheckboxes,
-  FieldServer
+  FieldServer,
+  FieldRadio
 };
 
 
@@ -34,6 +36,8 @@ export const getField = type => {
       return FieldObject;
     case 'string':
       return FieldText;
+    case 'radio':
+      return FieldRadio;
     case 'color':
       return FieldText;
     case 'price':

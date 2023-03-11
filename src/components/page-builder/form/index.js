@@ -4,7 +4,7 @@ import {Col, Row} from "shards-react";
 import LoadingComponent from "#c/components/components-overview/LoadingComponent";
 import CreateForm from "#c/components/form/CreateForm";
 
-import {getEntity, isClient, submitForm} from "#c/functions/index";
+import {getEntity, isClient, setStyles, submitForm} from "#c/functions/index";
 
 import {withTranslation} from "react-i18next";
 import {useNavigate, useParams} from "react-router-dom";
@@ -15,7 +15,6 @@ const getURIParts = (url) => {
   return loc
 }
 const Form = (props) => {
-  console.log('Form...', props)
   let navigate = useNavigate();
 
   const [tracks, settracks] = useState([]);
@@ -39,10 +38,7 @@ const Form = (props) => {
   url = isClient ? new URL(window.location.href) : "";
   let theurl = getURIParts(url);
   const loadForm = async () => {
-
     getEntity('form', _id).then((resp) => {
-      console.log('resp', resp)
-      // setLoadingMoreItems(false);
       afterGetData(resp);
     });
   };
@@ -96,7 +92,7 @@ const Form = (props) => {
   }
   const afterGetData = (resp, tracks = []) => {
     // console.clear()
-    console.log('afterGetData', resp, tracks)
+    console.log('afterGetDataafterGetData', resp, tracks)
     // let {items, count} = resp;
     // if (resp.length < 24) sethasMoreItems(false);
     // console.log("resp", resp);
@@ -115,13 +111,12 @@ const Form = (props) => {
         let {settings = {}, children} = d;
         let {general = {}} = settings;
         let {fields = []} = general;
-        let {name, label, value = '', placeholder, classes, sm, lg} = fields;
+        let {name, label, value = '', placeholder, classes, sm, lg,options} = fields;
+        let stylee = setStyles(fields);
         formFields[name] = value;
         let theChildren = [];
         if (children) {
           children.forEach((ch) => {
-
-            // console.log('type of ',d,typeof data[d])
             theChildren.push(lastObj)
           })
         }
@@ -138,10 +133,12 @@ const Form = (props) => {
             // setFields([...fields,])
             // this.state.checkOutBillingAddress.add.data[d] = text;
           },
+          style : stylee,
           className: 'rtl ' + (classes ? classes.map(ob => (ob.name ? ob.name : ob)).join(" ") : ""),
           placeholder: placeholder,
           child: [],
           children: children || [],
+          options: options || [],
           value: value,
         };
         if (typeof data[d] == 'object') {
@@ -200,7 +197,7 @@ const Form = (props) => {
                     toast(t(d.message), {
                       type: "success"
                     });
-                }).cache(d => {
+                }).catch(d => {
                   toast(t('sth wrong happened!'), {
                     type: "error"
                   });

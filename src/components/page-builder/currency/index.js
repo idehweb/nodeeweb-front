@@ -96,13 +96,6 @@ const Currency = (props) => {
     // setcount(count);
     settheload(false)
 
-    //   // if (resp && resp.length < 1) sethasMoreItems(false);
-    // } else {
-    //   // sethasMoreItems(false);
-    //   // setLoad(false);
-    //   settheload(false)
-    //
-    // }
   };
   const loader = (
     <div className="loadNotFound loader " key={23}>

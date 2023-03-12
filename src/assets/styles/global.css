@@ -9,7 +9,10 @@
 .ltr, .ltr * {
   direction: ltr;
 }
-
+.response-flex > div{
+  display: flex;
+  justify-content: space-between;
+}
 .page table, .page table th, .page table td {
   border: 1px solid
 }
@@ -1437,7 +1440,7 @@ body .ltr .mobilenone .sizeless.nav.sidecategories .nav-item {
 .the-labels {
   position: absolute;
   right: 0;
-  top: 0;
+  top: 20px;
   z-index: 1;
 }
 
@@ -2861,10 +2864,22 @@ del {
 }
 
 .the-body .container > div {
-  padding-top: 15px !important;
-  padding-bottom: 15px !important;
+  padding-top: 15px ;
+  padding-bottom: 15px;
 }
+.back-filter-blur:before{
+  content: '';
+  position: absolute;
+  left:0;
+  width: 100%;
+  height: 100%;
+  filter: blur(2px);
+  background-color: rgba(255, 255, 255, 0.6);
+  z-index: -1;
+  right:0;
+  top:0;
 
+}
 .main-navbar__search {
   z-index: 99;
 }

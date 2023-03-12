@@ -46,8 +46,16 @@ export const setStyles = (fields) => {
     left,
     boxShadow,
     zIndex,
-    color, float, borderRadius, direction, width, maxWidth, height, maxHeight, backgroundColor, margin, padding, fontWeight, fontSize, lineHeight, display
+    color, float, borderRadius, direction, width, maxWidth, height, maxHeight, backgroundColor, margin, padding, fontWeight, fontSize, lineHeight, display,
+    paddingTop,
+    paddingBottom
   } = fields
+  if (paddingTop) {
+    style['paddingTop'] = paddingTop;
+  }
+  if (paddingBottom) {
+    style['paddingBottom'] = paddingBottom;
+  }
   if (borderRadius) {
     style['borderRadius'] = borderRadius;
   }
@@ -466,7 +474,17 @@ export const SidebarCategoriesData = (i = "") =>
       handleErr(err);
       return err;
     });
+
 export const getThemeData = (i = "") =>
+  (isClient && window.theme) ? window.theme : getAdminData(`${THEME_URL}`, {}, true)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      handleErr(err);
+      return err;
+    });
+export const getThemeDataold = (i = "") =>
   getAdminData(`${THEME_URL}`, {}, true)
     .then((res) => {
       return res.data;

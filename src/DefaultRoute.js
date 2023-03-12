@@ -93,6 +93,12 @@ export default function createRoutes(themeRoutes) {
       layout: DefaultLayout,
       exact: true,
 
+    }, {
+      path: '/p/:_id',
+      element: Product,
+      layout: DefaultLayout,
+      exact: true,
+
     },
     {
       path: '/login',

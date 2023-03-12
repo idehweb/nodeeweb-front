@@ -123,9 +123,12 @@ const reducer = (state = initialState, {type, data, payload}) => {
         case "persist/REHYDRATE": {
           // initialState.product = payload;
 
-          // console.log('************* persist/REHYDRATE ************',state,payload.store)
-           if(payload)
-            return {...state,...payload.store};
+           if(payload) {
+            delete payload.store.themeData;
+             console.log('************* persist/REHYDRATE ************',state,payload.store)
+
+             return {...state, ...payload.store};
+           }
         }
         default:
             return state

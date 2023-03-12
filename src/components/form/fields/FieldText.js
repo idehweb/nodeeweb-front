@@ -21,12 +21,13 @@ function FieldText(props) {
     sm={size ? size.sm : ''}
     lg={size ? size.lg : ''}
     className={'MGD ' + className}>
-    <label htmlFor={name}>{label ? t(label) : t(name)}</label>
+    <label htmlFor={name}>{label === name ?  '' : t(label)}</label>
+    {/*<label htmlFor={name}>{label ? t(label) : t(name)}</label>*/}
     <Field
       name={name}
       component="input"
       type="text"
-      placeholder={placeholder ? placeholder : (label ? t(label) : t(name))}
+      placeholder={placeholder}
       onChange={(e) => {
         field.setValue(name, e.target.value)
 

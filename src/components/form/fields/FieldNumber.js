@@ -16,7 +16,8 @@ function FieldNumber(props) {
     sm={size ? size.sm : ''}
     lg={size ? size.lg : ''}
     className={'MGD ' + className}>
-    <label htmlFor={name}>{label ? t(label) : t(name)}</label>
+    {/*<label htmlFor={name}>{label ? t(label) : t(name)}</label>*/}
+    <label htmlFor={name}>{label === name ? '' : t(label)}</label>
     <Field
       name={name}
       component="input"

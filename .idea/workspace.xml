@@ -7,8 +7,9 @@
     <list default="true" id="06443989-9eed-404f-8640-c258027113f4" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/form/CreateForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/form/CreateForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/form/fields/FieldText.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/form/fields/FieldText.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/page-builder/stepper/demo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/page-builder/stepper/demo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/form/fields/FieldNumber.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/form/fields/FieldNumber.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/form/fields/FieldSelect.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/form/fields/FieldSelect.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/form/fields/FieldTextarea.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/form/fields/FieldTextarea.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -500,6 +501,7 @@
       <workItem from="1678518379851" duration="30000" />
       <workItem from="1678521102132" duration="11408000" />
       <workItem from="1678535594023" duration="8978000" />
+      <workItem from="1678603848628" duration="4491000" />
     </task>
     <servers />
   </component>

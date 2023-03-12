@@ -61,7 +61,6 @@ function CreateForm(props) {
   }, []);
 
   const TheField = (field) => {
-    console.log('fieldfieldfieldfield', field);
     if (!field) {
       return <>no field</>
     }
@@ -90,13 +89,11 @@ function CreateForm(props) {
       return <DemoSteps field={field}/>
     }
     if ((type === 'string' || type==='input') || !type) {
-      // console.log('string')
-
       return <Col
         sm={size ? size.sm : ''}
         lg={size ? size.lg : ''}
         className={'MGD ' + className}>
-        <label htmlFor={name}>{label}</label>
+        <label htmlFor={name}>{label === name ? '' : label}</label>
         <Field
           name={name}
           component="input"
@@ -183,7 +180,7 @@ function CreateForm(props) {
         sm={size ? size.sm : ''}
         lg={size ? size.lg : ''}
         className={'MGD ' + className}>
-        <label htmlFor={name}>{label}</label>
+        <label htmlFor={name}>{label === name ? '' : label}</label>
         <FieldTextarea
           name={name}
           style={style}

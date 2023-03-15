@@ -16,7 +16,6 @@ const getURIParts = (url) => {
 }
 const Form = (props) => {
   let navigate = useNavigate();
-
   const [tracks, settracks] = useState([]);
   const [theformFields, setformFields] = useState([]);
   const [counts, setcount] = useState(0);
@@ -91,11 +90,6 @@ const Form = (props) => {
     }
   }
   const afterGetData = (resp, tracks = []) => {
-    // console.clear()
-    console.log('afterGetDataafterGetData', resp, tracks)
-    // let {items, count} = resp;
-    // if (resp.length < 24) sethasMoreItems(false);
-    // console.log("resp", resp);
     if (resp) {
       let {elements} = resp;
 
@@ -104,7 +98,6 @@ const Form = (props) => {
       // items.forEach((item) => {
       //   trackss.push(item);
       // });
-      console.log('elements:', elements)
       elements.forEach((d) => {
         console.log('d', d)
         // formFields.push()

@@ -6,16 +6,12 @@ import {getEntitiesForAdmin, MainUrl, uploadMedia} from "#c/functions/index";
 
 function FieldCheckbox(props) {
   // console.clear();
-  console.log('checkbox')
+
   let {field, t} = props;
   let {type,style, kind, size, className, entity, searchbox = true, limit = 1000, name, options = [], label, placeholder, value} = field;
   let [checkboxes, setCheckBoxes] = useState(options)
-  // return JSON.stringify(options)
-// if(options!==checkboxes){
-//   setCheckBoxes([...options])
-// }
+
   let [search, setSearch] = useState('')
-  // console.log('field object', field)
   useEffect(() => {
     if (limit) {
       limit = parseInt(limit)
@@ -52,26 +48,18 @@ function FieldCheckbox(props) {
       {({input, meta}) => {
         return (
           <div><label htmlFor={name}>{t(label)}</label>
-            <div className={"checkbox-wrapper"}>
-              {/*{searchbox && <input*/}
-              {/*className={'searchBox'}*/}
-              {/*type="text"*/}
-              {/*onChange={(e) => {*/}
-              {/*setSearch(e.target.value)*/}
-              {/*}}*/}
-              {/*value={search}*/}
-              {/*/>}*/}
-              {checkboxes && checkboxes.map((ch, i) => {
-                // console.log('checkboxes', checkboxes)
-
-                return <label key={i} className={'checkbox-items'}><Field
+            <div className={"d-flex "}>
+              {checkboxes && checkboxes.map((checkbox, i) => {
+                return <label key={i} className={'checkbox-items p-1'}>
+                  <Field
                   name={name}
                   component="input"
                   style={style}
                   type="checkbox"
-                  value={ch._id || ch.slug}
-                /><span>{ch.name.fa}</span></label>
-
+                  value={checkbox.value}
+                />
+                  <span>{checkbox.title}</span>
+                </label>
               })}
 
 

@@ -5,11 +5,11 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import StepDetail from './detail';
 
 // const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad'];
 
 const  DemoSteps = (props) => {
-  console.log('propspropspropsprops',props);
   const {field} = props;
   const {style, size, className, name, label, options, placeholder, value,children} = field;
 
@@ -66,17 +66,19 @@ const  DemoSteps = (props) => {
         {steps.map((step, index) => {
           const stepProps = {};
           const labelProps = {};
-          if (isStepOptional(index)) {
-            labelProps.optional = (
-              <Typography variant="caption">Optional</Typography>
-            );
-          }
+          // if (isStepOptional(index)) {
+          //   labelProps.optional = (
+          //     <Typography variant="caption">Optional</Typography>
+          //   );
+          // }
           if (isStepSkipped(index)) {
             stepProps.completed = false;
           }
           return (
             <Step key={index} {...stepProps}>
-              <StepLabel {...labelProps}>{step.settings.general.fields.title}</StepLabel>
+              <StepLabel {...labelProps}>
+                &nbsp;&nbsp;{step.settings.general.fields.title}
+                </StepLabel>
             </Step>
           );
         })}
@@ -93,7 +95,18 @@ const  DemoSteps = (props) => {
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>Step222222 {activeStep + 1}</Typography>
+
+
+
+
+          <StepDetail content={children} activeStep={activeStep}/>
+
+
+
+
+
+
+
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Button
               color="inherit"

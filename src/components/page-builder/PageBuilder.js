@@ -92,7 +92,7 @@ export function ShowElement(p) {
       return <THE_TABS element={element} content={content} params={params}/>;
     case "tab":
       return <THE_TAB element={element} content={content} params={params}/>;
- 
+
     case "Cell":
       return <GRID_COL element={element} content={content} params={params}/>;
     case "col":
@@ -667,10 +667,10 @@ export function Content(props) {
 
 export default function PageBuilder(props) {
   // console.clear();
+  console.log('PageBuilder ===>===>===>', props)
 
 
   let {elements, content, style = {}, kind = 'container-fluid', maxWidth = '100%', data, description = null, params} = props;
-  console.log('PageBuilder ===>elementselements', elements)
   // let html = elements.html;
   // if (elements && elements.pages && elements.pages[0] && elements.pages[0].frames && elements.pages[0].frames[0] && elements.pages[0].frames[0].component && elements.pages[0].frames[0].component.components)
   //     elements = elements.pages[0].frames[0].component.components;

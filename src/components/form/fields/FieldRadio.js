@@ -6,8 +6,8 @@ import {getEntitiesForAdmin, MainUrl, uploadMedia} from "#c/functions/index";
 
 function FieldRadio(props) {
   let {field, t} = props;
+  console.log(field);
   let {type,style, kind, size, className, entity, searchbox = true, limit = 1000, name, options = [], label, placeholder, value} = field;
-  console.log('optionsoptionsoptions-Radiooo',options);
   let [radios, setRadios] = useState(options)
   let [search, setSearch] = useState('')
   useEffect(() => {
@@ -36,7 +36,7 @@ function FieldRadio(props) {
     >
       {({input, meta}) => {
         return (
-          <div><label htmlFor={name}>{t(label)}</label>
+          <div><label htmlFor={name}>{label}</label>
             <div className={"d-flex "}>
               {radios && radios.map((ch, i) => {
                 return <label key={i} className={'checkbox-items p-1'}>

@@ -40,10 +40,28 @@ import {setStyles} from "../../../functions"
     if (name === 'steps') {
       return <DemoSteps field={values}/>
     }
+    if ((name==='button')) {
+      return <Col
+        sm={fields.sm ? fields.sm : ''}
+        lg={fields.lg ? fields.lg : ''}
+        className={'MGD ' + className}>
+        <label htmlFor={name}>{fields.label}</label>
+        <Field
+          name={fields.name}
+          component="button"
+          type="button"
+          placeholder={fields.placeholder ? fields.placeholder : ''}
+          className="mb-2 form-control"
+          disabled={disabled}
+          style={dynamicStyle}
+
+        />
+      </Col>
+    }
     if ((name==='input')) {
       return <Col
-        sm={size ? size.sm : ''}
-        lg={size ? size.lg : ''}
+        sm={fields.sm ? fields.sm : ''}
+        lg={fields.lg ? fields.lg : ''}
         className={'MGD ' + className}>
         <label htmlFor={name}>{fields.label}</label>
         <Field
@@ -54,6 +72,7 @@ import {setStyles} from "../../../functions"
           className="mb-2 form-control"
           disabled={disabled}
           style={dynamicStyle}
+
         />
       </Col>
     }
@@ -61,8 +80,8 @@ import {setStyles} from "../../../functions"
       // console.clear()
       // console.log(field)
       return  <Col
-      sm={size ? size.sm : ''}
-      lg={size ? size.lg : ''}
+      sm={fields.sm ? fields.sm : ''}
+        lg={fields.lg ? fields.lg : ''}
       className={'MGD ' + className}>
       <Field name={name}
         // initialValue={()=> []}
@@ -96,8 +115,8 @@ import {setStyles} from "../../../functions"
 
     if (name === 'radio') {
       return  <Col
-      sm={size ? size.sm : ''}
-      lg={size ? size.lg : ''}
+      sm={fields.sm ? fields.sm : ''}
+      lg={fields.lg ? fields.lg : ''}
       className={'MGD ' + className}>
       <Field name={name}
         // initialValue={()=> []}
@@ -129,8 +148,8 @@ import {setStyles} from "../../../functions"
     }
     if (name === 'select') {
       return <Col
-      sm={size ? size.sm : ''}
-      lg={size ? size.lg : ''}
+      sm={fields.sm ? fields.sm : ''}
+      lg={fields.lg ? fields.lg : ''}
       className={'MGD ' + className}>
       <label htmlFor={name}>{fields.label}</label>
       <Field
@@ -154,8 +173,8 @@ import {setStyles} from "../../../functions"
     }
      if (name === 'textarea') {
       return <Col
-        sm={size ? size.sm : ''}
-        lg={size ? size.lg : ''}
+      sm={fields.sm ? fields.sm : ''}
+      lg={fields.lg ? fields.lg : ''}
         className={'MGD ' + className}>
         <label htmlFor={name}>{fields.label}</label>
         <FieldTextarea
@@ -171,7 +190,7 @@ import {setStyles} from "../../../functions"
   return (
     <Container>
     <Row>
-      {childs.map((field, index) => {
+      {childs && childs.map((field, index) => {
         return (<TheField key={index} values={field}/>);
       })}
     </Row>

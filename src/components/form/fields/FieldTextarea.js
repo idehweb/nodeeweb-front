@@ -5,16 +5,26 @@ import {Col} from 'shards-react';
 import {getEntities, MainUrl, uploadMedia} from "#c/functions/index";
 
 function FieldTextarea(props) {
-  console.log('textAreaFiled',props);
   const {className, name,style,value,placeholder} = props;
+  
   // const {type, kind, size, className, name, label, placeholder, value} = field;
 
-  let [theVal, setTheVal] = useState(value)
-
+  let [theVal, setTheVal] = useState('')
+ 
   const changeVal = (e) => {
     setTheVal(e.target.value)
+    
   }
-  return  <textarea name={name} className={className} placeholder={placeholder}  onChange={(e) => {changeVal(e)}} value={theVal} style={style}/>
+  return  <textarea
+            type="text"
+             name={name}
+             className={className}
+             placeholder={placeholder}
+              onChange={(e) => {changeVal(e)}} 
+             value={theVal}
+             style={style}
+          />
+
 }
 
 export default withTranslation()(FieldTextarea);

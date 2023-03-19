@@ -25,7 +25,7 @@ import {
 import DemoSteps from "#c/components/page-builder/stepper/demo";
 
 function CreateForm(props) {
-  // console.clear()
+  console.log('propsprops',props)
   let {fields, rules = {fields: []},theFields=false, t} = props;
   // console.clear();
 
@@ -67,12 +67,84 @@ function CreateForm(props) {
     const {type,style, kind, size, className, options, disabled = false, name, label, placeholder} = field;
     // console.log('themeData',  themeData['models']);
     // moment(field.value, "YYYY-MM-DD[T]HH:mm:ss.SSS[Z]", true).isValid())
+
+    if ((type==='radiobuttonlists')) {
+      return <Col
+        sm={fields.sm ? fields.sm : ''}
+        lg={fields.lg ? fields.lg : ''}
+        className={'MGD ' +  (className !== undefined ? className : '')}>
+        <label htmlFor={name}>{fields.label}</label>
+        <div class="radio-toolbar">
+            <input type="radio" id="radioApple" name="radioFruit" value="apple" checked />
+            <label for="radioApple">Apple</label>
+        </div>
+{/* 
+
+
+
+
+        <Field
+          name={fields.name}
+          component="button"
+          type="button"
+          placeholder={fields.placeholder ? fields.placeholder : ''}
+          className="mb-2 form-control"
+          disabled={disabled}
+          style={dynamicStyle}
+
+        /> */}
+      </Col>
+    }
+    // if ((type==='radiobuttonitem')) {
+    //   return <Col
+    //     sm={fields.sm ? fields.sm : ''}
+    //     lg={fields.lg ? fields.lg : ''}
+    //     className={'MGD ' +  (className !== undefined ? className : '')}>
+    //     <label htmlFor={name}>{fields.label}</label>
+
+
+    //       {/* <input type="radio" id="radioApple" name="radioFruit" value="apple" checked />
+    //       <label for="radioApple">Apple</label> */}
+
+
+    //     <Field
+    //       name={fields.name}
+    //       component="radio"
+    //       type="radio"
+    //       placeholder={fields.placeholder ? fields.placeholder : ''}
+    //       className="mb-2 form-control"
+    //       disabled={disabled}
+    //       style={dynamicStyle}
+
+    //     />
+    //   </Col>
+    // }
+
+
+    if ((type==='button')) {
+      return <Col
+        sm={fields.sm ? fields.sm : ''}
+        lg={fields.lg ? fields.lg : ''}
+        className={'MGD ' +  (className !== undefined ? className : '')}>
+        <label htmlFor={name}>{fields.label}</label>
+        <Field
+          name={fields.name}
+          component="button"
+          type="button"
+          placeholder={fields.placeholder ? fields.placeholder : ''}
+          className="mb-2 form-control"
+          disabled={disabled}
+          style={dynamicStyle}
+
+        />
+      </Col>
+    }
     if (type === 'date') {
       // console.log('date')
       return <Col
         sm={size ? size.sm : ''}
         lg={size ? size.lg : ''}
-        className={'MGD ' + className}>
+        className={'MGD ' +  (className !== undefined ? className : '')}>
         <label htmlFor={name}>{label}</label>
         <Field
           name={name}
@@ -86,13 +158,13 @@ function CreateForm(props) {
       </Col>
     }
     if (type === 'steps') {
-      return <DemoSteps field={field}/>
+      return <DemoSteps field={field} onSubmit={props.onSubmit}/>
     }
     if ((type === 'string' || type==='input') || !type) {
       return <Col
         sm={size ? size.sm : ''}
         lg={size ? size.lg : ''}
-        className={'MGD ' + className}>
+        className={'MGD ' +  (className !== undefined ? className : '')}>
         <label htmlFor={name}>{label === name ? '' : label}</label>
         <Field
           name={name}
@@ -164,7 +236,7 @@ function CreateForm(props) {
       // return <Col
       //   sm={size ? size.sm : ''}
       //   lg={size ? size.lg : ''}
-      //   className={'MGD ' + className}>
+      //   className={'MGD ' +  (className !== undefined ? className : '')}>
       //   <label htmlFor={name}>{t(label)}</label>
       //   <Field
       //     name={name}
@@ -179,7 +251,7 @@ function CreateForm(props) {
       return <Col
         sm={size ? size.sm : ''}
         lg={size ? size.lg : ''}
-        className={'MGD ' + className}>
+        className={'MGD ' + (className !== undefined ? className : '')}>
         <label htmlFor={name}>{label === name ? '' : label}</label>
         <FieldTextarea
           name={name}
@@ -197,7 +269,7 @@ function CreateForm(props) {
       return <Col
         sm={size ? size.sm : ''}
         lg={size ? size.lg : ''}
-        className={'MGD ' + className}>
+        className={'MGD ' +  (className !== undefined ? className : '')}>
         <label htmlFor={name}>{t(label)}</label>
         <Field
           style={style}
@@ -242,7 +314,7 @@ function CreateForm(props) {
       return <Col
         sm={size ? size.sm : ''}
         lg={size ? size.lg : ''}
-        className={'MGD ' + className}>
+        className={'MGD ' +  (className !== undefined ? className : '')}>
         <label htmlFor={name}>{label}</label>
         <Field
           style={style}
@@ -279,9 +351,9 @@ function CreateForm(props) {
   }
 
   const onSubmit = async v => {
-    console.log('onSubmit',v)
     if (props.onSubmit) {
       let values = v;
+      
       if (theRules && theRules.fields)
         theRules.fields.forEach((item, i) => {
           if (item.type == 'object' && values[item.name] instanceof Array && item.value) {
@@ -293,6 +365,7 @@ function CreateForm(props) {
             values[item.name] = obj;
           }
         })
+        
       props.onSubmit(values)
     }
   }
@@ -337,7 +410,7 @@ function CreateForm(props) {
                     if (field.value) {
                       lastObj['value'] = field.value;
                     }
-                    return (<TheField key={index} {...lastObj} setValue={form.mutators.setValue}/>);
+                    return (<TheField onSubmit={onSubmit} key={index} {...lastObj} setValue={form.mutators.setValue}/>);
                   })}
                   {!theFields && theRules?.fields?.map((field, index) => {
                     if (fields[field.name]) {
@@ -363,7 +436,7 @@ function CreateForm(props) {
                     if (field.value) {
                       lastObj['value'] = field.value;
                     }
-                    return (<TheField key={index} {...lastObj} setValue={form.mutators.setValue}/>);
+                    return (<TheField onSubmit={onSubmit} key={index} {...lastObj} setValue={form.mutators.setValue}/>);
                   })}
                   <div className="buttons">
                     <Button type="submit">

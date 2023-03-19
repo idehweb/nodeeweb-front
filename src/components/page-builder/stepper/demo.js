@@ -10,7 +10,7 @@ import StepDetail from './detail';
 // const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad'];
 
 const  DemoSteps = (props) => {
-  const {field} = props;
+  const {field,onSubmit} = props;
   const {style, size, className, name, label, options, placeholder, value,children} = field;
 
 
@@ -25,14 +25,14 @@ const  DemoSteps = (props) => {
     return skipped.has(step);
   };
   const handleNext = () => {
-    let newSkipped = skipped;
-    if (isStepSkipped(activeStep)) {
-      newSkipped = new Set(newSkipped.values());
-      newSkipped.delete(activeStep);
-    }
+    // let newSkipped = skipped;
+    // if (isStepSkipped(activeStep)) {
+    //   newSkipped = new Set(newSkipped.values());
+    //   newSkipped.delete(activeStep);
+    // }
 
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped(newSkipped);
+    // setSkipped(newSkipped);
   };
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -59,7 +59,7 @@ const  DemoSteps = (props) => {
     <Box
       sm={size ? size.sm : ''}
       lg={size ? size.lg : ''}
-      className={'MGD ' + className}
+      className={'MGD ' + (className !== undefined ? className : '')}
       style={style}
     >
       <Stepper activeStep={activeStep}>
@@ -123,9 +123,22 @@ const  DemoSteps = (props) => {
               </Button>
             )}
 
-            <Button onClick={handleNext}>
+            {/* <Button onClick={handleNext}>
               {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-            </Button>
+            </Button> */}
+              {
+                activeStep === steps.length -1 ?(
+                  <Button type="submit" onClick={onSubmit}>
+                      Finish
+                </Button>
+                ):(
+                  <Button  onClick={handleNext}>
+                      Next
+                </Button>
+                )
+              }
+
+
           </Box>
         </React.Fragment>
       )}

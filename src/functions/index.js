@@ -48,7 +48,8 @@ export const setStyles = (fields) => {
     zIndex,
     color, float, borderRadius, direction, width, maxWidth, height, maxHeight, backgroundColor, margin, padding, fontWeight, fontSize, lineHeight, display,
     paddingTop,
-    paddingBottom
+    paddingBottom,
+    flexDirection
   } = fields
   if (paddingTop) {
     style['paddingTop'] = paddingTop;
@@ -121,6 +122,9 @@ export const setStyles = (fields) => {
   if (boxShadow) {
     style['boxShadow'] = boxShadow;
   }
+  if (flexDirection) {
+    style['flexDirection'] = flexDirection;
+  } 
 
   if (right) {
     style['right'] = right;
@@ -1146,6 +1150,7 @@ export const sendExtra = (d, obj) => {
 };
 
 export const submitForm = (_id, obj) => {
+  
   return new Promise(function (resolve, reject) {
     postData(`${ApiUrl}/form/entry/${_id}`, obj, false)
       .then((data) => {

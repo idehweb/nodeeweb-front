@@ -1,6 +1,7 @@
 import React from 'react';
 import {Field} from 'react-final-form'
 import { Col, Container, Row} from 'shards-react';
+import * as Icons from "@mui/icons-material";
 import {
   FieldArray,
   FieldBoolean,
@@ -23,29 +24,46 @@ import {setStyles} from "../../../functions"
 
   const {content,activeStep} = props;
   const childs = content[activeStep].children;
-
+  let [dynamicActive,setDynamicActive] = React.useState('');
   const TheField = (valuesvalues) => {
-    // const [selectValue,setSelectValue] = React.useState('');
     const {values} = valuesvalues;
-    console.log('ggggg222gggg',valuesvalues);
-
     if (!values) {
       return <>no field</>
     }
-    const {type,style, kind, size, className, options, disabled = false, name, label, placeholder} = values;
+    console.log('valuesvalues',valuesvalues);
+    const {type,style, kind, size, className, options, disabled = false, name, label, placeholder,children} = values;
     const {settings} = values;
     const {general} = settings;
     const {fields} = general;
     let dynamicStyle = setStyles(fields)
-    if (name === 'steps') {
-      return <DemoSteps field={values}/>
-    }
-    if ((name==='button')) {
+    const Radio = ({ input, children }) =>
+  // input should contain checked value to indicate
+  // if the input is checked
+  console.log(input) || (
+    <label>
+      <input type="radio" {...input} />
+      {children}
+    </label>
+  );
+    if ((name==='radiobuttonlists')) {
       return <Col
         sm={fields.sm ? fields.sm : ''}
         lg={fields.lg ? fields.lg : ''}
-        className={'MGD ' + className}>
+        className={'MGD ' +  (className !== undefined ? className : '')}>
         <label htmlFor={name}>{fields.label}</label>
+        <div className="radio-toolbar" style={dynamicStyle}>
+          {children && children.map((child,ichi)=>
+              <label key={ichi}>
+                  <Field
+                   key={ichi}
+                   name={fields.name}
+                   type="radio" value={child.settings.general.fields.value}
+                   component="input" />{Icons[child.settings.general.fields.iconFont] &&
+                    <span>{React.createElement(Icons[child.settings.general.fields.iconFont])}</span>}{child.settings.general.fields.label}
+              </label>
+          )}
+        </div>
+{/* 
         <Field
           name={fields.name}
           component="button"
@@ -55,14 +73,36 @@ import {setStyles} from "../../../functions"
           disabled={disabled}
           style={dynamicStyle}
 
-        />
+        /> */}
+      </Col>
+    }
+    if (name === 'steps') {
+      return <DemoSteps field={values}/>
+    }
+    if ((name==='button')) {
+      return <Col
+        sm={fields.sm ? fields.sm : ''}
+        lg={fields.lg ? fields.lg : ''}
+        className={'MGD ' + (className !== undefined ? className : '')}>
+        <Field
+          name={fields.name}
+          component="button"
+          type="button"
+          value={fields.text}
+          onClick={(e)=>{setDynamicActive(fields.action ? fields.action : fields.text)}}
+          placeholder={fields.placeholder ? fields.placeholder : ''}
+          className="mb-2 form-control"
+          disabled={disabled}
+          style={dynamicStyle}>
+          {fields.text}
+            </Field>
       </Col>
     }
     if ((name==='input')) {
       return <Col
         sm={fields.sm ? fields.sm : ''}
         lg={fields.lg ? fields.lg : ''}
-        className={'MGD ' + className}>
+        className={'MGD ' + (className !== undefined ? className : '')}>
         <label htmlFor={name}>{fields.label}</label>
         <Field
           name={fields.name}
@@ -82,7 +122,7 @@ import {setStyles} from "../../../functions"
       return  <Col
       sm={fields.sm ? fields.sm : ''}
         lg={fields.lg ? fields.lg : ''}
-      className={'MGD ' + className}>
+      className={'MGD ' + (className !== undefined ? className : '')}>
       <Field name={name}
         // initialValue={()=> []}
       >
@@ -117,7 +157,7 @@ import {setStyles} from "../../../functions"
       return  <Col
       sm={fields.sm ? fields.sm : ''}
       lg={fields.lg ? fields.lg : ''}
-      className={'MGD ' + className}>
+      className={'MGD ' + (className !== undefined ? className : '')}>
       <Field name={name}
         // initialValue={()=> []}
       >
@@ -150,7 +190,7 @@ import {setStyles} from "../../../functions"
       return <Col
       sm={fields.sm ? fields.sm : ''}
       lg={fields.lg ? fields.lg : ''}
-      className={'MGD ' + className}>
+      className={'MGD ' + (className !== undefined ? className : '')}>
       <label htmlFor={name}>{fields.label}</label>
       <Field
         name={fields.name}
@@ -175,14 +215,23 @@ import {setStyles} from "../../../functions"
       return <Col
       sm={fields.sm ? fields.sm : ''}
       lg={fields.lg ? fields.lg : ''}
-        className={'MGD ' + className}>
+        className={'MGD ' + (className !== undefined ? className : '')}>
         <label htmlFor={name}>{fields.label}</label>
-        <FieldTextarea
+        <Field
+          name={fields.name}
+          component="textarea"
+          type="text"
+          placeholder={fields.placeholder ? fields.placeholder : ''}
+          className="mb-2 form-control"
+          disabled={disabled}
+          style={dynamicStyle}
+        />
+        {/* <FieldTextarea
           name={fields.name}
           style={dynamicStyle}
           placeholder={fields.placeholder  ?fields.placeholder : ''}
           className="mb-2 form-control"
-        />
+        /> */}
       </Col>
     }
   }

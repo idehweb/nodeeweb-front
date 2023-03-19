@@ -200,7 +200,7 @@ export function TheButton(p) {
               onClick={() => {
                 handleStep(action)
               }}
-              className={classess + (showInMobile ? ' showInMobile ' : '')} style={style}>{Icons[iconFont] &&
+              className={(classess !== undefined ? classess : '') + (showInMobile ? ' showInMobile ' : '') + action} style={style}>{Icons[iconFont] &&
                 <span>{React.createElement(Icons[iconFont])}</span>}<span>{text}</span>
            </Button>
 

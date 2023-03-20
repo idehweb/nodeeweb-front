@@ -37,14 +37,16 @@ import {setStyles} from "../../../functions"
     const {fields} = general;
     let dynamicStyle = setStyles(fields)
     const Radio = ({ input, children }) =>
-  // input should contain checked value to indicate
-  // if the input is checked
-  console.log(input) || (
-    <label>
-      <input type="radio" {...input} />
-      {children}
-    </label>
-  );
+          {
+            // input should contain checked value to indicate
+            // if the input is checked
+            console.log(input) || (
+              <label>
+                <input type="radio" {...input} />
+                {children}
+              </label>
+          );
+          }
     if ((name==='radiobuttonlists')) {
       return <Col
         sm={fields.sm ? fields.sm : ''}
@@ -55,6 +57,9 @@ import {setStyles} from "../../../functions"
           {children && children.map((child,ichi)=>
               <label key={ichi}>
                   <Field
+                   style={setStyles(child.settings.general.fields)}
+                  //  onClick={next}
+                    onClick={props.nextStep}
                    key={ichi}
                    name={fields.name}
                    type="radio" value={child.settings.general.fields.value}
@@ -63,7 +68,7 @@ import {setStyles} from "../../../functions"
               </label>
           )}
         </div>
-{/* 
+{/*
         <Field
           name={fields.name}
           component="button"
@@ -235,12 +240,14 @@ import {setStyles} from "../../../functions"
       </Col>
     }
   }
+React.useEffect(()=>{
 
+},[])
   return (
     <Container>
     <Row>
       {childs && childs.map((field, index) => {
-        return (<TheField key={index} values={field}/>);
+        return (<TheField key={index} values={field} />);
       })}
     </Row>
   </Container>

@@ -78,7 +78,7 @@ function CreateForm(props) {
             <input type="radio" id="radioApple" name="radioFruit" value="apple" checked />
             <label for="radioApple">Apple</label>
         </div>
-{/* 
+{/*
 
 
 
@@ -353,7 +353,7 @@ function CreateForm(props) {
   const onSubmit = async v => {
     if (props.onSubmit) {
       let values = v;
-      
+
       if (theRules && theRules.fields)
         theRules.fields.forEach((item, i) => {
           if (item.type == 'object' && values[item.name] instanceof Array && item.value) {
@@ -365,7 +365,7 @@ function CreateForm(props) {
             values[item.name] = obj;
           }
         })
-        
+
       props.onSubmit(values)
     }
   }

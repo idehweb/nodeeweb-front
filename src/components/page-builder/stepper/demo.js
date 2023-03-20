@@ -17,7 +17,7 @@ const  DemoSteps = (props) => {
   const [steps, setSteps] = React.useState(children);
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
-
+  console.log('steps',steps)
   const isStepOptional = (step) => {
     return step === 1;
   };
@@ -54,7 +54,13 @@ const  DemoSteps = (props) => {
   const handleReset = () => {
     setActiveStep(0);
   };
-
+  // const handleNextRadio = ()=>{
+  //   // setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  //   console.log('zeeeeeeeeeeeeeeeeeeert')
+  // }
+  const handleNextRadio = React.useCallback(() => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  }, [])
   return (
     <Box
       sm={size ? size.sm : ''}
@@ -99,7 +105,7 @@ const  DemoSteps = (props) => {
 
 
 
-          <StepDetail content={children} activeStep={activeStep}/>
+          <StepDetail content={children} activeStep={activeStep} nextStep={handleNextRadio} />
 
 
 
@@ -130,7 +136,7 @@ const  DemoSteps = (props) => {
                 activeStep === steps.length -1 ?(
                   <Button type="submit" onClick={onSubmit}>
                       Finish
-                </Button>
+                  </Button>
                 ):(
                   <Button  onClick={handleNext}>
                       Next

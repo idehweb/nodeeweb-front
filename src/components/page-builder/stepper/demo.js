@@ -11,13 +11,13 @@ import StepDetail from './detail';
 
 const  DemoSteps = (props) => {
   const {field,onSubmit} = props;
-  const {style, size, className, name, label, options, placeholder, value,children} = field;
+  const {style, size, className, name, label, options, placeholder, value,children,showStepsTitle} = field;
 
 
   const [steps, setSteps] = React.useState(children);
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
-  console.log('steps',steps)
+  console.log('fieldfield',field)
   const isStepOptional = (step) => {
     return step === 1;
   };
@@ -68,27 +68,35 @@ const  DemoSteps = (props) => {
       className={'MGD ' + (className !== undefined ? className : '')}
       style={style}
     >
-      <Stepper activeStep={activeStep}>
-        {steps.map((step, index) => {
-          const stepProps = {};
-          const labelProps = {};
-          // if (isStepOptional(index)) {
-          //   labelProps.optional = (
-          //     <Typography variant="caption">Optional</Typography>
-          //   );
-          // }
-          if (isStepSkipped(index)) {
-            stepProps.completed = false;
-          }
-          return (
-            <Step key={index} {...stepProps}>
-              <StepLabel {...labelProps}>
-                &nbsp;&nbsp;{step.settings.general.fields.title}
-                </StepLabel>
-            </Step>
-          );
-        })}
-      </Stepper>
+
+    {
+      showStepsTitle && (
+          <Stepper activeStep={activeStep}>
+                  {steps.map((step, index) => {
+                    const stepProps = {};
+                    const labelProps = {};
+                    // if (isStepOptional(index)) {
+                    //   labelProps.optional = (
+                    //     <Typography variant="caption">Optional</Typography>
+                    //   );
+                    // }
+                    if (isStepSkipped(index)) {
+                      stepProps.completed = false;
+                    }
+                    return (
+                      <Step key={index} {...stepProps}>
+                        <StepLabel {...labelProps}>
+                          &nbsp;&nbsp;{step.settings.general.fields.title}
+                          </StepLabel>
+                      </Step>
+                    );
+                  })}
+          </Stepper>
+      )
+    }
+
+
+
       {activeStep === steps.length ? (
         <React.Fragment>
           <Typography sx={{ mt: 2, mb: 1 }}>
@@ -97,6 +105,7 @@ const  DemoSteps = (props) => {
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Box sx={{ flex: '1 1 auto' }} />
             <Button onClick={handleReset}>Reset</Button>
+            <Button type="submit" onClick={onSubmit}>Submit</Button>
           </Box>
         </React.Fragment>
       ) : (
@@ -133,8 +142,9 @@ const  DemoSteps = (props) => {
               {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
             </Button> */}
               {
-                activeStep === steps.length -1 ?(
-                  <Button type="submit" onClick={onSubmit}>
+                activeStep === steps.length - 1 ?(
+                  <Button   onClick={handleNext} >
+                  {/* <Button type="submit" onClick={onSubmit}> */}
                       Finish
                   </Button>
                 ):(

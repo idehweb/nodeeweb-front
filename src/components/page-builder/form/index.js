@@ -99,12 +99,12 @@ const Form = (props) => {
       //   trackss.push(item);
       // });
       elements.forEach((d) => {
-        console.log('d', d)
+        console.log('dd', d)
         // formFields.push()
         let {settings = {}, children} = d;
         let {general = {}} = settings;
         let {fields = []} = general;
-        let {name, label, value = '', placeholder, classes, sm, lg,options} = fields;
+        let {name, label, value = '', placeholder, classes, sm, lg,options,showStepsTitle} = fields;
         let stylee = setStyles(fields);
         formFields[name] = value;
         let theChildren = [];
@@ -117,7 +117,7 @@ const Form = (props) => {
           type: d.name || 'string',
           label: label || name,
           name: name,
-
+          showStepsTitle:showStepsTitle,
           size: {
             sm: 6,
             lg: 6,

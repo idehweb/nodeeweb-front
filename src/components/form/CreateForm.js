@@ -23,28 +23,38 @@ import {
   FieldTextarea
 } from "#c/components/form/fields";
 import DemoSteps from "#c/components/page-builder/stepper/demo";
-
+import _ from 'lodash';
 function CreateForm(props) {
-  console.log('propsprops',props)
+
   let {fields, rules = {fields: []},theFields=false, t} = props;
   // console.clear();
 
+
   const themeData = useSelector((st) => st.store.themeData);
   if (!themeData) {
-    // console.log('not themeData', themeData);
-
     return
   }
-  // console.log('fields', fields);
-  // console.log('rules', {...{fields:rules.fields}});
   const [theRules, setTheRules] = useState({...{fields:rules.fields}});
+  const [submitButton, setSubmitButton] = useState(true);
+  console.log('tttttttdsadstt',props.theFields)
+  const checkSteps = () =>{
+    if(props.theFields.lenght > 0){
+      props.theFields.map((fild,index)=>{
+        if(fild.type === 'steps'){
+          // setSubmitButton(false)
+          // return;
+          return false;
+        }
+      })
+    }
+  }
   useEffect(() => {
     // console.log('useEffect',rules)
-
+    setSubmitButton(checkSteps);
     if (!theRules || (theRules && !theRules.fields) || (theRules.fields && !theRules.fields[0])) {
       Object.keys(fields).forEach((fi) => {
         let typ = typeof fields[fi];
-        // console.log('typ instanceof' ,fields[fi]);
+        console.log('typ instanceofinstanceof' ,typ);
         if (fields[fi] instanceof Array) {
           typ = 'select';
         }
@@ -438,11 +448,18 @@ function CreateForm(props) {
                     }
                     return (<TheField onSubmit={onSubmit} key={index} {...lastObj} setValue={form.mutators.setValue}/>);
                   })}
-                  <div className="buttons">
-                    <Button type="submit">
-                      {t('Submit')}
-                    </Button>
-                  </div>
+                  {
+                    submitButton && (
+                      <div className="buttons">
+                        <Button type="submit">
+                          {t('Submit')}
+                        </Button>
+                      </div>
+                    )
+                  }
+
+
+
                 </Row>
               </Container>
             </form>)}

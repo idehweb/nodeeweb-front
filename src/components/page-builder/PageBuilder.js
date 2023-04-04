@@ -397,7 +397,7 @@ export function ThePagination(props) {
   if (arrows == 'false') {
     arrows = false;
   }
-  console.log('props', props)
+  console.log('PaginationPagination', props)
 // return JSON.stringify(element.data)
   return <Pagination element={element} params={params}/>
 

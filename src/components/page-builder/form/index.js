@@ -181,7 +181,7 @@ const Form = (props) => {
 
             {/*{JSON.stringify(tracks)}*/}
             {/*{JSON.stringify(theformFields)}*/}
-            {(theformFields && tracks) && <CreateForm
+            {(theformFields && tracks) && <CreateForm formFiledsDetail={fields}
               rules={{fields: tracks}}
               onSubmit={(e) => {
                 console.log('onSubmit', e)

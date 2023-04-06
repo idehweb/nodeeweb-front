@@ -11,6 +11,8 @@ import FieldTextarea from './FieldTextarea';
 import FieldJson from './FieldJson';
 import FieldNumber from './FieldNumber';
 import FieldRadio from './FieldRadio';
+import FieldUploadMedia from './FieldUploadMedia';
+import FieldUploadDocument from './FieldUploadDocument';
 
 
 export {
@@ -26,7 +28,9 @@ export {
   FieldCheckbox,
   FieldCheckboxes,
   FieldServer,
-  FieldRadio
+  FieldRadio,
+  FieldUploadDocument,
+  FieldUploadMedia
 };
 
 

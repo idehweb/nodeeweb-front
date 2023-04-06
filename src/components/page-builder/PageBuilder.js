@@ -23,7 +23,9 @@ import {useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 
 export function ShowElement(p) {
+
   let {element, content, params,condition,handleStep} = p;
+
   if (!element) {
     return
   }
@@ -81,7 +83,7 @@ export function ShowElement(p) {
     case "grid":
       return <TheGrid element={element} content={content} params={params}/>;
     case "form":
-      return <TheForm element={element} content={content} params={params}/>;
+      return <TheForm  element={element} content={content} params={params}/>;
     case "Slide":
       return <SWIPERSlide element={element} content={content} params={params}/>;
     case "ProductSlider":
@@ -423,12 +425,13 @@ export function TheGrid(props) {
 }
 
 export function TheForm(props) {
-  let {element, content} = props;
+
+  let {element, content,p} = props;
   let {type, children, settings, classes} = element;
   let {general} = settings;
   let {fields} = general;
 
-  return <Form element={element}/>
+  return <Form element={element} formFileds={fields}/>
 
 }
 export function TheDescription(props) {
@@ -685,10 +688,6 @@ export function Content(props) {
 
 
 export default function PageBuilder(props) {
-  // console.clear();
-  console.log('PageBuilder ===>===>===>', props)
-
-
   let {elements, content, style = {}, kind = 'container-fluid', maxWidth = '100%', data, description = null, params} = props;
   // let html = elements.html;
   // if (elements && elements.pages && elements.pages[0] && elements.pages[0].frames && elements.pages[0].frames[0] && elements.pages[0].frames[0].component && elements.pages[0].frames[0].component.components)

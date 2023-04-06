@@ -20,23 +20,25 @@ import {
   FieldServer,
   FieldText,
   FieldRadio,
-  FieldTextarea
+  FieldTextarea,
+  FieldUploadDocument,
+  FieldUploadMedia
+
 } from "#c/components/form/fields";
 import DemoSteps from "#c/components/page-builder/stepper/demo";
 import _ from 'lodash';
 function CreateForm(props) {
 
-  let {fields, rules = {fields: []},theFields=false, t} = props;
-  // console.clear();
-
-
+  let {fields, rules = {fields: []},theFields=false, t,formFiledsDetail} = props;
+  let {showSubmitButton} = formFiledsDetail;
+  console.log('showSubmitButton',showSubmitButton);
   const themeData = useSelector((st) => st.store.themeData);
   if (!themeData) {
     return
   }
   const [theRules, setTheRules] = useState({...{fields:rules.fields}});
-  const [submitButton, setSubmitButton] = useState(true);
-  console.log('tttttttdsadstt',props.theFields)
+  const [submitButton, setSubmitButton] = useState(showSubmitButton);
+
   const checkSteps = () =>{
     if(props.theFields.lenght > 0){
       props.theFields.map((fild,index)=>{
@@ -78,6 +80,31 @@ function CreateForm(props) {
     // console.log('themeData',  themeData['models']);
     // moment(field.value, "YYYY-MM-DD[T]HH:mm:ss.SSS[Z]", true).isValid())
 
+
+    // if ((type==='radiobuttonitem')) {
+    //   return <Col
+    //     sm={fields.sm ? fields.sm : ''}
+    //     lg={fields.lg ? fields.lg : ''}
+    //     className={'MGD ' +  (className !== undefined ? className : '')}>
+    //     <label htmlFor={name}>{fields.label}</label>
+
+
+    //       {/* <input type="radio" id="radioApple" name="radioFruit" value="apple" checked />
+    //       <label for="radioApple">Apple</label> */}
+
+
+    //     <Field
+    //       name={fields.name}
+    //       component="radio"
+    //       type="radio"
+    //       placeholder={fields.placeholder ? fields.placeholder : ''}
+    //       className="mb-2 form-control"
+    //       disabled={disabled}
+    //       style={dynamicStyle}
+
+    //     />
+    //   </Col>
+    // }
     if ((type==='radiobuttonlists')) {
       return <Col
         sm={fields.sm ? fields.sm : ''}
@@ -105,32 +132,12 @@ function CreateForm(props) {
         /> */}
       </Col>
     }
-    // if ((type==='radiobuttonitem')) {
-    //   return <Col
-    //     sm={fields.sm ? fields.sm : ''}
-    //     lg={fields.lg ? fields.lg : ''}
-    //     className={'MGD ' +  (className !== undefined ? className : '')}>
-    //     <label htmlFor={name}>{fields.label}</label>
-
-
-    //       {/* <input type="radio" id="radioApple" name="radioFruit" value="apple" checked />
-    //       <label for="radioApple">Apple</label> */}
-
-
-    //     <Field
-    //       name={fields.name}
-    //       component="radio"
-    //       type="radio"
-    //       placeholder={fields.placeholder ? fields.placeholder : ''}
-    //       className="mb-2 form-control"
-    //       disabled={disabled}
-    //       style={dynamicStyle}
-
-    //     />
-    //   </Col>
-    // }
-
-
+    if (type === "document") {
+      return <FieldUploadDocument field={field}/>;
+    }
+    if (type === "media") {
+      return <FieldUploadMedia field={field}/>;
+    }
     if ((type==='button')) {
       return <Col
         sm={fields.sm ? fields.sm : ''}
@@ -448,18 +455,15 @@ function CreateForm(props) {
                     }
                     return (<TheField onSubmit={onSubmit} key={index} {...lastObj} setValue={form.mutators.setValue}/>);
                   })}
-                  {
-                    submitButton && (
-                      <div className="buttons">
-                        <Button type="submit">
-                          {t('Submit')}
-                        </Button>
-                      </div>
-                    )
-                  }
-
-
-
+                    {
+                      showSubmitButton && (
+                        <div className="buttons">
+                          <Button type="submit">
+                            {t('Submit')}
+                          </Button>
+                        </div>
+                      )
+                    }
                 </Row>
               </Container>
             </form>)}

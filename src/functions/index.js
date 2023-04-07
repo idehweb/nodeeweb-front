@@ -1153,7 +1153,9 @@ export const sendExtra = (d, obj) => {
 };
 
 export const submitForm = (_id, obj) => {
-
+  // uploadMedia
+  // console.log('submitFooorm',uploadMedia(obj,{},_id,'document'));
+  // console.log('submitFooorm',store.getState());
   return new Promise(function (resolve, reject) {
     postData(`${ApiUrl}/form/entry/${_id}`, obj, false)
       .then((data) => {
@@ -1766,7 +1768,7 @@ export const getContactData = (i) => {
   });
 };
 
-export const uploadMedia = (file = {}, onUploadProgress, id) => {
+export const uploadMedia = (file = {}, onUploadProgress, id,uploadType) => {
   return new Promise(function (resolve, reject) {
 
     const formData = new FormData();
@@ -1788,6 +1790,18 @@ export const uploadMedia = (file = {}, onUploadProgress, id) => {
         onUploadProgress(percent, id, cancel);
       }
     };
+
+    if(uploadType){
+      return axios
+      .post(`${AdminRoute}/${uploadType}/fileUpload`, formData, config)
+      .then((res) => {
+        return resolve(res.data);
+      })
+      .catch((err) => {
+        console.error("err in axios => ", err);
+        return reject(err);
+      });
+    }
     return axios
       .post(`${AdminRoute}/media/fileUpload`, formData, config)
       .then((res) => {
@@ -1797,6 +1811,7 @@ export const uploadMedia = (file = {}, onUploadProgress, id) => {
         console.error("err in axios => ", err);
         return reject(err);
       });
+
   });
 
 };

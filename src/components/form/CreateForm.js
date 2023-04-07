@@ -31,7 +31,6 @@ function CreateForm(props) {
 
   let {fields, rules = {fields: []},theFields=false, t,formFiledsDetail} = props;
   let {showSubmitButton} = formFiledsDetail;
-  console.log('showSubmitButton',showSubmitButton);
   const themeData = useSelector((st) => st.store.themeData);
   if (!themeData) {
     return

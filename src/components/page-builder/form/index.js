@@ -184,7 +184,6 @@ const Form = (props) => {
             {(theformFields && tracks) && <CreateForm formFiledsDetail={fields}
               rules={{fields: tracks}}
               onSubmit={(e) => {
-                console.log('onSubmit', e)
                 submitForm(_id, e).then(d => {
                   if (d.success && d.message)
                     toast(t(d.message), {

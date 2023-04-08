@@ -42,7 +42,8 @@
     "redux-thunk": "^2.4.1",
     "shards-react": "^1.0.3",
     "socket.io-client": "^4.5.2",
-    "underscore": "^1.13.6"
+    "underscore": "^1.13.6",
+    "use-offline-captcha": "^0.2.0"
   },
   "devDependencies": {
     "@craco/craco": "^6.4.3",

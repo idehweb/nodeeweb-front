@@ -4,10 +4,11 @@ import {Field} from 'react-final-form'
 import {Col} from 'shards-react';
 import {MainUrl, uploadMedia} from "#c/functions/index";
 
-function FieldText({field}) {
+// function FieldText({field}) {
+function FieldText(props) {
   const {t} = useTranslation();
 
-  const {type, kind, size, className, name, label, options, placeholder, value} = field;
+  const {type, kind, size, className, name, label, options, placeholder, value} = props;
 // return JSON.stringify(value)
   let [theVal, setTheVal] = useState(value)
   // console.log('field object', field)
@@ -20,14 +21,14 @@ function FieldText({field}) {
     sm={size ? size.sm : ''}
     lg={size ? size.lg : ''}
     className={'MGD ' + className}>
-    <label htmlFor={name}>{label ? t(label) : t(name)}</label>
+    <label htmlFor={name}>{label === name ?  '' : t(label)}</label>
+    {/*<label htmlFor={name}>{label ? t(label) : t(name)}</label>*/}
     <Field
       name={name}
       component="input"
       type="text"
-      placeholder={placeholder ? placeholder : (label ? t(label) : t(name))}
+      placeholder={placeholder}
       onChange={(e) => {
-        console.log(e.target.value, name)
         field.setValue(name, e.target.value)
 
       }}

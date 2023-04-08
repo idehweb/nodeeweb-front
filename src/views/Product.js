@@ -52,9 +52,11 @@ const Product = (props) => {
   // let history = useNavigate();
 
   let st = store.getState().store;
+  let fp=localStorage.getItem('username');
+  // return JSON.stringify(fp)
   let admin_token = null;
-  if (st.username) {
-    admin_token = st.username;
+  if (fp) {
+    admin_token = fp;
   }
   const [mainId, setMainId] = useState(the_id);
   const [tab, setTab] = useState("attributes");

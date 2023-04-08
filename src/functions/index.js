@@ -46,8 +46,17 @@ export const setStyles = (fields) => {
     left,
     boxShadow,
     zIndex,
-    color, float, borderRadius, direction, width, maxWidth, height, maxHeight, backgroundColor, margin, padding, fontWeight, fontSize, lineHeight, display
+    color, float, borderRadius, direction, width, maxWidth, height, maxHeight, backgroundColor, margin,marginTop, padding, fontWeight, fontSize, lineHeight, display,
+    paddingTop,
+    paddingBottom,
+    flexDirection
   } = fields
+  if (paddingTop) {
+    style['paddingTop'] = paddingTop;
+  }
+  if (paddingBottom) {
+    style['paddingBottom'] = paddingBottom;
+  }
   if (borderRadius) {
     style['borderRadius'] = borderRadius;
   }
@@ -92,6 +101,9 @@ export const setStyles = (fields) => {
   if (margin) {
     style['margin'] = margin;
   }
+  if (marginTop) {
+    style['margin-top'] = marginTop;
+  }
   if (padding) {
     style['padding'] = padding;
   }
@@ -112,6 +124,9 @@ export const setStyles = (fields) => {
   }
   if (boxShadow) {
     style['boxShadow'] = boxShadow;
+  }
+  if (flexDirection) {
+    style['flexDirection'] = flexDirection;
   }
 
   if (right) {
@@ -466,7 +481,17 @@ export const SidebarCategoriesData = (i = "") =>
       handleErr(err);
       return err;
     });
+
 export const getThemeData = (i = "") =>
+  (isClient && window.theme) ? window.theme : getAdminData(`${THEME_URL}`, {}, true)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      handleErr(err);
+      return err;
+    });
+export const getThemeDataold = (i = "") =>
   getAdminData(`${THEME_URL}`, {}, true)
     .then((res) => {
       return res.data;
@@ -1128,6 +1153,9 @@ export const sendExtra = (d, obj) => {
 };
 
 export const submitForm = (_id, obj) => {
+  // uploadMedia
+  // console.log('submitFooorm',uploadMedia(obj,{},_id,'document'));
+  // console.log('submitFooorm',store.getState());
   return new Promise(function (resolve, reject) {
     postData(`${ApiUrl}/form/entry/${_id}`, obj, false)
       .then((data) => {
@@ -1740,7 +1768,7 @@ export const getContactData = (i) => {
   });
 };
 
-export const uploadMedia = (file = {}, onUploadProgress, id) => {
+export const uploadMedia = (file = {}, onUploadProgress, id,uploadType) => {
   return new Promise(function (resolve, reject) {
 
     const formData = new FormData();
@@ -1762,6 +1790,18 @@ export const uploadMedia = (file = {}, onUploadProgress, id) => {
         onUploadProgress(percent, id, cancel);
       }
     };
+
+    if(uploadType){
+      return axios
+      .post(`${AdminRoute}/${uploadType}/fileUpload`, formData, config)
+      .then((res) => {
+        return resolve(res.data);
+      })
+      .catch((err) => {
+        console.error("err in axios => ", err);
+        return reject(err);
+      });
+    }
     return axios
       .post(`${AdminRoute}/media/fileUpload`, formData, config)
       .then((res) => {
@@ -1771,6 +1811,7 @@ export const uploadMedia = (file = {}, onUploadProgress, id) => {
         console.error("err in axios => ", err);
         return reject(err);
       });
+
   });
 
 };

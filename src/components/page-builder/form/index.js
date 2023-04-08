@@ -4,7 +4,7 @@ import {Col, Row} from "shards-react";
 import LoadingComponent from "#c/components/components-overview/LoadingComponent";
 import CreateForm from "#c/components/form/CreateForm";
 
-import {getEntity, isClient, submitForm} from "#c/functions/index";
+import {getEntity, isClient, setStyles, submitForm} from "#c/functions/index";
 
 import {withTranslation} from "react-i18next";
 import {useNavigate, useParams} from "react-router-dom";
@@ -15,9 +15,7 @@ const getURIParts = (url) => {
   return loc
 }
 const Form = (props) => {
-  console.log('Form...', props)
   let navigate = useNavigate();
-
   const [tracks, settracks] = useState([]);
   const [theformFields, setformFields] = useState([]);
   const [counts, setcount] = useState(0);
@@ -39,10 +37,7 @@ const Form = (props) => {
   url = isClient ? new URL(window.location.href) : "";
   let theurl = getURIParts(url);
   const loadForm = async () => {
-
     getEntity('form', _id).then((resp) => {
-      console.log('resp', resp)
-      // setLoadingMoreItems(false);
       afterGetData(resp);
     });
   };
@@ -95,11 +90,6 @@ const Form = (props) => {
     }
   }
   const afterGetData = (resp, tracks = []) => {
-    // console.clear()
-    console.log('afterGetData', resp, tracks)
-    // let {items, count} = resp;
-    // if (resp.length < 24) sethasMoreItems(false);
-    // console.log("resp", resp);
     if (resp) {
       let {elements} = resp;
 
@@ -108,20 +98,18 @@ const Form = (props) => {
       // items.forEach((item) => {
       //   trackss.push(item);
       // });
-      console.log('elements:', elements)
       elements.forEach((d) => {
-        console.log('d', d)
+        console.log('dd', d)
         // formFields.push()
         let {settings = {}, children} = d;
         let {general = {}} = settings;
         let {fields = []} = general;
-        let {name, label, value = '', placeholder, classes, sm, lg} = fields;
+        let {name, label, value = '', placeholder, classes, sm, lg,options,showStepsTitle} = fields;
+        let stylee = setStyles(fields);
         formFields[name] = value;
         let theChildren = [];
         if (children) {
           children.forEach((ch) => {
-
-            // console.log('type of ',d,typeof data[d])
             theChildren.push(lastObj)
           })
         }
@@ -129,7 +117,7 @@ const Form = (props) => {
           type: d.name || 'string',
           label: label || name,
           name: name,
-
+          showStepsTitle:showStepsTitle,
           size: {
             sm: 6,
             lg: 6,
@@ -138,10 +126,12 @@ const Form = (props) => {
             // setFields([...fields,])
             // this.state.checkOutBillingAddress.add.data[d] = text;
           },
+          style : stylee,
           className: 'rtl ' + (classes ? classes.map(ob => (ob.name ? ob.name : ob)).join(" ") : ""),
           placeholder: placeholder,
           child: [],
           children: children || [],
+          options: options || [],
           value: value,
         };
         if (typeof data[d] == 'object') {
@@ -191,16 +181,15 @@ const Form = (props) => {
 
             {/*{JSON.stringify(tracks)}*/}
             {/*{JSON.stringify(theformFields)}*/}
-            {(theformFields && tracks) && <CreateForm
+            {(theformFields && tracks) && <CreateForm formFiledsDetail={fields}
               rules={{fields: tracks}}
               onSubmit={(e) => {
-                console.log('onSubmit', e)
                 submitForm(_id, e).then(d => {
                   if (d.success && d.message)
                     toast(t(d.message), {
                       type: "success"
                     });
-                }).cache(d => {
+                }).catch(d => {
                   toast(t('sth wrong happened!'), {
                     type: "error"
                   });

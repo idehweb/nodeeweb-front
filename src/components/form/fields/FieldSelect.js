@@ -6,18 +6,12 @@ import {Col} from 'shards-react';
 import {getEntitiesForAdmin, MainUrl, uploadMedia} from "#c/functions/index";
 
 function FieldSelect(props) {
-  // console.clear();
   let {field, t} = props;
-  // console.log('field', field);
-  // const {type, kind, size, className, name, label,options=[], placeholder,value} = field;
   let {type, kind, size, className, entity, optionName, optionValue, onChange, searchbox = true, options = [], limit = 1000, name, label, placeholder, value} = field;
 
   let [theVal, setTheVal] = useState(value)
-  // console.log('field object', field)
-
   let [list, setList] = useState(options || [])
   let [search, setSearch] = useState('')
-  // console.log('field object', field)
   useEffect(() => {
     if (limit) {
       limit = parseInt(limit)
@@ -29,12 +23,11 @@ function FieldSelect(props) {
 
       })
   }, [])
-  // return;
   return <Col
     sm={size ? size.sm : ''}
     lg={size ? size.lg : ''}
     className={'MGD ' + className}>
-    <label htmlFor={name}>{label ? t(label) : t(name)}</label>
+    <label htmlFor={name}>{label === name ? '' : t(label)}</label>
 
     <Field
       name={name}
@@ -42,8 +35,6 @@ function FieldSelect(props) {
       type="select"
       allowNull={true}
       className="mb-2 form-control"
-      // value={theVal}
-      // defaultValue={theVal}
       onChange={(e) => {
         // console.log('e',e.target.value,field)
         setTheVal(e.target.value);
@@ -51,9 +42,9 @@ function FieldSelect(props) {
           let ty = list.filter((i, idx) => {
               console.log(i['value'], e.target.value)
               if (optionValue)
-                return (i[optionValue] == e.target.value)
+                return (i[optionValue] === e.target.value)
               if (!optionValue)
-                return (i['value'] == e.target.value)
+                return (i['value'] === e.target.value)
 
             }
           );
@@ -68,12 +59,12 @@ function FieldSelect(props) {
           field.setValue(name, e.target.value);
       }}
     >
-      <option/>
-      {list && list.map((ch, c) => {
-        return <option key={c} value={optionValue ? ch[optionValue] : ch.value}>
-          {optionName ? ch[optionName] : t(ch.label)}
-        </option>
-      })}
+      <option value="">{'انتخاب کنید'}</option>
+      {list && list.map((ch, c) =>
+          <option key={c} value={optionValue ? ch[optionValue] : ch.value}>
+            {optionName ? ch[optionName] : t(ch.title)}
+          </option>
+      )}
 
     </Field>
 

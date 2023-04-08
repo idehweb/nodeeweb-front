@@ -14,6 +14,8 @@ import LoadMore from "#c/components/page-builder/loadmore";
 import Pagination from "#c/components/page-builder/pagination";
 import Form from "#c/components/page-builder/form";
 import Stepper from "#c/components/page-builder/stepper";
+import ConditionSteps from "#c/components/page-builder/conditionStepper";
+import ConditionStep from "#c/components/page-builder/conditionStepper/detail";
 import Description from "#c/components/page-builder/description";
 import * as Icons from "@mui/icons-material";
 import {Button} from "shards-react";
@@ -21,9 +23,9 @@ import {useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 
 export function ShowElement(p) {
-  // console.log("\n\n\nShowElement", p);
 
-  let {element, content, params} = p;
+  let {element, content, params,condition,handleStep} = p;
+
   if (!element) {
     return
   }
@@ -50,8 +52,14 @@ export function ShowElement(p) {
   switch (name) {
     case "html":
       return <div>html</div>;
+    case "text":
+      return <TITLE element={element}/>;
+    case "conditionsteps":
+        return <ConditionSteps element={element} content={content} params={params}/>;
+    case "conditionstep":
+        return <ConditionStep element={element} content={content} params={params}/>;
     case "button":
-      return <TheButton element={element} content={content} params={params}/>;
+      return <TheButton element={element} content={content} params={params} conditionStep={condition} handleStep={handleStep}/>;
     case "hr":
       return <Hr element={element} content={content} params={params}/>;
     case "header":
@@ -75,7 +83,7 @@ export function ShowElement(p) {
     case "grid":
       return <TheGrid element={element} content={content} params={params}/>;
     case "form":
-      return <TheForm element={element} content={content} params={params}/>;
+      return <TheForm  element={element} content={content} params={params}/>;
     case "Slide":
       return <SWIPERSlide element={element} content={content} params={params}/>;
     case "ProductSlider":
@@ -92,10 +100,7 @@ export function ShowElement(p) {
       return <THE_TABS element={element} content={content} params={params}/>;
     case "tab":
       return <THE_TAB element={element} content={content} params={params}/>;
-    case "steps":
-      return <THE_STEPS element={element} content={content} params={params}/>;
-    case "step":
-      return <THE_STEP element={element} content={content} params={params}/>;
+
     case "Cell":
       return <GRID_COL element={element} content={content} params={params}/>;
     case "col":
@@ -125,8 +130,7 @@ export function TEXTNODE({element}) {
   // console.clear()
   // console.log('element', element)
 
-  return <div
-    className={'p-node ' + (classes ? classes.map(ob => (ob.name ? ob.name : ob)).join(" ") : "")}> {content}</div>;
+  return <div className={'p-node ' + (classes ? classes.map(ob => (ob.name ? ob.name : ob)).join(" ") : "")}> {content}</div>;
   // return <div className={'the-title'}><ShowElement element={component}/></div>;
 
 
@@ -186,66 +190,78 @@ export function TheMainNavbar({element}) {
   // return <div style={style}>{text}</div>
 }
 
-export function TheButton({element}) {
+export function TheButton(p) {
+  const {element,conditionStep,handleStep} = p;
   let {type, components, classes, settings, handleCard, card} = element;
   let {general} = settings;
   let {fields} = general;
   let {text, iconFont, action, classess, showInMobile, showInDesktop,target="_self"} = fields;
   let style = setStyles(fields);
-// return JSON.stringify(fields)
-  if (iconFont && action) {
-// return <CardSidebar />
-    if (action == 'toggleCart') {
-      // console.log(handleCard)
-      return <Button onClick={() => {
-        // console.clear()
-        console.log('element', element)
-        handleCard();
-      }} className={' posrel ' + classess + (showInMobile ? ' showInMobile ' : '')} style={style}>{Icons[iconFont] &&
-      <span>{React.createElement(Icons[iconFont])}</span>}<span className={'badge'}
-                                                                theme="info">{card && card.length}</span><span>{text}</span></Button>
+  if(conditionStep){
+    return <Button
+              onClick={() => {
+                handleStep(action)
+              }}
+              className={(classess !== undefined ? classess : '') + (showInMobile ? ' showInMobile ' : '') + action} style={style}>{Icons[iconFont] &&
+                <span>{React.createElement(Icons[iconFont])}</span>}<span>{text}</span>
+           </Button>
 
+
+  }
+
+if (iconFont && action) {
+  // return <CardSidebar />
+      if (action == 'toggleCart') {
+        // console.log(handleCard)
+        return <Button onClick={() => {
+          // console.clear()
+
+          handleCard();
+        }} className={' posrel ' + classess + (showInMobile ? ' showInMobile ' : '')} style={style}>{Icons[iconFont] &&
+        <span>{React.createElement(Icons[iconFont])}</span>}<span className={'badge'}
+                                                                  theme="info">{card && card.length}</span><span>{text}</span></Button>
+
+      }
+      if (action == 'toggleMenu') {
+        // console.log(handleCard)
+        return <Button onClick={() => {
+          // console.clear()
+          console.log('element', element)
+          toggleSidebar();
+        }} className={' posrel ' + classess + (showInMobile ? ' showInMobile ' : '')} style={style}>{Icons[iconFont] &&
+        <span>{React.createElement(Icons[iconFont])}</span>}<span>{text}</span></Button>
+
+      }
+
+      if (action) {
+        if (action.substring(0, 4) == "http" || action.substring(0, 3) == "tel" || action.substring(0, 3) == "mai" || action.substring(0, 3) == "sms") {
+          return <a target={target} href={action}
+                    className={'the-link with-http ' + classess + (showInMobile ? ' showInMobile ' : '')}><Button
+            style={style}>{Icons[iconFont] &&
+          <span>{React.createElement(Icons[iconFont])}</span>}<span>{text}</span></Button></a>
+        } else {
+          return <Link to={action}
+                       className={'the-link with-out-http ' + classess + (showInMobile ? ' showInMobile ' : '')}><Button
+            style={style}>{Icons[iconFont] &&
+          <span>{React.createElement(Icons[iconFont])}</span>}<span>{text}</span></Button></Link>
+        }
+      }
     }
-    if (action == 'toggleMenu') {
-      // console.log(handleCard)
-      return <Button onClick={() => {
-        // console.clear()
-        console.log('element', element)
-        toggleSidebar();
-      }} className={' posrel ' + classess + (showInMobile ? ' showInMobile ' : '')} style={style}>{Icons[iconFont] &&
+    if (iconFont) {
+
+      return <Button className={classess + (showInMobile ? ' showInMobile ' : '')} style={style}>{Icons[iconFont] &&
       <span>{React.createElement(Icons[iconFont])}</span>}<span>{text}</span></Button>
 
     }
-
     if (action) {
-      if (action.substring(0, 4) == "http" || action.substring(0, 3) == "tel" || action.substring(0, 3) == "mai" || action.substring(0, 3) == "sms") {
-        return <a target={target} href={action}
-                  className={'the-link with-http ' + classess + (showInMobile ? ' showInMobile ' : '')}><Button
-          style={style}>{Icons[iconFont] &&
-        <span>{React.createElement(Icons[iconFont])}</span>}<span>{text}</span></Button></a>
-      } else {
-        return <Link to={action}
-                     className={'the-link with-out-http ' + classess + (showInMobile ? ' showInMobile ' : '')}><Button
-          style={style}>{Icons[iconFont] &&
-        <span>{React.createElement(Icons[iconFont])}</span>}<span>{text}</span></Button></Link>
-      }
+      if (action.substring(0, 4) == "http" || action.substring(0, 3) == "tel" || action.substring(0, 3) == "mai" || action.substring(0, 3) == "sms")
+        return <a target={target} href={action}><Button className={classess + (showInMobile ? ' showInMobile ' : '')}
+                                        style={style}>{text}</Button></a>
+      else
+        return <Link to={action}><Button className={classess + (showInMobile ? ' showInMobile ' : '')}
+                                         style={style}>{text}</Button></Link>
     }
-  }
-  if (iconFont) {
-
-    return <Button className={classess + (showInMobile ? ' showInMobile ' : '')} style={style}>{Icons[iconFont] &&
-    <span>{React.createElement(Icons[iconFont])}</span>}<span>{text}</span></Button>
-
-  }
-  if (action) {
-    if (action.substring(0, 4) == "http" || action.substring(0, 3) == "tel" || action.substring(0, 3) == "mai" || action.substring(0, 3) == "sms")
-      return <a target={target} href={action}><Button className={classess + (showInMobile ? ' showInMobile ' : '')}
-                                      style={style}>{text}</Button></a>
-    else
-      return <Link to={action}><Button className={classess + (showInMobile ? ' showInMobile ' : '')}
-                                       style={style}>{text}</Button></Link>
-  }
-  return <Button className={classess + (showInMobile ? ' showInMobile ' : '')} style={style}>{text}</Button>
+    return <Button className={classess + (showInMobile ? ' showInMobile ' : '')} style={style}>{text}</Button>
 }
 
 export function Hr({element}) {
@@ -383,7 +399,7 @@ export function ThePagination(props) {
   if (arrows == 'false') {
     arrows = false;
   }
-  console.log('props', props)
+  console.log('PaginationPagination', props)
 // return JSON.stringify(element.data)
   return <Pagination element={element} params={params}/>
 
@@ -409,12 +425,13 @@ export function TheGrid(props) {
 }
 
 export function TheForm(props) {
-  let {element, content} = props;
+
+  let {element, content,p} = props;
   let {type, children, settings, classes} = element;
   let {general} = settings;
   let {fields} = general;
 
-  return <Form element={element}/>
+  return <Form element={element} formFileds={fields}/>
 
 }
 export function TheDescription(props) {
@@ -489,8 +506,9 @@ export function TEXTBOX(element) {
 //
 // }
 
-export function IMAGE({element}) {
+export function IMAGE(props) {
   // let {settings, classes} = element;
+  const {element} = props;
 
   let {type, components, classes, settings} = element;
   let {general} = settings;
@@ -500,6 +518,7 @@ export function IMAGE({element}) {
   }
   let {link, title, src, showInDesktop, showInMobile,target} = fields;
   let style = setStyles(fields);
+  console.log('Imageprops',style);
   // console.clear()
   if (link) {
     return <a target={target} href={link} title={title}
@@ -669,9 +688,6 @@ export function Content(props) {
 
 
 export default function PageBuilder(props) {
-  // console.clear();
-
-  console.log('PageBuilder ===>', props)
   let {elements, content, style = {}, kind = 'container-fluid', maxWidth = '100%', data, description = null, params} = props;
   // let html = elements.html;
   // if (elements && elements.pages && elements.pages[0] && elements.pages[0].frames && elements.pages[0].frames[0] && elements.pages[0].frames[0].component && elements.pages[0].frames[0].component.components)

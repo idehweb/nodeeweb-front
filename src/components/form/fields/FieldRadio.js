@@ -4,39 +4,28 @@ import {Field} from 'react-final-form';
 import {Col} from 'shards-react';
 import {getEntitiesForAdmin, MainUrl, uploadMedia} from "#c/functions/index";
 
-function FieldCheckbox(props) {
-  // console.clear();
-
+function FieldRadio(props) {
   let {field, t} = props;
+  console.log(field);
   let {type,style, kind, size, className, entity, searchbox = true, limit = 1000, name, options = [], label, placeholder, value} = field;
-  let [checkboxes, setCheckBoxes] = useState(options)
-
+  let [radios, setRadios] = useState(options)
   let [search, setSearch] = useState('')
   useEffect(() => {
     if (limit) {
       limit = parseInt(limit)
     }
-    if (entity && checkboxes.length === 0)
+    if (entity && radios.length === 0)
       getEntitiesForAdmin(entity, 0, limit).then((d) => {
-        setCheckBoxes(d)
+        setRadios(d)
       }).catch((e) => {
 
       })
   }, [])
   useEffect(() => {
-  //   if (options != checkboxes)
-  //     setCheckBoxes([...options])
+    //   if (options != checkboxes)
+    //     setCheckBoxes([...options])
   }, [])
-  // useEffect(() => {
-  //   // if(limit){limit=parseInt(limit)}
-  //   if (entity)
-  //     getEntities(entity, 0, limit,search).then((d) => {
-  //       setCheckBoxes(d)
-  //     }).catch((e) => {
-  //
-  //     })
-  // }, [search])
-  // return;
+
 
   return <Col
     sm={size ? size.sm : ''}
@@ -47,18 +36,18 @@ function FieldCheckbox(props) {
     >
       {({input, meta}) => {
         return (
-          <div><label htmlFor={name}>{t(label)}</label>
+          <div><label htmlFor={name}>{label}</label>
             <div className={"d-flex "}>
-              {checkboxes && checkboxes.map((checkbox, i) => {
+              {radios && radios.map((ch, i) => {
                 return <label key={i} className={'checkbox-items p-1'}>
                   <Field
                   name={name}
                   component="input"
                   style={style}
-                  type="checkbox"
-                  value={checkbox.value}
+                  type="radio"
+                  value={ch.value}
                 />
-                  <span>{checkbox.title}</span>
+                  <span>{ch.title}</span>
                 </label>
               })}
 
@@ -73,4 +62,4 @@ function FieldCheckbox(props) {
 }
 
 
-export default withTranslation()(FieldCheckbox);
+export default withTranslation()(FieldRadio);

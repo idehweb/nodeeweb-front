@@ -28,7 +28,7 @@ import {
 import {withTranslation} from "react-i18next";
 import {Navigate} from "react-router-dom";
 import {toast} from "react-toastify";
-
+import Captcha from '#c/components/captcha'
 import {fNum} from "#c/functions/utils";
 
 import CircularProgress from "@mui/material/CircularProgress";
@@ -46,6 +46,7 @@ class LoginForm extends React.Component {
     console.log(props);
 
     this.state = {
+      captcha: false,
       phoneNumber: null,
       thePhoneNumber: null,
       activationCode: null,
@@ -70,6 +71,7 @@ class LoginForm extends React.Component {
       timer: globalTimerSet
     };
     window.scrollTo(0, 0);
+    this.captchaAction = this.captchaAction.bind(this);
   }
 
   fd(d) {
@@ -90,8 +92,13 @@ class LoginForm extends React.Component {
 
     let fd = this.state.countryCode || "98";
     let number = this.state.phoneNumber || "0";
+    let captcha = this.state.captcha;
     if (!number || number == "" || number == 0) {
       alert("enter phone number!");
+      return;
+    }
+    if (!captcha || captcha == false || captcha == "undefined") {
+      alert("enter captcha");
       return;
     }
     number = number.substring(number.length - 10);
@@ -388,7 +395,17 @@ class LoginForm extends React.Component {
   componentWillUnmount() {
     clearInterval(this.myInterval);
   }
-
+  captchaValue(cVal){
+    // console.log('parentReCaptchaaaaaa',cVal);
+  }
+  captchaAction(e){
+    if(e === true){
+      console.log('parentReCaptchaaaaaa',true)
+          this.setState({
+              captcha: true
+            });
+    }
+  }
   render() {
     // console.clear()
     const {
@@ -482,6 +499,7 @@ class LoginForm extends React.Component {
                             }
                           />
                         </InputGroup>
+                        <Captcha onActionValue={this.captchaValue} onActionSubmit={this.captchaAction}/>
                       </Col>
 
                     </Row>

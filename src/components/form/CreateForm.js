@@ -19,32 +19,43 @@ import {
   FieldSelect,
   FieldServer,
   FieldText,
-  FieldTextarea
+  FieldRadio,
+  FieldTextarea,
+  FieldUploadDocument,
+  FieldUploadMedia
+
 } from "#c/components/form/fields";
-
+import DemoSteps from "#c/components/page-builder/stepper/demo";
+import _ from 'lodash';
 function CreateForm(props) {
-  // console.clear()
-  // console.log('==> input: ',props)
-  let {fields, rules = {fields: []},theFields=false, t} = props;
-  // console.clear();
 
-
+  let {fields, rules = {fields: []},theFields=false, t,formFiledsDetail} = props;
+  let {showSubmitButton} = formFiledsDetail;
   const themeData = useSelector((st) => st.store.themeData);
   if (!themeData) {
-    // console.log('not themeData', themeData);
-
     return
   }
-  // console.log('fields', fields);
-  // console.log('rules', {...{fields:rules.fields}});
   const [theRules, setTheRules] = useState({...{fields:rules.fields}});
+  const [submitButton, setSubmitButton] = useState(showSubmitButton);
+
+  const checkSteps = () =>{
+    if(props.theFields.lenght > 0){
+      props.theFields.map((fild,index)=>{
+        if(fild.type === 'steps'){
+          // setSubmitButton(false)
+          // return;
+          return false;
+        }
+      })
+    }
+  }
   useEffect(() => {
     // console.log('useEffect',rules)
-
+    setSubmitButton(checkSteps);
     if (!theRules || (theRules && !theRules.fields) || (theRules.fields && !theRules.fields[0])) {
       Object.keys(fields).forEach((fi) => {
         let typ = typeof fields[fi];
-        // console.log('typ instanceof' ,fields[fi]);
+        console.log('typ instanceofinstanceof' ,typ);
         if (fields[fi] instanceof Array) {
           typ = 'select';
         }
@@ -61,19 +72,95 @@ function CreateForm(props) {
   }, []);
 
   const TheField = (field) => {
-    // console.log('field', field);
     if (!field) {
       return <>no field</>
     }
-    const {type, kind, size, className, options, disabled = false, name, label, placeholder} = field;
+    const {type,style, kind, size, className, options, disabled = false, name, label, placeholder} = field;
     // console.log('themeData',  themeData['models']);
     // moment(field.value, "YYYY-MM-DD[T]HH:mm:ss.SSS[Z]", true).isValid())
-    if (type == 'date') {
+
+
+    // if ((type==='radiobuttonitem')) {
+    //   return <Col
+    //     sm={fields.sm ? fields.sm : ''}
+    //     lg={fields.lg ? fields.lg : ''}
+    //     className={'MGD ' +  (className !== undefined ? className : '')}>
+    //     <label htmlFor={name}>{fields.label}</label>
+
+
+    //       {/* <input type="radio" id="radioApple" name="radioFruit" value="apple" checked />
+    //       <label for="radioApple">Apple</label> */}
+
+
+    //     <Field
+    //       name={fields.name}
+    //       component="radio"
+    //       type="radio"
+    //       placeholder={fields.placeholder ? fields.placeholder : ''}
+    //       className="mb-2 form-control"
+    //       disabled={disabled}
+    //       style={dynamicStyle}
+
+    //     />
+    //   </Col>
+    // }
+    if ((type==='radiobuttonlists')) {
+      return <Col
+        sm={fields.sm ? fields.sm : ''}
+        lg={fields.lg ? fields.lg : ''}
+        className={'MGD ' +  (className !== undefined ? className : '')}>
+        <label htmlFor={name}>{fields.label}</label>
+        <div class="radio-toolbar">
+            <input type="radio" id="radioApple" name="radioFruit" value="apple" checked />
+            <label for="radioApple">Apple</label>
+        </div>
+{/*
+
+
+
+
+        <Field
+          name={fields.name}
+          component="button"
+          type="button"
+          placeholder={fields.placeholder ? fields.placeholder : ''}
+          className="mb-2 form-control"
+          disabled={disabled}
+          style={dynamicStyle}
+
+        /> */}
+      </Col>
+    }
+    if (type === "document") {
+      return <FieldUploadDocument field={field}/>;
+    }
+    if (type === "media") {
+      return <FieldUploadMedia field={field}/>;
+    }
+    if ((type==='button')) {
+      return <Col
+        sm={fields.sm ? fields.sm : ''}
+        lg={fields.lg ? fields.lg : ''}
+        className={'MGD ' +  (className !== undefined ? className : '')}>
+        <label htmlFor={name}>{fields.label}</label>
+        <Field
+          name={fields.name}
+          component="button"
+          type="button"
+          placeholder={fields.placeholder ? fields.placeholder : ''}
+          className="mb-2 form-control"
+          disabled={disabled}
+          style={dynamicStyle}
+
+        />
+      </Col>
+    }
+    if (type === 'date') {
       // console.log('date')
       return <Col
         sm={size ? size.sm : ''}
         lg={size ? size.lg : ''}
-        className={'MGD ' + className}>
+        className={'MGD ' +  (className !== undefined ? className : '')}>
         <label htmlFor={name}>{label}</label>
         <Field
           name={name}
@@ -81,23 +168,20 @@ function CreateForm(props) {
           type="date"
           placeholder={placeholder || label}
           className="mb-2 form-control"
+          style={style}
         />
 
       </Col>
     }
-    if (type == 'steps') {
-      // console.log('date')
-      return JSON.stringify(field)
-      return <Stepper/>
+    if (type === 'steps') {
+      return <DemoSteps field={field} onSubmit={props.onSubmit}/>
     }
-    if ((type == 'string' || type=='input') || !type) {
-      // console.log('string')
-
+    if ((type === 'string' || type==='input') || !type) {
       return <Col
         sm={size ? size.sm : ''}
         lg={size ? size.lg : ''}
-        className={'MGD ' + className}>
-        <label htmlFor={name}>{label}</label>
+        className={'MGD ' +  (className !== undefined ? className : '')}>
+        <label htmlFor={name}>{label === name ? '' : label}</label>
         <Field
           name={name}
           component="input"
@@ -105,60 +189,70 @@ function CreateForm(props) {
           placeholder={placeholder || label}
           className="mb-2 form-control"
           disabled={disabled}
+          style={style}
         />
+        {/*<FieldText*/}
+        {/*  name={name}*/}
+        {/*  component="input"*/}
+        {/*  type="text"*/}
+        {/*  placeholder={placeholder || label}*/}
+        {/*  className="mb-2 form-control"*/}
+        {/*  disabled={disabled}*/}
+        {/*  style={style}*/}
+        {/*/>*/}
 
       </Col>
     }
-    if (type == 'price') {
+    if (type === 'price') {
       // console.log('string')
 
       return <FieldPrice field={field}/>
     }
-    if (type == 'json') {
+    if (type === 'json') {
       // console.log('string')
 
       return <FieldJson field={field}/>
     }
-    if (type == 'object') {
+    if (type === 'object') {
       return <FieldObject field={field}/>
     }
-    if (type == 'array') {
+    if (type === 'array') {
       return <FieldArray field={field}/>
 
     }
-    if (type == 'checkbox') {
+    if (type === 'checkbox') {
       // console.clear()
       // console.log(field)
       return <FieldCheckbox field={field}/>
 
     }
-    if (type == 'checkboxes') {
+    if (type === 'checkboxes') {
       // console.clear()
       // console.log(field)
       return <FieldCheckboxes field={field}/>
 
     }
-    if (type == 'radio') {
+    if (type === 'radio') {
       // console.clear()
       // console.log(field)
-      return <FieldCheckbox field={field}/>
+      return <FieldRadio field={field}/>
 
     }
-    if (type == 'select') {
+    if (type === 'select') {
       return <FieldSelect field={field}/>
 
     }
-    if (type == 'server') {
+    if (type === 'server') {
       return <FieldServer field={field}/>
 
     }
-    if (type == 'number') {
+    if (type === 'number') {
       return <FieldNumber field={field}/>
 
       // return <Col
       //   sm={size ? size.sm : ''}
       //   lg={size ? size.lg : ''}
-      //   className={'MGD ' + className}>
+      //   className={'MGD ' +  (className !== undefined ? className : '')}>
       //   <label htmlFor={name}>{t(label)}</label>
       //   <Field
       //     name={name}
@@ -169,32 +263,32 @@ function CreateForm(props) {
       //   />
       // </Col>
     }
-    if (type == 'textarea') {
+    if (type === 'textarea') {
       return <Col
         sm={size ? size.sm : ''}
         lg={size ? size.lg : ''}
-        className={'MGD ' + className}>
-        <label htmlFor={name}>{label}</label>
-        <Field
+        className={'MGD ' + (className !== undefined ? className : '')}>
+        <label htmlFor={name}>{label === name ? '' : label}</label>
+        <FieldTextarea
           name={name}
-          component="input"
-          type="text"
+          style={style}
           placeholder={placeholder || label}
           className="mb-2 form-control"
         />
       </Col>
     }
-    if (type == 'boolean') {
+    if (type === 'boolean') {
       return <FieldBoolean field={field}/>
     }
-    if (type == 'image') {
+    if (type === 'image') {
       // console.log('image')
       return <Col
         sm={size ? size.sm : ''}
         lg={size ? size.lg : ''}
-        className={'MGD ' + className}>
+        className={'MGD ' +  (className !== undefined ? className : '')}>
         <label htmlFor={name}>{t(label)}</label>
         <Field
+          style={style}
           name={name} className="mb-2 form-control">
           {props => {
             console.log('props', props)
@@ -231,14 +325,15 @@ function CreateForm(props) {
 
       </Col>
     }
-    if (type == 'images') {
+    if (type === 'images') {
       // console.log('image')
       return <Col
         sm={size ? size.sm : ''}
         lg={size ? size.lg : ''}
-        className={'MGD ' + className}>
+        className={'MGD ' +  (className !== undefined ? className : '')}>
         <label htmlFor={name}>{label}</label>
         <Field
+          style={style}
           name={name} className="mb-2 form-control">
           {props => {
             return (
@@ -272,9 +367,9 @@ function CreateForm(props) {
   }
 
   const onSubmit = async v => {
-    console.log('onSubmit',v)
     if (props.onSubmit) {
       let values = v;
+
       if (theRules && theRules.fields)
         theRules.fields.forEach((item, i) => {
           if (item.type == 'object' && values[item.name] instanceof Array && item.value) {
@@ -286,10 +381,10 @@ function CreateForm(props) {
             values[item.name] = obj;
           }
         })
+
       props.onSubmit(values)
     }
   }
-  console.log('render',theRules)
   if (themeData)
     return (
       <div className="fields pt-2">
@@ -331,7 +426,7 @@ function CreateForm(props) {
                     if (field.value) {
                       lastObj['value'] = field.value;
                     }
-                    return (<TheField key={index} {...lastObj} setValue={form.mutators.setValue}/>);
+                    return (<TheField onSubmit={onSubmit} key={index} {...lastObj} setValue={form.mutators.setValue}/>);
                   })}
                   {!theFields && theRules?.fields?.map((field, index) => {
                     if (fields[field.name]) {
@@ -357,13 +452,17 @@ function CreateForm(props) {
                     if (field.value) {
                       lastObj['value'] = field.value;
                     }
-                    return (<TheField key={index} {...lastObj} setValue={form.mutators.setValue}/>);
+                    return (<TheField onSubmit={onSubmit} key={index} {...lastObj} setValue={form.mutators.setValue}/>);
                   })}
-                  <div className="buttons">
-                    <Button type="submit">
-                      {t('Submit')}
-                    </Button>
-                  </div>
+                    {
+                      showSubmitButton && (
+                        <div className="buttons">
+                          <Button type="submit">
+                            {t('Submit')}
+                          </Button>
+                        </div>
+                      )
+                    }
                 </Row>
               </Container>
             </form>)}

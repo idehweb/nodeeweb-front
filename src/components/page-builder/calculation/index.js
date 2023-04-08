@@ -63,19 +63,27 @@ const CalCulation = (props) => {
     // if (props.onSubmit) {
     let {A, B, D, E,I} = v;
     // let c=A*B;
+
+    B = returnNormalPrice(B);
+    E = returnNormalPrice(E);
+    A=parseInt(A)
+    B=parseInt(B)
+    E=parseInt(E)
+    D=parseInt(D)
     console.log("A", A)
     console.log("B", B)
-    B = returnNormalPrice(B);
+    console.log("D", D)
+    console.log("E", E)
     // return
     setNerkh(B);
     let the_c = A * B,
-      the_f = D * E,
+      the_f = parseInt(D) * parseInt(E),
       the_g = (the_c + the_f) * 0.005,
       the_h = the_c + the_f + the_g,
-      the_j = (I/100)*the_h,
-      the_k = 0.01*the_j,
-      the_l = 0.06*(the_j+the_h),
-      the_m = 0.03*(the_j+the_h),
+      the_j = parseInt((I/100)*the_h),
+      the_k = parseInt(0.01*the_j),
+      the_l = parseInt(0.06*(the_j+the_h)),
+      the_m = parseInt(0.03*(the_j+the_h)),
       the_z =(the_j+the_k+the_l+the_m)
     ;
 
@@ -86,6 +94,7 @@ const CalCulation = (props) => {
     setH(the_h)
     setJ(the_j)
     setL(the_l)
+    setK(the_k)
     setM(the_m)
     setZ(the_z)
     // console.log('c',c)
@@ -147,11 +156,11 @@ const CalCulation = (props) => {
             <Form
               onSubmit={onSubmit}
               initialValues={{
-                A: 0,
+                A:'',
                 B: (tracks && tracks[1] && tracks[1].price) ? returnNormalPrice(tracks[1].price) : 0,
-                D: 0,
-                E: 0,
-                I:0
+                D: '',
+                E: '',
+                I:''
               }}
               mutators={{
                 setValue: ([field, value], state, {changeValue}) => {
@@ -187,6 +196,9 @@ const CalCulation = (props) => {
 
                           className="mb-2 form-control ltr"
                         >
+                          <option value={0}>
+                            {'انتخاب کنید'}
+                          </option>
                           {tracks && tracks.map((ch, c) => {
                             if (c)
                               return <option key={c} value={ch.price}>
@@ -214,13 +226,22 @@ const CalCulation = (props) => {
                         <label htmlFor={'E'}>{'نرخ ارز کرایه'}</label>
                         <Field
                           name={'E'}
-                          component="input"
+                          component="select"
                           placeholder={'E'}
-                          type={"number"}
+                          type={"select"}
 
                           className="mb-2 form-control ltr"
-                        />
-
+                        >
+                          <option value={0}>
+                            {'انتخاب کنید'}
+                          </option>
+                          {tracks && tracks.map((ch, c) => {
+                            if (c)
+                              return <option key={c} value={ch.price}>
+                                {ch.currency}
+                              </option>
+                          })}
+                        </Field>
                       </Col>
                       <Col
                         className={'MGD '}>
@@ -235,6 +256,19 @@ const CalCulation = (props) => {
                         />
 
                       </Col>
+                      {/*<Col*/}
+                        {/*className={'MGD '}>*/}
+                        {/*<label htmlFor={'takhfif'}>{'تخفیف'}</label>*/}
+                        {/*<Field*/}
+                          {/*name={'takhfif'}*/}
+                          {/*component="input"*/}
+                          {/*placeholder={'تخفیف'}*/}
+                          {/*type={"number"}*/}
+
+                          {/*className="mb-2 form-control ltr"*/}
+                        {/*/>*/}
+
+                      {/*</Col>*/}
                       <div className="buttons">
                         <Button type="submit">
                           {'محاسبه کن'}
@@ -267,7 +301,7 @@ const CalCulation = (props) => {
             <span>{h.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
           </div>}
           {j && <div>
-            <span>ماخذ x سیف:</span>
+            <span>ماخذ:</span>
             <span>{j.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
           </div>}
           {k && <div>
@@ -275,15 +309,15 @@ const CalCulation = (props) => {
             <span>{k.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
           </div>}
           {l && <div>
-            <span>(HxJ)x0.06:</span>
+            <span>۶٪ مالیات:</span>
             <span>{l.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
           </div>}
           {m && <div>
-            <span>(HxJ)x0.03:</span>
+            <span>۳٪ عوارض:</span>
             <span>{m.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
           </div>}
           {z && <div>
-            <span>j+k+l+m:</span>
+            <span>جمع کل:</span>
             <span>{z.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
           </div>}
           </div>

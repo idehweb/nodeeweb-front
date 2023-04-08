@@ -64,7 +64,7 @@ export default ()=>({
   "Forgot Password": "فراموشی رمز عبور",
   "Related Products": "محصولات مرتبط",
   "You did not add anything to cart!": "شما چیزی به سبد خرید خود اضافه نکردید!",
-  "search please...": "جستجو (برند، مدل، نام محصول...)",
+  "search please...": "جستجو (نام کالا، کد تعرفه...)",
   "Navigateing...": "در حال انتقال...",
   "Error...": "خطا...",
   "Added to cart successfully!": "با موفقیت به کارت اضافه شد!",

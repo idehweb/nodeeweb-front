@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Container} from "shards-react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
+
 import {withTranslation} from "react-i18next";
 import {dFormat, PriceFormat} from "#c/functions/utils";
 import MainContent from '#c/components/MainContent';
@@ -34,6 +35,9 @@ const Page = (props) => {
     // console.log("st.store", st.store.productSliderData);
     return st.store.page || [];
   });
+  let {firstName, lastName, internationalCode, token} = store.getState().store.user;
+  let navigate=useNavigate();
+
   // window.scrollTo(0, 0);
   let params = useParams();
   let the_id = params._id;
@@ -52,6 +56,14 @@ const Page = (props) => {
     return new Promise(function (resolve, reject) {
 
       getPage(_id).then((d = {}) => {
+        if(d.success==false && (d.access && d.access=='private')){
+          console.log('redireccting')
+
+          // if(!firstName || !lastName || !internationalCode){
+          let redirect_url = "/login/";
+          navigate(redirect_url)
+          // }
+        }
         // console.log("set _id to show:", d);
         if (d._id) {
           // savePost({
@@ -67,6 +79,7 @@ const Page = (props) => {
           resolve({
             load: true,
             title: d.title,
+            access: d.access,
             description: d.description,
             photos: d.photos,
             maxWidth: d.maxWidth,
@@ -98,8 +111,9 @@ const Page = (props) => {
       // if (_id != the_id)
       getThePost(the_id)
         .then(items => {
-          // console.log('items',items,the_id);
+          console.log('items',items);
           // if (mounted) {
+
           setState(items);
           if (isClient)
             window.scrollTo(0, 0);

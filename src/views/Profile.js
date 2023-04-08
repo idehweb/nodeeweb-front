@@ -21,41 +21,45 @@ const Profile = ({ t }) => {
         {/*/>*/}
       </Row>
       <div className="w-100">
-        <Col lg="4" className="m-auto">
-          <Nav justified={true} tabs={true} className={"post-product-nav profile-nav"}>
-            <NavItem>
-              <NavLink active={tab === "profile"} href="#profile"
-                       onClick={() => setTab("profile")}>
-                {/*<EditAttributesIcon className={"ml-2"}/>*/}
-                <span
-                className={""}>{t("profile")}</span></NavLink>
-            </NavItem>
-            <NavItem>
-              <Link
-                className={'nav-link'}
-                       to="/my-orders"
-              >
-                {/*<DescriptionIcon className={"ml-2"}/>*/}
-                <span
-                className={""}>{t("my orders")}</span></Link>
-            </NavItem>
+        <Col lg="12" className="m-auto">
+          <UserAccountDetails title={t('account details')} />
 
+        </Col>
+        {/*<Col lg="4" className="m-auto">*/}
+          {/*<Nav justified={true} tabs={true} className={"post-product-nav profile-nav"}>*/}
             {/*<NavItem>*/}
-              {/*<NavLink active={tab === "transactions"} href="#transactions" onClick={() => setTab("transactions")}>*/}
+              {/*<NavLink active={tab === "profile"} href="#profile"*/}
+                       {/*onClick={() => setTab("profile")}>*/}
+                {/*/!*<EditAttributesIcon className={"ml-2"}/>*!/*/}
+                {/*<span*/}
+                {/*className={""}>{t("profile")}</span></NavLink>*/}
+            {/*</NavItem>*/}
+            {/*<NavItem>*/}
+              {/*<Link*/}
+                {/*className={'nav-link'}*/}
+                       {/*to="/my-orders"*/}
+              {/*>*/}
+                {/*/!*<DescriptionIcon className={"ml-2"}/>*!/*/}
+                {/*<span*/}
+                {/*className={""}>{t("my orders")}</span></Link>*/}
+            {/*</NavItem>*/}
+
+            {/*/!*<NavItem>*!/*/}
+              {/*/!*<NavLink active={tab === "transactions"} href="#transactions" onClick={() => setTab("transactions")}>*!/*/}
                 {/*/!*<ReviewsIcon className={"ml-2"}/>*!/*/}
 
-                {/*<span className={""}>{t("transactions")}</span></NavLink>*/}
-            {/*</NavItem>*/}
-          </Nav>
+                {/*/!*<span className={""}>{t("transactions")}</span></NavLink>*!/*/}
+            {/*/!*</NavItem>*!/*/}
+          {/*</Nav>*/}
 
-        </Col>
-        <Col lg="8" className="m-auto">
-          {tab === "profile" && <div className={"pt-5"} id={"description"}>
+        {/*</Col>*/}
+        {/*<Col lg="8" className="m-auto">*/}
+          {/*{tab === "profile" && <div className={"pt-5"} id={"description"}>*/}
 
-            <UserAccountDetails title={t('account details')} />
-          </div>}
-        </Col>
+          {/*</div>}*/}
+        {/*</Col>*/}
       </div>
+      <div style={{height:'100px'}}></div>
     </Container>
   );
 }

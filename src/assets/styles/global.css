@@ -28,9 +28,9 @@
     border-radius: 4px;
 }
 
-.radio-toolbar label:hover {
+/* .radio-toolbar label:hover {
   background-color: #dfd;
-}
+} */
 
 .radio-toolbar input[type="radio"]:focus + label {
     border: 2px dashed #444;

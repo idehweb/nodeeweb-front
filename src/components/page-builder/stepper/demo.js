@@ -100,12 +100,12 @@ const  DemoSteps = (props) => {
       {activeStep === steps.length ? (
         <React.Fragment>
           <Typography sx={{ mt: 2, mb: 1 }}>
-            All steps completed - you&apos;re finished
+            با تشکر از شما برای ارسال روی دکمه ثبت کلیک نمایید
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Box sx={{ flex: '1 1 auto' }} />
-            <Button onClick={handleReset}>Reset</Button>
-            <Button type="submit" onClick={onSubmit}>Submit</Button>
+            <Button onClick={handleReset} style={{fontSize:'15px'}}>پاکسازی</Button>
+            <Button type="submit" onClick={onSubmit} style={{fontSize:'20px',backgroundColor:'rgb(5, 78, 133)',color:'white'}}>ثبت</Button>
           </Box>
         </React.Fragment>
       ) : (
@@ -148,7 +148,7 @@ const  DemoSteps = (props) => {
                       Finish
                   </Button>
                 ):(
-                  <Button  onClick={handleNext}>
+                  <Button   onClick={handleNext}>
                       Next
                 </Button>
                 )

@@ -75,6 +75,7 @@ function CreateForm(props) {
     if (!field) {
       return <>no field</>
     }
+    
     const {type,style, kind, size, className, options, disabled = false, name, label, placeholder} = field;
     // console.log('themeData',  themeData['models']);
     // moment(field.value, "YYYY-MM-DD[T]HH:mm:ss.SSS[Z]", true).isValid())
@@ -105,6 +106,7 @@ function CreateForm(props) {
     //   </Col>
     // }
     if ((type==='radiobuttonlists')) {
+      
       return <Col
         sm={fields.sm ? fields.sm : ''}
         lg={fields.lg ? fields.lg : ''}
@@ -133,6 +135,9 @@ function CreateForm(props) {
     }
     if (type === "document") {
       return <FieldUploadDocument field={field}/>;
+    }
+    if (type === "text") {
+      return <FieldText field={field}/>;
     }
     if (type === "media") {
       return <FieldUploadMedia field={field}/>;

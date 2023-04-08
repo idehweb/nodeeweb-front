@@ -30,7 +30,6 @@ import {setStyles} from "../../../functions"
     if (!values) {
       return <>no field</>
     }
-    console.log('valuesvalues',valuesvalues);
     const {type,style, kind, size, className, options, disabled = false, name, label, placeholder,children} = values;
     const {settings} = values;
     const {general} = settings;
@@ -48,14 +47,16 @@ import {setStyles} from "../../../functions"
           );
           }
     if ((name==='radiobuttonlists')) {
+      console.log('optionLists->Fileds---->',fields);
       return <Col
         sm={fields.sm ? fields.sm : ''}
         lg={fields.lg ? fields.lg : ''}
         className={'MGD ' +  (className !== undefined ? className : '')}>
-        <label htmlFor={name}>{fields.label}</label>
-        <div className="radio-toolbar" style={dynamicStyle}>
+        <label  htmlFor={name}>{fields.label}</label>
+        <div className="radio-toolbar" >
+        {/* <div className="radio-toolbar" style={dynamicStyle}> */}
           {children && children.map((child,ichi)=>
-              <label key={ichi}>
+              <label style={setStyles(fields)} key={ichi}>
                   <Field
                    style={setStyles(child.settings.general.fields)}
                   //  onClick={next}
@@ -80,6 +81,14 @@ import {setStyles} from "../../../functions"
 
         /> */}
       </Col>
+    }
+    if (name === 'text') {
+      return <span
+          name={fields.name}
+          className="mb-2"
+          style={dynamicStyle}>
+          {fields.text}
+            </span>
     }
     if (name === 'steps') {
       return <DemoSteps field={values}/>

@@ -28,8 +28,9 @@ import {
 import DemoSteps from "#c/components/page-builder/stepper/demo";
 import _ from 'lodash';
 function CreateForm(props) {
-
+  
   let {fields, rules = {fields: []},theFields=false, t,formFiledsDetail} = props;
+  console.log('formProoooooops',formFiledsDetail);
   let {showSubmitButton} = formFiledsDetail;
   const themeData = useSelector((st) => st.store.themeData);
   if (!themeData) {
@@ -77,34 +78,15 @@ function CreateForm(props) {
     }
     
     const {type,style, kind, size, className, options, disabled = false, name, label, placeholder} = field;
-    // console.log('themeData',  themeData['models']);
-    // moment(field.value, "YYYY-MM-DD[T]HH:mm:ss.SSS[Z]", true).isValid())
-
-
-    // if ((type==='radiobuttonitem')) {
-    //   return <Col
-    //     sm={fields.sm ? fields.sm : ''}
-    //     lg={fields.lg ? fields.lg : ''}
-    //     className={'MGD ' +  (className !== undefined ? className : '')}>
-    //     <label htmlFor={name}>{fields.label}</label>
-
-
-    //       {/* <input type="radio" id="radioApple" name="radioFruit" value="apple" checked />
-    //       <label for="radioApple">Apple</label> */}
-
-
-    //     <Field
-    //       name={fields.name}
-    //       component="radio"
-    //       type="radio"
-    //       placeholder={fields.placeholder ? fields.placeholder : ''}
-    //       className="mb-2 form-control"
-    //       disabled={disabled}
-    //       style={dynamicStyle}
-
-    //     />
-    //   </Col>
-    // }
+    if (type === 'text') {
+      console.log('TEXT',field);
+      // return <span
+      //     name={fields.name}
+      //     className="mb-2"
+      //     style={dynamicStyle}>
+      //     {fields.text}
+      //       </span>
+    }
     if ((type==='radiobuttonlists')) {
       
       return <Col
@@ -136,9 +118,9 @@ function CreateForm(props) {
     if (type === "document") {
       return <FieldUploadDocument field={field}/>;
     }
-    if (type === "text") {
-      return <FieldText field={field}/>;
-    }
+    // if (type === "text") {
+    //   return <FieldText field={field}/>;
+    // }
     if (type === "media") {
       return <FieldUploadMedia field={field}/>;
     }
@@ -182,11 +164,18 @@ function CreateForm(props) {
       return <DemoSteps field={field} onSubmit={props.onSubmit}/>
     }
     if ((type === 'string' || type==='input') || !type) {
+      let w100,labelAlign;
+      if(style.width === "100%"){
+        w100 = '12';
+      }
+      if(style.textAlign){
+        labelAlign = style.textAlign;
+      }
       return <Col
-        sm={size ? size.sm : ''}
-        lg={size ? size.lg : ''}
-        className={'MGD ' +  (className !== undefined ? className : '')}>
-        <label htmlFor={name}>{label === name ? '' : label}</label>
+        sm={w100 ? w100 : size.sm}
+        lg={w100 ? w100 : size.lg}
+        className={'MGD ' +  (className !== undefined ? className : '')} style={{textAlign:labelAlign}}>
+        <label  htmlFor={name}>{label === name ? '' : label}</label>
         <Field
           name={name}
           component="input"
@@ -196,17 +185,15 @@ function CreateForm(props) {
           disabled={disabled}
           style={style}
         />
-        {/*<FieldText*/}
-        {/*  name={name}*/}
-        {/*  component="input"*/}
-        {/*  type="text"*/}
-        {/*  placeholder={placeholder || label}*/}
-        {/*  className="mb-2 form-control"*/}
-        {/*  disabled={disabled}*/}
-        {/*  style={style}*/}
-        {/*/>*/}
-
       </Col>
+    }
+    if (type === 'text') {
+      return <span
+                name={name}
+                className="mb-2 form-control"
+                style={style}>
+                Title
+            </span>
     }
     if (type === 'price') {
       // console.log('string')

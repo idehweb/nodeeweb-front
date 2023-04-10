@@ -10,7 +10,6 @@ import _ from 'lodash'
 import {ShowElement} from '#c/components/page-builder/PageBuilder';
 const ConditionSteps = (props) => {
   const {element} = props;
-  console.log('elementelementelementelementelement',element);
   const {children} = element;
   const {settings} = element;
   const {general} = settings;

@@ -7,8 +7,7 @@ import {getEntitiesForAdmin, MainUrl, uploadMedia} from "#c/functions/index";
 
 function FieldSelect(props) {
   let {field, t} = props;
-  let {type, kind, size, className, entity, optionName, optionValue, onChange, searchbox = true, options = [], limit = 1000, name, label, placeholder, value} = field;
-
+  let {style,type, kind, size, className, entity, optionName, optionValue, onChange, searchbox = true, options = [], limit = 1000, name, label, placeholder, value} = field;
   let [theVal, setTheVal] = useState(value)
   let [list, setList] = useState(options || [])
   let [search, setSearch] = useState('')
@@ -23,13 +22,22 @@ function FieldSelect(props) {
 
       })
   }, [])
+  let w100,labelAlign;
+  if(style.width === "100%"){
+    w100 = '12';
+  }
+  if(style.textAlign){
+    labelAlign = style.textAlign;
+  }
+  
   return <Col
-    sm={size ? size.sm : ''}
-    lg={size ? size.lg : ''}
-    className={'MGD ' + className}>
+  sm={w100 ? w100 : size.sm}
+  lg={w100 ? w100 : size.lg}
+    className={'MGD ' + className} style={{textAlign:labelAlign}}>
     <label htmlFor={name}>{label === name ? '' : t(label)}</label>
 
     <Field
+      
       name={name}
       component="select"
       type="select"
@@ -67,6 +75,7 @@ function FieldSelect(props) {
       )}
 
     </Field>
+    
 
   </Col>
 }

@@ -30,7 +30,7 @@ import _ from 'lodash';
 function CreateForm(props) {
   
   let {fields, rules = {fields: []},theFields=false, t,formFiledsDetail} = props;
-  console.log('formProoooooops',formFiledsDetail);
+  console.log('formProoooooops',formFiledsDetail.showSubmitButton);
   let {showSubmitButton} = formFiledsDetail;
   const themeData = useSelector((st) => st.store.themeData);
   if (!themeData) {
@@ -448,6 +448,15 @@ function CreateForm(props) {
                   })}
                     {
                       showSubmitButton && (
+                        <div className="buttons">
+                          <Button type="submit">
+                            {t('Submit')}
+                          </Button>
+                        </div>
+                      )
+                    }
+                    {
+                      formFiledsDetail.hasOwnProperty('showSubmitButton') === false &&(
                         <div className="buttons">
                           <Button type="submit">
                             {t('Submit')}

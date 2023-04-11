@@ -197,13 +197,18 @@ export function TheButton(p) {
   let {fields} = general;
   let {text, iconFont, action, classess, showInMobile, showInDesktop,target="_self"} = fields;
   let style = setStyles(fields);
+  console.log('buttonActio',fields);
   if(conditionStep){
     return <Button
               onClick={() => {
                 handleStep(action)
               }}
-              className={(classess !== undefined ? classess : '') + (showInMobile ? ' showInMobile ' : '') + action} style={style}>{Icons[iconFont] &&
-                <span>{React.createElement(Icons[iconFont])}</span>}<span>{text}</span>
+              className={(classess !== undefined ? classess : '') + (showInMobile ? ' showInMobile ' : '') + action} style={style}>
+                  {
+                  Icons[iconFont] &&
+                  <span>{React.createElement(Icons[iconFont])}</span>
+                  }
+                <span>{text}</span>
            </Button>
 
 

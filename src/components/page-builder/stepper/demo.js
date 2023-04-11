@@ -99,14 +99,14 @@ const  DemoSteps = (props) => {
 
       {activeStep === steps.length ? (
         <React.Fragment>
-          <Typography sx={{ mt: 2, mb: 1 }}>
+          {/* <Typography sx={{ mt: 2, mb: 1 }}>
             با تشکر از شما برای ارسال روی دکمه ثبت کلیک نمایید
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Box sx={{ flex: '1 1 auto' }} />
             <Button onClick={handleReset} style={{fontSize:'15px'}}>پاکسازی</Button>
-            <Button type="submit" onClick={onSubmit} style={{fontSize:'20px',backgroundColor:'rgb(5, 78, 133)',color:'white'}}>ثبت</Button>
-          </Box>
+            
+          </Box> */}
         </React.Fragment>
       ) : (
         <React.Fragment>
@@ -132,25 +132,22 @@ const  DemoSteps = (props) => {
               Back
             </Button>
             <Box sx={{ flex: '1 1 auto' }} />
-            {isStepOptional(activeStep) && (
+            {/* {isStepOptional(activeStep) || activeStep !== steps.length - 1 &&(
               <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
                 Skip
               </Button>
-            )}
+            )} */}
 
             {/* <Button onClick={handleNext}>
               {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
             </Button> */}
               {
                 activeStep === steps.length - 1 ?(
-                  <Button   onClick={handleNext} >
-                  {/* <Button type="submit" onClick={onSubmit}> */}
-                      Finish
-                  </Button>
+                  <Button type="submit" onClick={onSubmit} style={{fontSize:'20px',backgroundColor:'rgb(5, 78, 133)',color:'white'}}>ثبت</Button>
                 ):(
-                  <Button   onClick={handleNext}>
+                <button style={{background:'transparent','border':'none'}}   onClick={handleNext}>
                       Next
-                </Button>
+                </button>
                 )
               }
 

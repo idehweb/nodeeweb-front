@@ -77,7 +77,7 @@ function CreateForm(props) {
       return <>no field</>
     }
     
-    const {type,style, kind, size, className, options, disabled = false, name, label, placeholder} = field;
+    const {type,style, kind, size, className, options, disabled = false, name, label, placeholder,value} = field;
     if (type === 'text') {
       console.log('TEXT',field);
       // return <span
@@ -190,9 +190,9 @@ function CreateForm(props) {
     if (type === 'text') {
       return <span
                 name={name}
-                className="mb-2 form-control"
+                className="mb-2"
                 style={style}>
-                Title
+                {value}
             </span>
     }
     if (type === 'price') {

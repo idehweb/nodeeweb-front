@@ -195,18 +195,24 @@ export function TheButton(p) {
   let {type, components, classes, settings, handleCard, card} = element;
   let {general} = settings;
   let {fields} = general;
-  let {text, iconFont, action, classess, showInMobile, showInDesktop,target="_self"} = fields;
+  let {text, iconFont, action, classess, showInMobile, showInDesktop,target="_self",link,iconImage,imgWidth,imgHeight,imgMargin} = fields;
   let style = setStyles(fields);
   console.log('buttonActio',fields);
   if(conditionStep){
     return <Button
+              href={link && link}
               onClick={() => {
                 handleStep(action)
               }}
+              target={target}
               className={(classess !== undefined ? classess : '') + (showInMobile ? ' showInMobile ' : '') + action} style={style}>
                   {
                   Icons[iconFont] &&
                   <span>{React.createElement(Icons[iconFont])}</span>
+                  }
+                  {
+                    iconImage &&
+                    <img src={MainUrl+'/'+iconImage} width={imgWidth} height={imgHeight} style={{margin:imgMargin}}/>
                   }
                 <span>{text}</span>
            </Button>

@@ -12,6 +12,7 @@ const Captcha = ({onActionSubmit,onActionValue}) => {
         height: 40, // Canvas height. default is 50
         fontColor: '#000',
         background: 'rgba(255, 255, 255, .2)',
+        borderColor:'#ddd'
     }
     const { gen, validate } = useCaptcha(captchaRef, userOpt)
 

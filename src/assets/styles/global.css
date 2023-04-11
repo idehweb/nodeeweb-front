@@ -30,6 +30,10 @@
 a{
   text-decoration: none !important;
 }
+#offline-captcha-canvas-area{
+  border:none !important;
+}
+
 /* .radio-toolbar label:hover {
   background-color: #dfd;
 } */

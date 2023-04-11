@@ -38,7 +38,8 @@ import ReviewsIcon from "@mui/icons-material/Reviews";
 const Product = (props) => {
 
   let {match, location, history, t, url} = props;
-
+  
+// console.log("st.storest.storest.storest.store", props);
   let product = useSelector((st) => {
     // console.log("st.store", st.store.productSliderData);
     return st.store.product || [];
@@ -69,7 +70,7 @@ const Product = (props) => {
     return new Promise(function (resolve, reject) {
 
       getPost(_id).then((d = {}) => {
-        console.log("set _id to show:", d);
+        console.log('isClientisClientisClientisClient', d);
         // savePost({
         //   mainList: d.mainList,
         //   catChoosed: d.catChoosed,
@@ -186,7 +187,8 @@ const Product = (props) => {
       <Row className={"limited posrel justify-end"}>
         <div className={"floating-tools"}>
           <ButtonGroup vertical>
-            <Button className={"love-it"}
+            <Button className={"love-it "}
+            
                     onClick={() => {
                       loveIt(_id).then(res => {
                         console.log("res", res);

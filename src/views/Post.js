@@ -115,7 +115,7 @@ const Post = (props) => {
   if (redirect && isClient) return <Navigate to={redirect}/>;
   if (!load && isClient) return <Loading/>;
   // console.log("product", title, lan, encodeURIComponent(title[lan]));
-  console.log('isClient', isClient);
+ 
   return (
 
     <Container className="main-content-container p-0 pb-4 kiuytyuioiu bg-white" key={0}>

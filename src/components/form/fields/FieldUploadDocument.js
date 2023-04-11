@@ -24,8 +24,19 @@ function FieldUploadDocument({field}) {
       // component="input"
       type="file"
       placeholder={placeholder ? placeholder : (label ? t(label) : t(name))}
-      onChange={(e) => {
-        field.setValue(name, e.target.value)
+      // onChange={(e) => {
+      //   field.setValue(name, e.target.value)
+      // }}
+      onChange={(props) => {
+        let { target } = props;
+        uploadMedia(target.files[0], (e) => {
+          console.log("e", e);
+        }).then(x => {
+          if (x.success && x.media && x.media.url) {
+            console.log("set", name, x.media.url);
+            field.setValue(name, x.media.url);
+          }
+        });
       }}
       className="mb-2 form-control ltr"
     />

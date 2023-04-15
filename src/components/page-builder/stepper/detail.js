@@ -25,6 +25,7 @@ import {setStyles} from "../../../functions"
   const {content,activeStep} = props;
   const childs = content[activeStep].children;
   let [dynamicActive,setDynamicActive] = React.useState('');
+  const required = value => (value ? undefined : 'فیلد الزامی می باشد')
   const TheField = (valuesvalues) => {
     const {values} = valuesvalues;
     if (!values) {
@@ -47,7 +48,6 @@ import {setStyles} from "../../../functions"
           );
           }
     if ((name==='radiobuttonlists')) {
-      console.log('optionLists->Fileds---->',fields);
       return <Col
         sm={fields.sm ? fields.sm : ''}
         lg={fields.lg ? fields.lg : ''}
@@ -118,7 +118,7 @@ import {setStyles} from "../../../functions"
         lg={fields.lg ? fields.lg : ''}
         className={'MGD ' + (className !== undefined ? className : '')}>
         <label htmlFor={name}>{fields.label}</label>
-        <Field
+        {/* <Field
           name={fields.name}
           component="input"
           type="text"
@@ -127,7 +127,19 @@ import {setStyles} from "../../../functions"
           disabled={disabled}
           style={dynamicStyle}
 
-        />
+        /> */}
+        <Field name={fields.name} validate={require && required}>
+            {({ input, meta }) => (
+              <div>
+                <input disabled={disabled}
+                 style={dynamicStyle}
+                  className={meta.error && meta.touched ? "mb-2 form-control  border-danger" : "mb-2 form-control "}
+                   {...input}
+                    type="text" placeholder={fields.placeholder ? fields.placeholder : ''} />
+                {meta.error && meta.touched && <span style={{display:'block',textAlign:'right',color:'red',fontWeight:'bold',marginRight:'20px'}}>{meta.error}</span>}
+              </div>
+            )}
+          </Field>
       </Col>
     }
     if (name === 'checkbox') {
@@ -231,7 +243,7 @@ import {setStyles} from "../../../functions"
       lg={fields.lg ? fields.lg : ''}
         className={'MGD ' + (className !== undefined ? className : '')}>
         <label htmlFor={name}>{fields.label}</label>
-        <Field
+        {/* <Field
           name={fields.name}
           component="textarea"
           type="text"
@@ -239,7 +251,23 @@ import {setStyles} from "../../../functions"
           className="mb-2 form-control"
           disabled={disabled}
           style={dynamicStyle}
-        />
+        /> */}
+        <Field component="textarea" name={fields.name} validate={require && required}>
+            {({ input, meta }) => (
+              <div>
+                <textarea
+                 disabled={disabled}
+                  style={dynamicStyle} 
+                  className={meta.error && meta.touched ? "mb-2 form-control  border-danger" : "mb-2 form-control "}
+                   {...input} 
+                   placeholder={fields.placeholder ? fields.placeholder : ''} 
+                   >
+               
+                  </textarea>
+                {meta.error && meta.touched && <span style={{display:'block',textAlign:'right',color:'red',fontWeight:'bold',marginRight:'20px'}}>{meta.error}</span>}
+              </div>
+            )}
+          </Field>
         {/* <FieldTextarea
           name={fields.name}
           style={dynamicStyle}

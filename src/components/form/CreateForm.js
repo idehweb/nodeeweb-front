@@ -71,15 +71,15 @@ function CreateForm(props) {
 
     }
   }, []);
-
+  const required = value => (value ? undefined : 'فیلد الزامی می باشد');
   const TheField = (field) => {
     if (!field) {
       return <>no field</>
     }
     
-    const {type,style, kind, size, className, options, disabled = false, name, label, placeholder,value} = field;
+    const {type,style, kind, size, className, options, disabled = false, name, label, placeholder,value,require} = field;
     if (type === 'text') {
-      console.log('TEXT',field);
+      
       // return <span
       //     name={fields.name}
       //     className="mb-2"
@@ -176,7 +176,7 @@ function CreateForm(props) {
         lg={w100 ? w100 : size.lg}
         className={'MGD ' +  (className !== undefined ? className : '')} style={{textAlign:labelAlign}}>
         <label  htmlFor={name}>{label === name ? '' : label}</label>
-        <Field
+        {/* <Field
           name={name}
           component="input"
           type="text"
@@ -184,7 +184,23 @@ function CreateForm(props) {
           className="mb-2 form-control"
           disabled={disabled}
           style={style}
-        />
+          /> */}
+          <Field name={name} validate={require && required}>
+            {({ input, meta }) => (
+              <div>
+                <input disabled={disabled}
+                 style={style}
+                  className={meta.error && meta.touched ? "mb-2 form-control  border-danger" : "mb-2 form-control "}
+                   {...input}
+                    type="text" placeholder={placeholder || label} />
+                {meta.error && meta.touched && <span style={{display:'block',textAlign:'right',color:'red',fontWeight:'bold',marginRight:'20px'}}>{meta.error}</span>}
+              </div>
+            )}
+          </Field>
+
+
+
+
       </Col>
     }
     if (type === 'text') {

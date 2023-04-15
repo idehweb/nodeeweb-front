@@ -15,7 +15,7 @@ const getURIParts = (url) => {
   return loc
 }
 const Form = (props) => {
-  
+ 
   let navigate = useNavigate();
   const [tracks, settracks] = useState([]);
   const [theformFields, setformFields] = useState([]);
@@ -91,6 +91,7 @@ const Form = (props) => {
     }
   }
   const afterGetData = (resp, tracks = []) => {
+    
     if (resp) {
       let {elements} = resp;
 
@@ -105,7 +106,8 @@ const Form = (props) => {
         let {settings = {}, children} = d;
         let {general = {}} = settings;
         let {fields = []} = general;
-        let {name, label, value = '', placeholder, classes, sm, lg,options,showStepsTitle} = fields;
+       
+        let {name, label, value = '', placeholder, classes, sm, lg,options,showStepsTitle,require} = fields;
         let stylee = setStyles(fields);
         formFields[name] = value;
         let theChildren = [];
@@ -119,9 +121,10 @@ const Form = (props) => {
           label: label || name,
           name: name,
           showStepsTitle:showStepsTitle,
+          require:require,
           size: {
-            sm: 6,
-            lg: 6,
+            sm:sm?sm: 6,
+            lg: lg?lg:6,
           },
           onChange: (text) => {
             // setFields([...fields,])

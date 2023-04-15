@@ -65,7 +65,7 @@ const  DemoSteps = (props) => {
     <Box
       sm={size ? size.sm : ''}
       lg={size ? size.lg : ''}
-      className={'MGD ' + (className !== undefined ? className : '')}
+      className={'MGD stepper ' + (className !== undefined ? className : '')}
       style={style}
     >
 
@@ -129,7 +129,7 @@ const  DemoSteps = (props) => {
               onClick={handleBack}
               sx={{ mr: 1 }}
             >
-              Back
+              قبلی
             </Button>
             <Box sx={{ flex: '1 1 auto' }} />
             {/* {isStepOptional(activeStep) || activeStep !== steps.length - 1 &&(
@@ -143,10 +143,10 @@ const  DemoSteps = (props) => {
             </Button> */}
               {
                 activeStep === steps.length - 1 ?(
-                  <Button type="submit" onClick={onSubmit} style={{fontSize:'20px',backgroundColor:'rgb(5, 78, 133)',color:'white'}}>ثبت</Button>
+                  <Button type="submit" onClick={onSubmit} style={{fontSize:'20px',backgroundColor:'rgb(5, 78, 133)',color:'white',fontFamily:'IRANSans !important'}}>ثبت</Button>
                 ):(
                 <button style={{background:'transparent','border':'none'}}   onClick={handleNext}>
-                      Next
+                      بعدی
                 </button>
                 )
               }

@@ -33,7 +33,9 @@ a{
 #offline-captcha-canvas-area{
   border:none !important;
 }
-
+.stepper button{
+  font-family: IRANSans !important;
+}
 /* .radio-toolbar label:hover {
   background-color: #dfd;
 } */

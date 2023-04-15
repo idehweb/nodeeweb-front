@@ -1155,7 +1155,7 @@ export const sendExtra = (d, obj) => {
 export const submitForm = (_id, obj) => {
   // uploadMedia
   // console.log('submitFooorm',uploadMedia(obj,{},_id,'document'));
-  // console.log('submitFooorm',store.getState());
+  
   return new Promise(function (resolve, reject) {
     postData(`${ApiUrl}/form/entry/${_id}`, obj, false)
       .then((data) => {

@@ -375,9 +375,12 @@ function CreateForm(props) {
   }
 
   const onSubmit = async v => {
+    let objForm = v;
+    if(objForm.hasOwnProperty('undefined')){
+      delete objForm['undefined'];
+    }
     if (props.onSubmit) {
-      let values = v;
-
+      let values = objForm;
       if (theRules && theRules.fields)
         theRules.fields.forEach((item, i) => {
           if (item.type == 'object' && values[item.name] instanceof Array && item.value) {

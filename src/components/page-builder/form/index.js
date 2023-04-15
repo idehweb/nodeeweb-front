@@ -188,16 +188,20 @@ const Form = (props) => {
             {(theformFields && tracks) && <CreateForm formFiledsDetail={fields}
               rules={{fields: tracks}}
               onSubmit={(e) => {
+                
                 submitForm(_id, e).then(d => {
+                  console.log('ffffffffffff',e);
                   if (d.success && d.message)
                     toast(t(d.message), {
                       type: "success"
                     });
-                }).catch(d => {
-                  toast(t('sth wrong happened!'), {
-                    type: "error"
-                  });
                 })
+                // .catch(err => {
+                //   console.log('ddddddddddd',err);
+                //   toast(t('sth wrong happened!'), {
+                //     type: "error"
+                //   });
+                // })
               }}
               buttons={[]}
               theFields={tracks}

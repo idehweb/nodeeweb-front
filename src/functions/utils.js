@@ -6,7 +6,7 @@ import axios from "axios";
 import {isClient} from "#c/functions/index";
 
 export const postData = (url = "", data = {}, f = false, headers = {}, rewriteHeader = false) => {
-  console.log('...postData');
+ 
   return new Promise(function (resolve, reject) {
     let option = {
       headers: {
@@ -33,15 +33,16 @@ export const postData = (url = "", data = {}, f = false, headers = {}, rewriteHe
 
         // }
       }
+      
     axios
-      .post(url, data, option)
+      .post(url,JSON.stringify(data), option)
       .then(function (response) {
-        console.log('post...')
+        console.log('post...',response)  
         return resolve(response);
         // response.json();
       })
       .catch(function (error) {
-        console.log("post error()", error);
+        console.log("post error()--->", error);
         if (error && error.response && error.response.data && error.response.status == 401) {
           return reject({
             success: false,

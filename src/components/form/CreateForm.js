@@ -116,13 +116,13 @@ function CreateForm(props) {
       </Col>
     }
     if (type === "document") {
-      return <FieldUploadDocument field={field}/>;
+      return <FieldUploadDocument formID={formFiledsDetail._id} field={field}/>;
     }
     // if (type === "text") {
     //   return <FieldText field={field}/>;
     // }
     if (type === "media") {
-      return <FieldUploadMedia field={field}/>;
+      return <FieldUploadMedia formID={formFiledsDetail._id} field={field}/>;
     }
     if ((type==='button')) {
       return <Col

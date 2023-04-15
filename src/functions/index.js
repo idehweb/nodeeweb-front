@@ -1793,7 +1793,7 @@ export const uploadMedia = (file = {}, onUploadProgress, id,uploadType) => {
 
     if(uploadType){
       return axios
-      .post(`${AdminRoute}/${uploadType}/fileUpload`, formData, config)
+      .post(`${ApiUrl}/media/fileUpload`, formData, config)
       .then((res) => {
         return resolve(res.data);
       })

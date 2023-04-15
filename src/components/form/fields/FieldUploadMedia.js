@@ -8,7 +8,8 @@ import {getField} from "#c/components/form/fields";
 import {useTranslation} from 'react-i18next';
 
 
-function FieldUploadMedia({field}) {
+function FieldUploadMedia(props) {
+  let {field,formID} = props;
   const {t} = useTranslation();
   const {type, kind, size, className, name, label, options, placeholder, value} = field;
   let [theVal, setTheVal] = useState(value)
@@ -24,8 +25,16 @@ function FieldUploadMedia({field}) {
       // component="input"
       type="file"
       placeholder={placeholder ? placeholder : (label ? t(label) : t(name))}
-      onChange={(e) => {
-        field.setValue(name, e.target.value)
+      onChange={(props) => {
+        let { target } = props;
+        uploadMedia(target.files[0],() => void 0,formID,'media', (e) => {
+          console.log("e", e);
+        }).then(x => {
+          if (x.success && x.media && x.media.url) {
+            console.log("set", name, x.media.url);
+            field.setValue(name, x.media.url);
+          }
+        });
       }}
       className="mb-2 form-control ltr"
     />

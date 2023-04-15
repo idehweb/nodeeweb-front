@@ -8,7 +8,7 @@ const Captcha = ({onActionSubmit,onActionValue}) => {
         type: 'numeric', // "mixed"(default) | "numeric" | "alpha"
         length: 6, // 4 to 8 number. default is 5
         sensitive: false, // Case sensitivity. default is false
-        width: 220, // Canvas width. default is 200
+        width: 180, // Canvas width. default is 200
         height: 40, // Canvas height. default is 50
         fontColor: '#000',
         background: 'rgba(255, 255, 255, .2)',

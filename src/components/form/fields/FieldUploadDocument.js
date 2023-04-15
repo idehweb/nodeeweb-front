@@ -8,11 +8,12 @@ import {getField} from "#c/components/form/fields";
 import {useTranslation} from 'react-i18next';
 
 
-function FieldUploadDocument({field}) {
+function FieldUploadDocument(props) {
+  let {field,formID} = props;
+  console.log('Uplooooooooooooad',formID);
   const {t} = useTranslation();
   const {type, kind, size, className, name, label, options, placeholder, value} = field;
   let [theVal, setTheVal] = useState(value)
-
   return <Col
     sm={size ? size.sm : ''}
     lg={size ? size.lg : ''}
@@ -29,7 +30,7 @@ function FieldUploadDocument({field}) {
       // }}
       onChange={(props) => {
         let { target } = props;
-        uploadMedia(target.files[0], (e) => {
+        uploadMedia(target.files[0],() => void 0,formID,'document', (e) => {
           console.log("e", e);
         }).then(x => {
           if (x.success && x.media && x.media.url) {

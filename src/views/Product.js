@@ -38,12 +38,13 @@ import ReviewsIcon from "@mui/icons-material/Reviews";
 const Product = (props) => {
 
   let {match, location, history, t, url} = props;
-  
+
 // console.log("st.storest.storest.storest.store", props);
   let product = useSelector((st) => {
-    // console.log("st.store", st.store.productSliderData);
+
     return st.store.product || [];
   });
+
   // window.scrollTo(0, 0);
   let params = useParams();
   // console.log("params", params);
@@ -188,7 +189,7 @@ const Product = (props) => {
         <div className={"floating-tools"}>
           <ButtonGroup vertical>
             <Button className={"love-it "}
-            
+
                     onClick={() => {
                       loveIt(_id).then(res => {
                         console.log("res", res);

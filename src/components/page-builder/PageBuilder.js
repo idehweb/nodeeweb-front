@@ -703,7 +703,7 @@ export default function PageBuilder(props) {
   // let html = elements.html;
   // if (elements && elements.pages && elements.pages[0] && elements.pages[0].frames && elements.pages[0].frames[0] && elements.pages[0].frames[0].component && elements.pages[0].frames[0].component.components)
   //     elements = elements.pages[0].frames[0].component.components;
-  // console.log('elements', elements)
+
   const cardVisible = useSelector((st) => !!st.store.cardVisible);
   let card = useSelector((st) => st.store.card || []);
   // let menu = useSelector((st) => st.store.menuVisible);

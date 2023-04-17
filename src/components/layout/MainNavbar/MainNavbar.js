@@ -91,9 +91,14 @@ export default function MainNavbar({layout, element, style, setStyles, stickyTop
           })}
         </Navbar>
       </div>
+
+      
       {(classes && classes.indexOf('responsive-menu')!==-1) && <MainSidebar>
         <MainSidebarMobile items={menu}/>
-      </MainSidebar>}</>
+      </MainSidebar>}
+      
+      
+      </>
   );
 }
 

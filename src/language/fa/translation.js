@@ -45,6 +45,7 @@ export default ()=>({
   "username": "نام کاربری",
   "password": "رمز عبور",
   "Wrong phone number?": "شماره موبایل اشتباه است",
+  "Change phone number?": "تغییر شماره موبایل",
   "cancel": "بستن",
   "sth wrong happened!": "اشتباهی رخ داده است!",
   "your phone number": "شماره موبایل شما",

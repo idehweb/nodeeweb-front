@@ -102,7 +102,7 @@ class LoginForm extends React.Component {
       return;
     }
     number = number.substring(number.length - 10);
-    console.log("number", number);
+    
     this.setState({
       thePhoneNumber: number,
       countryCode: fd,
@@ -110,10 +110,12 @@ class LoginForm extends React.Component {
     });
     let phoneNumber = fd + fNum(number);
 
+
+
+
+
     register(phoneNumber, fd, this.state.loginMethod).then((r) => {
       // new user
-      console.log('local', store.getState().store)
-
       if (r.shallWeSetPass) {
         this.state.timer = globalTimerSet;
         this.myInterval = setInterval(() => {
@@ -400,7 +402,6 @@ class LoginForm extends React.Component {
   }
   captchaAction(e){
     if(e === true){
-      console.log('parentReCaptchaaaaaa',true)
           this.setState({
               captcha: true
             });
@@ -427,8 +428,6 @@ class LoginForm extends React.Component {
       timer
     } = this.state;
     const {t} = this.props;
-    console.log("render Login form...", token, firstName, lastName, internationalCode, setPassword);
-    console.log("did we come from a post while publishing?", CameFromPost, timer);
     if (token && !firstName && !lastName && !internationalCode) {
       // this.setState({setPassword: true});
       // return <Navigate to={'/login/'} />;
@@ -438,17 +437,11 @@ class LoginForm extends React.Component {
 
       return <Navigate to={"/submit-order/" + goToProduct}/>;
     }
-    console.log('goToCheckout',goToCheckout)
-    console.log('token',token)
-    console.log('lastName',lastName)
-    console.log('internationalCode',internationalCode)
-    console.log('!setPassword',!setPassword)
     if (token && goToCheckout && firstName && lastName && internationalCode && !setPassword) {
       savePost({goToCheckout: false});
 
       return <Navigate to={"/checkout/"}/>;
     }
-    console.log(token, goToChat, firstName, lastName, internationalCode, !setPassword)
     // if (token && goToChat && firstName && lastName && internationalCode && !setPassword) {
     if (token && goToChat) {
       savePost({goToChat: false});
@@ -626,7 +619,7 @@ class LoginForm extends React.Component {
                       type="button"
                       className="center btn-block outline the-less-important"
                       onClick={this.handleWrongPhoneNumber}>
-                      {t("Wrong phone number?")}
+                      {t("Change phone number?")}
                     </Button>
                     {Boolean(!timer) && <div className={"flex-item-relative center "}>
                       <Button

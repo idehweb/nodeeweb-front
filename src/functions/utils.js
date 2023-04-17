@@ -35,7 +35,7 @@ export const postData = (url = "", data = {}, f = false, headers = {}, rewriteHe
       }
       
     axios
-      .post(url,JSON.stringify(data), option)
+      .post(url,data, option)
       .then(function (response) {
         console.log('post...',response)  
         return resolve(response);

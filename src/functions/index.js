@@ -2121,15 +2121,21 @@ export const deleteModel = (model, id) => {
 
 export const register = (number, fd, method = "sms") => {
   let {user} = store.getState().store;
-  return postData(`${ApiUrl}/customer/authCustomer`, {phoneNumber: number, countryCode: fd, method: method})
+  let userObj = {
+    phoneNumber:number,
+    countryCode:fd,
+    method:method
+  }
+  return postData(`${ApiUrl}/customer/authCustomer`, userObj)
     .then(({data}) => {
+      
       user = {...user, ...{phoneNumber: number, countryCode: fd}};
       if (data.success) SaveData({user: user});
 
       return data;
     })
     .catch((err) => {
-      // console.log('sdf', err);
+      console.log('eweeee', err);
       handleErr(err);
       return err;
     });

@@ -16,7 +16,6 @@ export default function NavbarToggle(props) {
 
 
   const classes = clsx('main-sidebar', 'px-0', 'col-9', menuVisible && 'open');
-// console.log('width',width);
   return (
     <>
       {menuVisible && <div className={'back-drop'}></div>}
@@ -29,6 +28,7 @@ export default function NavbarToggle(props) {
 
       {/*<SidebarAttrItems {...props} />*/}
       <SidebarFooterNavbar hideLogoText={props.hideLogoText}/>
-    </Col></>
+    </Col>
+    </>
   );
 }

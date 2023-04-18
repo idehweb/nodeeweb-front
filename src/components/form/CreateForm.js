@@ -30,8 +30,7 @@ import _ from 'lodash';
 function CreateForm(props) {
   
   let {fields, rules = {fields: []},theFields=false, t,formFiledsDetail} = props;
-  console.log('formProoooooops',formFiledsDetail.showSubmitButton);
-  let {showSubmitButton} = formFiledsDetail;
+  let {showSubmitButton,_id} = formFiledsDetail;
   const themeData = useSelector((st) => st.store.themeData);
   if (!themeData) {
     return
@@ -161,7 +160,7 @@ function CreateForm(props) {
       </Col>
     }
     if (type === 'steps') {
-      return <DemoSteps field={field} onSubmit={props.onSubmit}/>
+      return <DemoSteps field={field} onSubmit={props.onSubmit} />
     }
     if ((type === 'string' || type==='input') || !type) {
       let w100,labelAlign;

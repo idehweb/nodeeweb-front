@@ -6,14 +6,16 @@ import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import StepDetail from './detail';
-
+import {getEntity, isClient, setStyles, submitForm} from "#c/functions/index";
 // const steps = ['Select campaign settings', 'Create an ad group', 'Create an ad'];
 
 const  DemoSteps = (props) => {
   const {field,onSubmit} = props;
   const {style, size, className, name, label, options, placeholder, value,children,showStepsTitle} = field;
 
-
+  
+  const [trackingCode, setTrackingCode] = React.useState(localStorage.getItem('trackingCode'));
+  const [trackingCodeBlock, setTrackingCodeBlock] = React.useState(false);
   const [steps, setSteps] = React.useState(children);
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
@@ -61,6 +63,7 @@ const  DemoSteps = (props) => {
   const handleNextRadio = React.useCallback(() => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   }, [])
+
   return (
     <Box
       sm={size ? size.sm : ''}
@@ -97,12 +100,16 @@ const  DemoSteps = (props) => {
 
 
 
-      {activeStep === steps.length ? (
+      {
+      // activeStep === steps.length  ? (
+        trackingCodeBlock  ? (
+        // trackingCode ? (
         <React.Fragment>
-          {/* <Typography sx={{ mt: 2, mb: 1 }}>
+          <Typography sx={{ mt: 2, mb: 1 }}>
             با تشکر از شما برای ارسال روی دکمه ثبت کلیک نمایید
+            {trackingCode}
           </Typography>
-          <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+          {/* <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
             <Box sx={{ flex: '1 1 auto' }} />
             <Button onClick={handleReset} style={{fontSize:'15px'}}>پاکسازی</Button>
             
@@ -132,18 +139,9 @@ const  DemoSteps = (props) => {
               قبلی
             </Button>
             <Box sx={{ flex: '1 1 auto' }} />
-            {/* {isStepOptional(activeStep) || activeStep !== steps.length - 1 &&(
-              <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-                Skip
-              </Button>
-            )} */}
-
-            {/* <Button onClick={handleNext}>
-              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-            </Button> */}
-              {
+                         {
                 activeStep === steps.length - 1 ?(
-                  <Button type="submit" onClick={onSubmit} style={{fontSize:'20px',backgroundColor:'rgb(5, 78, 133)',color:'white',fontFamily:'IRANSans !important'}}>ثبت</Button>
+                  <Button type="submit"   style={{fontSize:'20px',backgroundColor:'rgb(5, 78, 133)',color:'white',fontFamily:'IRANSans !important'}}>ثبت</Button>
                 ):(
                 <button style={{background:'transparent','border':'none'}}   onClick={handleNext}>
                       بعدی

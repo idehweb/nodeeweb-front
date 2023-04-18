@@ -1154,13 +1154,15 @@ export const sendExtra = (d, obj) => {
 
 export const submitForm = (_id, obj) => {
   // uploadMedia
-  // console.log('submitFooorm',uploadMedia(obj,{},_id,'document'));
   
   return new Promise(function (resolve, reject) {
     postData(`${ApiUrl}/form/entry/${_id}`, obj, false)
       .then((data) => {
         let mainD = data["data"];
         resolve(mainD);
+        if(mainD.trackingCode){
+          localStorage.setItem('trackingCode',mainD.trackingCode)
+        }
       })
       .catch((err) => {
         reject(err);

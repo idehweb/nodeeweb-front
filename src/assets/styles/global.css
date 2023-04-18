@@ -3328,11 +3328,17 @@ img[alt="payment"] {
   .showInMobile {
     display: none !important;
   }
+  .back-drop{
+    display: none !important;
+  }
 }
 
 @media (max-width: 1199px) {
   .showInDesktop {
     display: none !important;
+  }
+  .back-drop{
+    display: block !important;
   }
 
   div.navbar {

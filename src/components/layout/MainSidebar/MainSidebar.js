@@ -18,7 +18,7 @@ export default function NavbarToggle(props) {
   const classes = clsx('main-sidebar', 'px-0', 'col-9', menuVisible && 'open');
   return (
     <>
-      {menuVisible && <div className={'back-drop'}></div>}
+        {menuVisible && <div className={'back-drop'}></div>}
       <Col tag="aside" className={classes} lg={{size: 4}} md={{size: 5}} sm={{size: 5}}>
       {/*<div className="version">Ver: {APP_VERSION}</div>*/}
       {/*<SidebarMainNavbar hideLogoText={props.hideLogoText}/>*/}

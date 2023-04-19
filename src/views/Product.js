@@ -64,6 +64,7 @@ const Product = (props) => {
   const [tab, setTab] = useState("attributes");
   const [state, setState] = useState(isClient ? [] : (product || []));
   const [lan, setLan] = useState(store.getState().store.lan || "fa");
+  const [requiredWarranty, setRequiredWarranty] = useState(true);
   // const [enableAdmin] = useState(store.getState().store.enableAdmin || false);
 
 
@@ -360,7 +361,10 @@ const Product = (props) => {
                               options={options}
                               in_stock={in_stock}
                               quantity={quantity}
-                              thirdCategory={thirdCategory}/>
+                              thirdCategory={thirdCategory}
+                              requireWarranty={requiredWarranty}
+
+                              />
 
             </Col>
           </Row>}

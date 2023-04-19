@@ -95,23 +95,48 @@ function AddToCardButton({item, text = '',variable=false,children, t}) {
         }} />
       </Button>}
       {count === 0 &&
-      <Button size="md" className={'buy-button kjhgfgh empty-card '} theme="primary" onClick={(e) => {
-        if (text && text === t('options') && !item.single) {
-          let title=encodeURIComponent(item.title.fa.replace(/\\|\//g,''));
-          // SetNavigate('/product/' + item._id + '/' + title);
-          history('/product/' + item._id + '/' + title)
+      <Button size="md" className={'buy-button kjhgfgh empty-card '} theme="primary"
+       onClick={(e) => {
+        console.log('item.requireWarranty',item.requireWarranty);
+        console.log('item.canBuy',item.canBuy);
+        if(item.requireWarranty){
+          if(item.canBuy){
+            if (text && text === t('options') && !item.single) {
+              let title=encodeURIComponent(item.title.fa.replace(/\\|\//g,''));
+              // SetNavigate('/product/' + item._id + '/' + title);
+              history('/product/' + item._id + '/' + title)
+            }
+            else {
+              // console.log('item',item);
+              // return;
+              addItem(item).then((x) => {
+                toggleCardbar();
+                toast(t('Added to cart successfully!'), {
+                  type: 'success'
+                })
+              });
+            }
+          }else{
+            alert('Please Select Warranty')
+          }
+        }else{
+          if (text && text === t('options') && !item.single) {
+            let title=encodeURIComponent(item.title.fa.replace(/\\|\//g,''));
+            // SetNavigate('/product/' + item._id + '/' + title);
+            history('/product/' + item._id + '/' + title)
+          }
+          else {
+            // console.log('item',item);
+            // return;
+            addItem(item).then((x) => {
+              toggleCardbar();
+              toast(t('Added to cart successfully!'), {
+                type: 'success'
+              })
+            });
+          }
         }
-        else {
-          // console.log('item',item);
-          // return;
-          addItem(item).then((x) => {
-            toggleCardbar();
 
-            toast(t('Added to cart successfully!'), {
-              type: 'success'
-            })
-          });
-        }
       }}>
         {!item.single && <span>{text}</span>}
         {!item.single && <ShoppingBagIcon className="center"/>}

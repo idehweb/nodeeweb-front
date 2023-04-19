@@ -13,6 +13,7 @@ import { dFormat, PriceFormat,NormalizePrice } from "#c/functions/utils";
 import {isSSR} from "#c/config";
 
 class SidebarActions extends React.PureComponent {
+  // requireWarranty
     constructor(props) {
         super(props);
         this.state = {
@@ -77,7 +78,7 @@ class SidebarActions extends React.PureComponent {
 
     render() {
         const { phoneNumber, email, lan, optionsId, combinationsTemp } = this.state;
-        let { t, updatedAt, countryChoosed, type, _id, firstCategory, in_stock, quantity, secondCategory, thirdCategory, title, photos, price, salePrice, options, combinations, method, single = true } = this.props;
+        let { requireWarranty,t, updatedAt, countryChoosed, type, _id, firstCategory, in_stock, quantity, secondCategory, thirdCategory, title, photos, price, salePrice, options, combinations, method, single = true } = this.props;
         let mixcombandoptions = [];
 // return price+'xxx'+salePrice
         if (price) price = NormalizePrice(price);
@@ -87,7 +88,7 @@ class SidebarActions extends React.PureComponent {
             [<div key={0}>
                 {type == "variable" && combinations && <Col lg={12} md={12} sm={12} xs={12}>
                     <Row>
-                        {Boolean(!isSSR && combinations.length>0) && <TheChip _id={_id} title={title} photos={photos} options={options} single={single} method={method} combinations={combinations} t={t} />}
+                        {Boolean(!isSSR && combinations.length>0) && <TheChip requireWarranty={requireWarranty} _id={_id} title={title} photos={photos} options={options} single={single} method={method} combinations={combinations} t={t} />}
                         {Boolean(isSSR && combinations.length>0) && <TheList _id={_id} title={title} photos={photos} options={options} single={single} method={method} combinations={combinations} t={t}/>}
 
                     </Row>
@@ -97,6 +98,7 @@ class SidebarActions extends React.PureComponent {
                   {!single && <Theprice price={price} className={"text-center"} salePrice={salePrice} combinations={combinations} type={type} t={t}/>}
 
                   <AddToCardButton item={{
+                        requireWarranty:{requireWarranty},
                         _id: _id,
                         title: title,
                         photos: photos,
@@ -105,7 +107,8 @@ class SidebarActions extends React.PureComponent {
                         quantity: quantity,
                         price: price,
                         salePrice: salePrice
-                    }}/></Col>
+                    }}/>
+                    </Col>
                 }
 
             </div>]

@@ -26,12 +26,11 @@ const theChip = (props) => {
     _id,
     method,
     title,
-    t
+    t,
+    requireWarranty
   } = props;
   let allOptions = [];
 
-  // console.log("allOptions", allOptions);
-  console.log('combinations', combinations)
   let choosed = combinations[0], doptions =combinations[0].options, lessPrice = combinations[0].salePrice || combinations[0].price,dstock=combinations[0].in_stock;
   _.forEach(combinations, (combination, j) => {
     let pr = combination.salePrice || combination.price
@@ -54,29 +53,24 @@ const theChip = (props) => {
   const [actives, setActives] = useState(doptions || {});
   const [count, setCount] = useState(options.length);
   const [theCombination, setTheCombination] = useState(choosed || {});
-
-  // const goToPage = (post) => {
-  //
-  // };
-  //
+  const [canBuy,setCanBuy] = useState(false);
   const onClickChip = (name, e) => {
-    console.log("onClickChip", name, e);
-    // console.log(count);
-    // console.log(name, ":", e.name);
-    let obj = {...actives};
-    obj[name] = e.name;
-    // let co=getCombination(combinations,obj);
-    combinations.forEach((comb) => {
-      // console.log('condition',condition,Object.is(comb.options,condition));
-
-      if (isEqual(comb.options, obj)) {
-        console.log("comb", comb);
-        setTheCombination(comb);
+    if(requireWarranty){
+      if(e.key >0){
+        setCanBuy(!canBuy)
       }
-    });
-    setActives(obj);
-    showPrice(obj);
-    console.log("obj", obj);
+    }
+
+      let obj = {...actives};
+      obj[name] = e.name;
+      combinations.forEach((comb) => {
+        if (isEqual(comb.options, obj)) {
+          console.log("comb", comb);
+          setTheCombination(comb);
+        }
+      });
+      setActives(obj);
+      showPrice(obj);
   };
 
   useEffect(() => {
@@ -86,9 +80,6 @@ const theChip = (props) => {
   }, []);
 
   let inS = ((theCombination.in_stock == "0" || theCombination.in_stock == null) ? false : true);
-  // if (!inS && !single)
-  //   return;
-  console.log('combinations', combinations, theCombination)
   return (
     [<div className={" mt-5 the-chip row"} key={0}>
       <label className={"the-label-inline bigger"}>{t("please choose combination") + ":"}</label>
@@ -112,6 +103,8 @@ const theChip = (props) => {
           {inS && method === "list" && !single && <>
             <div className={"the-option-actions " + inS}>
               <AddToCardButton item={{
+                canBuy:canBuy,
+                requireWarranty:requireWarranty,
                 _id: _id + "DDD" + theCombination,
                 title: {
                   [lan]: title[lan] + " - " + handleTitles(theCombination)
@@ -130,7 +123,9 @@ const theChip = (props) => {
           </>}
           {single && <>
             <div className={"the-option-actions " + inS}>
-              <AddToCardButton item={{
+              <AddToCardButton  item={{
+                canBuy:canBuy,
+                 requireWarranty:requireWarranty,
                 _id: _id + "DDD" + theCombination.id,
                 title: {
                   [lan]: title[lan] + " - " + handleTitles(theCombination)
@@ -154,10 +149,9 @@ const theChip = (props) => {
 const ChipInside = ({opt, actives, onClickChip}) => {
   let [state, setState] = useState({});
   const onClick = (val, j) => {
-    // console.log(val, j);
     onClickChip(val);
-    // setState({...state,})
   };
+
   return (
     <Stack direction="row" className={" mt-2 wrap-stack"} spacing={1}>
       <label className={"the-label-inline"}>{opt.name + ":"}</label>
@@ -169,6 +163,7 @@ const ChipInside = ({opt, actives, onClickChip}) => {
           variant={(actives && (actives[opt.name] === val.name)) ? "filled" : "outlined"}
           className={(actives && (actives[opt.name] === val.name)) ? "active" : ""} label={val.name}
           onClick={(e) => {
+            Object.assign(val,{key:j})
             onClick(val, j);
           }}/>;
       })}

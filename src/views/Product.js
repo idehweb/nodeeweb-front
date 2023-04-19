@@ -64,7 +64,7 @@ const Product = (props) => {
   const [tab, setTab] = useState("attributes");
   const [state, setState] = useState(isClient ? [] : (product || []));
   const [lan, setLan] = useState(store.getState().store.lan || "fa");
-  const [requiredWarranty, setRequiredWarranty] = useState(true);
+  const [requiredWarranty, setRequiredWarranty] = useState(false);
   // const [enableAdmin] = useState(store.getState().store.enableAdmin || false);
 
 
@@ -80,6 +80,7 @@ const Product = (props) => {
         //   categories: d.categories,
         //   mainCategory: d.mainCategory
         // });
+        setRequiredWarranty(d.requireWarranty)
         resolve({
           load: true,
           title: d.title,

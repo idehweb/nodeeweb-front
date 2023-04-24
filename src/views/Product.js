@@ -9,7 +9,7 @@ import Comments from "#c/components/single-post/Comments";
 import {withTranslation} from "react-i18next";
 import {dFormat, PriceFormat} from "#c/functions/utils";
 
-import {addBookmark, clearPost, getPost, isClient, loadProduct, loveIt, MainUrl, savePost} from "#c/functions/index";
+import {addBookmark, clearPost, getPost, isClient, loadProduct, loveIt, MainUrl, savePost,getThemeData} from "#c/functions/index";
 import {SnapChatIcon} from "#c/assets/index";
 import Loading from "#c/components/Loading";
 import store from "../functions/store";
@@ -124,13 +124,18 @@ const Product = (props) => {
       });
     });
   };
+
+
+
   if (isClient)
     useEffect(() => {
       // let mounted = true;
       let {_id, title} = params;
 
       console.log("useEffect", _id, the_id, mainId);
-
+      getThemeData().then((data)=>{
+        console.log('getTheSettings',data);
+      })
       getThePost(the_id)
         .then(items => {
           // console.log('items',items,the_id);

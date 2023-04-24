@@ -33,7 +33,7 @@ const getURIParts = (url) => {
 }
 
 const Sidemenu = (props) => {
-  console.log('Pagination...', props)
+  console.log('PaginationPaginationPaginationPaginationPagination...', props)
   let navigate = useNavigate();
 
   const [tracks, settracks] = useState([]);
@@ -58,85 +58,44 @@ const Sidemenu = (props) => {
   }
   url = isClient ? new URL(window.location.href) : "";
   let theurl = getURIParts(url);
-  // theurl=theurl.split('/');
-  // console.log('mainParams',theurl[1])
-
   const postCardMode = useSelector((st) => st.store.postCardMode, _.isEqual);
-
-  // console.log('general', general)
-  // console.log('params', params)
-  // const params = useParams();
   const loadProductItems = async (page, filter = {}) => {
-    // return
-    console.log('loadProductItems', params, params.offset)
-    // setLoadingMoreItems(true);
-
-    // settracks([...[]]);
     settracks([])
     settheload(true)
     let query = {};
-    // params = useParams();
-    console.log('customQuery', customQuery, mainParams, data)
     if (customQuery)
       Object.keys(customQuery).forEach((item) => {
         let main = customQuery[item];
-        console.log('params._id', params._id)
-
         main = main.replace('params._id', JSON.stringify(params._id))
-        console.log('customQuery[item]', item, customQuery, customQuery[item])
         query[item] = JSON.parse(main)
       })
-
-    console.log("==> loadProductItems() offset:", params.offset, "filter:", filter, "query:", query);
     if (query) {
       filter = JSON.stringify(query)
     }
-    // let newOffset = (await offset) + 24;
     getEntitiesWithCount('attributes', params.offset, params.limit, "", JSON.stringify({useInFilter: true}), JSON.stringify(populateQuery)).then((resp) => {
-      // setLoadingMoreItems(false);
       afterGetData(resp);
     });
   };
   const loadProductCategories = async (page, filter = {}) => {
-    // return
-
-    // setLoadingMoreItems(true);
-
-    // settracks([...[]]);
     setcats([])
     settheload2(true)
     let query = {};
-    // params = useParams();
-    console.log('customQuery', customQuery, mainParams, data)
+
     if (customQuery)
       Object.keys(customQuery).forEach((item) => {
         let main = customQuery[item];
-        console.log('params._id', params._id)
-
         main = main.replace('params._id', JSON.stringify(params._id))
-        console.log('customQuery[item]', item, customQuery, customQuery[item])
         query[item] = JSON.parse(main)
       })
-
-    console.log("==> loadProductItems() offset:", params.offset, "filter:", filter, "query:", query);
     if (query) {
       filter = JSON.stringify(query)
     }
-    // let newOffset = (await offset) + 24;
     getEntitiesWithCount('productCategory', params.offset, params.limit, "", filter, JSON.stringify(populateQuery)).then((resp) => {
-      // setLoadingMoreItems(false);
       afterGetDataPC(resp);
     });
   };
 
-
-  // useEffect(() => {
-  //   console.log("params.offset");
-  //   loadProductItems(0);
-  // }, [params.offset]);
-
   useEffect(() => {
-    console.log("params._id");
     loadProductItems(0);
     loadProductCategories(0);
   }, []);
@@ -209,7 +168,7 @@ const Sidemenu = (props) => {
       items.forEach((item) => {
         trackss.push(item);
       });
-      console.log('set data:', trackss)
+      console.log('set data:set data:set data:set data:set data:', trackss)
       setcats([...trackss]);
       setcount(count);
       settheload2(false)
@@ -228,7 +187,7 @@ const Sidemenu = (props) => {
       <LoadingComponent height={30} width={30} type="spin" color="#3d5070"/>
     </div>
   );
-
+  console.log('customQuerycustomQuery',cats);
   // return JSON.stringify(params)
   return (<div className="main-content-container fghjkjhgf ">
 
@@ -256,6 +215,7 @@ const Sidemenu = (props) => {
           </Row>
 
         </Col>}
+
         {!theload && <Col
           className="main-content2 iuytfghj pb-5 "
           lg={{size: 12}}
@@ -274,6 +234,28 @@ const Sidemenu = (props) => {
           </>}
 
         </Col>}
+
+        {!theload && <Col
+          className="main-content2 iuytfghj pb-5 "
+          lg={{size: 12}}
+          md={{size: 12}}
+          sm="12"
+          tag="main">
+          {((window && window.innerWidth < 768) && openFilter) && <>
+            <Collapsable type={'price'} defaultStatus={!(window && window.innerWidth < 768)} title={t('product price')} values={cats}
+                         slug={'product-price'}/>
+            {tracks && tracks.map((i, idxx) => (<Collapsable type={'price'} title={i.name.fa} values={i.values} slug={i.slug}/>))}
+          </>}
+          {(window && window.innerWidth > 767) && <>
+            <Collapsable type={'price'}  defaultStatus={!(window && window.innerWidth < 768)} title={t('product price')} values={cats}
+                         slug={'product-price'}/>
+
+            {tracks && tracks.map((i, idxx) => (<Collapsable type={'price'} title={i.name.fa} values={i.values} slug={i.slug}/>))}
+          </>}
+
+        </Col>}
+
+
       </Row>
       {/*{cats && JSON.stringify(cats)}*/}
     </div>

@@ -1,12 +1,10 @@
-console.log('#f main/src/client/functions/utils.js')
-
 import store from "./store";
 import moment from "jalali-moment";
 import axios from "axios";
 import {isClient} from "#c/functions/index";
 
 export const postData = (url = "", data = {}, f = false, headers = {}, rewriteHeader = false) => {
- 
+
   return new Promise(function (resolve, reject) {
     let option = {
       headers: {
@@ -33,11 +31,11 @@ export const postData = (url = "", data = {}, f = false, headers = {}, rewriteHe
 
         // }
       }
-      
+
     axios
       .post(url,data, option)
       .then(function (response) {
-        console.log('post...',response)  
+        console.log('post...',response)
         return resolve(response);
         // response.json();
       })

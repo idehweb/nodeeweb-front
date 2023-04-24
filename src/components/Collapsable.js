@@ -10,49 +10,69 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 import StarBorder from '@mui/icons-material/StarBorder';
 import {withTranslation} from "react-i18next";
 import {Link} from "react-router-dom";
+import PriceFilter from "#c/components/page-builder/sidemenu/filters/PriceFilter";
 import {
   isClient,
 } from "#c/functions/index";
 const Collapsable = (props) => {
   let url = isClient ? new URL(window.location.href) : "";
 
-  let {title, values,slug,defaultStatus=false} = props;
+  let {title, values,slug,defaultStatus=false,type} = props;
   const [open, setOpen] = useState(defaultStatus);
 
   const handleClick = () => {
     setOpen(!open);
   };
 
-  return (<List
-    dir="rtl"
-    sx={{width: '100%', bgcolor: 'background.paper'}}
-    component="nav"
-    aria-labelledby="nested-list-subheader"
-  >
-    <ListItemButton onClick={handleClick}>
-      <ListItemText primary={title}/>
-      {open ? <ExpandLess/> : <ExpandMore/>}
-    </ListItemButton>
-    <Collapse in={open} timeout="auto" unmountOnExit>
-      <List component="div" disablePadding>
-        {values && values.map((ij, idxx2) => {
-          url.searchParams.set(slug, ij.slug);
-          url.searchParams.set('offset', 0);
+  if(type === 'price'){
+          return (<List
+            dir="rtl"
+            sx={{width: '100%', bgcolor: 'background.paper'}}
+            component="nav"
+            aria-labelledby="nested-list-subheader"
+          >
+            <ListItemButton onClick={handleClick}>
+              <ListItemText primary={title}/>
+              {open ? <ExpandLess/> : <ExpandMore/>}
+            </ListItemButton>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+              <List component="div" disablePadding>
+                <PriceFilter/>
+              </List>
+            </Collapse>
+          </List>);
+        }
 
-          return(
-            <Link to={url.pathname + url.search}>
-              <ListItemButton sx={{pl: 4}} alignItems="flex-end">
+  return (
+    <List
+      dir="rtl"
+      sx={{width: '100%', bgcolor: 'background.paper'}}
+      component="nav"
+      aria-labelledby="nested-list-subheader"
+    >
+      <ListItemButton onClick={handleClick}>
+        <ListItemText primary={title}/>
+        {open ? <ExpandLess/> : <ExpandMore/>}
+      </ListItemButton>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+                {values && values.map((ij, idxx2) => {
+            url.searchParams.set(slug, ij.slug);
+            url.searchParams.set('offset', 0);
 
-                <ListItemText primary={ij.name.fa}/>
-              </ListItemButton>
-            </Link>
-          )
-        })}
+            return(
+              <Link to={url.pathname + url.search}>
+                <ListItemButton sx={{pl: 4}} alignItems="flex-end">
 
-      </List>
-    </Collapse>
-  </List>);
-}
+                  <ListItemText primary={ij.name.fa}/>
+                </ListItemButton>
+              </Link>
+            )
+          })}
+
+        </List>
+      </Collapse>
+    </List>);
 // {/*<Link to={'/' + slug + '/' + ij.slug + '/'}>*/}
-
+        }
 export default withTranslation()(Collapsable);

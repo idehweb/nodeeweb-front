@@ -20,7 +20,6 @@ import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 const DataContext = createContext(null);
 export const isClient = (typeof window !== "undefined");
 // clearState
-console.log('CONFIG', CONFIG);
 export const MainUrl = CONFIG.BASE_URL;
 if (isClient) {
 // import { createContext } from "react";
@@ -142,7 +141,6 @@ export const setStyles = (fields) => {
 }
 
 export const loadProductItems = (cat_id = null, filter = {}) => {
-  console.log("======> loadProductItems");
   return new Promise(function (resolve, reject) {
     // if (cat_id)
     //   getPostsByCat(0, 8, cat_id, "", {}, include).then((resp) => {
@@ -164,7 +162,6 @@ export const loadProductItems = (cat_id = null, filter = {}) => {
   });
 };
 export const loadPostItems = (cat_id = null, include = null) => {
-  console.log("======> loadPostItems");
   return new Promise(function (resolve, reject) {
     if (cat_id)
       getBlogPostsByCat(0, 8, cat_id, "", {}, include).then((resp) => {
@@ -178,7 +175,6 @@ export const loadPostItems = (cat_id = null, include = null) => {
   });
 };
 export const loadEntityItems = (entity, cat_id = null, include = null) => {
-  console.log("======> loadPostItems");
   if (!entity) {
     return;
   }
@@ -195,7 +191,6 @@ export const loadEntityItems = (entity, cat_id = null, include = null) => {
   });
 };
 export const loadItem = (_id = null) => {
-  console.log("======> loadItem");
   return new Promise(function (resolve, reject) {
     getPost(_id).then((resp) => {
       resolve(resp);
@@ -203,20 +198,12 @@ export const loadItem = (_id = null) => {
   });
 };
 export const loadBlogItem = (_id = null) => {
-  console.log("======> loadBlogItem");
   return new Promise(function (resolve, reject) {
     getBlogPost(_id).then((resp) => {
       resolve(resp);
     });
   });
 };
-// export const fetchData = () => async (dispatch) => {
-//   console.log("fetchData************");
-//   await loadProductItems().then(async res => {
-//     return await dispatch(storeProducts(res));
-//   });
-// //
-// };
 export const SearchIt = (_id) => {
   return new Promise(function (resolve, reject) {
     let c = [];
@@ -261,7 +248,6 @@ export const receive_error = (data) => ({
 
 export const SaveData = (data) => {
   if (data) {
-    console.log('SaveData', data)
     return store.dispatch({
       type: Types.SaveData,
       data
@@ -269,7 +255,6 @@ export const SaveData = (data) => {
   }
 }
 const handleErr = (err) => {
-  console.error('err => ', err);
   store.dispatch(receive_error(err));
 };
 
@@ -301,7 +286,6 @@ export const LevelCountriesData = (i = "") =>
       return err;
     });
 export const handleTitles = (combination) => {
-  // const { t, options } = this.props;
   let arr = [];
 
   if (combination && combination.options) {
@@ -388,50 +372,36 @@ export const getAllSidebarCategoriesData = (i = "") =>
       return err;
     });
 export const loadProduct = (_id = null) => async (dispatch) => {
-
-  console.log("======> loadProduct", _id);
   await loadItem(_id).then(async res => {
     return await dispatch(storeProduct({data: res, _id: _id}));
   });
 };
 export const loadPost = (_id = null) => async (dispatch) => {
-
-  console.log("======> loadPost", _id);
-  // return new Promise(function (resolve, reject) {
   await loadBlogItem(_id).then(async res => {
     return await dispatch(storeProduct({data: res, _id: _id}));
   });
 };
 export const loadProducts = (cat_id = null, include = null) => async (dispatch) => {
-  console.log("======> loadProducts", cat_id, include);
   await loadProductItems(cat_id).then(async res => {
     return await dispatch(storeProducts({data: res, id: cat_id}));
   });
 
 };
 export const loadPosts = (cat_id = null, include = null) => async (dispatch) => {
-  console.log("======> loadPosts", cat_id, include);
   await loadPostItems(cat_id).then(async res => {
     return await dispatch(storePosts({data: res, id: cat_id}));
   });
 };
 
 export const setAttrValue = (attr = null, value = null) => async (dispatch) => {
-  console.log("======> setAttrValue", attr, value);
   await dispatch(storeAttrValue({attr: attr, value: value}));
 
 }
 
 export const fetchCats = () => async (dispatch) => {
-  console.log("fetchCats");
   let allCategories = store.getState().store.allCategories;
-  // console.log('allCategories', allCategories);
   if (allCategories && !allCategories.length) {
-    // console.log('awaiting... getAllSidebarCategoriesData');
-
     const response = await getAllSidebarCategoriesData();
-    // console.log('response... getAllSidebarCategoriesData', response);
-
     let cat = "";
     if (response && response[0] && response[0]._id)
       cat = response[0]._id;
@@ -442,14 +412,24 @@ export const fetchCats = () => async (dispatch) => {
 
   }
 };
+// export const fetchPrice = () => async (dispatch) => {
+//   let allPrices = store.getState().store.allPrices;
+//   if (allPrices && !allPrices.length) {
+//     const response = await getAllSidebarPricesData();
+//     let price = "";
+//     if (response && response[0] && response[0]._id)
+//       price = response[0]._id;
+//     return await dispatch({
+//       type: "prices/pricesLoaded",
+//       payload: {allPrices: response, price: price, searchvisible: false}
+//     });
+
+//   }
+// };
 export const fetchTheme = () => async (dispatch) => {
-  console.log("fetchTheme");
   let themeData = store.getState().store.themeData;
-  // console.log('allCategories', allCategories);
   if (themeData && !themeData.length) {
-
     const response = await getThemeData();
-
     return await dispatch({
       type: "theme/themeLoaded",
       payload: {themeData: response}
@@ -458,9 +438,7 @@ export const fetchTheme = () => async (dispatch) => {
   }
 };
 export const fetchHome = () => async (dispatch) => {
-  console.log("fetchHome");
   let homeData = store.getState().store.homeData;
-  // console.log('allCategories', allCategories);
   if (homeData && !homeData.length) {
 
     const response = await getHomeData();
@@ -527,7 +505,6 @@ export const getHomeData = (i = "") => {
 
 export const isStringified = (jsonValue) => {
   try {
-    console.log("need to parse");
     return JSON.parse(jsonValue);
   } catch (err) {
     console.log("not need to parse");
@@ -537,10 +514,7 @@ export const isStringified = (jsonValue) => {
 }
 export const getCombination = async (combinations, condition) => {
   let r = await combinations.forEach(async (comb) => {
-    // console.log('condition',condition,Object.is(comb.options,condition));
-
     if (await isEqual(comb.options, condition)) {
-      console.log('comb', comb);
       return comb;
     }
   })
@@ -587,7 +561,6 @@ export const getMyPosts = (offset = 0, limit = 100) =>
     });
 
 export const getContacts = () => {
-  console.log('getContacts')
   return new Promise(function (resolve, reject) {
     let c = [];
     getData(`${ApiUrl}/session/contacts/mine`, {}, true)
@@ -602,7 +575,6 @@ export const getContacts = () => {
   });
 };
 export const addToMyContacts = (phoneNumber) => {
-  console.log('getContacts')
   return new Promise(function (resolve, reject) {
     let c = [];
     putData(`${ApiUrl}/session/contacts/mine`, {phoneNumber: phoneNumber}, true)
@@ -617,7 +589,6 @@ export const addToMyContacts = (phoneNumber) => {
   });
 };
 export const startChat = (phoneNumber, from) => {
-  console.log('startChat from', from, 'with', phoneNumber)
   return new Promise(function (resolve, reject) {
     let c = [];
 
@@ -1154,7 +1125,7 @@ export const sendExtra = (d, obj) => {
 
 export const submitForm = (_id, obj) => {
   // uploadMedia
-  
+
   return new Promise(function (resolve, reject) {
     postData(`${ApiUrl}/form/entry/${_id}`, obj, false)
       .then((data) => {
@@ -2130,7 +2101,7 @@ export const register = (number, fd, method = "sms") => {
   }
   return postData(`${ApiUrl}/customer/authCustomer`, userObj)
     .then(({data}) => {
-      
+
       user = {...user, ...{phoneNumber: number, countryCode: fd}};
       if (data.success) SaveData({user: user});
 

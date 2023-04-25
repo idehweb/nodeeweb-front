@@ -47,7 +47,7 @@ const Sidemenu = (props) => {
   let {data = {}, settings = {}} = element;
   let {general = {}} = settings;
   let {fields = {}} = general;
-  let {entity = '', customQuery, populateQuery} = fields;
+  let {entity = '',showPriceFilter, customQuery, populateQuery} = fields;
   let mainParams = useParams();
   // let params = data;
   if (!params.offset) {
@@ -187,8 +187,6 @@ const Sidemenu = (props) => {
       <LoadingComponent height={30} width={30} type="spin" color="#3d5070"/>
     </div>
   );
-  console.log('customQuerycustomQuery',cats);
-  // return JSON.stringify(params)
   return (<div className="main-content-container fghjkjhgf ">
 
       <Row className={"m-0"}>
@@ -200,7 +198,7 @@ const Sidemenu = (props) => {
           sm="12"
           tag="main">
           <Row className={" pt-3 productsmobile"}>
-            <Col lg="12"
+            {/* <Col lg="12"
                  md="12"
                  sm="12"
                  xs="12" className={"nbghjk post-style-"}>
@@ -211,49 +209,49 @@ const Sidemenu = (props) => {
                 }}><FilterAltIcon/></Button>}
               </div>
               <hr className={'the-label-hr'}/>
-            </Col>
+            </Col> */}
           </Row>
 
         </Col>}
-
-        {!theload && <Col
-          className="main-content2 iuytfghj pb-5 "
+        {!theload && showPriceFilter && <Col
+          className="main-content2 iuytfghj pb-2 "
           lg={{size: 12}}
           md={{size: 12}}
           sm="12"
           tag="main">
           {((window && window.innerWidth < 768) && openFilter) && <>
-            <Collapsable defaultStatus={!(window && window.innerWidth < 768)} title={t('product category')} values={cats}
-                         slug={'product-category'}/>
-            {tracks && tracks.map((i, idxx) => (<Collapsable title={i.name.fa} values={i.values} slug={i.slug}/>))}
-          </>}
-          {(window && window.innerWidth > 767) && <>
-            <Collapsable defaultStatus={!(window && window.innerWidth < 768)} title={t('product category')} values={cats}
-                         slug={'product-category'}/>
-            {tracks && tracks.map((i, idxx) => (<Collapsable title={i.name.fa} values={i.values} slug={i.slug}/>))}
-          </>}
-
-        </Col>}
-
-        {!theload && <Col
-          className="main-content2 iuytfghj pb-5 "
-          lg={{size: 12}}
-          md={{size: 12}}
-          sm="12"
-          tag="main">
-          {((window && window.innerWidth < 768) && openFilter) && <>
-            <Collapsable type={'price'} defaultStatus={!(window && window.innerWidth < 768)} title={t('product price')} values={cats}
-                         slug={'product-price'}/>
-            {tracks && tracks.map((i, idxx) => (<Collapsable type={'price'} title={i.name.fa} values={i.values} slug={i.slug}/>))}
-          </>}
-          {(window && window.innerWidth > 767) && <>
             <Collapsable type={'price'}  defaultStatus={!(window && window.innerWidth < 768)} title={t('product price')} values={cats}
-                         slug={'product-price'}/>
+                         slug={'ProductPrice'}/>
+            {tracks && tracks.map((i, idxx) => (<Collapsable  type={'price'} title={i.name.fa} values={i.values} slug={i.slug}/>))}
+          </>}
+          {(window && window.innerWidth > 767) && <>
+            <Collapsable type={'price'}   defaultStatus={!(window && window.innerWidth < 768)} title={t('product price')} values={cats}
+                         slug={'ProductPrice'}/>
 
-            {tracks && tracks.map((i, idxx) => (<Collapsable type={'price'} title={i.name.fa} values={i.values} slug={i.slug}/>))}
+            {tracks && tracks.map((i, idxx) => (<Collapsable  type={'price'} title={i.name.fa} values={i.values} slug={i.slug}/>))}
           </>}
 
         </Col>}
+        {!theload && <Col
+          className="main-content2 iuytfghj pb-2 "
+          lg={{size: 12}}
+          md={{size: 12}}
+          sm="12"
+          tag="main">
+          {((window && window.innerWidth < 768) && openFilter) && <>
+            <Collapsable defaultStatus={!(window && window.innerWidth < 768)} title={t('product category')} values={cats}
+                         slug={'ProductCategory'}/>
+            {tracks && tracks.map((i, idxx) => (<Collapsable title={i.name.fa} values={i.values} slug={i.slug}/>))}
+          </>}
+          {(window && window.innerWidth > 767) && <>
+            <Collapsable defaultStatus={!(window && window.innerWidth < 768)} title={t('product category')} values={cats}
+                         slug={'ProductCategory'}/>
+            {tracks && tracks.map((i, idxx) => (<Collapsable title={i.name.fa} values={i.values} slug={i.slug}/>))}
+          </>}
+
+        </Col>}
+
+      
 
 
       </Row>

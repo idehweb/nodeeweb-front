@@ -12,7 +12,7 @@ export default ()=>({
   "Entry": "ورودی فرم ها",
   "discount": "تخفیف",
   "product category": "دسته محصولات",
-  "product price": "فیلتر قیمت",
+  "product price": "فیلتر براساس قیمت:",
   "tax": "مالیات",
   "Service": "خدمات",
   "you have used this discount once!": "شما قبلا از این کد تخفیف یکبار استفاده کرده اید!",

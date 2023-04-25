@@ -72,7 +72,6 @@ const Product = (props) => {
     return new Promise(function (resolve, reject) {
 
       getPost(_id).then((d = {}) => {
-        console.log('isClientisClientisClientisClient', d);
         // savePost({
         //   mainList: d.mainList,
         //   catChoosed: d.catChoosed,

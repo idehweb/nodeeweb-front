@@ -12,11 +12,10 @@ import { useNavigate } from "react-router-dom"
 import {toast} from "react-toastify";
 import CloseIcon from '@mui/icons-material/Close';
 import { toggleCardbar } from "#c/functions/index";
-
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
-function AddToCardButton({item, text = '',variable=false,children, t}) {
+function AddToCardButton({item, text = '',variable=false,children, t,onSelectWarranty}) {
   let [count, setcount] = useState(0);
   let [Navigate, SetNavigate] = useState(null);
   let card = useSelector((st) => st.store.card || []);
@@ -51,8 +50,6 @@ function AddToCardButton({item, text = '',variable=false,children, t}) {
 
   };
   if (Navigate) {
-    console.log('Navigate',Navigate);
-    // history(Navigate)
     return <Navigate to={Navigate}/>;
   }
   if ((item.single && !item.in_stock) || (item.single && !item.quantity)) {
@@ -80,6 +77,7 @@ function AddToCardButton({item, text = '',variable=false,children, t}) {
 
   return (
     <div className="AddToCardButton">
+    
       {(count !== 0) && <Button size="md" className={'buy-button kjhgfgh'} theme="primary">
         <RemoveCircleOutlineIcon className={"left"} onClick={(e) => {
           removeItem(item);
@@ -117,7 +115,7 @@ function AddToCardButton({item, text = '',variable=false,children, t}) {
               });
             }
           }else{
-            alert('Please Select Warranty')
+            onSelectWarranty(true)
           }
         }else{
           if (text && text === t('options') && !item.single) {

@@ -14,8 +14,12 @@ import AddToCardButton from "#c/components/components-overview/AddToCardButton";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 // import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
+import AlertPopup from "#c/components/components-overview/AlertPopup";
 const theChip = (props) => {
-  // console.log("props", props);
+  let [showPop, setShowPop] = useState(false);
+  const onSelectWarranty =(e)=>{
+    setShowPop(e)
+  }
   const {
     combinations,
     options,
@@ -58,6 +62,8 @@ const theChip = (props) => {
     if(requireWarranty){
       if(e.key >0){
         setCanBuy(!canBuy)
+      }else{
+        setCanBuy(false)
       }
     }
 
@@ -82,15 +88,33 @@ const theChip = (props) => {
   let inS = ((theCombination.in_stock == "0" || theCombination.in_stock == null) ? false : true);
   return (
     [<div className={" mt-5 the-chip row"} key={0}>
-      <label className={"the-label-inline bigger"}>{t("please choose combination") + ":"}</label>
+      {
+        !requireWarranty && (
+          <label className={"the-label-inline bigger"}>{t("please choose combination") + ":"}</label>
+        )
+      }
+
+        {
+        showPop && (
+          <AlertPopup title={t("please choose combination") + ":"} show={showPop}  onHandler={(e)=>setShowPop(e)}>
+                  {options && options.map((opt, k) => {
+                                  return <ChipInside key={k} opt={opt} actives={actives} onClickChip={(e) => {
+                                    onClickChip(opt.name, e);
+                                  }}/>;
+                  })}
+            </AlertPopup>
+        )
+      }
+
     </div>,
       <div className={" mt-2 the-chip row"} key={1}>
-        <div className={"col-md-8"}> {options && options.map((opt, k) => {
-          // console.log("opt", opt);
-          return <ChipInside key={k} opt={opt} actives={actives} onClickChip={(e) => {
-            onClickChip(opt.name, e);
-          }}/>;
-        })}</div>
+        <div className={"col-md-8"}>
+           {options && !requireWarranty &&  options.map((opt, k) => {
+                return <ChipInside key={k} opt={opt} actives={actives} onClickChip={(e) => {
+                  onClickChip(opt.name, e);
+                }}/>;
+            })}
+        </div>
         <div className={"col-md-4"}>{Boolean(theCombination) && <div className={"the-option-price text-center"}>
 
           <div className={"gfd"}>
@@ -102,7 +126,7 @@ const theChip = (props) => {
           </div>
           {inS && method === "list" && !single && <>
             <div className={"the-option-actions " + inS}>
-              <AddToCardButton item={{
+              <AddToCardButton onSelectWarranty={(e)=>onSelectWarranty(e)} item={{
                 canBuy:canBuy,
                 requireWarranty:requireWarranty,
                 _id: _id + "DDD" + theCombination,
@@ -123,7 +147,7 @@ const theChip = (props) => {
           </>}
           {single && <>
             <div className={"the-option-actions " + inS}>
-              <AddToCardButton  item={{
+              <AddToCardButton onSelectWarranty={(e)=>onSelectWarranty(e)}  item={{
                 canBuy:canBuy,
                  requireWarranty:requireWarranty,
                 _id: _id + "DDD" + theCombination.id,
@@ -154,12 +178,13 @@ const ChipInside = ({opt, actives, onClickChip}) => {
 
   return (
     <Stack direction="row" className={" mt-2 wrap-stack"} spacing={1}>
-      <label className={"the-label-inline"}>{opt.name + ":"}</label>
+      <label className={"the-label-inline"} style={{width:'100%'}}>{opt.name + ":"}</label>
+      
       {(opt.values && opt.values.length) &&
       (opt.values).map((val, j) => {
         return <Chip
           key={j}
-          icon={(actives && (actives[opt.name] === val.name)) ? <RadioButtonCheckedIcon/> : <RadioButtonUncheckedIcon/>}
+          icon={(actives && (actives[opt.name] === val.name)) ? <RadioButtonCheckedIcon style={{marginRight:'10px'}}/> : <RadioButtonUncheckedIcon style={{marginRight:'10px'}}/>}
           variant={(actives && (actives[opt.name] === val.name)) ? "filled" : "outlined"}
           className={(actives && (actives[opt.name] === val.name)) ? "active" : ""} label={val.name}
           onClick={(e) => {

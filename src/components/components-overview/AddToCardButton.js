@@ -15,32 +15,11 @@ import { toggleCardbar } from "#c/functions/index";
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
-function AddToCardButton({item, text = '',variable=false,children, t,onSelectWarranty}) {
+function AddToCardButton({item, text = '',variable=false,children, t}) {
   let [count, setcount] = useState(0);
   let [Navigate, SetNavigate] = useState(null);
   let card = useSelector((st) => st.store.card || []);
   let history = useNavigate();
-  // useEffect(() => {
-  //   console.log('useEffect count...',count);
-  //   return;
-  //   // setcount(count);
-  // }, [count]);
-  // useEffect(() => {
-  //   return;
-  //   console.log('useEffect card...',card);
-  //
-  //   let find = false;
-  //   card.map((isx, xs) => {
-  //     if (isx._id === item._id) {
-  //       find = true;
-  //     }
-  //   });
-  //   if (!find) {
-  //     count = 0;
-  //     // setcount(count);
-  //
-  //   }
-  // }, [card]);
   card.map((isx, xs) => {
     if (isx._id === item._id) {
       count = (isx.count);
@@ -95,37 +74,11 @@ function AddToCardButton({item, text = '',variable=false,children, t,onSelectWar
       {count === 0 &&
       <Button size="md" className={'buy-button kjhgfgh empty-card '} theme="primary"
        onClick={(e) => {
-        console.log('item.requireWarranty',item.requireWarranty);
-        console.log('item.canBuy',item.canBuy);
-        if(item.requireWarranty){
-          if(item.canBuy){
-            if (text && text === t('options') && !item.single) {
-              let title=encodeURIComponent(item.title.fa.replace(/\\|\//g,''));
-              // SetNavigate('/product/' + item._id + '/' + title);
-              history('/product/' + item._id + '/' + title)
-            }
-            else {
-              // console.log('item',item);
-              // return;
-              addItem(item).then((x) => {
-                toggleCardbar();
-                toast(t('Added to cart successfully!'), {
-                  type: 'success'
-                })
-              });
-            }
-          }else{
-            onSelectWarranty(true)
-          }
-        }else{
           if (text && text === t('options') && !item.single) {
             let title=encodeURIComponent(item.title.fa.replace(/\\|\//g,''));
-            // SetNavigate('/product/' + item._id + '/' + title);
             history('/product/' + item._id + '/' + title)
           }
           else {
-            // console.log('item',item);
-            // return;
             addItem(item).then((x) => {
               toggleCardbar();
               toast(t('Added to cart successfully!'), {
@@ -133,8 +86,6 @@ function AddToCardButton({item, text = '',variable=false,children, t,onSelectWar
               })
             });
           }
-        }
-
       }}>
         {!item.single && <span>{text}</span>}
         {!item.single && <ShoppingBagIcon className="center"/>}

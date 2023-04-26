@@ -98,7 +98,6 @@ class SidebarActions extends React.PureComponent {
                   {!single && <Theprice price={price} className={"text-center"} salePrice={salePrice} combinations={combinations} type={type} t={t}/>}
 
                   <AddToCardButton item={{
-                        requireWarranty:{requireWarranty},
                         _id: _id,
                         title: title,
                         photos: photos,

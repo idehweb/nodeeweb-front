@@ -131,10 +131,10 @@ const Product = (props) => {
       // let mounted = true;
       let {_id, title} = params;
 
-      console.log("useEffect", _id, the_id, mainId);
-      getThemeData().then((data)=>{
-        console.log('getTheSettings',data);
-      })
+      // console.log("useEffect", _id, the_id, mainId);
+      // getThemeData().then((data)=>{
+      //   console.log('getTheSettings',data);
+      // })
       getThePost(the_id)
         .then(items => {
           // console.log('items',items,the_id);

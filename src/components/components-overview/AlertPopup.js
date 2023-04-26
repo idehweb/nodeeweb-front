@@ -20,11 +20,13 @@ const AlertPopup =({show,onHandler,children,title,canBuy,item})=> {
   };
   const handleCloseAfterSelected = () =>{
     if(canBuy){
-      addItem(item).then((x) => {
-        toast(t('Added to cart successfully!'), {
-          type: 'success'
-        })
-      });
+      if(item){
+        addItem(item).then((x) => {
+          toast(t('Added to cart successfully!'), {
+            type: 'success'
+          })
+        });
+      }
       onHandler(false);
       setOpen(false);
       

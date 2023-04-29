@@ -60,8 +60,8 @@ const theChip = (props) => {
   const [canBuy,setCanBuy] = useState(false);
   const onClickChip = (name, e) => {
     if(requireWarranty){
-      if(e.key >0){
-        setCanBuy(!canBuy)
+      if(e.name != 'گارانتی اصالت و سلامت فیزیکی'){
+        setCanBuy(true)
       }else{
         setCanBuy(false)
       }
@@ -259,6 +259,7 @@ const theChip = (props) => {
   );
 };
 const ChipInside = ({opt, actives, onClickChip,showTitle}) => {
+  console.log('ooooooooooooooooo',opt);
   let [state, setState] = useState({});
   const onClick = (val, j) => {
     onClickChip(val);
@@ -275,16 +276,18 @@ const ChipInside = ({opt, actives, onClickChip,showTitle}) => {
       
       {(opt.values && opt.values.length) &&
       (opt.values).map((val, j) => {
-        return <Chip
-        style={{fontFamily: 'IRANSans'}}
-          key={j}
-          icon={(actives && (actives[opt.name] === val.name)) ? <RadioButtonCheckedIcon style={{marginRight:'10px'}}/> : <RadioButtonUncheckedIcon style={{marginRight:'10px'}}/>}
-          variant={(actives && (actives[opt.name] === val.name)) ? "filled" : "outlined"}
-          className={(actives && (actives[opt.name] === val.name)) ? "active" : ""} label={val.name}
-          onClick={(e) => {
-            Object.assign(val,{key:j})
-            onClick(val, j);
-          }}/>;
+          if(val.name != 'گارانتی اصالت و سلامت فیزیکی'){
+            return <Chip
+            style={{fontFamily: 'IRANSans'}}
+              key={j}
+              icon={(actives && (actives[opt.name] === val.name)) ? <RadioButtonCheckedIcon style={{marginRight:'10px'}}/> : <RadioButtonUncheckedIcon style={{marginRight:'10px'}}/>}
+              variant={(actives && (actives[opt.name] === val.name)) ? "filled" : "outlined"}
+              className={(actives && (actives[opt.name] === val.name)) ? "active" : ""} label={val.name}
+              onClick={(e) => {
+                Object.assign(val,{key:j})
+                onClick(val, j);
+              }}/>;
+          }
       })}
 
 

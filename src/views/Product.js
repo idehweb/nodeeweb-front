@@ -80,11 +80,11 @@ const Product = (props) => {
         //   mainCategory: d.mainCategory
         // });
 
-        // if(d.requireWarranty){
-        //   setRequiredWarranty(d.requireWarranty)
-        // }else{
-        //   setRequiredWarranty(false)
-        // }
+        if(d.requireWarranty){
+          setRequiredWarranty(d.requireWarranty)
+        }else{
+          setRequiredWarranty(false)
+        }
         resolve({
           load: true,
           title: d.title,

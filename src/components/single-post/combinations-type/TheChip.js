@@ -210,6 +210,7 @@ const theChip = (props) => {
               <>
                 {inS  && method === "list" && !single && <>
                 <div className={"the-option-actions " + inS}>
+                  <span>salammmmmmmm</span>
                   <AddToCardButton  item={{
                     _id: _id + "DDD" + theCombination,
                     title: {
@@ -229,6 +230,7 @@ const theChip = (props) => {
               </>}
               {single  && <>
                 <div className={"the-option-actions " + inS}>
+                <span style={{color:'red',cursor:'pointer'}} onClick={()=>setShowPop(true)}>تغییر گارانتی</span>
                   <AddToCardButton   item={{
                     _id: _id + "DDD" + theCombination.id,
                     title: {

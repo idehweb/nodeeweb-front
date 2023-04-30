@@ -80,11 +80,18 @@ const Product = (props) => {
         //   mainCategory: d.mainCategory
         // });
 
-        if(d.requireWarranty){
-          setRequiredWarranty(d.requireWarranty)
-        }else{
-          setRequiredWarranty(false)
-        }
+
+        // **********WarrantyRequired*********************
+
+        // if(d.requireWarranty){
+        //   setRequiredWarranty(d.requireWarranty)
+        // }else{
+        //   setRequiredWarranty(false)
+        // }
+        
+        // **************WarrantyRequired*****************
+
+
         resolve({
           load: true,
           title: d.title,

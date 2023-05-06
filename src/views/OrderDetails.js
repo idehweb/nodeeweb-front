@@ -153,7 +153,6 @@ const OrderDetails = ({ t }) => {
 
 
   }, []);
-  console.log("dat", dat.card);
   const columns = [
     { field: "id", headerName: t("ID"), hide: true },
     { field: "title", headerName: t("title"), flex: 1, sortable: false },

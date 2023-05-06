@@ -1,9 +1,4 @@
-console.log('# config')
-
 export const isSSR = typeof window === "undefined";
-// if (isSSR) var window = {};
-// console.log('window.SHOP_URL',window.SHOP_URL);
-
 export default isSSR
     ? {
         BASE_URL: process.env.BASE_URL,

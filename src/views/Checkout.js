@@ -16,7 +16,6 @@ import _ from "underscore";
 import {useSelector} from "react-redux";
 
 function Checkout(props) {
-  console.log('props', props)
   const {t} = useTranslation();
   // let ref = this;
   let navigate=useNavigate();
@@ -47,7 +46,6 @@ function Checkout(props) {
 
   const updateTheStatus = (status = "checkout") => {
     updatetStatus(status).then(e => {
-      console.log('e', e)
       let {discountCode, discount, amount} = e;
       setdiscountCode(discountCode)
       setDiscount(discount)
@@ -56,23 +54,19 @@ function Checkout(props) {
   }
 
   const goNext = (page) => {
-    console.log("page", page);
     setPage(page);
 
   }
 
   const onSetAddress = (params) => {
-    console.log("onSetAddress", params);
     setThe_address(params);
 
   }
 
   const setThePaymentMethod = (e) => {
-    console.log("setPaymentMethod", e);
     setPaymentMethod(e)
   }
   const setTheDiscount = (e, d) => {
-    console.log("setDiscount", e, d);
     setDiscount(e)
     setdiscountCode(d)
   }
@@ -80,7 +74,6 @@ function Checkout(props) {
     setAmount(e)
   }
   const onChooseDelivery = (params) => {
-    console.log("onChooseDelivery", params);
     setdeliveryPrice(params.deliveryPrice)
     setHoverD(params.hoverD)
     setSetting(params.setting)
@@ -91,13 +84,6 @@ function Checkout(props) {
   }
 
   const placeOrder = (theprice = 0) => {
-
-    // let {address, hover, deliveryPrice, hoverD, order_id, card, setting, user, sum, paymentMethod, return_url, amount,  discountCode, discount} = state;
-    // const { t } = props
-    // let c;
-    // console.log("placeOrder...", state);
-    console.log("placeOrder...", store.getState().store.order_id);
-    // return;
     sum = 0;
     card.map((item, idx2) => {
 
@@ -122,8 +108,6 @@ function Checkout(props) {
     if (store.getState().store.order_id) {
       order['order_id'] = store.getState().store.order_id
     }
-    // console.log('user',user);
-    // return;
     if (!user.internationalCode) {
       toast(t("Please enter international code!"), {
         type: "error"
@@ -152,14 +136,8 @@ function Checkout(props) {
     toast(t("Submitting order..."), {
       type: "success"
     });
-    // console.clear();
-    console.log('order', order);
-    console.log('paymentMethod', paymentMethod);
-    // return;
-
     createOrder(order).then((res) => {
 
-      // console.log('res for judytgs is:', res.order._id);
       if (!res.success) {
 
         toast(t(res.message), {
@@ -181,7 +159,6 @@ function Checkout(props) {
           return toast(t("Error..."), {
             type: "error"
           });
-        console.log("ass", add);
         if (isClient)
           window.location.replace(add.url);
       });
@@ -197,10 +174,6 @@ function Checkout(props) {
   let {firstName, lastName, internationalCode, token} = store.getState().store.user;
   // sum = 0;
   let dp = 0;
-  // console.log('this.state.checkout', state);
-  // console.log('card', card);
-  // console.log('settings', settings);
-  console.log("page", page, page);
 
   // return null;
   if (!firstName || !lastName || !internationalCode) {
@@ -211,18 +184,8 @@ function Checkout(props) {
     redirect = true;
   }
   if (redirect) {
-    console.log("redirect_url", redirect, redirect_url);
-    // if (!_id) {
-    //   _id = this.props.match.params._id;
-    // }
-    // this.cameFromProduct(_id);
-    // Promise.all([savePost({goToCheckout: true})]).then(() => {
     return navigate(redirect_url)
-
-    // })
-    // ;
   }
-  // } else {
   if (!page)
     return <></>
 

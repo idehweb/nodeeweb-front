@@ -1,5 +1,3 @@
-console.log('# ssrRoutes')
-
 // Layout Types
 import { DefaultLayout,Nohf } from "#c/layouts/index";
 

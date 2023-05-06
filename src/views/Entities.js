@@ -28,11 +28,6 @@ let theFilter=false;
 import {withTranslation} from "react-i18next";
 import PostCard from "#c/components/Home/PostCard";
 import {useSelector} from "react-redux";
-//
-// const Entities = (props) => {
-//   console.log('Entities...',props);
-// return <></>;
-// }
 const Entities = (props) => {
   let {match, location, history, t, url} = props;
   let params = useParams();
@@ -41,8 +36,6 @@ const Entities = (props) => {
   let filter = isClient ? (url.searchParams.get("filter") || {}) : {};
   let search = isClient ? (url.searchParams.get("search") || "") : "";
   const [tracks, settracks] = useState([]);
-  // let showSlide = true;
-
   let [showSlide, setShowSlide] = useState(true);
 
   const [hasMoreItems, sethasMoreItems] = useState(true);
@@ -55,51 +48,12 @@ const Entities = (props) => {
   const [initialLoad, setInitialLoad] = useState(true);
   const [catid, setcatid] = useState(params._id);
   const [load, setLoad] = useState(null);
-  //
-  // const postCardMode = store.getState().store.postCardMode;
   const postCardMode = useSelector((st) => st.store.postCardMode, _.isEqual);
   const sortBy = useSelector((st) => st.store.sortBy, _.isEqual);
   const defaultSort = useSelector((st) => st.store.defaultSort, _.isEqual);
 
-
-  // console.log('sortBy', sortBy);
-  // const theAttr = useSelector((st) => st.store.attr);
-  // const theValue = useSelector((st) => st.store.value);
-  // console.log("theAttr", theAttr, "theValue", theValue);
-  // if (isClient) {
-  //   useEffect(() => {
-  //
-  //     let url = new URL(window.location.href);
-  //     let eAd = url.searchParams.get("enableAdmin") || "";
-  //     if (eAd) {
-  //       console.log('enableAdmin');
-  //       enableAdmin(true);
-  //     }
-  //
-  //
-  //   }, []);
-  //
-  // }
-  // useEffect(() => {
-  //   console.log('defaultSort changed to: ', defaultSort);
-  //   SaveData({
-  //     defaultSort: defaultSort
-  //   });
-  //   setoffset(-24);
-  //   offset = -24;
-  //   sethasMoreItems(true);
-  //   settracks([]);
-  //   loadProductItems(0);
-  //
-  // }, [defaultSort]);
-  // useEffect(() => {
-  //
-  //   console.log('sortBy', sortBy);
-  //
-  // }, [sortBy]);
   useEffect(() => {
     if(theFilter!=filter) {
-      console.log('filter', filter);
       setoffset(-24);
       offset = -24;
       sethasMoreItems(true);
@@ -109,25 +63,7 @@ const Entities = (props) => {
     }
   }, [filter]);
   const loadProductItems = async (page, filter = {}) => {
-
-    console.log("==> loadProductItems():", offset,filter);
-
-    // if(!loadingMoreItems){
     let newOffset = (await offset) + 24;
-    // if (!catId && !showSlide) {
-    //   let trackss = [...tracks];
-    //
-    //   await setoffset(newOffset);
-    //   await setInitialLoad(false);
-    //   await setLoadingMoreItems(true);
-    //   getPosts(newOffset, 48, search || "", filter).then((resp) => {
-    //     setLoadingMoreItems(false);
-    //     afterGetData(resp);
-    //   });
-    //   return;
-    // } else {
-      // console.clear();
-      // console.log('v',params._entity)
       await setoffset(newOffset);
       await setInitialLoad(false);
       await setLoadingMoreItems(true);
@@ -135,10 +71,6 @@ const Entities = (props) => {
         setLoadingMoreItems(false);
         afterGetData(resp);
       });
-
-
-    // }
-    // }
   };
   if (isClient) {
 
@@ -150,37 +82,17 @@ const Entities = (props) => {
       setValue(value);
 
   }
-  // useEffect(() => {
-  //   loadProductItems(0, catid);
-  // }, [catid]);
-
-
-  // useEffect(() => {
-  //   console.log("match.params._id", match, "and:", catid);
-  //   if (params._id !== catid) {
-  //     setcatid(params._id);
-  //     sethasMoreItems(true);
-  //     settracks([]);
-  //     setoffset(-24);
-  //   }
-  // }, [params._id, catid]);
   useEffect(() => {
-    console.log("we changed value...");
     filter = isClient ? (url.searchParams.get("filter") || false) : false;
-
     setoffset(-24);
-
-    // settracks([]);
     sethasMoreItems(true);
     settracks([]);
-    //
     loadProductItems(0,filter);
   }, []);
 
   const afterGetData = (resp) => {
     let trackss = [...tracks];
     if (resp.length < 24) sethasMoreItems(false);
-    // console.log("resp", resp);
     if (resp && resp.length) {
       resp.forEach((item) => {
         trackss.push(item);
@@ -199,7 +111,6 @@ const Entities = (props) => {
       <LoadingComponent height={30} width={30} type="spin" color="#3d5070"/>
     </div>
   );
-  // console.log("Home", catid, search);
   if (catid || search)
     showSlide = false;
 
@@ -207,15 +118,6 @@ const Entities = (props) => {
   return (<div className="main-content-container fghjkjhgf ">
 
       <Row className={"m-0"}>
-        {/*{(!showSlide) && <Col tag="aside" lg={{size: 3}} md={{size: 4}} className={"sidebar white mobilenone"}>*/}
-        {/*<Row className={""}>*/}
-        {/*<Col lg={{size: 12}} md={{size: 12}}>*/}
-        {/*<SidebarNavItems/>*/}
-        {/*</Col>*/}
-        {/*</Row>*/}
-        {/*</Col>}*/}
-
-
         {(!showSlide) && <Col
           className="main-content iuytfghj pb-5 "
           lg={{size: 12}}

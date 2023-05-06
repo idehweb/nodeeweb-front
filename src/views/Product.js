@@ -35,11 +35,12 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import EditAttributesIcon from "@mui/icons-material/EditAttributes";
 import ReviewsIcon from "@mui/icons-material/Reviews";
 
-const Product = (props) => {
 
+
+
+const Product = (props) => {
   let {match, location, history, t, url} = props;
 
-// console.log("st.storest.storest.storest.store", props);
   let product = useSelector((st) => {
 
     return st.store.product || [];
@@ -47,7 +48,6 @@ const Product = (props) => {
 
   // window.scrollTo(0, 0);
   let params = useParams();
-  // console.log("params", params);
   // return;
   let the_id = params._id || params._product_slug;
   // let search = false;
@@ -137,15 +137,8 @@ const Product = (props) => {
     useEffect(() => {
       // let mounted = true;
       let {_id, title} = params;
-
-      // console.log("useEffect", _id, the_id, mainId);
-      // getThemeData().then((data)=>{
-      //   console.log('getTheSettings',data);
-      // })
       getThePost(the_id)
         .then(items => {
-          // console.log('items',items,the_id);
-          // if (mounted) {
           setState(items);
           if (isClient)
             window.scrollTo(0, 0);
@@ -156,7 +149,6 @@ const Product = (props) => {
 
   // useEffect(() => {
   //   let { _id, title } = params;
-  //   console.log("useEffect", _id, the_id, mainId);
   //   // if (mainId != _id) {
   //   getThePost(_id).then(res=>setState(state => ({ ...state, ...res })));
   //   window.scrollTo(0, 0);
@@ -197,7 +189,6 @@ const Product = (props) => {
   } = state;
   if (redirect && isClient) return <Navigate to={redirect}/>;
   if (!load && isClient) return <Loading/>;
-  // console.log("product", title, lan, encodeURIComponent(title[lan]));
 
   return (
 
@@ -210,7 +201,6 @@ const Product = (props) => {
 
                     onClick={() => {
                       loveIt(_id).then(res => {
-                        console.log("res", res);
                         if (res.like) {
                           like = res.like;
                           setState({...state, like: like});
@@ -219,7 +209,6 @@ const Product = (props) => {
                           type: "success"
                         });
                       }).catch(err => {
-                        console.log("err", err);
                         toast(t(err.message), {
                           type: "warning"
                         });
@@ -249,13 +238,10 @@ const Product = (props) => {
             </Button>}
             <Button onClick={() => {
               addBookmark(_id).then(res => {
-                console.log("res", res);
                 toast(t(res.message), {
                   type: "success"
                 });
               }).catch(err => {
-                  console.log("err", err);
-
                   toast(t(err.message), {
                     type: "warning"
                   });

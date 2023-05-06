@@ -70,9 +70,6 @@ const Admin = (props) => {
   let action = params.action || 'dashboard';
   let model = params.model;
   let rules = themeData.rules
-  // console.clear();
-  // console.log('action', action, params.action, params.model);
-  // console.log('themeData.rules[',model,']',themeData.rules)
   if (params.model) {
     action = params.action || 'list'
   }
@@ -88,48 +85,27 @@ const Admin = (props) => {
     action = 'login'
 
   }
-  console.log('admin_token', admin_token);
   if (!admin_token) {
     action = 'login'
   }
-  // console.log('models', models);
-  // useEffect(() => {
-  //   // setSelectedCats(items)
-  //   if (action == 'list')
-  //     getData();
-  //   console.log('model,action', model, action)
-  // }, [model, action]);
   const renewData=(offset)=>{
 
     getData(offset);
   }
   useEffect(() => {
-    // setSelectedCats(items)
-    console.log('model',model);
     if (action == 'list')
       getData();
-    console.log('model,action', model, action, themeData)
   }, [model, action, themeData]);
   const getData = (offset=0) => {
-    // console.clear()
-    // setData([]);
-
-    //   const { t } = this.props;
     let headers = {
       fields: []
     };
-    // console.log('themeData.rules[model]',themeData.rules)
     if (themeData.rules && themeData.rules[model] && themeData.rules[model].list && themeData.rules[model].list.header) {
-      console.log("rules", rules[model])
       themeData.rules[model].list.header.forEach((l) => {
         headers['fields'].push(l.name);
       });
-      // headers['fields'] = themeData.rules[model].list.header
     }
-    console.log("headers['fields']", headers['fields'])
-    // return;
     getTheData('admin', model, headers,offset).then(({data = [],headers}) => {
-      console.log('data',data)
       if(data.success==false){
         toast(data.message, {
           type: "error"
@@ -142,7 +118,6 @@ const Admin = (props) => {
       }
     });
   }
-  // if(!data)
   let headCells = [];
   if (themeData.rules && themeData.rules[model] && themeData.rules[model].list && themeData.rules[model].list.header) {
     headCells = [];
@@ -188,7 +163,6 @@ const Admin = (props) => {
     to: "",
     _id: "Logout"
   }];
-  console.log('menu', menu)
   return (
     <>
 
@@ -196,8 +170,6 @@ const Admin = (props) => {
       {action == 'login' && <Login/>}
 
       {(action !== 'login' && action !== 'logout') && <Row className={"m-0"}>
-        {/*<MainNavbar />*/}
-        {/*{JSON.stringify(menu)}*/}
         <MainSidebar>
           <MainSidebarNavItems items={menu}/>
 
@@ -219,7 +191,6 @@ const Admin = (props) => {
 
           <Row className={"mt-3 juytrfvbh pr-15"}>
             <Col
-              // className="ghjhtgfrdsfg bg-color-full bg-right"
               lg={{size: 12}}
               md={{size: 12}}
               sm="12">

@@ -71,7 +71,6 @@ class MyOrders extends React.Component {
 
   redirectTrue(_id) {
     // getMyPost(_id).then((data) => {
-    //   console.log('set _id to edit:', data);
     //   savePost(data);
     this.props.history.push('/order/' + _id);
     // this.setState({
@@ -191,7 +190,6 @@ class MyOrders extends React.Component {
   render() {
     let {t} = this.props;
     let {data, headCells, newText, buttonText} = this.state;
-    // console.log('data', data);
     // if (redirect) {
     //   return <Navigate to='/add-new-post'/>;
     // } else {

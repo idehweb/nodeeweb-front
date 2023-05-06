@@ -22,8 +22,6 @@ import {Navigate} from "react-router-dom";
 class Order extends React.Component {
   constructor(props) {
     super(props);
-    console.clear();
-    console.log(props);
     const {match} = props;
     this.state = {
       _id: match.params._id,
@@ -52,10 +50,7 @@ class Order extends React.Component {
     let {_id} = this.state;
     getOrder(_id).then((response) => {
       if (response.success) {
-        console.log(response);
-
         this.setState({
-
           card: response.order.card,
           deliveryDay: response.order.deliveryDay,
           billingAddress: response.order.billingAddress,
@@ -71,8 +66,6 @@ class Order extends React.Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount')
-    console.log('this.props', this.props.match.params._id);
     const {token} = this.state;
     if (this.props && this.props.match && this.props.match.params && this.props.match.params._id) {
       if (!token) {
@@ -85,7 +78,6 @@ class Order extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log('componentDidUpdate');
     if (this.state.update)
       this.setState({
         redirect: null,
@@ -116,7 +108,6 @@ class Order extends React.Component {
         transaction_param: "rqBEoqFwJt2L",
         merchant_user_id: 21132,
       }, function (data) {
-        console.log("closed", data);
         if (data && data.status == 2) {
           console.log('payment success');
         }
@@ -133,19 +124,10 @@ class Order extends React.Component {
     // let sum = 0;
     let {card, orderNumber, redirect, redirect_url, paymentStatus, status, deliveryDay, sum, lan, modals, token, billingAddress, customer_data, hoverD} = this.state;
     sum = 0;
-    console.log('sum', sum);
-    console.log('card', card);
-    console.log('deliveryDay', deliveryDay);
-    // return null;
     if (!token) {
       redirect = true;
     }
     if (redirect) {
-      // console.log('_id', _id);
-      // if (!_id) {
-      //   _id = this.props.match.params._id;
-      // }
-      // this.cameFromProduct(_id);
       return <Navigate to={redirect_url} push={false} exact={true}/>
     } else {
       return (

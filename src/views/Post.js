@@ -20,11 +20,9 @@ import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import {RWebShare} from "react-web-share";
 
 const Post = (props) => {
-  // console.log("props", props);
   let {match, location, history, t, url} = props;
 
   let product = useSelector((st) => {
-    // console.log("st.store", st.store.productSliderData);
     return st.store.product || [];
   });
   // window.scrollTo(0, 0);
@@ -44,7 +42,6 @@ const Post = (props) => {
     return new Promise(function (resolve, reject) {
 
       getBlogPost(_id).then((d = {}) => {
-        console.log("set _id to show:", d);
         savePost({
           mainList: d.mainList,
           catChoosed: d.catChoosed,
@@ -74,11 +71,9 @@ const Post = (props) => {
       // let mounted = true;
       let {_id, title} = params;
 
-      console.log("useEffect", _id, the_id, mainId);
 
       getThePost(the_id)
         .then(items => {
-          // console.log('items',items,the_id);
           // if (mounted) {
           setState(items);
           if (isClient)
@@ -90,7 +85,6 @@ const Post = (props) => {
 
   // useEffect(() => {
   //   let { _id, title } = params;
-  //   console.log("useEffect", _id, the_id, mainId);
   //   // if (mainId != _id) {
   //   getThePost(_id).then(res=>setState(state => ({ ...state, ...res })));
   //   window.scrollTo(0, 0);
@@ -114,7 +108,6 @@ const Post = (props) => {
   } = state;
   if (redirect && isClient) return <Navigate to={redirect}/>;
   if (!load && isClient) return <Loading/>;
-  // console.log("product", title, lan, encodeURIComponent(title[lan]));
  
   return (
 

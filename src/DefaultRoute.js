@@ -215,7 +215,6 @@ export default function createRoutes(themeRoutes) {
 
     }
     if (e.element == 'DynamicPage' ) {
-      console.log('set up DynamicPage')
       e.element = DynamicPage;
 
     }

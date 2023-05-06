@@ -37,19 +37,11 @@ const Chat = ({match, location, history, t}) => {
     socket.on('disconnect', () => {
       setIsConnected(false);
     })
-    // socket.on('pong',(x)=>{
-    //   console.log('pong',x)
-    //   setLastPong(new Date().toISOString());
-    // })
-    // socket.on('send message',(x)=>{
-    //   console.log('send message',x)
-    // })
+    
     socket.on('get message' + _id, (x) => {
       if (x.from && x.msg) {
         setMessage(x.msg);
         setFrom(x.from);
-        console.log('get message ', x.msg, ' from', x.from)
-
       }
     })
     return () => {
@@ -60,19 +52,15 @@ const Chat = ({match, location, history, t}) => {
   }, [])
   const sendPing = (e) => {
     e.preventDefault();
-    console.log('send ping');
     setInputValue('');
     socket.emit('send message', token + '::::' + inputValue + '::::' + inputValue2)
   }
   const useContacts = () => {
-    console.log('useContacts', inputValue2);
     startChat(inputValue2, _id).then((e) => {
       console.log('startChat', e)
-
     })
   }
   const goToContacts = () => {
-    console.log('goToContacts');
     return <Navigate to={'/contacts'} push={true} exact={true}/>;
 
   }

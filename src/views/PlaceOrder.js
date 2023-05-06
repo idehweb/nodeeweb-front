@@ -16,21 +16,15 @@ class PlaceOrder extends React.Component {
     };
     // let {_id} = this.params;
     if (props && props.match && props.match.params && props.match.params._id) {
-      console.log('_id', props.match.params._id, props.match.params._token);
       PlaceOrderF(props.match.params._token, props.match.params._id).then(
         (d) => {
-          console.log('dx', d);
           if (d && d.success && d.url) {
             window.location.replace(d.url);
           }
         }
       );
     }
-    // if(_id){
-    //   window.location.replace(MainUrl+"/customer/link/"+_id);
-    // }
-    // if (props && props.match && props.match.params && props.match.params._id) {
-    // }
+  
   }
 
   render() {

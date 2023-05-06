@@ -1,5 +1,3 @@
-console.log('# Firebase')
-
 import { initializeApp } from 'firebase/app';
 import { subscribeTokenToTopic } from "#c/components/Utils";
 import { getMessaging , getToken,onMessage} from "firebase/messaging";
@@ -20,7 +18,6 @@ export const requestForToken = async () => {
   return await getToken(messaging, { vapidKey: 'BFjOV8hMyyNh8enoDVKsaSh6m5H7hcmZYGQuXFWO39GLK6Dde3w6jGjeRC4C00OXBsubU_akuHkD4DKYU8ArtBc' })
     .then((currentToken) => {
       if (currentToken) {
-        console.log('current token for client: ', currentToken);
         subscribeTokenToTopic(currentToken, "all");
 
         // Perform any other neccessary action with the token
@@ -37,7 +34,6 @@ export const requestForToken = async () => {
 export const onMessageListener = () =>
   new Promise((resolve) => {
     onMessage(messaging, (payload) => {
-      console.log("payload", payload)
       resolve(payload);
     });
   });

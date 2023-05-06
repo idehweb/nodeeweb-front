@@ -29,9 +29,7 @@ const Contacts = ({match, location, history, t}) => {
   }, [])
 
   const getMyContacts = () => {
-    console.log('getMyContacts');
     getContacts().then((e) => {
-      console.log('getContacts answer', e)
       setContcats(e);
 
     })
@@ -42,7 +40,6 @@ const Contacts = ({match, location, history, t}) => {
   const addContact = (e) => {
     e.preventDefault();
     addToMyContacts(phoneNumber).then((e) => {
-      console.log('getContacts answer', e)
       setPhoneNumber('');
       setEnableAddContact(false);
 

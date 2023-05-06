@@ -33,10 +33,8 @@ const Home = (props) => {
   const homeData = useSelector((st) => st.store.homeData);
 
   useEffect(() => {
-    console.log('homeData', themeData)
   }, []);
   if (themeData) {
-    console.log('themeData', themeData, homeData)
 
     return <>
 

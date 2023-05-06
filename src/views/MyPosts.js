@@ -10,7 +10,6 @@ import { dateFormat } from '#c/functions/utils';
 class MyPosts extends React.Component {
   constructor(props) {
     super(props);
-    console.log('this.props', props);
     const { t } = props;
     this.state = {
       data: [],

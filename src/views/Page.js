@@ -28,11 +28,9 @@ import {useSelector} from "react-redux";
 
 const Page = (props) => {
   // console.clear()
-  // console.log("props", props);
   let {match, location, history, t, url} = props;
 
   let page = useSelector((st) => {
-    // console.log("st.store", st.store.productSliderData);
     return st.store.page || [];
   });
   let {firstName, lastName, internationalCode, token} = store.getState().store.user;
@@ -52,19 +50,14 @@ const Page = (props) => {
 
 
   const getThePost = (_id) => {
-    console.log('getThePost()')
     return new Promise(function (resolve, reject) {
 
       getPage(_id).then((d = {}) => {
         if(d.success==false && (d.access && d.access=='private')){
-          console.log('redireccting')
-
-          // if(!firstName || !lastName || !internationalCode){
           let redirect_url = "/login/";
           navigate(redirect_url)
           // }
         }
-        // console.log("set _id to show:", d);
         if (d._id) {
           // savePost({
           //   mainList: d.mainList,
@@ -103,17 +96,12 @@ const Page = (props) => {
   };
   if (isClient)
     useEffect(() => {
-      console.log('i fire once');
       // let mounted = true;
       let {_id, title} = params;
       // console.clear()
-      console.log("useEffect", _id, the_id, mainId);
       // if (_id != the_id)
       getThePost(the_id)
         .then(items => {
-          console.log('items',items);
-          // if (mounted) {
-
           setState(items);
           if (isClient)
             window.scrollTo(0, 0);
@@ -125,17 +113,6 @@ const Page = (props) => {
       });
       // return () => mounted = false;
     }, [the_id]);
-
-  // useEffect(() => {
-  //   let { _id, title } = params;
-  //   console.log("useEffect", _id, the_id, mainId);
-  //   // if (mainId != _id) {
-  //   getThePost(_id).then(res=>setState(state => ({ ...state, ...res })));
-  //   window.scrollTo(0, 0);
-  //   // }
-  //
-  // }, [the_id]);
-
 
   let {
     load,
@@ -157,9 +134,7 @@ const Page = (props) => {
   if (redirect && isClient) return <Navigate to={redirect}/>;
   if (!load && isClient) return <Loading/>;
   if (load && notfound && isClient) return <div>not found</div>;
-  // console.log("product", title, lan, encodeURIComponent(title[lan]));
   let style = setStyles({backgroundColor});
-  console.log('isClient', isClient);
   return (
 
     <Container className={"main-content-container p-0 pb-4 kiuytyuioiu bg-white " + classes} key={0}>

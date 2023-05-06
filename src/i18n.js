@@ -1,5 +1,3 @@
-console.log('#i18n')
-
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import {store} from '#c/functions/store';

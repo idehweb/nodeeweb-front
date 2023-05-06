@@ -1,8 +1,4 @@
-console.log('# routes1')
-
-// Layout Types
 import {DefaultLayout, Nof, Nohf} from '#c/layouts/index';
-// Route Views
 import Profile from '#c/views/Profile';
 import Link from '#c/views/Link';
 import PlaceOrder from '#c/views/PlaceOrder';
@@ -23,14 +19,11 @@ import Test from '#c/views/Test';
 import Best from '#c/views/Best';
 import Wishlist from "#c/views/Wishlist";
 import CreatePage from "#c/views/CreatePage";
-// import Db from "#c/views/Db";
-
 export default [
   {
     path: '/',
     exact: true,
     layout: Nohf,
-    // element: () => <Navigate to="/blog-posts" />
     element: Home,
   },
   {

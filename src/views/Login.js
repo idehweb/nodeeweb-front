@@ -8,14 +8,10 @@ import LoginForm from "#c/components/components-overview/LoginForm";
 import {defaultImg} from "#c/assets/index";
 import {savePost} from "#c/functions/index";
 
-// class Login extends React.PureComponent {
 const Login = ({t}) => {
   console.clear()
-  // constructor(props) {
-  //   super(props);
   let params = useParams();
 
-  console.log("params", params);
   if (params._state === 'goToCheckout') {
     savePost({goToCheckout: true})
   }

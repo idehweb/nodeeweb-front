@@ -16,12 +16,10 @@ class Link extends React.PureComponent {
     };
     // let {_id} = this.params;
     if (props && props.match && props.match.params && props.match.params._id) {
-      console.log('_id', props.match.params._id);
       getLink(props.match.params._id).then((d) => {
         if (d && d.success) {
           if (d.url) {
             updateAgent(d.agent, props.match.params._id).then(() => {
-              console.log('get url...', d.url);
               window.location.replace(d.url);
             });
 

@@ -19,7 +19,6 @@ const  DemoSteps = (props) => {
   const [steps, setSteps] = React.useState(children);
   const [activeStep, setActiveStep] = React.useState(0);
   const [skipped, setSkipped] = React.useState(new Set());
-  console.log('fieldfield',field)
   const isStepOptional = (step) => {
     return step === 1;
   };

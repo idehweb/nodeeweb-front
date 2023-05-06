@@ -165,7 +165,7 @@ const theChip = (props) => {
     </div>,
       <div className={" mt-2 the-chip row"} key={1}>
         <div className={"col-md-8"}>
-           {options && !requireWarranty &&  options.map((opt, k) => {
+           {options &&   options.map((opt, k) => {
                 return <ChipInside showTitle={true} key={k} opt={opt} actives={actives} onClickChip={(e) => {
                   onClickChip(opt.name, e);
                 }}/>;

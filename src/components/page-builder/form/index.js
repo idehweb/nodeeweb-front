@@ -1,5 +1,11 @@
 import React, {useEffect, useState} from "react";
-
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import {Col, Row} from "shards-react";
 import LoadingComponent from "#c/components/components-overview/LoadingComponent";
 import CreateForm from "#c/components/form/CreateForm";
@@ -19,6 +25,8 @@ const Form = (props) => {
   let navigate = useNavigate();
   const [tracks, settracks] = useState([]);
   const [theformFields, setformFields] = useState([]);
+  const [trackingCodeBlock, setTrackingCodeBlock] = React.useState(false);
+  const [response, setResponse] = React.useState([]);
   const [counts, setcount] = useState(0);
   const [theload, settheload] = useState(false);
   let {match, location, history, t, url} = props;
@@ -190,11 +198,18 @@ const Form = (props) => {
               onSubmit={(e) => {
                 
                 submitForm(_id, e).then(d => {
-                  console.log('ffffffffffff',e);
+                  setResponse(d)
+                  
                   if (d.success && d.message)
                     toast(t(d.message), {
                       type: "success"
                     });
+                    
+                    if(d.trackingCode){
+                      setTrackingCodeBlock(true)
+                    }else{
+                      setTrackingCodeBlock(false)
+                    }
                 })
                 // .catch(err => {
                 //   console.log('ddddddddddd',err);
@@ -210,6 +225,74 @@ const Form = (props) => {
           </Row>
 
         </Col>}
+        <Dialog
+        style={{direction:'rtl'}}
+        open={trackingCodeBlock}
+        onClose={()=>setTrackingCodeBlock(!trackingCodeBlock)}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          <div style={{
+            fontSize: '1rem',
+            fontWeight: '700',
+            color:'#070935',
+            width:'100%',
+            borderBottom:'1px solid #e3e3ea',
+            padding:'10px 5px'
+          }}>
+            <span
+             style={{
+              fontSize: '1rem',
+              fontWeight: '700',
+              color:'#070935',
+              display:'block',
+              width:'100%',
+              padding:'0px 5px'
+            }}
+            >
+             درخواست شما با موفقیت ثبت گردید
+            </span>
+          <span
+          style={{
+            fontSize: '12px',
+            fontWeight: '400',
+            color:'#777891',
+            display:'block',
+            width:'100%',
+            padding:'5px 5px'
+          }}
+          >
+          کد رهگیری شما در زیر آمده است , می توانید با کد رهگیری درخواست خود را پیگیری کنید
+          </span>
+          </div>
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {
+              response &&  (
+                <React.Fragment>
+                  <div style={{width:'100%',textAlign:'center'}}>
+                    <CheckCircleOutlineIcon color="success" sx={{ fontSize: 80 }}/>
+                  </div>
+                  <div style={{width:'100%',textAlign:'center',marginTop:'30px',fontSize:'20px',fontWeight:'bold'}}>
+                   <span>کد رهگیری : </span><span>{response.trackingCode}</span>
+                  </div>
+                </React.Fragment>
+
+
+              )
+            }
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <div className='d-flex w-100 p-3 gap-3'>
+          <button onClick={()=>setTrackingCodeBlock(!trackingCodeBlock)} className='w-50  btn btn-warning rounded ' style={{fontSize:'15px'}}  autoFocus>
+          با تشکر
+          </button>
+          </div>
+        </DialogActions>
+      </Dialog>
       </Row>
     </div>
   );

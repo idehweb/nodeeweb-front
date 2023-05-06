@@ -101,7 +101,6 @@ const AlertPopup =({show,onHandler,children,title,canBuy,item})=> {
           فعلا تمایل ندارم 
           </button>
           </div>
-          
         </DialogActions>
       </Dialog>
     </div>

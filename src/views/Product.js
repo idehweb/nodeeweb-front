@@ -1,4 +1,8 @@
 import React, {useEffect, useState} from "react";
+import warrantyIcon from '#c/images/warranty.png'
+import inPersonIcon from '#c/images/hozori.png'
+import immediateIcon from '#c/images/fory.png'
+import secureIcon from '#c/images/secure.png'
 import {Badge, Button, ButtonGroup, Col, Container, Nav, NavItem, NavLink, Row} from "shards-react";
 import {Link, useParams} from "react-router-dom";
 import Gallery from "#c/components/single-post/Gallery";
@@ -83,11 +87,11 @@ const Product = (props) => {
 
         // **********WarrantyRequired*********************
 
-        // if(d.requireWarranty){
-        //   setRequiredWarranty(d.requireWarranty)
-        // }else{
-        //   setRequiredWarranty(false)
-        // }
+        if(d.requireWarranty){
+          setRequiredWarranty(d.requireWarranty)
+        }else{
+          setRequiredWarranty(false)
+        }
         
         // **************WarrantyRequired*****************
 
@@ -376,10 +380,11 @@ const Product = (props) => {
 
           <Row>
             <Col lg={3} md={3} sm={6} xs={6} className={"mb-3"}>
-              <div className={"pro-icons-wrapper"}>
+              <div>
+              {/* <div className={"pro-icons-wrapper"}> */}
                 <div className={"pro-icons"}>
-                  <VerifiedIcon/>
-
+                  {/* <VerifiedIcon/> */}
+                  <img width={100} src={warrantyIcon} alt={' ضمانت اصالت و سلامت فیزیکی'}/>
                 </div>
                 <div className={"pro-icons-title"}>
                   ضمانت اصالت و سلامت فیزیکی
@@ -387,10 +392,12 @@ const Product = (props) => {
               </div>
             </Col>
             <Col lg={3} md={3} sm={6} xs={6} className={"mb-3"}>
-              <div className={"pro-icons-wrapper"}>
+              <div >
+              {/* <div className={"pro-icons-wrapper"}> */}
 
                 <div className={"pro-icons"}>
-                  <PaymentsIcon/>
+                  {/* <PaymentsIcon/> */}
+                  <img width={100} src={inPersonIcon} alt={' پرداخت حضوری و غیرحضوری'}/>
                 </div>
                 <div className={"pro-icons-title"}>
                   پرداخت حضوری و غیرحضوری
@@ -398,10 +405,12 @@ const Product = (props) => {
               </div>
             </Col>
             <Col lg={3} md={3} sm={6} xs={6} className={"mb-3"}>
-              <div className={"pro-icons-wrapper"}>
+              {/* <div className={"pro-icons-wrapper"}> */}
+              <div>
 
                 <div className={"pro-icons"}>
-                  <DeliveryDiningIcon/>
+                  {/* <DeliveryDiningIcon/> */}
+                  <img width={100} src={immediateIcon} alt={' امکان ارسال فوری'}/>
                 </div>
                 <div className={"pro-icons-title"}>
                   امکان ارسال فوری
@@ -409,13 +418,15 @@ const Product = (props) => {
               </div>
             </Col>
             <Col lg={3} md={3} sm={6} xs={6} className={"mb-3"}>
-              <div className={"pro-icons-wrapper"}>
+              {/* <div className={"pro-icons-wrapper"}> */}
+              <div>
 
                 <div className={"pro-icons"}>
-                  <SupportAgentIcon/>
+                  {/* <SupportAgentIcon/> */}
+                  <img width={100} src={secureIcon} alt={' پرداخت امن'}/>
                 </div>
                 <div className={"pro-icons-title"}>
-                  پشتیبانی ۲۴ ساعته
+                پرداخت امن
                 </div>
               </div>
             </Col>

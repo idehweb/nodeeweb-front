@@ -59,13 +59,13 @@ const theChip = (props) => {
   const [theCombination, setTheCombination] = useState(choosed || {});
   const [canBuy,setCanBuy] = useState(false);
   const onClickChip = (name, e) => {
-    if(requireWarranty){
-      if(e.name != 'گارانتی اصالت و سلامت فیزیکی'){
-        setCanBuy(true)
-      }else{
-        setCanBuy(false)
-      }
-    }
+    // if(requireWarranty){
+    //   if(e.name != 'گارانتی اصالت و سلامت فیزیکی'){
+    //     setCanBuy(true)
+    //   }else{
+    //     setCanBuy(false)
+    //   }
+    // }
 
       let obj = {...actives};
       obj[name] = e.name;
@@ -277,7 +277,7 @@ const ChipInside = ({opt, actives, onClickChip,showTitle}) => {
       
       {(opt.values && opt.values.length) &&
       (opt.values).map((val, j) => {
-          if(val.name != 'گارانتی اصالت و سلامت فیزیکی'){
+          // if(val.name != 'گارانتی اصالت و سلامت فیزیکی'){
             return <Chip
             style={{fontFamily: 'IRANSans'}}
               key={j}
@@ -288,7 +288,7 @@ const ChipInside = ({opt, actives, onClickChip,showTitle}) => {
                 Object.assign(val,{key:j})
                 onClick(val, j);
               }}/>;
-          }
+          // }
       })}
 
 

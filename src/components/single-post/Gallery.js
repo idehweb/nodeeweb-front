@@ -31,7 +31,7 @@ const Gallery = (params) => {
       {(photos && photos.length>0) && <Swiper perPage={1}
               breakpoints={{}}
               pagination={true}
-              arrows={false}
+              arrows={true}
       >
         {photos.map((item, idx) => {
           return (<div className={''} key={idx}><img src={MainUrl + '/' + item}/></div>);

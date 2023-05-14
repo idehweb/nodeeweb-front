@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from "react";
-import warrantyIcon from '#c/images/warranty.png'
-import inPersonIcon from '#c/images/hozori.png'
-import immediateIcon from '#c/images/fory.png'
-import secureIcon from '#c/images/secure.png'
+// import warrantyIcon from window.location.origin + '/assets/warranty.png'
+
 import {Badge, Button, ButtonGroup, Col, Container, Nav, NavItem, NavLink, Row} from "shards-react";
 import {Link, useParams} from "react-router-dom";
 import Gallery from "#c/components/single-post/Gallery";
@@ -43,6 +41,12 @@ import ReviewsIcon from "@mui/icons-material/Reviews";
 
 
 const Product = (props) => {
+  // staticImages
+  const warranty = window.location.origin + '/assets/warranty.png';
+  const inPersonIcon =window.location.origin + '/assets/hozori.png';
+  const immediateIcon =window.location.origin + '/assets/fory.png';
+  const secureIcon = window.location.origin + '/assets/secure.png';
+    // staticImages
   let {match, location, history, t, url} = props;
 
   let product = useSelector((st) => {
@@ -92,7 +96,7 @@ const Product = (props) => {
         }else{
           setRequiredWarranty(false)
         }
-        
+
         // **************WarrantyRequired*****************
 
 
@@ -384,7 +388,7 @@ const Product = (props) => {
               {/* <div className={"pro-icons-wrapper"}> */}
                 <div className={"pro-icons"}>
                   {/* <VerifiedIcon/> */}
-                  <img width={100} src={warrantyIcon} alt={' ضمانت اصالت و سلامت فیزیکی'}/>
+                  <img width={100} src={warranty} alt={' ضمانت اصالت و سلامت فیزیکی'}/>
                 </div>
                 <div className={"pro-icons-title"}>
                   ضمانت اصالت و سلامت فیزیکی

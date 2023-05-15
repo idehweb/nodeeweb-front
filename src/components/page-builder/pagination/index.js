@@ -164,7 +164,7 @@ const Pagination = (props) => {
   //
 
   const handleChangePage = (event, newPage) => {
-    console.log('newPage',newPage);
+    console.log('newPagenewPage',newPage);
     console.log('event',event);
     url = isClient ? new URL(window.location.href) : "";
 

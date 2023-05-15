@@ -16,6 +16,7 @@ import RadioButtonCheckedIcon from "@mui/icons-material/RadioButtonChecked";
 // import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import AlertPopup from "#c/components/components-overview/AlertPopup";
 const theChip = (props) => {
+  
   let [showPop, setShowPop] = useState(false);
   const onSelectWarranty =(e)=>{
     setShowPop(e)
@@ -33,6 +34,7 @@ const theChip = (props) => {
     t,
     requireWarranty
   } = props;
+  // return JSON.stringify(options)
   let allOptions = [];
 
   let choosed = combinations[0], doptions =combinations[0].options, lessPrice = combinations[0].salePrice || combinations[0].price,dstock=combinations[0].in_stock;
@@ -115,6 +117,7 @@ const theChip = (props) => {
            >
              <section style={{paddingBottom:'10px',borderBottom:'1px solid #e3e3ea'}}>
                 <div className={"the-chip row"} style={{fontFamily: 'IRANSans'}} key={1}>
+                  
                 {options && options.map((opt, k) => {
                                       return <ChipInside showTitle={false} key={k} opt={opt} actives={actives} onClickChip={(e) => {
                                         onClickChip(opt.name, e);
@@ -260,9 +263,9 @@ const theChip = (props) => {
   );
 };
 const ChipInside = ({opt, actives, onClickChip,showTitle}) => {
-  console.log('ooooooooooooooooo',opt);
+  // return JSON.stringify(props)
   let [state, setState] = useState({});
-  const onClick = (val, j) => {
+  const onClick = (val) => {
     onClickChip(val);
   };
 
@@ -285,8 +288,8 @@ const ChipInside = ({opt, actives, onClickChip,showTitle}) => {
               variant={(actives && (actives[opt.name] === val.name)) ? "filled" : "outlined"}
               className={(actives && (actives[opt.name] === val.name)) ? "active" : ""} label={val.name}
               onClick={(e) => {
-                Object.assign(val,{key:j})
-                onClick(val, j);
+                // Object.assign(val,{key:j})
+                onClick(val);
               }}/>;
           // }
       })}

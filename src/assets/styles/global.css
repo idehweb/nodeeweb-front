@@ -7,6 +7,94 @@
 }
 
 
+/* warrantyIcon */
+.wcls-1 {
+  fill: #a5b0c2;
+}
+
+.wcls-2 {
+  fill: #ee7f01;
+}
+
+.wcls-3 {
+  fill: #ff9f40;
+}
+
+.wcls-4 {
+  fill: #d5dbe1;
+}
+
+.wcls-5 {
+  fill: #172983;
+}
+
+.wcls-6 {
+  /* fill: #f0f0ef; */
+  fill: #ffffff;
+}
+.scls-1 {
+  fill: #a5b0c2;
+}
+
+.scls-2 {
+  fill: #ee7f01;
+}
+
+.scls-3 {
+  fill: #ff9f40;
+}
+
+.scls-4 {
+  fill: #d5dbe1;
+}
+
+.scls-5 {
+  fill: #172983;
+}
+
+.scls-6 {
+  /* fill: #f0f0ef; */
+  fill: #ffffff;
+}
+.pcls-1 {
+  fill: #ee7f01;
+}
+
+.pcls-2 {
+  fill: #ff9f40;
+}
+
+.pcls-3 {
+  fill: #172983;
+}
+
+.pcls-4 {
+  /* fill: #f0f0ef; */
+  fill: #ffffff;
+}
+.icls-1 {
+  fill: #ee7f01;
+}
+
+.icls-2 {
+  fill: #ff9f40;
+}
+
+.icls-3 {
+  fill: #172983;
+}
+
+.icls-4 {
+  fill: #ffffff;
+  /* fill: #f0f0ef; */
+}
+
+
+.icls-5 {
+  fill: #2fde84;
+}
+/* warrantyIcon */
+
 /*RadioBtn*/
 .radio-toolbar {
   margin: 10px;

@@ -4,6 +4,7 @@ import React, {useEffect, useState} from "react";
 import {Badge, Button, ButtonGroup, Col, Container, Nav, NavItem, NavLink, Row} from "shards-react";
 import {Link, useParams} from "react-router-dom";
 import Gallery from "#c/components/single-post/Gallery";
+import {WarrantyIcon,SecurityIcon,PersonInIcon,ImideatlyIcon} from "#c/components/single-post/base";
 import Theprice from "#c/components/single-post/Theprice";
 import SidebarActions from "#c/components/single-post/SidebarActions";
 import RelatedProducts from "#c/components/single-post/RelatedProducts";
@@ -41,12 +42,6 @@ import ReviewsIcon from "@mui/icons-material/Reviews";
 
 
 const Product = (props) => {
-  // staticImages
-  const warranty = window.location.origin + '/assets/warranty.png';
-  const inPersonIcon =window.location.origin + '/assets/hozori.png';
-  const immediateIcon =window.location.origin + '/assets/fory.png';
-  const secureIcon = window.location.origin + '/assets/secure.png';
-    // staticImages
   let {match, location, history, t, url} = props;
 
   let product = useSelector((st) => {
@@ -387,8 +382,7 @@ const Product = (props) => {
               <div>
               {/* <div className={"pro-icons-wrapper"}> */}
                 <div className={"pro-icons"}>
-                  {/* <VerifiedIcon/> */}
-                  <img width={100} src={warranty} alt={' ضمانت اصالت و سلامت فیزیکی'}/>
+                    <WarrantyIcon/>
                 </div>
                 <div className={"pro-icons-title"}>
                   ضمانت اصالت و سلامت فیزیکی
@@ -400,8 +394,7 @@ const Product = (props) => {
               {/* <div className={"pro-icons-wrapper"}> */}
 
                 <div className={"pro-icons"}>
-                  {/* <PaymentsIcon/> */}
-                  <img width={100} src={inPersonIcon} alt={' پرداخت حضوری و غیرحضوری'}/>
+                  <PersonInIcon/>
                 </div>
                 <div className={"pro-icons-title"}>
                   پرداخت حضوری و غیرحضوری
@@ -414,7 +407,8 @@ const Product = (props) => {
 
                 <div className={"pro-icons"}>
                   {/* <DeliveryDiningIcon/> */}
-                  <img width={100} src={immediateIcon} alt={' امکان ارسال فوری'}/>
+                  {/* <img width={100} src={immediateIcon} alt={' امکان ارسال فوری'}/> */}
+                  <ImideatlyIcon/>
                 </div>
                 <div className={"pro-icons-title"}>
                   امکان ارسال فوری
@@ -427,7 +421,8 @@ const Product = (props) => {
 
                 <div className={"pro-icons"}>
                   {/* <SupportAgentIcon/> */}
-                  <img width={100} src={secureIcon} alt={' پرداخت امن'}/>
+                  {/* <img width={100} src={secureIcon} alt={' پرداخت امن'}/> */}
+                  <SecurityIcon/>
                 </div>
                 <div className={"pro-icons-title"}>
                 پرداخت امن

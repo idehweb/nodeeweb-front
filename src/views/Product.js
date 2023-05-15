@@ -261,7 +261,7 @@ const Product = (props) => {
             </Link>}
           </ButtonGroup>
         </div>
-      </Row>,
+      </Row>
       <Row className={"limited posrel"}>
         <Col lg="6" md="12">
           <Row>

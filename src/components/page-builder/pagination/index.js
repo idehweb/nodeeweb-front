@@ -54,7 +54,6 @@ const Pagination = (props) => {
   if (!limit) {
     limit = 32;
   }
-  console.log('Pagination...', props, offset, limit)
 
   // let params = data;
   // if (!params.offset) {
@@ -65,7 +64,6 @@ const Pagination = (props) => {
   // }
 
   // theurl=theurl.split('/');
-  // console.log('mainParams',theurl[1])
 
   const postCardMode = useSelector((st) => st.store.postCardMode, _.isEqual);
   let device = isClient ? (url.searchParams.get("device") || "") : "";
@@ -73,12 +71,8 @@ const Pagination = (props) => {
   let productCategory = isClient ? (url.searchParams.get("productCategory") || "") : "";
   offset = isClient ? (url.searchParams.get("offset") || "") : "";
   let limit = isClient ? (url.searchParams.get("limit") || "") : "";
-  // console.log('general', general)
-  // console.log('params', params)
-  // const params = useParams();
   const loadProductItems = async (page, filter = {}) => {
     // return
-    console.log('url', url)
     offset = url.searchParams.get("offset")
     if (!offset) {
       offset = 0
@@ -87,24 +81,16 @@ const Pagination = (props) => {
     if (!limit) {
       limit = 32
     }
-    console.log('loadProductItems', params, offset, limit)
-    // setLoadingMoreItems(true);
-
-    // settracks([...[]]);
     settracks([])
     settheload(true)
     let query = {};
     // params = useParams();
-    // console.log('customQuery', customQuery)
     if (customQuery) {
       if (typeof customQuery == 'string') {
         customQuery = JSON.parse(customQuery);
       }
       Object.keys(customQuery).forEach((item) => {
-        // console.log('customQuery', customQuery)
         let main = customQuery[item];
-        // console.log('main', main)
-        // console.log('params._id', params._id)
         if (params._id) {
           let theVariable = params._id;
           const json2 = isStringified(theVariable);
@@ -118,10 +104,6 @@ const Pagination = (props) => {
           main = main.replace("'params._id'", theVariable)
           main = main.replace('params._id', theVariable)
         }
-        // console.log('item', item)
-        // console.log('customQuery', customQuery)
-        // console.log('customQuery[item]', customQuery[item])
-        // console.log('main', main)
 
         function isStringified(jsonValue) { // use this function to check
           try {
@@ -142,7 +124,6 @@ const Pagination = (props) => {
 
       })
     }
-    console.log("==> loadProductItems() offset:", offset, "filter:", filter, "query:", query);
     let search = isClient ? (url.searchParams.get("search") || "") : "";
 
     if (search) {
@@ -160,15 +141,12 @@ const Pagination = (props) => {
     if (query) {
       filter = JSON.stringify(query)
     }
-    console.log('limit', limit, 'offset', offset)
     getEntitiesWithCount(entity || params.entity, offset, limit, "", filter, JSON.stringify(populateQuery)).then((resp) => {
       afterGetData(resp);
     });
   };
 
   useEffect(() => {
-    console.log("\n\n\nuse effect");
-
     if (isClient) {
       if (url.searchParams.get("offset") != offset) {
 
@@ -181,19 +159,16 @@ const Pagination = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log("params._id");
     loadProductItems(0);
   }, [params._id]);
   //
 
   const handleChangePage = (event, newPage) => {
-    console.clear()
-
+    console.log('newPage',newPage);
+    console.log('event',event);
     url = isClient ? new URL(window.location.href) : "";
 
     let mainPath = theurl.pathname.split('/');
-    // console.log('mainPath', mainPath[1])
-    console.log('new offset:', newPage * params.limit)
     if (isClient) {
       window.scrollTo(0, 0)
     }
@@ -205,7 +180,6 @@ const Pagination = (props) => {
     if (isClient) {
       offset = (url.searchParams.get("offset") || "");
       limit = (url.searchParams.get("limit") || "");
-      console.log("offset:", offset, "limit:", limit)
       if (limit) {
         url.searchParams.set('limit', limit);
 
@@ -220,8 +194,6 @@ const Pagination = (props) => {
 
       }
 
-      console.log('url', url)
-      console.log('full url:', url.pathname + url.search, newPage * limit)
       navigate(url.pathname + url.search)
       loadProductItems(newPage * limit)
     }
@@ -230,24 +202,20 @@ const Pagination = (props) => {
     // setPage(newPage);
   };
   const handleChangeRowsPerPage = (event, newLimit) => {
-    // console.log('event',event)
-    console.log('new limit:', newLimit)
-    // console.log('event',event)
-
-    // renewData(newPage * rowsPerPage);
-    // setPage(newPage);
+    const {props} = newLimit;
+    // handleChangePage(event,newLimit)
+    console.log('new limit:', props)
+    console.log('offset', offset)
+    console.log('limit', limit)
   };
   const afterGetData = (resp, tracks = []) => {
-    console.log('afterGetData', resp, tracks)
     let trackss = [...tracks],
       {items, count} = resp;
     // if (resp.length < 24) sethasMoreItems(false);
-    // console.log("resp", resp);
     if (items && items.length) {
       items.forEach((item) => {
         trackss.push(item);
       });
-      console.log('set data:', trackss)
       settracks(trackss);
       setcount(count);
       settheload(false)
@@ -267,7 +235,6 @@ const Pagination = (props) => {
     </div>
   );
   // return JSON.stringify(params)
-  console.log('offset', offset, 'limit', limit)
   if (!offset) {
     offset = 0;
   }

@@ -33,8 +33,6 @@ export function ShowElement(p) {
   if (element['custom-name']) {
     name = element['custom-name'];
   }
-  // console.log("name:", name);
-  // console.log("type:", type);
 
   switch (type) {
     case "text":
@@ -127,13 +125,8 @@ export function ShowElement(p) {
 
 export function TEXTNODE({element}) {
   let {content, classes} = element;
-  // console.clear()
-  // console.log('element', element)
 
   return <div className={'p-node ' + (classes ? classes.map(ob => (ob.name ? ob.name : ob)).join(" ") : "")}> {content}</div>;
-  // return <div className={'the-title'}><ShowElement element={component}/></div>;
-
-
 }
 
 export function TITLE({element}) {
@@ -197,7 +190,6 @@ export function TheButton(p) {
   let {fields} = general;
   let {text, iconFont, action, classess, showInMobile, showInDesktop,target="_self",link,iconImage,imgWidth,imgHeight,imgMargin} = fields;
   let style = setStyles(fields);
-  console.log('buttonActio',fields);
   if(conditionStep){
     return <Button
               href={link && link}
@@ -221,11 +213,8 @@ export function TheButton(p) {
   }
 
 if (iconFont && action) {
-  // return <CardSidebar />
       if (action == 'toggleCart') {
-        // console.log(handleCard)
         return <Button onClick={() => {
-          // console.clear()
 
           handleCard();
         }} className={' posrel ' + classess + (showInMobile ? ' showInMobile ' : '')} style={style}>{Icons[iconFont] &&
@@ -234,10 +223,8 @@ if (iconFont && action) {
 
       }
       if (action == 'toggleMenu') {
-        // console.log(handleCard)
         return <Button onClick={() => {
           // console.clear()
-          console.log('element', element)
           toggleSidebar();
         }} className={' posrel ' + classess + (showInMobile ? ' showInMobile ' : '')} style={style}>{Icons[iconFont] &&
         <span>{React.createElement(Icons[iconFont])}</span>}<span>{text}</span></Button>
@@ -304,11 +291,8 @@ export function CAROUSEL({element}) {
 
 export function SWIPER({element}) {
   let {type, components, params} = element;
-  // console.clear()
-  // console.log(components);
   if (components)
     return components.map((com, index) => {
-      // console.log("TITLE", com)
       return <ShowElement params={params} key={index} element={com}/>
     })
 
@@ -323,7 +307,6 @@ export function SWIPERWrapper(props) {
     return
   }
   let {entity, classes, arrows = true, pagination = false, autoplay = true, perPage = 1, type = "slide", margin, customQuery,breakpoints=null} = fields;
-  // console.clear()
   let style = setStyles(fields);
 
   if (arrows == 'false') {
@@ -332,8 +315,6 @@ export function SWIPERWrapper(props) {
   if (pagination == 'false') {
     pagination = false;
   }
-  // console.log('fields', Boolean(arrows))
-  // return JSON.stringify(autoplay)
   if (entity) {
     if (entity == 'product')
       return <ProductsSlider breakpoints={breakpoints} arrows={Boolean(arrows)} autoplay={Boolean(autoplay)} perPage={parseInt(perPage)}
@@ -410,7 +391,6 @@ export function ThePagination(props) {
   if (arrows == 'false') {
     arrows = false;
   }
-  console.log('PaginationPagination', props)
 // return JSON.stringify(element.data)
   return <Pagination element={element} params={params}/>
 
@@ -429,7 +409,6 @@ export function TheGrid(props) {
   if (arrows == 'false') {
     arrows = false;
   }
-  console.log('props', props)
 // return JSON.stringify(element.data)
   return <Grid element={element} params={params}/>
 
@@ -462,11 +441,8 @@ export function TheDescription(props) {
 export function SWIPERSlide(props) {
   let {element, content, params} = props;
   let {type, children, classes, kind, text, src} = element;
-  // console.clear();
-  // console.log('props',props)
   if (children)
     return children.map((com, index) => {
-      // console.log("SWIPERSlide", com)
       return <div
         className={'SWIPERSlide ' + (classes ? classes.map(ob => (ob.name ? ob.name : ob)).join(" ") : "")}>
         {kind == 'link' &&
@@ -489,7 +465,6 @@ export function SWIPERSlide(props) {
 
 export function ProductElement(props) {
   console.clear();
-  // console.log(props)
   return <PostCard item={props}/>
 
 
@@ -529,8 +504,6 @@ export function IMAGE(props) {
   }
   let {link, title, src, showInDesktop, showInMobile,target} = fields;
   let style = setStyles(fields);
-  console.log('Imageprops',style);
-  // console.clear()
   if (link) {
     return <a target={target} href={link} title={title}
               className={' ' + (showInDesktop ? ' showInDesktop ' : '') + (showInMobile ? ' showInMobile ' : '') + (classes ? classes.map(ob => (ob.name ? ob.name : ob)).join(" ") : "")}>
@@ -557,7 +530,6 @@ export function SLIDER(props) {
 export function GRID_LAYOUT(props) {
   let {element, content, params} = props
   // let {type, components, children, classes, handleCard, card} = element;
-  // console.log("GRID_LAYOUT", props);
   let {type, components, classess, children, settings, handleCard, card} = element;
   let {general} = settings;
   let {fields} = general;
@@ -579,8 +551,6 @@ export function GRID_LAYOUT(props) {
 
 export function THE_TABS(props) {
   let {element, content, params} = props
-  // let {type, components, children, classes, handleCard, card} = element;
-  // console.log("GRID_LAYOUT", props);
   let {type, components, classess, children, settings, handleCard, card} = element;
   let {general} = settings;
   let {fields} = general;
@@ -602,8 +572,6 @@ export function THE_TABS(props) {
 
 export function THE_STEPS(props) {
   let {element, content, params} = props
-  // let {type, components, children, classes, handleCard, card} = element;
-  // console.log("GRID_LAYOUT", props);
   let {type, components, classess, children, settings, handleCard, card} = element;
   let {general} = settings;
   let {fields} = general;
@@ -684,17 +652,8 @@ export function THE_TAB(props) {
 export function Content(props) {
 //    console.clear();
   const {element, content} = props;
-  // console.log("Content ");
-
-  // const {payload, type, components, classes} = element;
   if (element && element.content && content && content[element.content])
     return content[element.content];
-  // return <div className={"col " + (typeof classes =='string' ? classes : classes ? classes.map(ob => (ob.name ? ob.name : ob)).join(" ") : "")}>
-  //     {components && components.map((item,i) => {
-  //         // console.log("item.id", item.id);
-  //         return <ShowElement element={item} key={i}/>;
-  //     })}
-  // </div>;
 }
 
 
@@ -709,7 +668,6 @@ export default function PageBuilder(props) {
   // let menu = useSelector((st) => st.store.menuVisible);
 
   const handleTheCard = () => {
-    // console.log('handleTheCard')
     toggleCardbar(cardVisible)
   };
   let elemStyle = {...style}
@@ -741,13 +699,10 @@ export default function PageBuilder(props) {
       </div>
       }
       {elements && elements.map((element, index) => {
-        // console.log('#' + index + ' element', element)
         element.handleCard = () => {
-          // console.log('handleCard')
           handleTheCard()
         };
         element.card = card;
-        // element.data = data;
         return <ShowElement content={content} key={index} element={element} params={params}/>
       })}
     </div>

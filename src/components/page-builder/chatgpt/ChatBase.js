@@ -183,7 +183,7 @@ const {data}=props;
                                 </div>
                             ): data && data.type==='support'  && (
                                 <div className="mine messages">
-                                    <div className="message last">
+                                    <div className={data.username === 'ERR_NETWORK' ?"message last borderDanger" : "message last "}>
                                         {data &&  data.text}
                                     </div>
                                 </div>
@@ -276,7 +276,14 @@ const ChatContent =   (props) =>{
                         //  Cookies.set(tokenID,JSON.stringify(AllMessages), { expires: 7, path: '/' })
                     }
                 }).catch((err)=>{
-                        console.log('errrorrFromAxios',err);
+                    let messageObjSupport = {
+                        token:err.name,
+                        username:err.code,
+                        type:'support',
+                        text:err && err.message
+                    }
+                        setMessages(messages=>[...messages,messageObjSupport])
+                        Block.remove('.chat');
                 });
                 
                 
@@ -330,7 +337,7 @@ const ChatContent =   (props) =>{
                                             {
                                                 messages && (
                                                     messages.map((message,i)=>
-                                                        <ChatSender key={i} data={message} loading={loadingMessage}/>
+                                                        <ChatSender key={i} data={message} />
                                                     )
                                                 )
                                             }

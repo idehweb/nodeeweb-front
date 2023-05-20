@@ -13,6 +13,7 @@ import FieldNumber from './FieldNumber';
 import FieldRadio from './FieldRadio';
 import FieldUploadMedia from './FieldUploadMedia';
 import FieldUploadDocument from './FieldUploadDocument';
+import ChatBase from './ChatBase';
 
 
 export {
@@ -30,7 +31,8 @@ export {
   FieldServer,
   FieldRadio,
   FieldUploadDocument,
-  FieldUploadMedia
+  FieldUploadMedia,
+  ChatBase
 };
 
 

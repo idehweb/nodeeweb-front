@@ -6,6 +6,32 @@
   src: url(fonts/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2) format('woff2');
 }
 /* ChatContentStyle */
+.fadeInUp {
+  animation-name: fadeInUp;
+  animation-duration: .4s;
+  animation-fill-mode: both;
+}
+.chatAvatar img{
+  border-radius:40px;
+}
+#box-widget-icon {
+  float: left;
+  cursor: pointer;
+width: 80px;
+height: 80px;
+text-align: center;
+padding-top: 10px;
+position: relative;
+}
+.widget-icon {
+  background: rgb(40,96,133);
+transition: all .2s ease !important;
+border-radius: 50%;
+width: 60px;
+height: 60px;
+box-shadow: 0 1px 6px rgba(0,0,0,.2),0 1px 10px rgba(0,0,0,.15);
+margin: 0 auto;
+}
 .chatFont{
   font-family: IRANSans !important;
 }

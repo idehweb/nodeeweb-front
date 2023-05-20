@@ -16,6 +16,7 @@ import Form from "#c/components/page-builder/form";
 import Stepper from "#c/components/page-builder/stepper";
 import ConditionSteps from "#c/components/page-builder/conditionStepper";
 import ConditionStep from "#c/components/page-builder/conditionStepper/detail";
+import ChatBase from "#c/components/page-builder/chatgpt/ChatBase";
 import Description from "#c/components/page-builder/description";
 import * as Icons from "@mui/icons-material";
 import {Button} from "shards-react";
@@ -52,6 +53,8 @@ export function ShowElement(p) {
       return <div>html</div>;
     case "text":
       return <TITLE element={element}/>;
+      case "chatgpt":
+        return <ChatBase element={element} />;
     case "conditionsteps":
         return <ConditionSteps element={element} content={content} params={params}/>;
     case "conditionstep":

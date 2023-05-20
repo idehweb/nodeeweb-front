@@ -77,6 +77,9 @@ function CreateForm(props) {
     }
     
     const {type,style, kind, size, className, options, disabled = false, name, label, placeholder,value,require} = field;
+    if (type === "chatgpt") {
+      return <ChatBase field={field}/>;
+    }
     if (type === 'text') {
       
       // return <span
@@ -247,7 +250,6 @@ function CreateForm(props) {
     }
     if (type === 'select') {
       return <FieldSelect field={field}/>
-
     }
     if (type === 'server') {
       return <FieldServer field={field}/>

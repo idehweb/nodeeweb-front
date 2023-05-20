@@ -19,6 +19,8 @@
     "firebase": "^9.8.1",
     "i18next": "^21.8.2",
     "jalali-moment": "^3.3.11",
+    "js-cookie": "^3.0.5",
+    "notiflix": "^3.2.6",
     "parse-link-header": "^2.0.0",
     "prettier": "^2.6.2",
     "querystring": "^0.2.1",
@@ -70,7 +72,7 @@
       "es6": true
     },
     "plugins": [
-      "prettier",  
+      "prettier",
       "react"
     ],
     "rules": {

@@ -6,7 +6,6 @@ import store from '#c/functions/store';
 import {SaveData} from '#c/functions/index';
 import {useSelector,useDispatch} from "react-redux";
 import createRoutes from '#c/DefaultRoute';
-import {ChatBase} from "./components/support/chat/ChatBase"
 const APP = ((props) => {
   let {t} = props,routes=[];
   const themeData = useSelector((st) => st.store.themeData, _.isEqual);
@@ -18,8 +17,6 @@ const APP = ((props) => {
   }
   return (
     <div className={t('languageDir')} dir={t('languageDir')}>
-     
-      {/* <div><ChatBase/></div> */}
       
       <BrowserRouter>
         <Routes>

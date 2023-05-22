@@ -176,13 +176,13 @@ const {data}=props;
                     <React.Fragment>
                         {
                           data &&  data.type==='client' ? (
-                                <div className="yours messages">
+                                <div className="mine messages">
                                     <div className="message last">
                                         {data && data.text}
                                     </div>
                                 </div>
                             ): data && data.type==='support'  && (
-                                <div className="mine messages">
+                                <div className="yours messages">
                                     <div className={data.username === 'ERR_NETWORK' ?"message last borderDanger" : "message last "}>
                                         {data &&  data.text}
                                     </div>

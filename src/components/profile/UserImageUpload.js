@@ -5,8 +5,7 @@ import {withTranslation} from 'react-i18next';
 import store from '#c/functions/store';
 import {Logout, submitProfile} from '#c/functions/index';
 import {Navigate} from 'react-router-dom';
-import {toast} from "react-toastify";
-import EditLocationAltIcon from '@mui/icons-material/EditLocationAlt';
+import { toast } from "react-toastify";
 
 // const UserAccountDetails  = ({ title }) => (
 class LoginForm extends React.PureComponent {
@@ -19,14 +18,11 @@ class LoginForm extends React.PureComponent {
       lastName: st.lastName,
       email: st.email,
       internationalCode: st.internationalCode,
-      address: st.address,
-      tab: 'details'
-
     };
   }
 
   submitForm = () => {
-    const {phoneNumber, firstName, lastName, internationalCode, email} = this.state;
+    const {phoneNumber, firstName, lastName, internationalCode,email} = this.state;
     const {t} = this.props;
     if (phoneNumber) {
       submitProfile({
@@ -45,20 +41,19 @@ class LoginForm extends React.PureComponent {
   };
 
   render() {
-    const {phoneNumber, firstName, lastName, internationalCode, email, address = [],tab='details'} = this.state;
+    const {phoneNumber, firstName, lastName, internationalCode,email} = this.state;
     const {title, t} = this.props;
-    console.log('internationalCode', firstName, lastName, email, internationalCode, !(firstName && lastName && internationalCode));
+    console.log('internationalCode',firstName , lastName ,email, internationalCode,!(firstName && lastName && internationalCode));
     if (!(firstName && lastName && internationalCode)) {
       return <Navigate to={'/login/'}/>;
 
     }
     return (
       <Card small={'true'} className="mb-4">
-        <CardHeader className="border-bottom justify-content-between d-flex">
-          <h6 className="m-0 cursorpointer" onClick={(e)=>this.setState({tab:'details'})}>{title}</h6>
-          <Button className="m-0 edit-address outline" outline={true} onClick={(e)=>this.setState({tab:'addresses'})}><EditLocationAltIcon/>{t('addresses')}</Button>
+        <CardHeader className="border-bottom">
+          <h6 className="m-0">{title}</h6>
         </CardHeader>
-        {tab =='details' && <ListGroup flush>
+        <ListGroup flush>
           <ListGroupItem className="p-3">
             <Row>
               <Col>
@@ -163,24 +158,7 @@ class LoginForm extends React.PureComponent {
               </Col>
             </Row>
           </ListGroupItem>
-        </ListGroup>}
-        {tab =='addresses' && <ListGroup flush>
-          {address && address.map((item, i) => {
-            return <ListGroupItem className="p-4" key={i}>
-              <strong className="text-muted d-block mb-2">
-                {item.Title}
-              </strong>
-              <div>
-                <span>{item.State}</span>
-                <span> - </span>
-                <span data-cityno={item.City_no}>{item.City}</span>
-                <span> - </span>
-                <span>{item.StreetAddress}</span>
-              </div>
-            </ListGroupItem>
-          })}
-
-        </ListGroup>}
+        </ListGroup>
       </Card>
     );
   }

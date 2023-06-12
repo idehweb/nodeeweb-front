@@ -39,7 +39,7 @@ const DefaultLayout = (props) => {
 
       {/*<MainMobileNavbar search={false} />*/}
       {themeData.footer && themeData.footer.elements &&
-      <footer style={footer} className={"main-footer p-2 px-3 border-top " + themeData.footer.classes} key={2}>
+      <footer style={footer} className={"main-footer p-2 px-3 " + themeData.footer.classes} key={2}>
         <PageBuilder elements={themeData.footer.elements} maxWidth={themeData.footer.maxWidth}/></footer>}
 
     </>

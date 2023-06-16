@@ -14,6 +14,7 @@ module.exports = {
   webpack: {
     alias: {
       '#c': path.resolve(__dirname, 'src/'),
+      '@': path.resolve(__dirname, 'src/'),
     },
     configure: (webpackConfig, { env, paths }) => {
       if (env === 'development') return webpackConfig;

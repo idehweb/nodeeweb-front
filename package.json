@@ -69,7 +69,7 @@
   "prettier": {
     "bracketSpacing": true,
     "singleQuote": true,
-    "jsxBracketSameLine": true,
+    "bracketSameLine": true,
     "trailingComma": "all",
     "printWidth": 80,
     "semi": true

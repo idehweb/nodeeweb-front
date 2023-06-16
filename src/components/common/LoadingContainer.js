@@ -3,7 +3,6 @@ import { styled } from '@mui/system';
 import { CircularProgress } from '@mui/material';
 
 export const Loading = styled('div')(() => ({
-  position: 'fixed',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -24,6 +23,7 @@ const LoadingContainer = forwardRef(
       children,
       className,
       as = 'div',
+      fixed = true,
       ...rest
     },
     ref,
@@ -33,7 +33,9 @@ const LoadingContainer = forwardRef(
     return (
       <Component ref={ref} className={className} {...rest}>
         {loading ? (
-          <Loading className={loadingClass}>
+          <Loading
+            sx={{ position: fixed ? 'fixed' : 'absolute' }}
+            className={loadingClass}>
             <CircularProgress color="secondary" size={size} />
           </Loading>
         ) : null}

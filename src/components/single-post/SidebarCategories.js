@@ -70,7 +70,7 @@ class SidebarCategories extends React.Component {
     let { t } = this.props;
 
     return (
-      <Card small={"true"} className="mb-3">
+      <Card small className="mb-3">
         <CardHeader className="border-bottom">
           <h6 className="m-0">{t("categories")}</h6>
         </CardHeader>

@@ -49,6 +49,7 @@
     "use-offline-captcha": "^0.2.0"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@craco/craco": "^6.4.3",
     "dotenv": "^16.0.1",
     "ftp-deploy": "^2.4.2"

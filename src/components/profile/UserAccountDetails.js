@@ -53,7 +53,7 @@ class LoginForm extends React.PureComponent {
 
     }
     return (
-      <Card small={'true'} className="mb-4">
+      <Card small className="mb-4">
         <CardHeader className="border-bottom justify-content-between d-flex">
           <h6 className="m-0 cursorpointer" onClick={(e)=>this.setState({tab:'details'})}>{title}</h6>
           <Button className="m-0 edit-address outline" outline={true} onClick={(e)=>this.setState({tab:'addresses'})}><EditLocationAltIcon/>{t('addresses')}</Button>

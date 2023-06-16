@@ -85,7 +85,7 @@ const NavbarMenu = ({t}) => {
               {(user && user.firstName) && (user.firstName+ ' خوش آمدید')}
 
             </DropdownToggle>
-            <DropdownMenu right={true} small={true}>
+            <DropdownMenu right={true} small>
               <Link
 
                 className={'dropdown-item'}

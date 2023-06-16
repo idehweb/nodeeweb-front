@@ -70,9 +70,10 @@
     "bracketSpacing": true,
     "singleQuote": true,
     "bracketSameLine": true,
-    "trailingComma": "all",
+    "trailingComma": "es5",
     "printWidth": 80,
-    "semi": true
+    "semi": true,
+    "arrowParens:": "always"
   },
   "imports": {
     "#json/*": "./*.json",

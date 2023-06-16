@@ -1,3 +1,5 @@
+import _get from 'lodash/get';
+
 export const Reject = (data) =>
   Promise.reject(_get(data, 'message', 'Something went wrong!!'));
 

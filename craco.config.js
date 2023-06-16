@@ -11,6 +11,9 @@ const now = new Date().toISOString('en-us');
 process.env.REACT_APP_VERSION = now + ', ' + gitHash;
 
 module.exports = {
+  eslint: {
+    enable: process.env.NODE_ENV === 'development',
+  },
   webpack: {
     alias: {
       '#c': path.resolve(__dirname, 'src/'),

@@ -6,7 +6,7 @@ import store from '@/functions/store';
 
 import config from '@/config';
 
-export const BASE_URL = config.BASE_URL;
+export const BASE_URL = `${config.BASE_URL}/customer`;
 
 // define the api
 export const API = create({

@@ -6,6 +6,7 @@
 
 - write document 
 - build document website
+- add sentry for app logs
 - optimize bundle size
 - remove unused files
 - centralize configs

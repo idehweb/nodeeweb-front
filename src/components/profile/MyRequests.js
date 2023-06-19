@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import {withTranslation} from 'react-i18next';
 
 import PageTitle from '#c/components/common/PageTitle';
-import {getMyOrders} from '#c/functions/index';
+import {getMyRequests} from '#c/functions/index';
 
 import {dateFormat} from '#c/functions/utils';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
@@ -81,7 +81,7 @@ class MyRequests extends React.Component {
 
   getMyOrdersF() {
     const {t} = this.props;
-    getMyOrders().then((data) => {
+    getMyRequests().then((data) => {
       if (data && data.length > 0)
         data.map((post) => {
           if (post.createdAt) post.createdAt = dateFormat(post.createdAt);
@@ -204,7 +204,7 @@ class MyRequests extends React.Component {
         <Row noGutters className="page-header py-4">
           <PageTitle
             sm="12"
-            title={t('my orders')}
+            title={t('my requests')}
             subtitle={t('user account')}
             className="text-sm-left"
           />

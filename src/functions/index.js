@@ -720,10 +720,10 @@ export const getMyOrders = (offset = 0, limit = 100) =>
     })
     .catch((err) => {
       handleErr(err);
-      return err;
+      return [];
     });
-export const getMyOrder = (_id) =>
-  getData(`${ApiUrl}/order/myOrder/onlyMine/${_id}`, {}, true)
+export const getMyTransactions = (offset = 0, limit = 100) =>
+  getData(`${ApiUrl}/transaction/myTransactions/mine/${offset}/${limit}`, {}, true)
     .then((res) => {
       if (res.data.success == false)
         return [];
@@ -731,8 +731,31 @@ export const getMyOrder = (_id) =>
     })
     .catch((err) => {
       handleErr(err);
-      return err;
+      return [];
     });
+export const getMyRequests = (offset = 0, limit = 100) =>
+  getData(`${ApiUrl}/entry/myEntries/mine/${offset}/${limit}`, {}, true)
+    .then((res) => {
+      if (res.data.success == false)
+        return [];
+      return res.data;
+    })
+    .catch((err) => {
+      handleErr(err);
+      return [];
+    });
+export const getMyOrder = (_id) =>
+  getData(`${ApiUrl}/order/myOrders/onlyMine/${_id}`, {}, true)
+    .then((res) => {
+      if (res.data.success == false)
+        return {};
+      return res.data;
+    })
+    .catch((err) => {
+      handleErr(err);
+      return {};
+    });
+
 
 export const getStoryList = (offset = 0, limit = 24) =>
   getData(`${ApiUrl}/product/story/${offset}/${limit}`, {}, true)

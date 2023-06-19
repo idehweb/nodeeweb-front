@@ -15,6 +15,9 @@ const Profile = ({t}) => {
   // console.log('location',location)
   // console.log('myQuery',myQuery)
   hash = hash.replace('#','')
+  if(!hash){
+    hash='profile'
+  }
   console.log('hash',hash)
   const [tab, setTab] = useState(hash);
 
@@ -28,7 +31,7 @@ const Profile = ({t}) => {
         {/*className="ml-sm-auto mr-sm-auto"*/}
         {/*/>*/}
       </Row>
-      <div className="w-100 row">
+      <div className="row">
         <Col lg="4">
           <div className="sticky">
             <UserDetails/>
@@ -62,7 +65,7 @@ const Profile = ({t}) => {
                   <span className={""}>{t("transactions")}</span></NavLink>
               </NavItem>
               <NavItem>
-                <NavLink active={tab === "requests"} href="#requests" onClick={() => setTab("transactions")}>
+                <NavLink active={tab === "requests"} href="#requests" onClick={() => setTab("requests")}>
                   {/*<ReviewsIcon className={"ml-2"}/>*/}
 
                   <span className={""}>{t("requests")}</span></NavLink>

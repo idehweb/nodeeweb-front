@@ -38,6 +38,7 @@ const OrderDetails = ({ t }) => {
   ]);
   const getMyOrdersF = (_id) => {
     getMyOrder(_id).then((post) => {
+      console.log('post',post)
       if (post.createdAt) post.createdAt = dateFormat(post.createdAt);
       if (post.updatedAt) post.updatedAt = dateFormat(post.updatedAt);
       if (post && post["sum"]) {
@@ -120,7 +121,7 @@ const OrderDetails = ({ t }) => {
           case "notpaid":
             post["paymentStatus"] = t("not paid");
             post["paymentStatus_cl"] =
-              "bg-warning text-white text-center rounded p-3 iii";
+              "bg-error text-white text-center rounded p-3 iii";
             break;
           case "unsuccessful":
             post["paymentStatus"] = t("unsuccessful");
@@ -183,7 +184,7 @@ const OrderDetails = ({ t }) => {
                 <Col lg={12} md={12} sm={12} xs={12}>
                   <div className={"the-order mb-3"}>
                     <div className={"the-order-purple p-4"}>
-                      <div className={"the-order-title"}>
+                      <div className={"the-order-title the-whole-block"}>
                         <div className={"the-order-number"}>
                           <div>{t("Order #") + dat.orderNumber}</div>
                           <div className={"mb-2"}>  {t("Order Date")}:{dat.updatedAt}</div>

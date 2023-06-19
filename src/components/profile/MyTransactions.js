@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import {withTranslation} from 'react-i18next';
 
 import PageTitle from '#c/components/common/PageTitle';
-import {getMyOrders} from '#c/functions/index';
+import {getMyTransactions} from '#c/functions/index';
 
 import {dateFormat} from '#c/functions/utils';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
@@ -81,7 +81,7 @@ class MyTransactions extends React.Component {
 
   getMyOrdersF() {
     const {t} = this.props;
-    getMyOrders().then((data) => {
+    getMyTransactions().then((data) => {
       if (data && data.length > 0)
         data.map((post) => {
           if (post.createdAt) post.createdAt = dateFormat(post.createdAt);
@@ -102,65 +102,35 @@ class MyTransactions extends React.Component {
             // link['kind']=t('product');
           }
           if (post && post['status']) {
+
             switch (post['status']) {
-              case 'processing':
-                post['status'] = t('waiting to review');
+              case 'false':
+                post['status'] = t('unsuccessful');
                 post['status_cl'] =
-                  'bg-warning text-white text-center rounded p-3 iii';
+                  'bg-error text-white text-center rounded p-3 iii';
                 break;
-              case 'published':
+              case false:
+                post['status'] = t('unsuccessful');
+                post['status_cl'] =
+                  'bg-error text-white text-center rounded p-3 iii';
+                break;
+              case 'true':
                 post['status'] = t('confirmed');
                 post['status_cl'] =
                   'bg-success text-white text-center rounded p-3 iii';
                 break;
-              case 'complete':
+              case true:
                 post['status'] = t('complete');
                 post['status_cl'] =
                   'bg-success text-white text-center rounded p-3 iii';
                 break;
-              case 'indoing':
-                post['status'] = t('indoing');
-                post['status_cl'] =
-                  'bg-warning text-white text-center rounded p-3 iii';
-                break;
-              case 'makingready':
-                post['status'] = t('makingready');
-                post['status_cl'] =
-                  'bg-warning text-white text-center rounded p-3 iii';
-                break;
-              case 'canceled':
-                post['status'] = t('canceled');
-                post['status_cl'] =
-                  'bg-error text-white text-center rounded p-3 iii';
-                break;
-              case 'trash':
-                post['status'] = t('trash');
-                post['status_cl'] =
-                  'bg-error text-white text-center rounded p-3 iii';
-                break;
-              case 'deleted':
-                post['status'] = t('deleted');
-                post['status_cl'] =
-                  'bg-error text-white text-center rounded p-3 iii';
-                break;
-              case 'inpeyk':
-                post['status'] = t('inpeyk');
-                post['status_cl'] =
-                  'bg-warning text-white text-center rounded p-3 iii';
-                break;
-              case 'checkout':
-                post['status'] = t('checkout');
-                post['status_cl'] =
-                  'bg-warning text-white text-center rounded p-3 iii';
-                break;
-              case 'cart':
-                post['status'] = t('cart');
-                post['status_cl'] =
-                  'bg-warning text-white text-center rounded p-3 iii';
-                break;
               default:
                 break;
             }
+          }else{
+            post['status'] = t('unsuccessful');
+            post['status_cl'] =
+              'bg-error text-white text-center rounded p-3 iii';
           }
           if (post && post['paymentStatus']) {
             switch (post['paymentStatus']) {
@@ -191,7 +161,18 @@ class MyTransactions extends React.Component {
       });
     });
   }
+  returnNormalPrice (price) {
+    // console.log('price',price)
+    // return
+    if (price) {
 
+      price = price.toString().trim();
+      let p = price.split(/\s+/)
+      p = parseInt(p.toString().replace(/,/g, ""))
+      console.log('p', p)
+      return p
+    }
+  }
   render() {
     let {t} = this.props;
     let {data, headCells, newText, buttonText} = this.state;
@@ -204,7 +185,7 @@ class MyTransactions extends React.Component {
         <Row noGutters className="page-header py-4">
           <PageTitle
             sm="12"
-            title={t('my orders')}
+            title={t('my transactions')}
             subtitle={t('user account')}
             className="text-sm-left"
           />
@@ -221,14 +202,15 @@ class MyTransactions extends React.Component {
                     return (<Col lg={12} md={12} sm={12} xs={12}>
                       <div className={'the-order mb-3'}>
                         <div className={'the-order-purple p-4'}>
-                          <div className={'the-order-title'}>
+                          <div className={'the-order-title the-whole-block'}>
                             <div className={'the-order-first-part'}>
-                              <div className={'the-order-number'}> {t('Order #') + dat.orderNumber}</div>
+                              <div className={'the-order-number'}> {t('Authority #') + dat.Authority}</div>
+                              {dat.order && <div className={'the-order-number'}><Link to={'/order-details/'+dat.order._id}>{t('Order #') + (dat.order.orderNumber)}</Link></div>}
 
                               <div className={'the-order-status-main '}>
 
                                 <div className={'the-order-body-line'}>
-                                  <span className={'order-label'}>{t('Order Status')}
+                                  <span className={'order-label'}>{t('Transaction Status')}
                                     :</span>
                                   <span className={dat.status_cl}><span
                                     className={'gfdsdf'}>{t(dat.status)}</span></span>
@@ -248,15 +230,15 @@ class MyTransactions extends React.Component {
                                   :</span>
                                 {dat.updatedAt}
                               </div>
-                              <div className={'the-order-body-line'}>
+                              {dat.amount && <div className={'the-order-body-line totalPrice'}>
                                 <span className={'order-label'}>{t('Total Price')}
                                   :</span>
-                                {dat.amount}
-                              </div>
-                              <div className={'the-order-body-line'}>
-                                <Link
-                                  className={'gfdsdf'} to={'/order-details/' + dat._id}><OpenInNewIcon/>{t("view items")}</Link>
-                              </div>
+                                {dat.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')+ t(' UZS')}
+                              </div>}
+                              {/*<div className={'the-order-body-line'}>*/}
+                                {/*<Link*/}
+                                  {/*className={'gfdsdf'} to={'/order-details/' + dat._id}><OpenInNewIcon/>{t("view items")}</Link>*/}
+                              {/*</div>*/}
                             </div>
                           </div>
 

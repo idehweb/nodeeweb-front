@@ -3779,6 +3779,12 @@ img[alt="payment"] {
 }
 
 @media (max-width: 780px) {
+  .the-whole-block{
+    display: block !important;
+  }
+  .the-order-purple {
+    padding: 10px !important;
+  }
   .profile-nav {
     flex-direction: column;
   }

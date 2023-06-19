@@ -172,7 +172,7 @@ class MyOrders extends React.Component {
               case 'notpaid':
                 post['paymentStatus'] = t('not paid');
                 post['paymentStatus_cl'] =
-                  'bg-warning text-white text-center rounded p-3 iii';
+                  'bg-error text-white text-center rounded p-3 iii';
                 break;
               case 'unsuccessful':
                 post['paymentStatus'] = t('unsuccessful');
@@ -221,7 +221,7 @@ class MyOrders extends React.Component {
                     return (<Col lg={12} md={12} sm={12} xs={12}>
                       <div className={'the-order mb-3'}>
                         <div className={'the-order-purple p-4'}>
-                          <div className={'the-order-title'}>
+                          <div className={'the-order-title the-whole-block'}>
                             <div className={'the-order-first-part'}>
                               <div className={'the-order-number'}> {t('Order #') + dat.orderNumber}</div>
 

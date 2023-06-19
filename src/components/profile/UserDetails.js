@@ -38,9 +38,9 @@ const UserDetails = ({
         </div>
         <h4 className="mb-0">{userDetails.name}</h4>
         <span className="text-muted d-block mb-2">{userDetails.jobTitle}</span>
-        <Button pill outline size="sm" className="mb-2">
-          <i className="material-icons mr-1">person_add</i> Follow
-        </Button>
+        {/*<Button pill outline size="sm" className="mb-2">*/}
+          {/*<i className="material-icons mr-1">person_add</i> Follow*/}
+        {/*</Button>*/}
       </CardHeader>
 
     </Card>

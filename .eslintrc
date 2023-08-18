@@ -1,7 +1,27 @@
 {
+  "extends": ["react-app", "prettier"],
+  "root": true,
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "plugins": ["prettier", "react"],
   "rules": {
-    "comma-dangle": "off",
-    "@typescript-eslint/comma-dangle": "off",
-    "jsx-a11y/anchor-is-valid": "off"
-  }
+    "import/no-anonymous-default-export": 1,
+    "prettier/prettier": 0,
+    "jsx-a11y/anchor-is-valid": 1,
+    "react-hooks/rules-of-hooks": 1,
+    "comma-dangle": 1,
+    "@typescript-eslint/comma-dangle": 1,
+    "no-undef": 1,
+    "react/jsx-no-undef": 1,
+    "import/first": 1,
+    "no-restricted-globals": 1
+  },
+  "ignorePatterns": [
+    "node_modules/",
+    "**/node_modules/",
+    "/**/node_modules/*",
+    "build/**"
+  ]
 }

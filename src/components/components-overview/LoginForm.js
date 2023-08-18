@@ -33,6 +33,9 @@ import {fNum} from "#c/functions/utils";
 
 import CircularProgress from "@mui/material/CircularProgress";
 
+import SSSLogin from './SSOLogin'
+import { LoadingContainer } from "../common";
+
 const globalTimerSet = 60
 
 class LoginForm extends React.Component {
@@ -46,6 +49,7 @@ class LoginForm extends React.Component {
     console.log(props);
 
     this.state = {
+      loading: false,
       captcha: false,
       phoneNumber: null,
       thePhoneNumber: null,
@@ -109,9 +113,6 @@ class LoginForm extends React.Component {
       phoneNumber: number
     });
     let phoneNumber = fd + fNum(number);
-
-
-
 
 
     register(phoneNumber, fd, this.state.loginMethod).then((r) => {
@@ -390,10 +391,6 @@ class LoginForm extends React.Component {
     });
   };
 
-  componentDidMount() {
-
-  }
-
   componentWillUnmount() {
     clearInterval(this.myInterval);
   }
@@ -458,14 +455,13 @@ class LoginForm extends React.Component {
       // window.location.reload();
     } else {
       return (
-        <ListGroup flush>
-          {isDisplay && (
-            <ListGroupItem className="p-3">
-              <Row>
-                <Col>
-                  <Form onSubmit={this.handleRegister}>
+        <LoadingContainer loading={this.state.loading} fixed={false} style={{ position: 'relative' }}>
+          <ListGroup flush>
+            {isDisplay && (
+              <ListGroupItem className="p-3">
+                <Row>
+                  <Col tag={Form} onSubmit={this.handleRegister}>
                     <Row form>
-
                       <Col md="12" className="form-group ltr">
                         <label htmlFor="thepho">{t("phone number")}</label>
 
@@ -494,7 +490,6 @@ class LoginForm extends React.Component {
                         </InputGroup>
                         <Captcha onActionValue={this.captchaValue} onActionSubmit={this.captchaAction}/>
                       </Col>
-
                     </Row>
                     <Row form>
                       {/*<Col md="12" className="form-group">*/}
@@ -537,278 +532,282 @@ class LoginForm extends React.Component {
                       onClick={this.handleRegister}>
                       {t("get enter code")}
                     </Button>
-                  </Form>
-                </Col>
-              </Row>
-            </ListGroupItem>
-          )}
-          {enterActivationCodeMode && (
-            <ListGroupItem className="p-3">
-              <Row>
-                <Col>
-                  <Form onSubmit={this.handleActivation}>
-                    <Row form>
-                      <Col md="12" className="form-group">
-                        <div className={"your-phone-number d-flex justify-content-sb"}>
-                          <div className={"flex-item "}>
-                            {t("your phone number") + ":"}
+                  </Col>
+                  <SSSLogin 
+                    setLoading={(v)=>this.setState(p =>({ ...p, loading: v }))}
+                    onNext={(v)=> window.location.href = '/profile'}
+                  />
+                </Row>
+              </ListGroupItem>
+            )}
+            {enterActivationCodeMode && (
+              <ListGroupItem className="p-3">
+                <Row>
+                  <Col>
+                    <Form onSubmit={this.handleActivation}>
+                      <Row form>
+                        <Col md="12" className="form-group">
+                          <div className={"your-phone-number d-flex justify-content-sb"}>
+                            <div className={"flex-item "}>
+                              {t("your phone number") + ":"}
+                            </div>
+                            <div className={"flex-item ltr"}>
+                              {"+" + this.state.countryCode + this.state.thePhoneNumber}
+
+                            </div>
                           </div>
-                          <div className={"flex-item ltr"}>
-                            {"+" + this.state.countryCode + this.state.thePhoneNumber}
+                          <div className={"your-timer"}>
+                            <div className={"flex-item "}>
+                              {Boolean(timer) && <div className={"flex-item-relative center "}>
+                                <CircularProgress className={'red-progress'} thickness={2} size={60} variant="determinate"
+                                                  value={parseInt((timer * 100) / globalTimerSet)}/>
+                                <div className={"flex-item-absolute "}>
+                                  {timer}
+                                </div>
+                              </div>}
+
+                            </div>
 
                           </div>
-                        </div>
-                        <div className={"your-timer"}>
-                          <div className={"flex-item "}>
-                            {Boolean(timer) && <div className={"flex-item-relative center "}>
-                              <CircularProgress className={'red-progress'} thickness={2} size={60} variant="determinate"
-                                                value={parseInt((timer * 100) / globalTimerSet)}/>
-                              <div className={"flex-item-absolute "}>
-                                {timer}
-                              </div>
-                            </div>}
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                              justifyContent: "start"
+                            }}>
 
+                            {/*<label htmlFor="feEmailAddress">*/}
+                            {/*{t("get enter code")}*/}
+                            {/*</label>*/}
+                            <label
+                              style={{fontSize: 12}}
+                              htmlFor="feEmailAddress">
+                              {t("enter sent code")}
+                            </label>
                           </div>
 
-                        </div>
-                        <div
-                          style={{
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "start"
-                          }}>
+                          <InputGroup className="mb-3">
+                            <FormInput
+                              placeholder="_ _ _ _ _ _"
+                              type="number"
+                              className={"iuygfghuji"}
+                              dir="ltr"
+                              onChange={(e) => {
 
-                          {/*<label htmlFor="feEmailAddress">*/}
-                          {/*{t("get enter code")}*/}
-                          {/*</label>*/}
-                          <label
-                            style={{fontSize: 12}}
-                            htmlFor="feEmailAddress">
-                            {t("enter sent code")}
-                          </label>
-                        </div>
+                                this.setState({activationCode: e.target.value});
+                              }}
+                            />
+                          </InputGroup>
+                        </Col>
+                      </Row>
 
-                        <InputGroup className="mb-3">
-                          <FormInput
-                            placeholder="_ _ _ _ _ _"
-                            type="number"
-                            className={"iuygfghuji"}
-                            dir="ltr"
-                            onChange={(e) => {
+                      <Row form>
+                        <Col md="12" className="form-group"></Col>
+                      </Row>
 
-                              this.setState({activationCode: e.target.value});
-                            }}
-                          />
-                        </InputGroup>
-                      </Col>
-                    </Row>
-
-                    <Row form>
-                      <Col md="12" className="form-group"></Col>
-                    </Row>
-
-                    <Button
-                      block={true}
-                      type="submit"
-                      className="center"
-                      onClick={this.handleActivation}>
-                      {t("login")}
-                    </Button>
-                    <Button
-                      outline={true}
-                      type="button"
-                      className="center btn-block outline the-less-important"
-                      onClick={this.handleWrongPhoneNumber}>
-                      {t("Change phone number?")}
-                    </Button>
-                    {Boolean(!timer) && <div className={"flex-item-relative center "}>
+                      <Button
+                        block={true}
+                        type="submit"
+                        className="center"
+                        onClick={this.handleActivation}>
+                        {t("login")}
+                      </Button>
                       <Button
                         outline={true}
                         type="button"
-                        className="center btn-block outline the-less-important the-no-border"
-                        onClick={(e) => this.handleRegister(e)}>
-                        {t("Send code again?")}
+                        className="center btn-block outline the-less-important"
+                        onClick={this.handleWrongPhoneNumber}>
+                        {t("Change phone number?")}
                       </Button>
-                    </div>}
-                  </Form>
-                </Col>
-              </Row>
-            </ListGroupItem>
-          )}
-          {setPassword && (
-            <ListGroupItem className="p-3">
-              <Row>
-                <Col>
-                  <Form onSubmit={this.savePasswordAndData}>
-                    <Row form>
-                      <Col md="12" className="form-group">
-                        <label htmlFor="olfirstname">
-                          {t("Your first name")}
-                        </label>
+                      {Boolean(!timer) && <div className={"flex-item-relative center "}>
+                        <Button
+                          outline={true}
+                          type="button"
+                          className="center btn-block outline the-less-important the-no-border"
+                          onClick={(e) => this.handleRegister(e)}>
+                          {t("Send code again?")}
+                        </Button>
+                      </div>}
+                    </Form>
+                  </Col>
+                </Row>
+              </ListGroupItem>
+            )}
+            {setPassword && (
+              <ListGroupItem className="p-3">
+                <Row>
+                  <Col>
+                    <Form onSubmit={this.savePasswordAndData}>
+                      <Row form>
+                        <Col md="12" className="form-group">
+                          <label htmlFor="olfirstname">
+                            {t("Your first name")}
+                          </label>
 
-                        <InputGroup className="mb-3">
-                          <FormInput
-                            placeholder={t("First name (persian)")}
-                            type="text"
-                            id="olfirstname"
-                            dir="rtl"
-                            value={firstName}
-                            onChange={(e) =>
-                              this.setState({firstName: e.target.value})
-                            }
-                          />
-                        </InputGroup>
-                      </Col>
+                          <InputGroup className="mb-3">
+                            <FormInput
+                              placeholder={t("First name (persian)")}
+                              type="text"
+                              id="olfirstname"
+                              dir="rtl"
+                              value={firstName}
+                              onChange={(e) =>
+                                this.setState({firstName: e.target.value})
+                              }
+                            />
+                          </InputGroup>
+                        </Col>
 
-                      <Col md="12" className="form-group">
-                        <label htmlFor="ollastname">
-                          {t("Your last name")}
-                        </label>
+                        <Col md="12" className="form-group">
+                          <label htmlFor="ollastname">
+                            {t("Your last name")}
+                          </label>
 
-                        <InputGroup className="mb-3">
-                          <FormInput
-                            placeholder={t("Last name (persian)")}
-                            type="text"
-                            value={lastName}
-                            id="ollastname"
-                            dir="rtl"
-                            onChange={(e) =>
-                              this.setState({lastName: e.target.value})
-                            }
-                          />
-                        </InputGroup>
-                      </Col>
-                      <Col md="12" className={"form-group " + internationalCodeClass}>
-                        <label htmlFor="internationalCode">
-                          {t("International Code")}
-                        </label>
+                          <InputGroup className="mb-3">
+                            <FormInput
+                              placeholder={t("Last name (persian)")}
+                              type="text"
+                              value={lastName}
+                              id="ollastname"
+                              dir="rtl"
+                              onChange={(e) =>
+                                this.setState({lastName: e.target.value})
+                              }
+                            />
+                          </InputGroup>
+                        </Col>
+                        <Col md="12" className={"form-group " + internationalCodeClass}>
+                          <label htmlFor="internationalCode">
+                            {t("International Code")}
+                          </label>
 
-                        <InputGroup className="mb-3">
-                          <FormInput
-                            className={"iuygfghuji "}
-                            placeholder={t("xxxxxxxxxx")}
-                            type="number"
-                            value={internationalCode}
-                            id="internationalCode"
-                            dir="ltr"
-                            onChange={(e) => {
-                              // console.log(checkCodeMeli(e.target.value));
-                              this.setState({
-                                internationalCode: e.target.value,
-                                internationalCodeClass: checkCodeMeli(e.target.value)
-                              });
-                            }}
-                          />
-                        </InputGroup>
-                      </Col>
+                          <InputGroup className="mb-3">
+                            <FormInput
+                              className={"iuygfghuji "}
+                              placeholder={t("xxxxxxxxxx")}
+                              type="number"
+                              value={internationalCode}
+                              id="internationalCode"
+                              dir="ltr"
+                              onChange={(e) => {
+                                // console.log(checkCodeMeli(e.target.value));
+                                this.setState({
+                                  internationalCode: e.target.value,
+                                  internationalCodeClass: checkCodeMeli(e.target.value)
+                                });
+                              }}
+                            />
+                          </InputGroup>
+                        </Col>
 
-                      <Col md="12" className="form-group">
-                        <label htmlFor="oiuytpaswword">
-                          {t("set new password")}
-                        </label>
+                        <Col md="12" className="form-group">
+                          <label htmlFor="oiuytpaswword">
+                            {t("set new password")}
+                          </label>
 
-                        <InputGroup className="mb-3">
-                          <FormInput
-                            placeholder="******"
-                            type="password"
-                            id="oiuytpaswword"
-                            dir="ltr"
-                            onChange={(e) =>
-                              this.setState({password: e.target.value})
-                            }
-                          />
-                        </InputGroup>
-                      </Col>
-                    </Row>
+                          <InputGroup className="mb-3">
+                            <FormInput
+                              placeholder="******"
+                              type="password"
+                              id="oiuytpaswword"
+                              dir="ltr"
+                              onChange={(e) =>
+                                this.setState({password: e.target.value})
+                              }
+                            />
+                          </InputGroup>
+                        </Col>
+                      </Row>
 
-                    <Row form>
-                      <Col md="12" className="form-group"></Col>
-                    </Row>
-                    <Button
-                      type="submit"
-                      className="center btn-block"
-                      onClick={this.savePasswordAndData}>
-                      {t("Register")}
-                    </Button>
-                    <Button
-                      type="submit"
-                      className="center btn-block"
-                      onClick={Logout}>
-                      {t("Logout")}
-                    </Button>
-                  </Form>
-                </Col>
-              </Row>
-            </ListGroupItem>
-          )}
-          {getPassword && (
-            <ListGroupItem className="p-3">
-              <Row>
-                <Col>
-                  <Form onSubmit={this.handlePassword}>
-                    <Row form>
-                      <Col md="12" className="form-group">
-                        <div className={"your-phone-number d-flex justify-content-sb"}>
-                          <div className={"mb-2 flex-item"}>
-                            {t("You registered before, please enter your password.")}
+                      <Row form>
+                        <Col md="12" className="form-group"></Col>
+                      </Row>
+                      <Button
+                        type="submit"
+                        className="center btn-block"
+                        onClick={this.savePasswordAndData}>
+                        {t("Register")}
+                      </Button>
+                      <Button
+                        type="submit"
+                        className="center btn-block"
+                        onClick={Logout}>
+                        {t("Logout")}
+                      </Button>
+                    </Form>
+                  </Col>
+                </Row>
+              </ListGroupItem>
+            )}
+            {getPassword && (
+              <ListGroupItem className="p-3">
+                <Row>
+                  <Col>
+                    <Form onSubmit={this.handlePassword}>
+                      <Row form>
+                        <Col md="12" className="form-group">
+                          <div className={"your-phone-number d-flex justify-content-sb"}>
+                            <div className={"mb-2 flex-item"}>
+                              {t("You registered before, please enter your password.")}
+                            </div>
+
                           </div>
-
-                        </div>
-                        <div className={"your-phone-number d-flex justify-content-sb"}>
-                          <div className={"flex-item "}>
-                            {t("your phone number") + ":"}
+                          <div className={"your-phone-number d-flex justify-content-sb"}>
+                            <div className={"flex-item "}>
+                              {t("your phone number") + ":"}
+                            </div>
+                            <div className={"flex-item ltr"}>
+                              {"+" + this.state.countryCode + this.state.thePhoneNumber}
+                            </div>
                           </div>
-                          <div className={"flex-item ltr"}>
-                            {"+" + this.state.countryCode + this.state.thePhoneNumber}
-                          </div>
-                        </div>
-                        <label htmlFor="oiuytgpaswword">
-                          {t("Enter password")}
-                        </label>
+                          <label htmlFor="oiuytgpaswword">
+                            {t("Enter password")}
+                          </label>
 
-                        <InputGroup className="mb-3">
-                          <FormInput
-                            placeholder="******"
-                            type="password"
-                            id="oiuytgpaswword"
-                            dir="ltr"
-                            onChange={(e) =>
-                              this.setState({password: e.target.value})
-                            }
-                          />
-                        </InputGroup>
-                      </Col>
-                    </Row>
+                          <InputGroup className="mb-3">
+                            <FormInput
+                              placeholder="******"
+                              type="password"
+                              id="oiuytgpaswword"
+                              dir="ltr"
+                              onChange={(e) =>
+                                this.setState({password: e.target.value})
+                              }
+                            />
+                          </InputGroup>
+                        </Col>
+                      </Row>
 
-                    <Row form>
-                      <Col md="12" className="form-group"></Col>
-                    </Row>
-                    <Button
-                      block={true}
-                      type="submit"
-                      className="center"
-                      onClick={this.handlePassword}>
-                      {t("Login")}
-                    </Button>
-                    <Button
-                      type="button"
-                      className="center btn-block"
-                      onClick={this.handleForgotPass}>
-                      {t("Forgot Password")}
-                    </Button>
-                    <Button
-                      outline={true}
-                      type="button"
-                      className="center btn-block outline the-less-important"
-                      onClick={this.handleWrongPhoneNumber}>
-                      {t("Wrong phone number?")}
-                    </Button>
-                  </Form>
-                </Col>
-              </Row>
-            </ListGroupItem>
-          )}
-        </ListGroup>
+                      <Row form>
+                        <Col md="12" className="form-group"></Col>
+                      </Row>
+                      <Button
+                        block={true}
+                        type="submit"
+                        className="center"
+                        onClick={this.handlePassword}>
+                        {t("Login")}
+                      </Button>
+                      <Button
+                        type="button"
+                        className="center btn-block"
+                        onClick={this.handleForgotPass}>
+                        {t("Forgot Password")}
+                      </Button>
+                      <Button
+                        outline={true}
+                        type="button"
+                        className="center btn-block outline the-less-important"
+                        onClick={this.handleWrongPhoneNumber}>
+                        {t("Wrong phone number?")}
+                      </Button>
+                    </Form>
+                  </Col>
+                </Row>
+              </ListGroupItem>
+            )}
+          </ListGroup>
+        </LoadingContainer>
       );
     }
   }

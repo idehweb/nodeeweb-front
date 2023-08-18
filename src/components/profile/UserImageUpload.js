@@ -49,7 +49,7 @@ class LoginForm extends React.PureComponent {
 
     }
     return (
-      <Card small={'true'} className="mb-4">
+      <Card small className="mb-4">
         <CardHeader className="border-bottom">
           <h6 className="m-0">{title}</h6>
         </CardHeader>

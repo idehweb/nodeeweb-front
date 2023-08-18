@@ -6,8 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no,maximum-scale=1">
   <meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
   <link rel="icon" type="image/png" href="%PUBLIC_URL%/site_setting/logo.png" />
-  <link rel="stylesheet" href="%PUBLIC_URL%/site_setting/theme.css"/>
+  <link rel="stylesheet" href="%PUBLIC_URL%/site_setting/theme.css" />
   <script src="%PUBLIC_URL%/site_setting/config.js"></script>
+  <meta name="app_version" content="%REACT_APP_VERSION%" />
+
 </head>
 
 <body>
@@ -15,7 +17,17 @@
     You need to enable JavaScript to run this app.
   </noscript>
   <div id="root"></div>
-
+  <% if (process.env.NODE_ENV==="production" ) { %>
+    <% if (process.env.REACT_APP_CLARITY_ID) { %>
+      <script id="ms-clarity" type="text/javascript">
+        (function (c, l, a, r, i, t, y) {
+          c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
+          t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
+          y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+        })(window, document, "clarity", "script", "%CLARITY_ID%");
+      </script>
+      <% } %>
+    <% } %>
 </body>
 
 </html>

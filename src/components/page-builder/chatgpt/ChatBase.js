@@ -113,7 +113,7 @@ const ChatType = (props) =>{
     let {callBackData} = props;
     const [text,setText] = React.useState('')
     const handlerEnter = (e) =>{
-        if (event.charCode === 13) {
+        if (e.charCode === 13) {
             callBackData(text)
             setText('')
         }

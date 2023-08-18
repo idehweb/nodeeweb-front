@@ -29,7 +29,7 @@ const UserDetails = ({
   }
 
   return (
-    <Card small={'true'} className="mb-5 pt-3 profile-box">
+    <Card small className="mb-5 pt-3 profile-box">
       <CardHeader className="border-bottom text-center">
         <div className="mb-3 mx-auto">
           <AccountCircleIcon

@@ -56,7 +56,7 @@ function NavbarMobileButton({cartButton, logo, isCustomer = false, isAdmin = fal
           <PersonIcon/>
         </DropdownToggle>
         ,
-        <Collapse tag={DropdownMenu} center={true} small={true} open={visible} key={1}>
+        <Collapse tag={DropdownMenu} center={true} small open={visible} key={1}>
           <Link
 
             className={"dropdown-item"}
@@ -115,7 +115,7 @@ function NavbarMobileButton({cartButton, logo, isCustomer = false, isAdmin = fal
           <PersonIcon/>
         </DropdownToggle>
         ,
-        <Collapse tag={DropdownMenu} center={true} small={true} open={visible} key={1}>
+        <Collapse tag={DropdownMenu} center={true} small open={visible} key={1}>
           <Link
 
             className={"dropdown-item"}

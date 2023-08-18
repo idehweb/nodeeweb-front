@@ -7,15 +7,19 @@ const gitHash = require('child_process')
   .toString()
   .trim();
 
-const now = new Date().toLocaleString('en-us');
+const now = new Date().toISOString('en-us');
 process.env.REACT_APP_VERSION = now + ', ' + gitHash;
 
 module.exports = {
+  eslint: {
+    enable: process.env.NODE_ENV === 'development',
+  },
   webpack: {
     alias: {
       '#c': path.resolve(__dirname, 'src/'),
+      '@': path.resolve(__dirname, 'src/'),
     },
-    configure: (webpackConfig, {env, paths}) => {
+    configure: (webpackConfig, { env, paths }) => {
       if (env === 'development') return webpackConfig;
       webpackConfig.output = {
         ...webpackConfig.output,
@@ -37,21 +41,20 @@ module.exports = {
       //     console.log('hi',JSON.stringify(plugin)+'\n\n\n\n')
       //   // }
       // })
-      webpackConfig.plugins[5] =
-        new MiniCssExtractPlugin({
-          // Options similar to the same options in webpackOptions.output
-          // both options are optional
-          filename: 'static/css/bundle.css',
-          chunkFilename: 'static/css/[name].chunk.css',
-        });
-      webpackConfig.plugins.push(new webpack.optimize.LimitChunkCountPlugin({
-        maxChunks: 1
-      }))
+      webpackConfig.plugins[5] = new MiniCssExtractPlugin({
+        // Options similar to the same options in webpackOptions.output
+        // both options are optional
+        filename: 'static/css/bundle.css',
+        chunkFilename: 'static/css/[name].chunk.css',
+      });
+      webpackConfig.plugins.push(
+        new webpack.optimize.LimitChunkCountPlugin({
+          maxChunks: 1,
+        }),
+      );
 
       // console.log('akbar => ', webpackConfig.optimization);
       return webpackConfig;
-    }
-
+    },
   },
-
 };

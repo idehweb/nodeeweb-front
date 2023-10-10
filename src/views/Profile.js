@@ -5,8 +5,11 @@ import UserDetails from "#c/components/profile/UserDetails";
 import UserAccountDetails from '#c/components/profile/UserAccountDetails';
 import MyOrders from '#c/components/profile/MyOrders';
 import MyTransactions from '#c/components/profile/MyTransactions';
+import MyPazireshha from '#c/components/profile/MyPazireshha';
 import MyRequests from '#c/components/profile/MyRequests';
 import {useLocation} from 'react-router-dom';
+import CONFIG from "#c/config";
+export const MainUrl = CONFIG.BASE_URL;
 
 const Profile = ({t}) => {
   const location = useLocation();
@@ -64,12 +67,18 @@ const Profile = ({t}) => {
 
                   <span className={""}>{t("transactions")}</span></NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink active={tab === "requests"} href="#requests" onClick={() => setTab("requests")}>
+              {(MainUrl.indexOf('arvandguarantee') !== -1) && <NavItem>
+                <NavLink active={tab === "pazireshha"} href="#pazireshha" onClick={() => setTab("pazireshha")}>
                   {/*<ReviewsIcon className={"ml-2"}/>*/}
 
-                  <span className={""}>{t("requests")}</span></NavLink>
-              </NavItem>
+                  <span className={""}>{t("pazireshha")}</span></NavLink>
+              </NavItem>}
+              {/*<NavItem>*/}
+                {/*<NavLink active={tab === "requests"} href="#requests" onClick={() => setTab("requests")}>*/}
+                  {/*/!*<ReviewsIcon className={"ml-2"}/>*!/*/}
+
+                  {/*<span className={""}>{t("requests")}</span></NavLink>*/}
+              {/*</NavItem>*/}
             </Nav>
           </div>
         </Col>
@@ -88,6 +97,10 @@ const Profile = ({t}) => {
           </div>}
           {tab === "requests" && <div className={"pt-0"} id={"requests"}>
             <MyRequests title={t('requests')}/>
+
+          </div>}
+          {tab === "pazireshha" && <div className={"pt-0"} id={"pazireshha"}>
+            <MyPazireshha title={t('pazireshha')}/>
 
           </div>}
         </Col>

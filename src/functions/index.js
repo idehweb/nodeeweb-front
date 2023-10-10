@@ -733,6 +733,17 @@ export const getMyTransactions = (offset = 0, limit = 100) =>
       handleErr(err);
       return [];
     });
+export const getMyPazireshha = (offset = 0, limit = 100) =>
+  getData(`${ApiUrl}/settings/api/sorooshan/getCustomerData/phoneNumber`, {}, true)
+    .then((res) => {
+      if (res.data.success == false)
+        return [];
+      return res.data;
+    })
+    .catch((err) => {
+      handleErr(err);
+      return [];
+    });
 export const getMyRequests = (offset = 0, limit = 100) =>
   getData(`${ApiUrl}/entry/myEntries/mine/${offset}/${limit}`, {}, true)
     .then((res) => {

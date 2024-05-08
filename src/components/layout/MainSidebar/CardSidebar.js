@@ -143,8 +143,8 @@ const CardSidebar = ({props, t}) => {
   };
   const returnPrice = (price) => {
     if (themeData.tax && themeData.taxAmount) {
-      let ta = parseInt(themeData.taxAmount)
-      price = parseInt(((ta / 100) + 1) * parseInt(price))
+      // let ta = parseInt(themeData.taxAmount)
+      // price = parseInt(((ta / 100) + 1) * parseInt(price))
     }
     if (price)
       return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " " + t(themeData.currency)

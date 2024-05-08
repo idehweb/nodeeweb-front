@@ -5,6 +5,7 @@ import Types from "./types";
 
 const initialState = {
     menuVisible: false,
+    menuContact: false,
     data: {},
     loading: true,
     searchvisible: false,

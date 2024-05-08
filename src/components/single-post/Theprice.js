@@ -94,10 +94,10 @@ const Theprice = (props) => {
     // x = 9
     // 9/100 * price + price
     // ((0.09)+ 1) * price
-    if (price)
-      price = parseInt(((ta / 100) + 1) * parseInt(price))
-    if (salePrice)
-      salePrice = parseInt(((ta / 100) + 1) * parseInt(salePrice))
+    // if (price)
+    //   price = parseInt(((ta / 100) + 1) * parseInt(price))
+    // if (salePrice)
+    //   salePrice = parseInt(((ta / 100) + 1) * parseInt(salePrice))
 // price=ta;
 //     salePrice=ta;
     //   themeData.taxAmount = 'toman';

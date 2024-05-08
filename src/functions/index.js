@@ -45,7 +45,9 @@ export const setStyles = (fields) => {
     left,
     boxShadow,
     zIndex,
-    color, float, borderRadius, direction, width, maxWidth, height, maxHeight, backgroundColor, margin,marginTop, padding, fontWeight, fontSize, lineHeight, display,
+    color, float,
+    borderRadius, direction,
+    width, maxWidth, height, maxHeight, backgroundColor, margin, marginTop, padding, fontWeight, fontSize, lineHeight, display,
     paddingTop,
     paddingBottom,
     flexDirection
@@ -95,7 +97,11 @@ export const setStyles = (fields) => {
     style['float'] = float;
   }
   if (backgroundColor) {
-    style['backgroundColor'] = backgroundColor;
+    console.log('backgroundColor', backgroundColor)
+    if (backgroundColor.indexOf('linear-gradient') !== -1) {
+      style['background'] = backgroundColor;
+    } else
+      style['backgroundColor'] = backgroundColor;
   }
   if (margin) {
     style['margin'] = margin;
@@ -220,7 +226,7 @@ export const SearchIt = (_id) => {
           let title = encodeURIComponent(ir.title.fa.replace(/\\|\//g, ""));
           let slug = encodeURIComponent(ir.slug.replace(/\\|\//g, ""));
 
-          c.push({title: ir.title, photo: ph, url: "/product/" + ir.slug + "/" });
+          c.push({title: ir.title, photo: ph, url: "/product/" + ir.slug + "/"});
 
         });
 
@@ -1154,8 +1160,8 @@ export const submitForm = (_id, obj) => {
       .then((data) => {
         let mainD = data["data"];
         resolve(mainD);
-        if(mainD.trackingCode){
-          localStorage.setItem('trackingCode',mainD.trackingCode)
+        if (mainD.trackingCode) {
+          localStorage.setItem('trackingCode', mainD.trackingCode)
         }
       })
       .catch((err) => {
@@ -1764,7 +1770,7 @@ export const getContactData = (i) => {
   });
 };
 
-export const uploadMedia = (file = {}, onUploadProgress, id,uploadType) => {
+export const uploadMedia = (file = {}, onUploadProgress, id, uploadType) => {
   return new Promise(function (resolve, reject) {
 
     const formData = new FormData();
@@ -1787,16 +1793,16 @@ export const uploadMedia = (file = {}, onUploadProgress, id,uploadType) => {
       }
     };
 
-    if(uploadType){
+    if (uploadType) {
       return axios
-      .post(`${ApiUrl}/media/fileUpload`, formData, config)
-      .then((res) => {
-        return resolve(res.data);
-      })
-      .catch((err) => {
-        console.error("err in axios => ", err);
-        return reject(err);
-      });
+        .post(`${ApiUrl}/media/fileUpload`, formData, config)
+        .then((res) => {
+          return resolve(res.data);
+        })
+        .catch((err) => {
+          console.error("err in axios => ", err);
+          return reject(err);
+        });
     }
     return axios
       .post(`${AdminRoute}/media/fileUpload`, formData, config)
@@ -1903,6 +1909,8 @@ export const savePost = (obj) => SaveData({...obj});
 
 export const toggleSidebar = (menuVisible) =>
   SaveData({menuVisible: !menuVisible});
+export const toggleContact = (menuContact = store.getState().store.menuContact) =>
+  SaveData({menuContact: !menuContact});
 export const toggleSearch = (searchvisible) => {
 
   SaveData({searchvisible: !searchvisible});
@@ -2118,9 +2126,9 @@ export const deleteModel = (model, id) => {
 export const register = (number, fd, method = "sms") => {
   let {user} = store.getState().store;
   let userObj = {
-    phoneNumber:number,
-    countryCode:fd,
-    method:method
+    phoneNumber: number,
+    countryCode: fd,
+    method: method
   }
   return postData(`${ApiUrl}/customer/authCustomer`, userObj)
     .then(({data}) => {

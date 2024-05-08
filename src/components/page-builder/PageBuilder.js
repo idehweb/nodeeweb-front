@@ -4,9 +4,19 @@ import ProductsSlider, {ProductsSliderServer} from "#c/components/components-ove
 import PostSlider, {PostSliderServer} from "#c/components/components-overview/PostSlider";
 import NavbarSearch from '#c/components/layout/MainNavbar/NavbarSearch';
 import MainNavbar from '#c/components/layout/MainNavbar/MainNavbar';
-import {getEntities, Logout, MainUrl, setStyles, toggleCardbar, toggleSearch, toggleSidebar} from "#c/functions/index";
+import {
+  getEntities,
+  Logout,
+  MainUrl,
+  setStyles,
+  toggleCardbar,
+  toggleContact,
+  toggleSearch,
+  toggleSidebar
+} from "#c/functions/index";
 import PostCard from "#c/components/Home/PostCard";
 import Currency from "#c/components/page-builder/currency";
+import Counter from "#c/components/page-builder/counter/Counter";
 import Tsc from "#c/components/page-builder/tsc";
 import Sidemenu from "#c/components/page-builder/sidemenu";
 import Grid from "#c/components/page-builder/grid";
@@ -22,10 +32,11 @@ import * as Icons from "@mui/icons-material";
 import {Button} from "shards-react";
 import {useSelector} from "react-redux";
 import {Link} from "react-router-dom";
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 
 export function ShowElement(p) {
 
-  let {element, content, params,condition,handleStep} = p;
+  let {element, content, params, condition, handleStep} = p;
 
   if (!element) {
     return
@@ -53,14 +64,17 @@ export function ShowElement(p) {
       return <div>html</div>;
     case "text":
       return <TITLE element={element}/>;
-      case "chatgpt":
-        return <ChatBase element={element} />;
+    case "counter":
+      return <Counter element={element}/>;
+    case "chatgpt":
+      return <ChatBase element={element}/>;
     case "conditionsteps":
-        return <ConditionSteps element={element} content={content} params={params}/>;
+      return <ConditionSteps element={element} content={content} params={params}/>;
     case "conditionstep":
-        return <ConditionStep element={element} content={content} params={params}/>;
+      return <ConditionStep element={element} content={content} params={params}/>;
     case "button":
-      return <TheButton element={element} content={content} params={params} conditionStep={condition} handleStep={handleStep}/>;
+      return <TheButton element={element} content={content} params={params} conditionStep={condition}
+                        handleStep={handleStep}/>;
     case "hr":
       return <Hr element={element} content={content} params={params}/>;
     case "header":
@@ -84,7 +98,7 @@ export function ShowElement(p) {
     case "grid":
       return <TheGrid element={element} content={content} params={params}/>;
     case "form":
-      return <TheForm  element={element} content={content} params={params}/>;
+      return <TheForm element={element} content={content} params={params}/>;
     case "Slide":
       return <SWIPERSlide element={element} content={content} params={params}/>;
     case "ProductSlider":
@@ -129,7 +143,8 @@ export function ShowElement(p) {
 export function TEXTNODE({element}) {
   let {content, classes} = element;
 
-  return <div className={'p-node ' + (classes ? classes.map(ob => (ob.name ? ob.name : ob)).join(" ") : "")}> {content}</div>;
+  return <div
+    className={'p-node ' + (classes ? classes.map(ob => (ob.name ? ob.name : ob)).join(" ") : "")}> {content}</div>;
 }
 
 export function TITLE({element}) {
@@ -187,82 +202,92 @@ export function TheMainNavbar({element}) {
 }
 
 export function TheButton(p) {
-  const {element,conditionStep,handleStep} = p;
+  const {element, conditionStep, handleStep} = p;
   let {type, components, classes, settings, handleCard, card} = element;
   let {general} = settings;
   let {fields} = general;
-  let {text, iconFont, action, classess, showInMobile, showInDesktop,target="_self",link,iconImage,imgWidth,imgHeight,imgMargin} = fields;
+  let {text, iconFont, action, classess, showInMobile, showInDesktop, target = "_self", link, iconImage, imgWidth, imgHeight, imgMargin} = fields;
   let style = setStyles(fields);
-  if(conditionStep){
+  if (conditionStep) {
     return <Button
-              href={link && link}
-              onClick={() => {
-                handleStep(action)
-              }}
-              target={target}
-              className={(classess !== undefined ? classess : '') + (showInMobile ? ' showInMobile ' : '') + action} style={style}>
-                  {
-                  Icons[iconFont] &&
-                  <span>{React.createElement(Icons[iconFont])}</span>
-                  }
-                  {
-                    iconImage &&
-                    <img src={MainUrl+'/'+iconImage} width={imgWidth} height={imgHeight} style={{margin:imgMargin}}/>
-                  }
-                <span>{text}</span>
-           </Button>
+      href={link && link}
+      onClick={() => {
+        handleStep(action)
+      }}
+      target={target}
+      className={(classess !== undefined ? classess : '') + (showInMobile ? ' showInMobile ' : '') + action}
+      style={style}>
+      {
+        Icons[iconFont] &&
+        <span>{React.createElement(Icons[iconFont])}</span>
+      }
+      {
+        iconImage &&
+        <img src={MainUrl + '/' + iconImage} width={imgWidth} height={imgHeight} style={{margin: imgMargin}}/>
+      }
+      <span>{text}</span>
+    </Button>
 
 
   }
 
-if (iconFont && action) {
-      if (action == 'toggleCart') {
-        return <Button onClick={() => {
+  if (iconFont && action) {
+    if (action == 'toggleCart') {
+      return <Button onClick={() => {
 
-          handleCard();
-        }} className={' posrel ' + classess + (showInMobile ? ' showInMobile ' : '')} style={style}>{Icons[iconFont] &&
-        <span>{React.createElement(Icons[iconFont])}</span>}<span className={'badge'}
-                                                                  theme="info">{card && card.length}</span><span>{text}</span></Button>
+        handleCard();
+      }} className={' posrel ' + classess + (showInMobile ? ' showInMobile ' : '')} style={style}>{Icons[iconFont] &&
+      <span>{React.createElement(Icons[iconFont])}</span>}<span className={'badge'}
+                                                                theme="info">{card && card.length}</span><span>{text}</span></Button>
 
-      }
-      if (action == 'toggleMenu') {
-        return <Button onClick={() => {
-          // console.clear()
-          toggleSidebar();
-        }} className={' posrel ' + classess + (showInMobile ? ' showInMobile ' : '')} style={style}>{Icons[iconFont] &&
-        <span>{React.createElement(Icons[iconFont])}</span>}<span>{text}</span></Button>
-
-      }
-
-      if (action) {
-        if (action.substring(0, 4) == "http" || action.substring(0, 3) == "tel" || action.substring(0, 3) == "mai" || action.substring(0, 3) == "sms") {
-          return <a target={target} href={action}
-                    className={'the-link with-http ' + classess + (showInMobile ? ' showInMobile ' : '')}><Button
-            style={style}>{Icons[iconFont] &&
-          <span>{React.createElement(Icons[iconFont])}</span>}<span>{text}</span></Button></a>
-        } else {
-          return <Link to={action}
-                       className={'the-link with-out-http ' + classess + (showInMobile ? ' showInMobile ' : '')}><Button
-            style={style}>{Icons[iconFont] &&
-          <span>{React.createElement(Icons[iconFont])}</span>}<span>{text}</span></Button></Link>
-        }
-      }
     }
-    if (iconFont) {
+    if (action == 'toggleContact') {
+      return <Button onClick={() => {
+        // console.clear()
+        toggleContact();
+      }} className={' posrel ' + classess + (showInMobile ? ' showInMobile ' : '')} style={style}>{Icons[iconFont] &&
+      <span>{React.createElement(Icons[iconFont])}</span>}<span>{text}</span><span
+        className={'arrow-toggle-contact'}><ArrowDropUpIcon/></span></Button>
 
-      return <Button className={classess + (showInMobile ? ' showInMobile ' : '')} style={style}>{Icons[iconFont] &&
+    }
+    if (action == 'toggleMenu') {
+      return <Button onClick={() => {
+        // console.clear()
+        toggleSidebar();
+      }} className={' posrel ' + classess + (showInMobile ? ' showInMobile ' : '')} style={style}>{Icons[iconFont] &&
       <span>{React.createElement(Icons[iconFont])}</span>}<span>{text}</span></Button>
 
     }
+
     if (action) {
-      if (action.substring(0, 4) == "http" || action.substring(0, 3) == "tel" || action.substring(0, 3) == "mai" || action.substring(0, 3) == "sms")
-        return <a target={target} href={action}><Button className={classess + (showInMobile ? ' showInMobile ' : '')}
-                                        style={style}>{text}</Button></a>
-      else
-        return <Link to={action}><Button className={classess + (showInMobile ? ' showInMobile ' : '')}
-                                         style={style}>{text}</Button></Link>
+      if (action.substring(0, 4) == "http" || action.substring(0, 3) == "tel" || action.substring(0, 3) == "mai" || action.substring(0, 3) == "sms") {
+        return <a target={target} href={action}
+                  className={'the-link with-http ' + classess + (showInMobile ? ' showInMobile ' : '')}><Button
+          style={style}>{Icons[iconFont] &&
+        <span>{React.createElement(Icons[iconFont])}</span>}<span>{text}</span></Button></a>
+      } else {
+        return <Link to={action}
+                     className={'the-link with-out-http ' + classess + (showInMobile ? ' showInMobile ' : '')}><Button
+          style={style}>{Icons[iconFont] &&
+        <span>{React.createElement(Icons[iconFont])}</span>}<span>{text}</span></Button></Link>
+      }
     }
-    return <Button className={classess + (showInMobile ? ' showInMobile ' : '')} style={style}>{text}</Button>
+  }
+  if (iconFont) {
+
+    return <Button className={classess + (showInMobile ? ' showInMobile ' : '')} style={style}>{Icons[iconFont] &&
+    <span>{React.createElement(Icons[iconFont])}</span>}<span>{text}</span></Button>
+
+  }
+  if (action) {
+    if (action.substring(0, 4) == "http" || action.substring(0, 3) == "tel" || action.substring(0, 3) == "mai" || action.substring(0, 3) == "sms")
+      return <a target={target} href={action}><Button className={classess + (showInMobile ? ' showInMobile ' : '')}
+                                                      style={style}>{text}</Button></a>
+    else
+      return <Link to={action}><Button className={classess + (showInMobile ? ' showInMobile ' : '')}
+                                       style={style}>{text}</Button></Link>
+  }
+  return <Button className={classess + (showInMobile ? ' showInMobile ' : '')} style={style}>{text}</Button>
 }
 
 export function Hr({element}) {
@@ -309,7 +334,7 @@ export function SWIPERWrapper(props) {
   if (!fields) {
     return
   }
-  let {entity, classes, arrows = true, pagination = false, autoplay = true, perPage = 1, type = "slide", margin, customQuery,breakpoints=null} = fields;
+  let {entity, classes, arrows = true, pagination = false, autoplay = true, perPage = 1, type = "slide", margin, customQuery, breakpoints = null} = fields;
   let style = setStyles(fields);
 
   if (arrows == 'false') {
@@ -320,10 +345,12 @@ export function SWIPERWrapper(props) {
   }
   if (entity) {
     if (entity == 'product')
-      return <ProductsSlider breakpoints={breakpoints} arrows={Boolean(arrows)} autoplay={Boolean(autoplay)} perPage={parseInt(perPage)}
+      return <ProductsSlider breakpoints={breakpoints} arrows={Boolean(arrows)} autoplay={Boolean(autoplay)}
+                             perPage={parseInt(perPage)}
                              customQuery={customQuery}/>
     if (entity == 'post')
-      return <PostSlider breakpoints={breakpoints} arrows={Boolean(arrows)} autoplay={Boolean(autoplay)} perPage={parseInt(perPage)}
+      return <PostSlider breakpoints={breakpoints} arrows={Boolean(arrows)} autoplay={Boolean(autoplay)}
+                         perPage={parseInt(perPage)}
                          customQuery={customQuery}/>
   } else
     return <div className={'the-swipppper-parent'} style={style}><Swiper
@@ -419,7 +446,7 @@ export function TheGrid(props) {
 
 export function TheForm(props) {
 
-  let {element, content,p} = props;
+  let {element, content, p} = props;
   let {type, children, settings, classes} = element;
   let {general} = settings;
   let {fields} = general;
@@ -427,6 +454,7 @@ export function TheForm(props) {
   return <Form element={element} formFileds={fields}/>
 
 }
+
 export function TheDescription(props) {
   let {element, content} = props;
   let {type, children, settings, classes} = element;
@@ -505,7 +533,7 @@ export function IMAGE(props) {
   if (!fields) {
     return
   }
-  let {link, title, src, showInDesktop, showInMobile,target} = fields;
+  let {link, title, src, showInDesktop, showInMobile, target} = fields;
   let style = setStyles(fields);
   if (link) {
     return <a target={target} href={link} title={title}
@@ -583,8 +611,8 @@ export function THE_STEPS(props) {
   }
   let {link, title, src, classes, showInDesktop, showInMobile} = fields;
   let style = setStyles(fields);
-return 'jk'
-return <Stepper/>
+  return 'jk'
+  return <Stepper/>
   return <div
     className={"posrel row grid-layout " + (classes ? classes : "") + (showInDesktop ? ' showInDesktop ' : '') + (showInMobile ? ' showInMobile ' : '')}
     style={style}>
@@ -613,6 +641,7 @@ export function THE_STEP(props) {
     })}
   </div>;
 }
+
 export function GRID_COL(props) {
 
   const {element, content, params} = props;
@@ -632,6 +661,7 @@ export function GRID_COL(props) {
     })}
   </div>;
 }
+
 export function THE_TAB(props) {
 
   const {element, content, params} = props;

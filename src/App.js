@@ -9,6 +9,7 @@ import createRoutes from '#c/DefaultRoute';
 const APP = ((props) => {
   let {t} = props,routes=[];
   const themeData = useSelector((st) => st.store.themeData, _.isEqual);
+  const menuContact = useSelector((st) => st.store.menuContact);
   if (themeData && themeData.routes) {
     routes=createRoutes(themeData.routes)
   }
@@ -16,8 +17,8 @@ const APP = ((props) => {
     return <></>
   }
   return (
-    <div className={t('languageDir')} dir={t('languageDir')}>
-      
+    <div className={t('languageDir') + ' '+(menuContact ? 'menuContact' : '')} dir={t('languageDir')}>
+
       <BrowserRouter>
         <Routes>
           {routes.map((route, index) => {

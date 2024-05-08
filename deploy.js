@@ -3,7 +3,9 @@ var axios = require('axios');
 var ftpDeploy = new FtpDeploy();
 
 require('dotenv').config({path: '.env.local'});
-
+console.log('process.env.FTP_HOST',process.env.FTP_HOST)
+console.log('process.env.FTP_USER',process.env.FTP_USER)
+console.log('process.env.FTP_PASS',process.env.FTP_PASS)
 var config = {
   user: process.env.FTP_USER,
   // Password optional, prompted if none given
